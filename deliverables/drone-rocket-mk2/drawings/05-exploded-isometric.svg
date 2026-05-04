@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Drone Rocket Mk II — Exploded Isometric, scale n.t.s. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1300" font-family="ui-monospace, Menlo, monospace" font-size="9">
+  <style>
+    .visible { stroke: #111; stroke-width: 0.7; fill: #fff; }
+    .accent  { fill: #cc2200; stroke: #aa1500; stroke-width: 0.4; }
+    .joint   { fill: #c8c8c8; stroke: #555; stroke-width: 0.4; }
+    .dark    { fill: #38383e; stroke: #111; stroke-width: 0.4; }
+    .duct    { fill: #1a1a20; stroke: #111; stroke-width: 0.4; }
+    .leader  { stroke: #555; stroke-width: 0.3; fill: none; }
+    .arrow   { stroke: #c33; stroke-width: 0.4; fill: none; stroke-dasharray: 3,2; }
+    .label   { fill: #111; font-size: 10; }
+    .note    { fill: #444; font-size: 8; font-style: italic; }
+    .callout { fill: #fff; stroke: #c33; stroke-width: 0.5; }
+    .callout-text { fill: #c33; font-size: 9; font-weight: bold; }
+    .title   { font-size: 12; font-weight: bold; fill: #111; }
+    .titleblock { stroke: #111; stroke-width: 0.7; fill: #fafaf6; }
+  </style>
+
+  <rect width="800" height="1300" fill="#fefefa"/>
+
+  <text x="400" y="30" text-anchor="middle" class="title">DRONE ROCKET Mk II — EXPLODED ASSEMBLY</text>
+  <text x="400" y="48" text-anchor="middle" class="note">Sections separated along assembly axis  |  Hardware shown at insertion points  |  N.T.S.</text>
+
+  <!-- Vertical exploded view; each section drawn at scale, separated by 30 px gaps -->
+  <!-- Centre at x=400 -->
+  <g>
+    <!-- ================ SECTION 1: NOSE ================ -->
+    <g transform="translate(400 100)">
+      <!-- Nose cone (ogive) -->
+      <path class="visible" d="M -45 0 Q -45 -12 -44.8 -21 Q -44.6 -30 -44.1 -39 Q -43.4 -48 -42 -57 Q -40 -67 -37.5 -76 Q -34 -86 -29.7 -95 Q -25 -103 -18.7 -112 Q -12 -119 -3.5 -125 L 0 -128 L 3.5 -125 Q 12 -119 18.7 -112 Q 25 -103 29.7 -95 Q 34 -86 37.5 -76 Q 40 -67 42 -57 Q 43.4 -48 44.1 -39 Q 44.6 -30 44.8 -21 Q 45 -12 45 0 Z"/>
+      <!-- Nose collar -->
+      <rect class="joint" x="-45" y="0" width="90" height="12"/>
+      <!-- Pitot -->
+      <line class="visible" x1="0" y1="-128" x2="0" y2="-145" stroke-width="1.5"/>
+      <text x="500" y="-60" class="label">Section 1: Nose &amp; Intake (1×)</text>
+      <text x="500" y="-50" class="note">PETG translucent + 6× struts (PETG dark)</text>
+    </g>
+
+    <!-- ================ SECTION 2: AVIONICS ================ -->
+    <g transform="translate(400 220)">
+      <!-- Body shell -->
+      <rect class="visible" x="-45" y="0" width="90" height="120" fill="#fff" opacity="0.65"/>
+      <!-- Joint ring at top -->
+      <rect class="accent" x="-46" y="-4" width="92" height="4"/>
+      <!-- Internal: avionics column -->
+      <rect class="joint" x="-15" y="0" width="30" height="120" fill="#d8d8d8"/>
+      <!-- FC -->
+      <rect x="-12" y="20" width="24" height="6" fill="#0a4a1a"/>
+      <!-- GPS -->
+      <rect x="-10" y="40" width="20" height="4" fill="#0a4a1a"/>
+      <!-- Radio -->
+      <rect x="-9" y="60" width="18" height="6" fill="#0a4a1a"/>
+      <!-- Antenna -->
+      <line stroke="#111" stroke-width="0.6" x1="45" y1="80" x2="80" y2="60"/>
+      <text x="500" y="60" class="label">Section 2: Avionics (1×)</text>
+      <text x="500" y="70" class="note">FC + GPS + radio in central column</text>
+    </g>
+
+    <!-- ================ SECTION 3: BATTERY + CANARDS ================ -->
+    <g transform="translate(400 380)">
+      <rect class="visible" x="-45" y="0" width="90" height="120" fill="#fff" opacity="0.65"/>
+      <rect class="accent" x="-46" y="-4" width="92" height="4"/>
+      <!-- Battery -->
+      <rect x="-15" y="0" width="30" height="120" fill="#d8d8d8"/>
+      <rect x="-12" y="20" width="24" height="80" fill="#1a3a8a"/>
+      <!-- Canards: 4 fins extending out at 45° (showing 2 visible) -->
+      <path class="visible" d="M -45 50 L -75 53 L -75 65 L -45 65 Z" fill="#e8e8ec"/>
+      <path class="visible" d="M  45 50 L  75 53 L  75 65 L  45 65 Z" fill="#e8e8ec"/>
+      <text x="500" y="60" class="label">Section 3: Battery + Canards (1×)</text>
+      <text x="500" y="70" class="note">Li-ion 6S pack + 4× steerable canards</text>
+    </g>
+
+    <!-- ================ SECTION 4: EDF DUCT (combined) ================ -->
+    <g transform="translate(400 540)">
+      <!-- Duct shell -->
+      <rect class="visible" x="-45" y="0" width="90" height="120" fill="#f0f0f0" opacity="0.6"/>
+      <rect class="accent" x="-46" y="-4" width="92" height="4"/>
+      <!-- Inner duct liner -->
+      <rect class="duct" x="-42" y="0" width="84" height="120"/>
+      <text x="500" y="60" class="label">Section 4: EDF Duct (1×, ASA)</text>
+      <text x="500" y="70" class="note">+ duct liner; awaits propulsion sub-assembly</text>
+    </g>
+
+    <!-- ================ UPPER EDF SUB-ASSEMBLY ================ -->
+    <g transform="translate(400 700)">
+      <!-- Stator vanes ring -->
+      <rect class="joint" x="-42" y="0" width="84" height="6"/>
+      <text class="note" x="-38" y="4" font-size="6">11×stator</text>
+      <!-- Rotor blades (top view as fan) -->
+      <ellipse class="visible" cx="0" cy="20" rx="40" ry="6" fill="#1a1a20"/>
+      <text class="note" x="-44" y="22" font-size="6">7×blade</text>
+      <!-- Spinner -->
+      <ellipse class="accent" cx="0" cy="14" rx="8" ry="3"/>
+      <!-- Motor pod -->
+      <rect class="dark" x="-12" y="32" width="24" height="20"/>
+      <text class="note" x="14" y="44">CW motor</text>
+      <!-- Mount struts (4) -->
+      <rect class="dark" x="-40" y="55" width="80" height="3"/>
+      <text x="500" y="30" class="label">Upper EDF (CW) sub-assembly</text>
+      <text x="500" y="40" class="note">Stator → blades → spinner → motor</text>
+    </g>
+
+    <!-- ================ LOWER EDF SUB-ASSEMBLY ================ -->
+    <g transform="translate(400 800)">
+      <!-- Stator vanes ring (mirror) -->
+      <rect class="joint" x="-42" y="0" width="84" height="6"/>
+      <!-- Mount struts -->
+      <rect class="dark" x="-40" y="6" width="80" height="3"/>
+      <!-- Motor pod -->
+      <rect class="dark" x="-12" y="10" width="24" height="20"/>
+      <text class="note" x="14" y="22">CCW motor</text>
+      <!-- Rotor blades -->
+      <ellipse class="visible" cx="0" cy="36" rx="40" ry="6" fill="#1a1a20"/>
+      <!-- Spinner -->
+      <ellipse class="accent" cx="0" cy="42" rx="8" ry="3"/>
+      <text x="500" y="30" class="label">Lower EDF (CCW) sub-assembly</text>
+      <text x="500" y="40" class="note">Mirrors upper, opposite blade pitch</text>
+    </g>
+
+    <!-- ================ SECTION 5: TAIL ================ -->
+    <g transform="translate(400 920)">
+      <rect class="visible" x="-45" y="0" width="90" height="100" fill="#fff" opacity="0.65"/>
+      <rect class="accent" x="-46" y="-4" width="92" height="4"/>
+      <!-- Tail convergent -->
+      <path class="visible" d="M -45 100 Q -42 109 -36 121 Q -28.8 131 -24 147 L 24 147 Q 28.8 131 36 121 Q 42 109 45 100 Z" fill="#fff" opacity="0.65"/>
+      <!-- Tail fins (4, 2 visible) -->
+      <path class="visible" d="M -45 30 L -85 45 L -85 65 L -45 60 Z" fill="#e8e8ec"/>
+      <path class="visible" d="M  45 30 L  85 45 L  85 65 L  45 60 Z" fill="#e8e8ec"/>
+      <text x="500" y="80" class="label">Section 5: Tail (1×)</text>
+      <text x="500" y="90" class="note">+ 4× steerable tail fins, servo bay</text>
+    </g>
+
+    <!-- ================ THRUST VECTORING ================ -->
+    <g transform="translate(400 1100)">
+      <!-- Outer gimbal ring (ellipse) -->
+      <ellipse class="joint" cx="0" cy="0" rx="40" ry="5"/>
+      <!-- Inner gimbal ring (vertical) -->
+      <ellipse class="joint" cx="0" cy="-3" rx="5" ry="33" fill="none" stroke="#666" stroke-width="0.5"/>
+      <!-- Nozzle bell -->
+      <path class="dark" d="M -24 5 Q -22.8 8 -19.2 14 Q -16.8 21 -14.4 28 Q -13.2 33 -10.8 36 L 10.8 36 Q 13.2 33 14.4 28 Q 16.8 21 19.2 14 Q 22.8 8 24 5 Z"/>
+      <!-- Exhaust ring -->
+      <ellipse class="visible" cx="0" cy="38" rx="11" ry="2" fill="#fff"/>
+      <!-- Glow -->
+      <ellipse cx="0" cy="38" rx="14" ry="2" fill="#ff8800" opacity="0.4"/>
+      <text x="500" y="0" class="label">Thrust Vectoring assembly</text>
+      <text x="500" y="10" class="note">2-axis gimbal + de Laval nozzle</text>
+    </g>
+  </g>
+
+  <!-- ASSEMBLY ARROWS connecting sections -->
+  <g class="arrow">
+    <!-- Section 1 → 2 -->
+    <line x1="400" y1="-40" x2="400" y2="100" transform="translate(0 130)"/>
+    <polygon fill="#c33" points="395,200 405,200 400,212"/>
+    <!-- Section 2 → 3 -->
+    <line x1="400" y1="280" x2="400" y2="370"/>
+    <polygon fill="#c33" points="395,360 405,360 400,372"/>
+    <!-- Section 3 → 4 -->
+    <line x1="400" y1="440" x2="400" y2="530"/>
+    <polygon fill="#c33" points="395,520 405,520 400,532"/>
+    <!-- Section 4 → Upper EDF -->
+    <line x1="400" y1="600" x2="400" y2="680"/>
+    <polygon fill="#c33" points="395,675 405,675 400,690"/>
+    <!-- Upper EDF → Lower EDF -->
+    <line x1="400" y1="780" x2="400" y2="800"/>
+    <polygon fill="#c33" points="395,795 405,795 400,805"/>
+    <!-- Lower EDF → Section 5 -->
+    <line x1="400" y1="880" x2="400" y2="910"/>
+    <polygon fill="#c33" points="395,905 405,905 400,920"/>
+    <!-- Section 5 → Vectoring -->
+    <line x1="400" y1="1080" x2="400" y2="1095"/>
+    <polygon fill="#c33" points="395,1090 405,1090 400,1102"/>
+  </g>
+
+  <!-- Callouts (numbered to match BOM) -->
+  <g class="callout">
+    <circle cx="100" cy="100" r="11"/>
+    <text x="100" y="103" text-anchor="middle" class="callout-text">1</text>
+    <line stroke="#c33" stroke-width="0.4" x1="111" y1="100" x2="350" y2="60"/>
+
+    <circle cx="100" cy="220" r="11"/>
+    <text x="100" y="223" text-anchor="middle" class="callout-text">2</text>
+    <line stroke="#c33" stroke-width="0.4" x1="111" y1="220" x2="350" y2="240"/>
+
+    <circle cx="100" cy="380" r="11"/>
+    <text x="100" y="383" text-anchor="middle" class="callout-text">3</text>
+    <line stroke="#c33" stroke-width="0.4" x1="111" y1="380" x2="350" y2="395"/>
+
+    <circle cx="100" cy="540" r="11"/>
+    <text x="100" y="543" text-anchor="middle" class="callout-text">4</text>
+    <line stroke="#c33" stroke-width="0.4" x1="111" y1="540" x2="350" y2="555"/>
+
+    <circle cx="100" cy="700" r="11"/>
+    <text x="100" y="703" text-anchor="middle" class="callout-text">5</text>
+    <line stroke="#c33" stroke-width="0.4" x1="111" y1="700" x2="350" y2="725"/>
+
+    <circle cx="100" cy="800" r="11"/>
+    <text x="100" y="803" text-anchor="middle" class="callout-text">6</text>
+    <line stroke="#c33" stroke-width="0.4" x1="111" y1="800" x2="350" y2="825"/>
+
+    <circle cx="100" cy="950" r="11"/>
+    <text x="100" y="953" text-anchor="middle" class="callout-text">7</text>
+    <line stroke="#c33" stroke-width="0.4" x1="111" y1="950" x2="350" y2="950"/>
+
+    <circle cx="100" cy="1100" r="11"/>
+    <text x="100" y="1103" text-anchor="middle" class="callout-text">8</text>
+    <line stroke="#c33" stroke-width="0.4" x1="111" y1="1100" x2="350" y2="1100"/>
+  </g>
+
+  <!-- Sub-assembly legend -->
+  <g transform="translate(50 1180)" font-size="9">
+    <text class="title" font-size="11">ASSEMBLY ORDER</text>
+    <text y="20">①  Build Section 1 (nose) — fit pitot</text>
+    <text y="34">②  Build Section 2 — populate avionics column (FC, GPS, radio)</text>
+    <text y="48">③  Build Section 3 — fit battery, install canard servos + fins</text>
+    <text y="62">④  Prepare Section 4 (EDF duct) — install both motor pods + struts</text>
+    <text y="76">⑤  Install Upper EDF (CW): stators → motor → rotor → spinner</text>
+  </g>
+  <g transform="translate(420 1180)" font-size="9">
+    <text class="title" font-size="11">&#160;</text>
+    <text y="20">⑥  Install Lower EDF (CCW): same sequence, opposite pitch</text>
+    <text y="34">⑦  Build Section 5 — fit tail fin servos, install gimbal frame</text>
+    <text y="48">⑧  Mount nozzle bell on gimbal; connect actuators</text>
+    <text y="62">⑨  Stack all sections; bayonet-engage joints; bolt and torque</text>
+    <text y="76">⑩  Wire harness, calibration, pre-flight checks</text>
+  </g>
+
+  <!-- Title block -->
+  <g transform="translate(540 1210)">
+    <rect class="titleblock" width="240" height="80"/>
+    <line x1="0" y1="20" x2="240" y2="20" stroke="#111" stroke-width="0.4"/>
+    <line x1="0" y1="40" x2="240" y2="40" stroke="#111" stroke-width="0.4"/>
+    <line x1="0" y1="60" x2="240" y2="60" stroke="#111" stroke-width="0.4"/>
+    <line x1="120" y1="20" x2="120" y2="80" stroke="#111" stroke-width="0.4"/>
+
+    <text x="120" y="14" text-anchor="middle" class="title">DRONE ROCKET Mk II</text>
+    <text x="60" y="34" text-anchor="middle" class="label">DRG 05</text>
+    <text x="180" y="34" text-anchor="middle" class="label">EXPLODED VIEW</text>
+    <text x="60" y="54" text-anchor="middle" class="label">N.T.S.</text>
+    <text x="180" y="54" text-anchor="middle" class="label">2026-05-03</text>
+    <text x="60" y="74" text-anchor="middle" class="note">Drawn by 3D Agent</text>
+    <text x="180" y="74" text-anchor="middle" class="note">Sheet 5 of 6</text>
+  </g>
+</svg>

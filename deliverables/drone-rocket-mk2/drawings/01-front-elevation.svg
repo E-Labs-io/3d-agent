@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Drone Rocket Mk II — Front Elevation, scale 1:5 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1100" font-family="ui-monospace, Menlo, monospace" font-size="9">
+  <style>
+    .visible { stroke: #111; stroke-width: 0.7; fill: none; }
+    .hidden  { stroke: #888; stroke-width: 0.35; fill: none; stroke-dasharray: 3,2; }
+    .center  { stroke: #c33; stroke-width: 0.25; fill: none; stroke-dasharray: 6,2,1,2; }
+    .dim     { stroke: #555; stroke-width: 0.25; fill: none; }
+    .dim-arrow { fill: #555; }
+    .label   { fill: #111; }
+    .note    { fill: #444; font-size: 8; font-style: italic; }
+    .accent  { fill: #cc2200; stroke: #aa1500; stroke-width: 0.3; }
+    .joint   { fill: #f0e0c0; stroke: #888; stroke-width: 0.3; }
+    .title   { font-size: 11; font-weight: bold; fill: #111; }
+    .titleblock { stroke: #111; stroke-width: 0.7; fill: #fafaf6; }
+  </style>
+
+  <!-- Background -->
+  <rect width="800" height="1100" fill="#fefefa"/>
+
+  <!-- Drawing title -->
+  <text x="400" y="30" text-anchor="middle" class="title">DRONE ROCKET Mk II — FRONT ELEVATION</text>
+  <text x="400" y="45" text-anchor="middle" class="note">Scale 1:5  |  All dims mm  |  Datum: nozzle exit plane (Y=0)</text>
+
+  <!-- Coordinate system: rocket centre at x=420, scale = 0.6 (1mm = 0.6 SVG units to fit easily)
+       Body OD = 150mm → 90 SVG units wide. Total height = 1000mm → 600 SVG units.
+       Y axis: Y=0 at SVG y=1000, Y=1000 at SVG y=400 -->
+  <g transform="translate(420 400)">
+    <!-- Centre line -->
+    <line class="center" x1="0" y1="-30" x2="0" y2="640"/>
+
+    <!-- Nose cone (ogive) -->
+    <path class="visible" d="
+      M -45 540
+      Q -45 528 -44.8 519
+      Q -44.6 510 -44.1 501
+      Q -43.4 492 -42 483
+      Q -40 473 -37.5 464
+      Q -34 454 -29.7 445
+      Q -25 437 -18.7 428
+      Q -12 421 -3.5 415
+      L 0 412
+      L 3.5 415
+      Q 12 421 18.7 428
+      Q 25 437 29.7 445
+      Q 34 454 37.5 464
+      Q 40 473 42 483
+      Q 43.4 492 44.1 501
+      Q 44.6 510 44.8 519
+      Q 45 528 45 540
+      "/>
+
+    <!-- Pitot -->
+    <line class="visible" x1="0" y1="412" x2="0" y2="395"/>
+    <circle class="visible" cx="0" cy="394" r="0.9"/>
+
+    <!-- Nose collar (dark band) y=860-880 -->
+    <rect class="joint" x="-45" y="552" width="90" height="12"/>
+
+    <!-- Annular intake gap y=820-860 (open) with 6 struts -->
+    <line class="visible" x1="-45" y1="564" x2="-45" y2="588"/>
+    <line class="visible" x1="45" y1="564" x2="45" y2="588"/>
+    <!-- Visible struts at the front (3 of 6 visible from front view) -->
+    <rect x="-43" y="566" width="4" height="20" fill="#666" stroke="#333" stroke-width="0.3"/>
+    <rect x="-2" y="566" width="4" height="20" fill="#666" stroke="#333" stroke-width="0.3"/>
+    <rect x="39" y="566" width="4" height="20" fill="#666" stroke="#333" stroke-width="0.3"/>
+
+    <!-- Lower intake collar -->
+    <rect class="joint" x="-45" y="588" width="90" height="12"/>
+
+    <!-- Section joint ring 800 (red) -->
+    <rect class="accent" x="-46" y="599" width="92" height="3"/>
+
+    <!-- Body section 2 (Avionics) -->
+    <line class="visible" x1="-45" y1="600" x2="-45" y2="720"/>
+    <line class="visible" x1="45" y1="600" x2="45" y2="720"/>
+
+    <!-- Inspection window indicator -->
+    <rect class="hidden" x="42" y="660" width="2" height="30"/>
+
+    <!-- Section joint ring 600 -->
+    <rect class="accent" x="-46" y="719" width="92" height="3"/>
+
+    <!-- Body section 3 (Battery + Canards) -->
+    <line class="visible" x1="-45" y1="720" x2="-45" y2="840"/>
+    <line class="visible" x1="45" y1="720" x2="45" y2="840"/>
+
+    <!-- Canard pivot indicators (4 fins offset 45° — show 2 visible-ish from front) -->
+    <line class="hidden" x1="-45" y1="773" x2="45" y2="773"/>
+
+    <!-- Canard fin profile (one visible at 45°, foreshortened) -->
+    <path class="visible" d="M -45 765 L -75 768 L -75 780 L -45 780 Z" fill="#e8e8ec"/>
+    <path class="visible" d="M  45 765 L  75 768 L  75 780 L  45 780 Z" fill="#e8e8ec"/>
+
+    <!-- Section joint ring 400 -->
+    <rect class="accent" x="-46" y="839" width="92" height="3"/>
+
+    <!-- Body section 4 (EDF Duct) -->
+    <line class="visible" x1="-45" y1="840" x2="-45" y2="960"/>
+    <line class="visible" x1="45" y1="840" x2="45" y2="960"/>
+
+    <!-- ESC pod indicator (peripheral, hidden behind shell) -->
+    <rect class="hidden" x="35" y="870" width="5" height="35"/>
+    <rect class="hidden" x="-40" y="870" width="5" height="35"/>
+
+    <!-- Section joint ring 200 -->
+    <rect class="accent" x="-46" y="959" width="92" height="3"/>
+
+    <!-- Body section 5 (Tail) -->
+    <line class="visible" x1="-45" y1="960" x2="-45" y2="1010"/>
+    <line class="visible" x1="45" y1="960" x2="45" y2="1010"/>
+    <!-- Tail fin servo ring band -->
+    <rect class="hidden" x="-45" y="975" width="90" height="9"/>
+
+    <!-- Tail fins (2 visible at front, foreshortened) -->
+    <path class="visible" d="M -45 980 L -85 1000 L -85 1018 L -45 1010 Z" fill="#e8e8ec"/>
+    <path class="visible" d="M  45 980 L  85 1000 L  85 1018 L  45 1010 Z" fill="#e8e8ec"/>
+
+    <!-- Tail convergent taper -->
+    <path class="visible" d="M -45 1010 Q -42 1019 -36 1031 Q -28.8 1041 -24 1057 L -24 1057
+                            L 24 1057 Q 28.8 1041 36 1031 Q 42 1019 45 1010 Z" fill="#fafaf6"/>
+
+    <!-- Gimbal rings (front view shows the outer ring as a horizontal ellipse) -->
+    <ellipse class="visible" cx="0" cy="1064" rx="22.8" ry="3" fill="#fff"/>
+    <line class="visible" x1="-22.8" y1="1064" x2="-22.8" y2="1080"/>
+    <line class="visible" x1="22.8" y1="1064" x2="22.8" y2="1080"/>
+
+    <!-- Nozzle bell (de Laval) -->
+    <path class="visible" d="
+      M -24 1060
+      Q -22.8 1062 -19.2 1066
+      Q -16.8 1071 -14.4 1076
+      Q -13.2 1081 -10.8 1083
+      L -10.8 1090
+      Q -13.2 1093 -19.2 1095
+      L -21 1100
+      L 21 1100
+      L 19.2 1095
+      Q 13.2 1093 10.8 1090
+      L 10.8 1083
+      Q 13.2 1081 14.4 1076
+      Q 16.8 1071 19.2 1066
+      Q 22.8 1062 24 1060
+      Z" fill="#3a3a44"/>
+
+    <!-- Exhaust glow (faint) -->
+    <ellipse cx="0" cy="1100" rx="15" ry="1.5" fill="#ff8800" opacity="0.25"/>
+
+  </g>
+
+  <!-- ── DIMENSIONS (right side, OD callouts) ─────────────────────── -->
+  <g transform="translate(420 400)">
+    <!-- 1000mm overall height -->
+    <line class="dim" x1="120" y1="-30" x2="160" y2="-30"/>
+    <line class="dim" x1="120" y1="600" x2="160" y2="600"/>
+    <line class="dim" x1="155" y1="-30" x2="155" y2="600"/>
+    <polygon class="dim-arrow" points="155,-30 152,-22 158,-22"/>
+    <polygon class="dim-arrow" points="155,600 152,592 158,592"/>
+    <text x="170" y="290" class="label" font-size="10">1000.0</text>
+    <text x="170" y="302" class="note">overall height</text>
+
+    <!-- 200mm sections -->
+    <line class="dim" x1="100" y1="-30" x2="100" y2="100"/>
+    <line class="dim" x1="100" y1="100" x2="100" y2="220"/>
+    <line class="dim" x1="100" y1="220" x2="100" y2="340"/>
+    <line class="dim" x1="100" y1="340" x2="100" y2="460"/>
+    <line class="dim" x1="100" y1="460" x2="100" y2="580"/>
+    <line class="dim" x1="100" y1="580" x2="100" y2="600"/>
+
+    <text x="105" y="40" class="label">200</text><text x="105" y="50" class="note">sec 1 nose</text>
+    <text x="105" y="160" class="label">200</text><text x="105" y="170" class="note">sec 2 avionics</text>
+    <text x="105" y="280" class="label">200</text><text x="105" y="290" class="note">sec 3 battery</text>
+    <text x="105" y="400" class="label">200</text><text x="105" y="410" class="note">sec 4 EDF</text>
+    <text x="105" y="520" class="label">200</text><text x="105" y="530" class="note">sec 5 tail</text>
+
+    <!-- Section joint rings -->
+    <text x="-100" y="601" text-anchor="end" class="note">y=800 joint</text>
+    <text x="-100" y="722" text-anchor="end" class="note">y=600 joint</text>
+    <text x="-100" y="841" text-anchor="end" class="note">y=400 joint</text>
+    <text x="-100" y="961" text-anchor="end" class="note">y=200 joint</text>
+    <line class="dim" x1="-50" y1="600" x2="-95" y2="600"/>
+    <line class="dim" x1="-50" y1="720" x2="-95" y2="720"/>
+    <line class="dim" x1="-50" y1="840" x2="-95" y2="840"/>
+    <line class="dim" x1="-50" y1="960" x2="-95" y2="960"/>
+
+    <!-- 150mm OD -->
+    <line class="dim" x1="-45" y1="630" x2="-75" y2="630"/>
+    <line class="dim" x1="45" y1="630" x2="75" y2="630"/>
+    <line class="dim" x1="-72" y1="630" x2="72" y2="630"/>
+    <polygon class="dim-arrow" points="-72,630 -64,627 -64,633"/>
+    <polygon class="dim-arrow" points="72,630 64,627 64,633"/>
+    <text x="0" y="643" text-anchor="middle" class="label">Ø150</text>
+    <text x="0" y="654" text-anchor="middle" class="note">body OD</text>
+
+    <!-- Intake gap callout -->
+    <line class="dim" x1="-100" y1="564" x2="-130" y2="564"/>
+    <line class="dim" x1="-100" y1="588" x2="-130" y2="588"/>
+    <line class="dim" x1="-125" y1="564" x2="-125" y2="588"/>
+    <polygon class="dim-arrow" points="-125,564 -128,572 -122,572"/>
+    <polygon class="dim-arrow" points="-125,588 -128,580 -122,580"/>
+    <text x="-128" y="579" text-anchor="end" class="label">40</text>
+    <text x="-128" y="590" text-anchor="end" class="note">annular intake</text>
+
+    <!-- Tail fin span -->
+    <line class="dim" x1="-85" y1="1030" x2="-85" y2="1055"/>
+    <line class="dim" x1="-45" y1="1030" x2="-45" y2="1055"/>
+    <line class="dim" x1="-85" y1="1050" x2="-45" y2="1050"/>
+    <text x="-65" y="1062" text-anchor="middle" class="label">40</text>
+    <text x="-65" y="1072" text-anchor="middle" class="note">fin span</text>
+
+    <!-- Nozzle dimension -->
+    <text x="0" y="1115" text-anchor="middle" class="note">Ø42 throat / Ø48 exit</text>
+  </g>
+
+  <!-- ── TITLE BLOCK ─────────────────────────────────────────────── -->
+  <g transform="translate(540 1010)">
+    <rect class="titleblock" width="240" height="80"/>
+    <line x1="0" y1="20" x2="240" y2="20" stroke="#111" stroke-width="0.4"/>
+    <line x1="0" y1="40" x2="240" y2="40" stroke="#111" stroke-width="0.4"/>
+    <line x1="0" y1="60" x2="240" y2="60" stroke="#111" stroke-width="0.4"/>
+    <line x1="120" y1="20" x2="120" y2="80" stroke="#111" stroke-width="0.4"/>
+
+    <text x="120" y="14" text-anchor="middle" class="title">DRONE ROCKET Mk II</text>
+    <text x="60" y="34" text-anchor="middle" class="label">DRG 01</text>
+    <text x="180" y="34" text-anchor="middle" class="label">FRONT ELEVATION</text>
+    <text x="60" y="54" text-anchor="middle" class="label">SCALE 1:5</text>
+    <text x="180" y="54" text-anchor="middle" class="label">2026-05-03</text>
+    <text x="60" y="74" text-anchor="middle" class="note">Drawn by 3D Agent</text>
+    <text x="180" y="74" text-anchor="middle" class="note">Sheet 1 of 6</text>
+  </g>
+
+</svg>

@@ -1,0 +1,142 @@
+name: 3d-design
+version: "1.0.0"
+description: >
+  AI-powered 3D design environment. Build, modify, and export 3D objects
+  via natural language. Includes live preview, manufacturing analysis,
+  and format conversion (STL, OBJ, GLTF, FBX, DXF, 3DS, PLY).
+
+trigger:
+  - "create a 3D"
+  - "build a model"
+  - "design a part"
+  - "3D print"
+  - "export STL"
+  - "export OBJ"
+  - "import 3D file"
+  - "make a gear"
+  - "manufacturing advice"
+  - "material selection"
+  - "printability"
+  - "CNC"
+
+server:
+  start: "node server.js"
+  port: 3030
+  viewer_url: "http://localhost:3030"
+
+scene_file: "scene/current.json"
+
+agents:
+  - id: modeler
+    name: 3D Modeler
+    file: agents/3d-modeler.md
+    triggers:
+      - "build"
+      - "create"
+      - "model"
+      - "add"
+      - "modify"
+      - "change"
+      - "make"
+      - "design"
+
+  - id: printer
+    name: 3D Printing Specialist
+    file: agents/3d-printing.md
+    triggers:
+      - "print"
+      - "FDM"
+      - "SLA"
+      - "resin"
+      - "SLS"
+      - "layer"
+      - "support"
+      - "printable"
+      - "slicer"
+
+  - id: manufacturing
+    name: Manufacturing Engineer
+    file: agents/manufacturing.md
+    triggers:
+      - "manufacture"
+      - "CNC"
+      - "injection"
+      - "mould"
+      - "die cast"
+      - "machining"
+      - "production"
+      - "tolerance"
+      - "DFM"
+
+  - id: materials
+    name: Materials Specialist
+    file: agents/materials.md
+    triggers:
+      - "material"
+      - "steel"
+      - "aluminium"
+      - "plastic"
+      - "nylon"
+      - "PEEK"
+      - "finish"
+      - "coating"
+      - "anodise"
+
+  - id: cad
+    name: CAD Designer
+    file: agents/cad-designer.md
+    triggers:
+      - "precision"
+      - "tolerance"
+      - "fit"
+      - "bearing"
+      - "thread"
+      - "GD&T"
+      - "assembly"
+      - "dimension"
+
+formats:
+  import:
+    - ext: stl
+      loader: STLLoader
+      desc: "Stereolithography — 3D printing standard"
+    - ext: obj
+      loader: OBJLoader
+      desc: "Wavefront OBJ — universal exchange"
+    - ext: gltf
+      loader: GLTFLoader
+      desc: "GL Transmission Format — game/web 3D"
+    - ext: glb
+      loader: GLTFLoader
+      desc: "GLTF binary"
+    - ext: fbx
+      loader: FBXLoader
+      desc: "Autodesk FBX — animation/game pipeline"
+    - ext: 3ds
+      loader: TDSLoader
+      desc: "3D Studio — legacy Autodesk format"
+    - ext: ply
+      loader: PLYLoader
+      desc: "Polygon File Format — point clouds, scans"
+    - ext: dxf
+      loader: note
+      note: "DXF import via server-side conversion"
+
+  export:
+    - format: stl
+      desc: "3D printing, CAD, machining"
+    - format: obj
+      desc: "Universal 3D exchange"
+    - format: gltf
+      desc: "Real-time / web / game"
+    - format: glb
+      desc: "GLTF binary (single file)"
+    - format: ply
+      desc: "Point clouds, mesh scans"
+
+geometry_types:
+  - box, sphere, cylinder, cone, torus, torusKnot, plane, circle
+  - capsule, pipe, roundedBox
+  - gear, spring, hex_bolt, nut
+  - lathe, extrude
+  - custom_code, file, group

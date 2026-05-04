@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Drone Rocket Mk II — Section View through centre line, scale 1:5 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1100" font-family="ui-monospace, Menlo, monospace" font-size="9">
+  <style>
+    .visible { stroke: #111; stroke-width: 0.7; fill: none; }
+    .hidden  { stroke: #888; stroke-width: 0.35; fill: none; stroke-dasharray: 3,2; }
+    .center  { stroke: #c33; stroke-width: 0.25; fill: none; stroke-dasharray: 6,2,1,2; }
+    .dim     { stroke: #555; stroke-width: 0.25; fill: none; }
+    .dim-arrow { fill: #555; }
+    .label   { fill: #111; }
+    .note    { fill: #444; font-size: 8; font-style: italic; }
+    .hatch-pla { fill: url(#hatch-pla); stroke: #111; stroke-width: 0.5; }
+    .hatch-asa { fill: url(#hatch-asa); stroke: #111; stroke-width: 0.5; }
+    .hatch-pacf { fill: url(#hatch-pacf); stroke: #111; stroke-width: 0.5; }
+    .hatch-electronics { fill: #d8e8c0; stroke: #111; stroke-width: 0.4; }
+    .hatch-battery { fill: #b8c8e8; stroke: #111; stroke-width: 0.4; }
+    .accent  { fill: #cc2200; stroke: #aa1500; stroke-width: 0.3; }
+    .title   { font-size: 11; font-weight: bold; fill: #111; }
+    .titleblock { stroke: #111; stroke-width: 0.7; fill: #fafaf6; }
+    .callout { fill: #fff; stroke: #111; stroke-width: 0.5; }
+    .callout-text { fill: #111; font-size: 9; font-weight: bold; }
+  </style>
+  <defs>
+    <pattern id="hatch-pla" patternUnits="userSpaceOnUse" width="4" height="4" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="4" stroke="#666" stroke-width="0.4"/>
+    </pattern>
+    <pattern id="hatch-asa" patternUnits="userSpaceOnUse" width="4" height="4" patternTransform="rotate(135)">
+      <line x1="0" y1="0" x2="0" y2="4" stroke="#444" stroke-width="0.4"/>
+    </pattern>
+    <pattern id="hatch-pacf" patternUnits="userSpaceOnUse" width="3" height="3" patternTransform="rotate(45)">
+      <rect width="3" height="3" fill="#222"/>
+      <line x1="0" y1="0" x2="0" y2="3" stroke="#666" stroke-width="0.4"/>
+    </pattern>
+  </defs>
+
+  <rect width="800" height="1100" fill="#fefefa"/>
+
+  <text x="400" y="30" text-anchor="middle" class="title">DRONE ROCKET Mk II — SECTION VIEW (cutaway through Y axis)</text>
+  <text x="400" y="45" text-anchor="middle" class="note">Scale 1:5  |  All dims mm  |  Hatch: ╲╲ PETG · ╱╱ ASA · ▓▓ PA-CF · ▣ electronics · ▤ battery</text>
+
+  <!-- Coordinate system -->
+  <g transform="translate(420 400)">
+    <line class="center" x1="0" y1="-30" x2="0" y2="660"/>
+
+    <!-- ============= LEFT HALF: cutaway showing internals ============= -->
+
+    <!-- Body shell wall (left side cut, hatched) -->
+    <!-- Section 5 Tail shell -->
+    <path class="hatch-pla" d="M -45 1010 L -42 980 L -42 962 L -45 962 Z M -45 962 L -45 840 L -42 840 L -42 962 Z M -45 840 L -45 720 L -42 720 L -42 840 Z M -45 720 L -45 600 L -42 600 L -42 720 Z"/>
+    <!-- Tail convergent -->
+    <path class="hatch-pla" d="M -45 1010 Q -42 1019 -36 1031 Q -28.8 1041 -24 1057 L -27 1057 Q -31 1042 -38 1032 Q -44 1020 -47 1011 Z"/>
+
+    <!-- Nose cone wall -->
+    <path class="hatch-pla" d="
+      M -45 540
+      Q -45 528 -44.8 519
+      Q -44.6 510 -44.1 501
+      Q -43.4 492 -42 483
+      Q -40 473 -37.5 464
+      Q -34 454 -29.7 445
+      Q -25 437 -18.7 428
+      Q -12 421 -3.5 415
+      L -3.5 419
+      Q -10 424 -16 430
+      Q -22 438 -27 446
+      Q -32 454 -36 463
+      Q -38 472 -40 482
+      Q -42 491 -42.5 500
+      Q -43 510 -42.7 519
+      Q -42.5 528 -42 540
+      Z"/>
+
+    <!-- Nose collar -->
+    <rect class="accent" x="-45" y="552" width="3" height="12"/>
+    <rect class="accent" x="-45" y="552" width="-3" height="12"/>
+
+    <!-- Intake annular gap (left side strut visible in section) -->
+    <rect class="hatch-pla" x="-45" y="566" width="-4" height="20"/>
+    <rect class="hatch-pla" x="-43" y="566" width="2" height="20"/>
+
+    <!-- Section accent rings in cross-section -->
+    <rect class="accent" x="-46" y="599" width="3" height="3"/>
+    <rect class="accent" x="-46" y="719" width="3" height="3"/>
+    <rect class="accent" x="-46" y="839" width="3" height="3"/>
+    <rect class="accent" x="-46" y="959" width="3" height="3"/>
+
+    <!-- Avionics column (centred) -->
+    <rect class="hatch-pla" x="-15" y="600" width="3" height="240"/>
+
+    <!-- Flight Computer -->
+    <rect class="hatch-electronics" x="-12" y="630" width="24" height="6"/>
+    <rect class="hatch-electronics" x="-7" y="624" width="14" height="6"/>
+    <text x="20" y="630" class="note">FC + IMU</text>
+
+    <!-- GPS -->
+    <rect class="hatch-electronics" x="-10" y="645" width="20" height="4"/>
+    <text x="20" y="649" class="note">GPS</text>
+
+    <!-- Telemetry radio -->
+    <rect class="hatch-electronics" x="-9" y="660" width="18" height="6"/>
+    <text x="20" y="664" class="note">Radio</text>
+
+    <!-- Battery column (in Section 3) -->
+    <rect class="hatch-pla" x="-15" y="720" width="3" height="120"/>
+
+    <!-- Battery pack -->
+    <rect class="hatch-battery" x="-12" y="740" width="24" height="66"/>
+    <text x="20" y="775" class="note">6S 5Ah</text>
+
+    <!-- Canard servo mount ring (cross-section) -->
+    <rect class="hatch-pacf" x="-15" y="765" width="3" height="12"/>
+
+    <!-- EDF section internals (Section 4, y=840-960) -->
+    <!-- Inner duct (ASA) -->
+    <rect class="hatch-asa" x="-42" y="840" width="-1.5" height="120"/>
+
+    <!-- Upper EDF motor pod with motor -->
+    <ellipse class="hatch-pacf" cx="0" cy="880" rx="16" ry="20"/>
+    <rect class="hatch-electronics" x="-9" y="868" width="18" height="20"/>
+    <text x="20" y="880" class="note">Upper motor</text>
+
+    <!-- Upper EDF blades (visible as slanted lines in section) -->
+    <line class="visible" x1="-25" y1="860" x2="-15" y2="855" stroke-width="1"/>
+    <line class="visible" x1="15" y1="855" x2="25" y2="860" stroke-width="1"/>
+    <text x="29" y="860" class="note">Rotor</text>
+
+    <!-- Upper stators (vertical lines) -->
+    <line class="visible" x1="-30" y1="848" x2="-30" y2="857" stroke-width="0.6"/>
+    <line class="visible" x1="-15" y1="848" x2="-15" y2="857" stroke-width="0.6"/>
+    <line class="visible" x1="15" y1="848" x2="15" y2="857" stroke-width="0.6"/>
+    <line class="visible" x1="30" y1="848" x2="30" y2="857" stroke-width="0.6"/>
+    <text x="29" y="848" class="note">Stators</text>
+
+    <!-- Lower EDF motor pod -->
+    <ellipse class="hatch-pacf" cx="0" cy="920" rx="16" ry="20"/>
+    <rect class="hatch-electronics" x="-9" y="908" width="18" height="20"/>
+    <text x="20" y="920" class="note">Lower motor</text>
+
+    <!-- Lower EDF blades -->
+    <line class="visible" x1="-25" y1="942" x2="-15" y2="947" stroke-width="1"/>
+    <line class="visible" x1="15" y1="947" x2="25" y2="942" stroke-width="1"/>
+
+    <!-- ESC pods peripheral -->
+    <rect class="hatch-electronics" x="-37" y="870" width="5" height="35"/>
+    <rect class="hatch-electronics" x="32" y="870" width="5" height="35"/>
+    <text x="-50" y="888" text-anchor="end" class="note">ESC</text>
+
+    <!-- Tail fin servo ring (in cross-section) -->
+    <rect class="hatch-pacf" x="-39" y="975" width="3" height="9"/>
+    <rect class="hatch-pacf" x="36" y="975" width="3" height="9"/>
+
+    <!-- Gimbal outer ring (sectioned) -->
+    <rect class="hatch-pacf" x="-23.5" y="1062" width="3" height="6"/>
+    <rect class="hatch-pacf" x="20.5" y="1062" width="3" height="6"/>
+
+    <!-- Gimbal inner ring (vertical orientation) -->
+    <rect class="hatch-pacf" x="-1.5" y="1058" width="3" height="14"/>
+
+    <!-- Nozzle bell -->
+    <path class="hatch-asa" d="
+      M -24 1060
+      Q -22.8 1062 -19.2 1066
+      Q -16.8 1071 -14.4 1076
+      Q -13.2 1081 -10.8 1083
+      L -7.8 1083
+      Q -10.2 1081 -11.4 1076
+      Q -13.8 1071 -16.2 1066
+      Q -19.8 1062 -21 1060 Z"/>
+    <path class="hatch-asa" d="
+      M 24 1060
+      Q 22.8 1062 19.2 1066
+      Q 16.8 1071 14.4 1076
+      Q 13.2 1081 10.8 1083
+      L 7.8 1083
+      Q 10.2 1081 11.4 1076
+      Q 13.8 1071 16.2 1066
+      Q 19.8 1062 21 1060 Z"/>
+
+    <!-- ============= RIGHT HALF: external view ============= -->
+    <!-- Mirror of front elevation, abbreviated -->
+    <line class="visible" x1="45" y1="540" x2="45" y2="552"/>
+    <rect class="accent" x="42" y="552" width="6" height="12"/>
+    <line class="visible" x1="45" y1="564" x2="45" y2="588"/>
+    <rect class="hatch-pla" x="41" y="566" width="4" height="20"/>
+    <rect class="accent" x="42" y="588" width="6" height="12"/>
+    <rect class="accent" x="42" y="599" width="6" height="3"/>
+    <line class="visible" x1="45" y1="600" x2="45" y2="720"/>
+    <rect class="accent" x="42" y="719" width="6" height="3"/>
+    <line class="visible" x1="45" y1="720" x2="45" y2="840"/>
+    <rect class="accent" x="42" y="839" width="6" height="3"/>
+    <line class="visible" x1="45" y1="840" x2="45" y2="960"/>
+    <rect class="accent" x="42" y="959" width="6" height="3"/>
+    <line class="visible" x1="45" y1="960" x2="45" y2="1010"/>
+
+    <!-- Tail convergent right side -->
+    <path class="visible" d="M 45 1010 Q 42 1019 36 1031 Q 28.8 1041 24 1057"/>
+
+  </g>
+
+  <!-- ── DIMENSIONS ──────────────────────────────────────── -->
+  <g transform="translate(420 400)">
+    <!-- 50mm column OD (left annotation) -->
+    <line class="dim" x1="-15" y1="690" x2="15" y2="690"/>
+    <line class="dim" x1="-15" y1="688" x2="-15" y2="700"/>
+    <line class="dim" x1="15" y1="688" x2="15" y2="700"/>
+    <line class="dim" x1="-100" y1="690" x2="-15" y2="690"/>
+    <text x="-105" y="693" text-anchor="end" class="label">Ø50 column</text>
+
+    <!-- 140mm body ID -->
+    <line class="dim" x1="-42" y1="930" x2="42" y2="930"/>
+    <line class="dim" x1="-42" y1="928" x2="-42" y2="935"/>
+    <line class="dim" x1="42" y1="928" x2="42" y2="935"/>
+    <line class="dim" x1="-100" y1="930" x2="-42" y2="930"/>
+    <text x="-105" y="933" text-anchor="end" class="label">Ø140 body ID</text>
+
+    <!-- 5mm wall -->
+    <line class="dim" x1="-50" y1="650" x2="-50" y2="660"/>
+    <line class="dim" x1="-45" y1="650" x2="-45" y2="660"/>
+    <line class="dim" x1="-50" y1="657" x2="-45" y2="657"/>
+    <text x="-55" y="660" text-anchor="end" class="label">5</text>
+    <text x="-55" y="670" text-anchor="end" class="note">wall</text>
+
+    <!-- Annular flow area indicator -->
+    <text x="105" y="693" class="note">→ annular flow gap r=25 to r=70</text>
+  </g>
+
+  <!-- ── CALLOUTS ─────────────────────────────────────────── -->
+  <!-- Number bubbles point to key parts -->
+  <g class="callout">
+    <circle cx="180" cy="450" r="9"/>
+    <text x="180" y="453" text-anchor="middle" class="callout-text">1</text>
+    <line stroke="#111" stroke-width="0.4" x1="189" y1="450" x2="395" y2="425"/>
+
+    <circle cx="180" cy="500" r="9"/>
+    <text x="180" y="503" text-anchor="middle" class="callout-text">2</text>
+    <line stroke="#111" stroke-width="0.4" x1="189" y1="500" x2="385" y2="565"/>
+
+    <circle cx="180" cy="630" r="9"/>
+    <text x="180" y="633" text-anchor="middle" class="callout-text">3</text>
+    <line stroke="#111" stroke-width="0.4" x1="189" y1="630" x2="408" y2="1030"/>
+
+    <circle cx="180" cy="680" r="9"/>
+    <text x="180" y="683" text-anchor="middle" class="callout-text">4</text>
+    <line stroke="#111" stroke-width="0.4" x1="189" y1="680" x2="408" y2="1145"/>
+
+    <circle cx="640" cy="450" r="9"/>
+    <text x="640" y="453" text-anchor="middle" class="callout-text">5</text>
+    <line stroke="#111" stroke-width="0.4" x1="631" y1="450" x2="465" y2="965"/>
+
+    <circle cx="640" cy="500" r="9"/>
+    <text x="640" y="503" text-anchor="middle" class="callout-text">6</text>
+    <line stroke="#111" stroke-width="0.4" x1="631" y1="500" x2="465" y2="999"/>
+
+    <circle cx="640" cy="630" r="9"/>
+    <text x="640" y="633" text-anchor="middle" class="callout-text">7</text>
+    <line stroke="#111" stroke-width="0.4" x1="631" y1="630" x2="465" y2="1320"/>
+
+    <circle cx="640" cy="680" r="9"/>
+    <text x="640" y="683" text-anchor="middle" class="callout-text">8</text>
+    <line stroke="#111" stroke-width="0.4" x1="631" y1="680" x2="465" y2="1450"/>
+  </g>
+
+  <!-- Callout legend -->
+  <g transform="translate(40 720)" font-size="9" fill="#111">
+    <text class="title" font-size="10">CALLOUTS:</text>
+    <text y="16">[1] Pitot tube (BOM #3)</text>
+    <text y="28">[2] Annular intake + 6 struts (BOM #4–6)</text>
+    <text y="40">[3] Flight computer + IMU (BOM #23)</text>
+    <text y="52">[4] GPS / radio / antenna (BOM #25–27)</text>
+  </g>
+  <g transform="translate(640 720)" font-size="9" fill="#111">
+    <text y="16">[5] Upper EDF rotor + motor (BOM #38–43)</text>
+    <text y="28">[6] Lower EDF rotor + motor (BOM #44–49)</text>
+    <text y="40">[7] Gimbal pitch + yaw rings (BOM #64–67)</text>
+    <text y="52">[8] Vectoring nozzle bell (BOM #68)</text>
+  </g>
+
+  <!-- Title block -->
+  <g transform="translate(540 1010)">
+    <rect class="titleblock" width="240" height="80"/>
+    <line x1="0" y1="20" x2="240" y2="20" stroke="#111" stroke-width="0.4"/>
+    <line x1="0" y1="40" x2="240" y2="40" stroke="#111" stroke-width="0.4"/>
+    <line x1="0" y1="60" x2="240" y2="60" stroke="#111" stroke-width="0.4"/>
+    <line x1="120" y1="20" x2="120" y2="80" stroke="#111" stroke-width="0.4"/>
+
+    <text x="120" y="14" text-anchor="middle" class="title">DRONE ROCKET Mk II</text>
+    <text x="60" y="34" text-anchor="middle" class="label">DRG 02</text>
+    <text x="180" y="34" text-anchor="middle" class="label">SECTION VIEW</text>
+    <text x="60" y="54" text-anchor="middle" class="label">SCALE 1:5</text>
+    <text x="180" y="54" text-anchor="middle" class="label">2026-05-03</text>
+    <text x="60" y="74" text-anchor="middle" class="note">Drawn by 3D Agent</text>
+    <text x="180" y="74" text-anchor="middle" class="note">Sheet 2 of 6</text>
+  </g>
+</svg>

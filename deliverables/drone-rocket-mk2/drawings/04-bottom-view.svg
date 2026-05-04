@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Drone Rocket Mk II — Bottom View, scale 1:3 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" font-family="ui-monospace, Menlo, monospace" font-size="9">
+  <style>
+    .visible { stroke: #111; stroke-width: 0.7; fill: none; }
+    .hidden  { stroke: #888; stroke-width: 0.35; fill: none; stroke-dasharray: 3,2; }
+    .center  { stroke: #c33; stroke-width: 0.25; fill: none; stroke-dasharray: 6,2,1,2; }
+    .dim     { stroke: #555; stroke-width: 0.25; fill: none; }
+    .dim-arrow { fill: #555; }
+    .label   { fill: #111; }
+    .note    { fill: #444; font-size: 8; font-style: italic; }
+    .nozzle  { fill: #2a2a30; stroke: #111; stroke-width: 0.5; }
+    .gimbal  { fill: #b8b8c0; stroke: #555; stroke-width: 0.4; }
+    .fin     { fill: #d8d8e0; stroke: #333; stroke-width: 0.5; }
+    .glow    { fill: #ff8800; opacity: 0.45; }
+    .title   { font-size: 11; font-weight: bold; fill: #111; }
+    .titleblock { stroke: #111; stroke-width: 0.7; fill: #fafaf6; }
+    .axis-label { font-size: 10; font-weight: bold; }
+  </style>
+
+  <rect width="800" height="800" fill="#fefefa"/>
+
+  <text x="400" y="30" text-anchor="middle" class="title">DRONE ROCKET Mk II — BOTTOM VIEW (looking up at nozzle / tail fins)</text>
+  <text x="400" y="45" text-anchor="middle" class="note">Scale 1:3  |  All dims mm  |  Mirror of plan view (looking +Y direction)</text>
+
+  <!-- Centred at SVG (400,400). Scale 1:3 so 1mm = 0.6 SVG units... actually keep 1:1 since we want detail.
+       Body OD 150 = 150 px circle. -->
+  <g transform="translate(400 400)">
+    <!-- Outer body OD at y=140 (where tail fins mount) -->
+    <circle class="visible" cx="0" cy="0" r="73"/>
+
+    <!-- Tail convergent profile (visible from below as concentric circle ~Ø80) -->
+    <circle class="hidden" cx="0" cy="0" r="40"/>
+
+    <!-- Gimbal outer ring (Ø76 OD at y=60) -->
+    <circle class="gimbal" cx="0" cy="0" r="38"/>
+    <!-- Gimbal inner ring orthogonal (drawn as ellipse foreshortened) -->
+    <ellipse class="gimbal" cx="0" cy="0" rx="3" ry="32" fill="none" stroke="#666" stroke-width="0.4" stroke-dasharray="4,2"/>
+
+    <!-- Nozzle bell exit -->
+    <circle class="nozzle" cx="0" cy="0" r="21"/>
+    <!-- Nozzle throat (smaller, inside) -->
+    <circle class="visible" cx="0" cy="0" r="18" fill="#111"/>
+
+    <!-- Exhaust glow -->
+    <circle class="glow" cx="0" cy="0" r="26"/>
+
+    <!-- Centre lines -->
+    <line class="center" x1="-90" y1="0" x2="90" y2="0"/>
+    <line class="center" x1="0" y1="-90" x2="0" y2="90"/>
+
+    <!-- 4× tail fins at 0° / 90° / 180° / 270° (cardinal) extending OUT from body -->
+    <!-- East fin (right) -->
+    <path class="fin" d="M 73 -20 L 113 -10 L 113 10 L 73 20 Z"/>
+    <text x="93" y="3" text-anchor="middle" class="note">Fin E</text>
+    <!-- North fin (up = +Z forward) -->
+    <path class="fin" d="M -20 -73 L -10 -113 L 10 -113 L 20 -73 Z"/>
+    <text x="0" y="-90" text-anchor="middle" class="note">Fin N</text>
+    <!-- West fin (left) -->
+    <path class="fin" d="M -73 -20 L -113 -10 L -113 10 L -73 20 Z"/>
+    <text x="-93" y="3" text-anchor="middle" class="note">Fin W</text>
+    <!-- South fin (down = -Z) -->
+    <path class="fin" d="M -20 73 L -10 113 L 10 113 L 20 73 Z"/>
+    <text x="0" y="100" text-anchor="middle" class="note">Fin S</text>
+
+    <!-- Pivot shafts (small circles at fin root) -->
+    <circle cx="73" cy="0" r="2.5" fill="#888"/>
+    <circle cx="-73" cy="0" r="2.5" fill="#888"/>
+    <circle cx="0" cy="73" r="2.5" fill="#888"/>
+    <circle cx="0" cy="-73" r="2.5" fill="#888"/>
+
+    <!-- Servo housing indicator (rectangles inside body, hidden) -->
+    <g stroke="#888" stroke-width="0.35" stroke-dasharray="3,2" fill="none">
+      <rect x="48" y="-10" width="22" height="20"/>
+      <rect x="-70" y="-10" width="22" height="20"/>
+      <rect x="-10" y="48" width="20" height="22"/>
+      <rect x="-10" y="-70" width="20" height="22"/>
+    </g>
+
+    <!-- Axis labels -->
+    <text x="125" y="3" class="axis-label">+X</text>
+    <text x="0" y="-125" text-anchor="middle" class="axis-label">+Z (fwd)</text>
+    <text x="-125" y="3" text-anchor="end" class="axis-label">-X</text>
+    <text x="0" y="135" text-anchor="middle" class="axis-label">-Z</text>
+  </g>
+
+  <!-- Dimensions -->
+  <g transform="translate(400 400)">
+    <!-- Ø80 tail base -->
+    <line class="dim" x1="-150" y1="42" x2="-150" y2="38"/>
+    <line class="dim" x1="-150" y1="-42" x2="-150" y2="-38"/>
+    <line class="dim" x1="-150" y1="42" x2="-150" y2="-42"/>
+    <text x="-155" y="3" text-anchor="end" class="label">Ø80 tail</text>
+
+    <!-- Ø42 nozzle exit -->
+    <line class="dim" x1="40" y1="-25" x2="60" y2="-45"/>
+    <text x="62" y="-46" class="label">Ø42 throat</text>
+
+    <!-- Tail fin span = body to tip -->
+    <line class="dim" x1="73" y1="35" x2="113" y2="35"/>
+    <line class="dim" x1="73" y1="32" x2="73" y2="40"/>
+    <line class="dim" x1="113" y1="32" x2="113" y2="40"/>
+    <text x="93" y="48" text-anchor="middle" class="label">40</text>
+    <text x="93" y="58" text-anchor="middle" class="note">fin span</text>
+
+    <!-- Gimbal Ø76 -->
+    <line class="dim" x1="40" y1="50" x2="80" y2="80"/>
+    <text x="83" y="83" class="label">Ø76 gimbal</text>
+
+    <!-- 90° fin spacing -->
+    <path class="dim" d="M 50 0 A 50 50 0 0 1 0 -50"/>
+    <text x="40" y="-40" class="label">90°</text>
+  </g>
+
+  <!-- Notes -->
+  <g transform="translate(40 600)" font-size="9" fill="#111">
+    <text class="title" font-size="10">NOTES:</text>
+    <text y="18">1. View looking UP at the rocket from below (mirror of plan view).</text>
+    <text y="32">2. Tail fins at cardinal directions (0/90/180/270°); canards above are at intercardinals.</text>
+    <text y="46">3. Gimbal pivot pins shown as hidden lines through the rings.</text>
+    <text y="60">4. Nozzle exit is recessed ~10 mm from tail base — tail fins extend below the nozzle plane.</text>
+  </g>
+
+  <!-- Title block -->
+  <g transform="translate(540 710)">
+    <rect class="titleblock" width="240" height="80"/>
+    <line x1="0" y1="20" x2="240" y2="20" stroke="#111" stroke-width="0.4"/>
+    <line x1="0" y1="40" x2="240" y2="40" stroke="#111" stroke-width="0.4"/>
+    <line x1="0" y1="60" x2="240" y2="60" stroke="#111" stroke-width="0.4"/>
+    <line x1="120" y1="20" x2="120" y2="80" stroke="#111" stroke-width="0.4"/>
+
+    <text x="120" y="14" text-anchor="middle" class="title">DRONE ROCKET Mk II</text>
+    <text x="60" y="34" text-anchor="middle" class="label">DRG 04</text>
+    <text x="180" y="34" text-anchor="middle" class="label">BOTTOM VIEW</text>
+    <text x="60" y="54" text-anchor="middle" class="label">SCALE 1:3</text>
+    <text x="180" y="54" text-anchor="middle" class="label">2026-05-03</text>
+    <text x="60" y="74" text-anchor="middle" class="note">Drawn by 3D Agent</text>
+    <text x="180" y="74" text-anchor="middle" class="note">Sheet 4 of 6</text>
+  </g>
+</svg>

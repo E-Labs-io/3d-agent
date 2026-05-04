@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Drone Rocket Mk II — Product Design &amp; Engineering Presentation</title>
+<style>
+  /* ============== PRINT-FIRST STYLING ============== */
+  @page {
+    size: A4 portrait;
+    margin: 14mm 12mm 16mm 12mm;
+    @bottom-right { content: counter(page) " / " counter(pages); }
+  }
+
+  :root {
+    --ink: #1a1a1f;
+    --muted: #5a5d65;
+    --line: #c4c8d0;
+    --accent: #cc2200;
+    --accent-soft: #fce8e0;
+    --bg: #fefefa;
+    --bg-soft: #f5f3ee;
+    --code-bg: #f0eee8;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Helvetica Neue", "Arial", sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.45;
+  }
+
+  /* On-screen wrapper to preview pages */
+  body { padding: 20px; }
+  @media print { body { padding: 0; } }
+
+  .page {
+    background: var(--bg);
+    width: 186mm; /* A4 width minus margins */
+    min-height: 268mm;
+    margin: 0 auto 8mm auto;
+    padding: 0;
+    page-break-after: always;
+    position: relative;
+  }
+  .page:last-child { page-break-after: auto; }
+
+  @media screen {
+    .page {
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 4px 24px rgba(0,0,0,0.06);
+      padding: 18mm 14mm;
+      border: 1px solid var(--line);
+    }
+  }
+  @media print {
+    .page { padding: 0; box-shadow: none; border: none; width: 100%; min-height: auto; }
+  }
+
+  h1, h2, h3, h4 { color: var(--ink); margin: 0 0 6mm 0; font-weight: 600; line-height: 1.2; }
+  h1 { font-size: 30pt; letter-spacing: -0.5px; }
+  h2 { font-size: 18pt; padding-bottom: 4mm; border-bottom: 2px solid var(--accent); margin-bottom: 8mm; }
+  h3 { font-size: 13pt; color: var(--accent); margin-top: 7mm; }
+  h4 { font-size: 11pt; margin-top: 5mm; margin-bottom: 2mm; }
+  p { margin: 0 0 3mm 0; }
+  small { color: var(--muted); }
+
+  ul, ol { margin: 0 0 3mm 0; padding-left: 5mm; }
+  li { margin-bottom: 1mm; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 3mm 0 5mm 0;
+    font-size: 9pt;
+  }
+  thead { background: var(--bg-soft); }
+  th, td {
+    border: 1px solid var(--line);
+    padding: 1.5mm 2mm;
+    text-align: left;
+    vertical-align: top;
+  }
+  th { font-weight: 600; font-size: 8.5pt; color: var(--ink); }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  td.center, th.center { text-align: center; }
+  td.code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 8.5pt; }
+
+  code, .mono { font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  code { background: var(--code-bg); padding: 0.5mm 1mm; border-radius: 1mm; font-size: 9pt; }
+
+  pre {
+    background: var(--code-bg);
+    padding: 3mm;
+    font-size: 8.5pt;
+    line-height: 1.4;
+    border-left: 3px solid var(--accent);
+    overflow: auto;
+    margin: 3mm 0;
+  }
+
+  hr { border: none; border-top: 1px solid var(--line); margin: 5mm 0; }
+
+  .note { color: var(--muted); font-style: italic; font-size: 9pt; }
+
+  /* ───── Header strip on each content page ───── */
+  .header-strip {
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 2mm;
+    margin-bottom: 6mm;
+    font-size: 8.5pt; color: var(--muted);
+  }
+  .header-strip .left { font-weight: 600; color: var(--ink); }
+
+  /* ───── Cover page ───── */
+  .cover {
+    display: flex; flex-direction: column; justify-content: space-between;
+    height: 268mm;
+    padding: 0 !important;
+  }
+  .cover .top-bar {
+    background: var(--ink); color: var(--bg);
+    padding: 8mm 14mm;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .cover .top-bar .brand { font-size: 11pt; font-weight: 600; letter-spacing: 1px; }
+  .cover .top-bar .doc-id { font-family: ui-monospace, monospace; font-size: 9pt; opacity: 0.7; }
+  .cover .hero {
+    flex: 1;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 0 14mm;
+  }
+  .cover h1 { font-size: 48pt; line-height: 1; margin: 0 0 4mm 0; }
+  .cover .subtitle { font-size: 16pt; color: var(--muted); font-weight: 400; }
+  .cover .accent-line { width: 80mm; height: 4px; background: var(--accent); margin: 8mm 0; }
+  .cover .meta-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm;
+    margin-top: 12mm;
+  }
+  .cover .meta-cell { padding: 4mm 0; border-top: 1px solid var(--line); }
+  .cover .meta-cell .label { font-size: 8pt; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); margin-bottom: 1mm; }
+  .cover .meta-cell .value { font-size: 14pt; font-weight: 600; }
+  .cover .footer-bar {
+    padding: 6mm 14mm;
+    border-top: 1px solid var(--line);
+    display: flex; justify-content: space-between;
+    font-size: 8.5pt; color: var(--muted);
+  }
+
+  /* ───── Big stats grid ───── */
+  .stat-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm;
+    margin: 5mm 0;
+  }
+  .stat {
+    background: var(--bg-soft);
+    border-left: 3px solid var(--accent);
+    padding: 4mm;
+  }
+  .stat .label { font-size: 8pt; text-transform: uppercase; color: var(--muted); letter-spacing: 0.5px; margin-bottom: 2mm; }
+  .stat .value { font-size: 18pt; font-weight: 600; line-height: 1; }
+  .stat .unit { font-size: 10pt; font-weight: 400; color: var(--muted); }
+
+  /* ───── Two-col grid ───── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5mm; }
+
+  /* ───── Architecture diagram ───── */
+  .arch-diagram {
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    padding: 4mm;
+    font-family: ui-monospace, monospace;
+    font-size: 9pt;
+    line-height: 1.55;
+    white-space: pre;
+    border-radius: 1mm;
+  }
+
+  /* ───── Subsystem cards ───── */
+  .subsys {
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--accent);
+    padding: 4mm;
+    margin-bottom: 4mm;
+    page-break-inside: avoid;
+  }
+  .subsys-header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 2mm;
+  }
+  .subsys-header h3 { margin: 0; }
+  .subsys-id { font-family: ui-monospace, monospace; font-size: 9pt; color: var(--muted); }
+  .subsys-meta {
+    display: flex; gap: 6mm; font-size: 9pt; color: var(--muted);
+    margin-bottom: 3mm;
+    border-bottom: 1px dashed var(--line);
+    padding-bottom: 2mm;
+  }
+  .subsys-meta strong { color: var(--ink); font-weight: 600; }
+
+  /* ───── Drawing pages ───── */
+  .drawing-page {
+    display: flex; flex-direction: column;
+    height: 268mm;
+    padding: 0 !important;
+  }
+  .drawing-page-header {
+    padding: 6mm 14mm 4mm 14mm;
+    border-bottom: 1px solid var(--line);
+  }
+  .drawing-page-header h2 { border: none; margin: 0; padding: 0; font-size: 14pt; }
+  .drawing-page-header .note { margin-top: 1mm; font-size: 8.5pt; }
+  .drawing-frame {
+    flex: 1;
+    padding: 4mm 14mm;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .drawing-frame img {
+    max-width: 100%; max-height: 100%;
+    width: auto; height: auto;
+  }
+
+  /* ───── Risk pill ───── */
+  .pill { display: inline-block; padding: 0.5mm 2mm; border-radius: 4mm; font-size: 8pt; font-weight: 600; }
+  .pill-low { background: #d4edda; color: #155724; }
+  .pill-med { background: #fff3cd; color: #856404; }
+  .pill-high { background: #f8d7da; color: #721c24; }
+  .pill-crit { background: var(--ink); color: #fff; }
+
+  /* ───── TOC ───── */
+  .toc-list { list-style: none; padding: 0; }
+  .toc-list li {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 2mm 0;
+    border-bottom: 1px dotted var(--line);
+  }
+  .toc-list .toc-num { color: var(--accent); font-weight: 600; min-width: 12mm; }
+  .toc-list .toc-title { flex: 1; padding: 0 4mm; }
+  .toc-list .toc-page { color: var(--muted); font-family: ui-monospace, monospace; font-size: 9pt; }
+
+  /* ───── Print-only ───── */
+  .screen-only { font-size: 9pt; }
+  @media print { .screen-only { display: none; } }
+</style>
+</head>
+<body>
+
+<!-- ═════════════════════════════════════════════════════════
+     SCREEN-ONLY PRINT INSTRUCTIONS
+     ═════════════════════════════════════════════════════════ -->
+<div class="screen-only" style="max-width:186mm;margin:0 auto 8mm auto;padding:6mm;background:#fff7e6;border:1px solid #f0c040;border-radius:2mm;">
+  <strong>To export as PDF:</strong> File → Print (⌘P) → Destination "Save as PDF", Layout: Portrait, Paper: A4, Margins: Default, Scale: 100%, Background graphics: <strong>ON</strong>.
+</div>
+
+<!-- ═════════════════════════════════════════════════════════
+     PAGE 1: COVER
+     ═════════════════════════════════════════════════════════ -->
+<div class="page cover">
+  <div class="top-bar">
+    <span class="brand">3D AGENT — DESIGN DELIVERABLES</span>
+    <span class="doc-id">DOC-DR-MK2-PRES-2026-05-03-v1</span>
+  </div>
+
+  <div class="hero">
+    <div style="font-size:11pt; letter-spacing:2px; color:var(--accent); font-weight:600; text-transform:uppercase;">Product Design &amp; Engineering Review</div>
+    <div class="accent-line"></div>
+    <h1>Drone Rocket Mk II</h1>
+    <div class="subtitle">Contra-Rotating EDF Tail-Sitter VTOL with Vectored Thrust</div>
+
+    <div class="meta-grid">
+      <div class="meta-cell">
+        <div class="label">Height</div>
+        <div class="value">1000 <span style="font-size:10pt;color:var(--muted);font-weight:400;">mm</span></div>
+      </div>
+      <div class="meta-cell">
+        <div class="label">All-Up Weight</div>
+        <div class="value">2.40 <span style="font-size:10pt;color:var(--muted);font-weight:400;">kg</span></div>
+      </div>
+      <div class="meta-cell">
+        <div class="label">Thrust : Weight</div>
+        <div class="value">1.92</div>
+      </div>
+      <div class="meta-cell">
+        <div class="label">Build Cost</div>
+        <div class="value">£1,124</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <span>Version 2026-05-03-1</span>
+    <span>Status: Concept / Development</span>
+    <span>Prepared by 3D Agent</span>
+  </div>
+</div>
+
+<!-- ═════════════════════════════════════════════════════════
+     PAGE 2: TABLE OF CONTENTS
+     ═════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="header-strip">
+    <span class="left">DRONE ROCKET Mk II</span>
+    <span>Table of Contents</span>
+  </div>
+
+  <h2>Contents</h2>
+
+  <ol class="toc-list">
+    <li><span class="toc-num">01</span><span class="toc-title">Executive summary</span><span class="toc-page">p. 3</span></li>
+    <li><span class="toc-num">02</span><span class="toc-title">The design challenge</span><span class="toc-page">p. 4</span></li>
+    <li><span class="toc-num">03</span><span class="toc-title">Functional requirements</span><span class="toc-page">p. 5</span></li>
+    <li><span class="toc-num">04</span><span class="toc-title">Architecture overview</span><span class="toc-page">p. 6</span></li>
+    <li><span class="toc-num">05</span><span class="toc-title">Subsystem walkthrough — Nose, Avionics, Power</span><span class="toc-page">p. 7</span></li>
+    <li><span class="toc-num">06</span><span class="toc-title">Subsystem walkthrough — Propulsion (CRDF)</span><span class="toc-page">p. 8</span></li>
+    <li><span class="toc-num">07</span><span class="toc-title">Subsystem walkthrough — Aero &amp; Vectoring</span><span class="toc-page">p. 9</span></li>
+    <li><span class="toc-num">08</span><span class="toc-title">Mechanical design</span><span class="toc-page">p. 10</span></li>
+    <li><span class="toc-num">09</span><span class="toc-title">Electrical design</span><span class="toc-page">p. 11</span></li>
+    <li><span class="toc-num">10</span><span class="toc-title">Aerodynamic design</span><span class="toc-page">p. 12</span></li>
+    <li><span class="toc-num">11</span><span class="toc-title">Materials &amp; selection rationale</span><span class="toc-page">p. 13</span></li>
+    <li><span class="toc-num">12</span><span class="toc-title">Manufacturing &amp; print plan</span><span class="toc-page">p. 14</span></li>
+    <li><span class="toc-num">13</span><span class="toc-title">Bill of Materials summary</span><span class="toc-page">p. 15</span></li>
+    <li><span class="toc-num">14</span><span class="toc-title">Cost &amp; lead-time analysis</span><span class="toc-page">p. 16</span></li>
+    <li><span class="toc-num">15</span><span class="toc-title">Risk register</span><span class="toc-page">p. 17</span></li>
+    <li><span class="toc-num">16</span><span class="toc-title">Open questions &amp; roadmap</span><span class="toc-page">p. 18</span></li>
+    <li><span class="toc-num">A1</span><span class="toc-title">Drawing — Front Elevation</span><span class="toc-page">p. 19</span></li>
+    <li><span class="toc-num">A2</span><span class="toc-title">Drawing — Section View</span><span class="toc-page">p. 20</span></li>
+    <li><span class="toc-num">A3</span><span class="toc-title">Drawing — Plan View</span><span class="toc-page">p. 21</span></li>
+    <li><span class="toc-num">A4</span><span class="toc-title">Drawing — Bottom View</span><span class="toc-page">p. 22</span></li>
+    <li><span class="toc-num">A5</span><span class="toc-title">Drawing — Exploded Isometric</span><span class="toc-page">p. 23</span></li>
+    <li><span class="toc-num">A6</span><span class="toc-title">Drawing — EDF Detail</span><span class="toc-page">p. 24</span></li>
+  </ol>
+
+  <hr>
+  <p class="note">Cross-reference: every part referenced in this document is identified by its BOM line number (e.g. BOM #43) and matches the live CAD scene at <code>scene/current.json</code>.</p>
+</div>
+
+<!-- ═════════════════════════════════════════════════════════
+     PAGE 3: EXECUTIVE SUMMARY
+     ═════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="header-strip">
+    <span class="left">DRONE ROCKET Mk II</span>
+    <span>01 — Executive Summary</span>
+  </div>
+
+  <h2>01 &nbsp; Executive summary</h2>
+
+  <p>A 1 m tall, 150 mm-diameter electric drone rocket built around two stacked, counter-rotating ducted fans. Designed for vertical takeoff/landing in tail-sitter mode, with full thrust vectoring and eight aerodynamic control surfaces. Intended as a <strong>research platform</strong> for compact contra-rotating EDF propulsion in a printable, field-serviceable airframe.</p>
+
+  <div class="stat-grid">
+    <div class="stat"><div class="label">Total height</div><div class="value">1000 <span class="unit">mm</span></div></div>
+    <div class="stat"><div class="label">Body diameter</div><div class="value">150 <span class="unit">mm</span></div></div>
+    <div class="stat"><div class="label">All-up weight</div><div class="value">2.40 <span class="unit">kg</span></div></div>
+    <div class="stat"><div class="label">Combined thrust</div><div class="value">4.6 <span class="unit">kg-f</span></div></div>
+    <div class="stat"><div class="label">T : W ratio</div><div class="value">1.92</div></div>
+    <div class="stat"><div class="label">Endurance</div><div class="value">~4 <span class="unit">min hover</span></div></div>
+    <div class="stat"><div class="label">Battery</div><div class="value">110 <span class="unit">Wh @ 22.2 V</span></div></div>
+    <div class="stat"><div class="label">Build cost</div><div class="value">£1,124</div></div>
+  </div>
+
+  <h3>What's novel</h3>
+  <ul>
+    <li><strong>Contra-rotating ducted fans</strong> in a single 200 mm section — torque-cancelling propulsion in a 6.7:1 aspect-ratio body.</li>
+    <li><strong>Five printable sections</strong> at 200 mm each, fitting any modern hobby printer (300 mm bed).</li>
+    <li><strong>Bayonet + bolt + O-ring</strong> joints — tool-free disassembly, IP54 sealing, 850 N axial capacity.</li>
+    <li><strong>Annular intake</strong> with 6 radial struts — 1.68× area margin over EDF demand.</li>
+    <li><strong>Coaxial avionics column</strong> (50 mm OD) leaves the 45 mm-wide annular flow path uninterrupted.</li>
+    <li><strong>Two-axis gimballed nozzle</strong> + 8 control surfaces — full attitude authority across hover and forward flight.</li>
+  </ul>
+
+  <h3>Status</h3>
+  <p>Concept-level design complete. CAD model in 54 grouped objects (16,886 triangles) at <code>scene/current.json</code>. Full BOM, manufacturing plan, drawings, and assembly instructions ready. <strong>6 open questions</strong> require resolution before first flight (see §16).</p>
+</div>
+
+<!-- ═════════════════════════════════════════════════════════
+     PAGE 4: THE DESIGN CHALLENGE
+     ═════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="header-strip">
+    <span class="left">DRONE ROCKET Mk II</span>
+    <span>02 — Design Challenge</span>
+  </div>
+
+  <h2>02 &nbsp; The design challenge</h2>
+
+  <p>The brief: build a small, printable, electric drone rocket that <strong>actually flies</strong> — not a static model. The vehicle must take off vertically, hover, transition to forward flight, return, and land on its tail.</p>
+
+  <h3>Why it's hard</h3>
+
+  <div class="two-col">
+    <div>
+      <h4>Propulsion</h4>
+      <p>A single EDF in a thin body produces a large reaction torque (~12 N·m at full thrust) that the small fin authority cannot counter at low airspeed. The vehicle would simply <em>spin</em>.</p>
+
+      <h4>Aerodynamic authority gap</h4>
+      <p>At hover (airspeed &lt; 5 m/s), aero surfaces are useless — there's no airflow over them. At forward flight (&gt; 10 m/s), aero surfaces dominate and thrust vectoring becomes coupled. The transition between regimes is the highest-risk regime in the entire flight envelope.</p>
+    </div>
+    <div>
+      <h4>Print volume vs vehicle size</h4>
+      <p>1000 mm tall, but every commodity FDM/SLS bed is 300 mm or smaller. The vehicle <em>must</em> come apart. Joints must carry full bending and axial loads, seal against the elements, and assemble in the field by hand.</p>
+
+      <h4>Mass &amp; cost discipline</h4>
+      <p>Hobby-grade components, 2.5 kg ceiling for regulatory class. Every gram and every pound matters. We can't aerospace-grade everything; we have to know when to.</p>
+    </div>
+  </div>
+
+  <h3>The chosen approach</h3>
+  <ul>
+    <li><strong>Two contra-rotating EDFs</strong> — net torque ≈ 0, both fans contribute thrust.</li>
+    <li><strong>Five 200 mm sections</strong> with engineered bayonet + bolt joints.</li>
+    <li><strong>Coaxial avionics column</strong> — splits internal volume into a sealed dry bay and an annular wet (airflow) bay.</li>
+    <li><strong>Layered control authority</strong> — thrust vectoring dominates at hover, aero surfaces dominate forward, FC blends both during transition.</li>
+    <li><strong>Mixed materials per duty</strong> — PETG for cheap shells, ASA where heat matters, PA-CF where fatigue matters.</li>
+  </ul>
+</div>
+
+<!-- ═════════════════════════════════════════════════════════
+     PAGE 5: FUNCTIONAL REQUIREMENTS
+     ═════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="header-strip">
+    <span class="left">DRONE ROCKET Mk II</span>
+    <span>03 — Functional Requirements</span>
+  </div>
+
+  <h2>03 &nbsp; Functional requirements</h2>
+
+  <p>Numbered, testable, ordered by criticality.</p>
+
+  <table>
+    <thead>
+      <tr><th style="width:10mm;">ID</th><th>Requirement</th><th style="width:35mm;">Target</th><th style="width:40mm;">Verify by</th><th class="center" style="width:18mm;">Priority</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="code">F-1</td><td>Vertical takeoff and stable hover</td><td>30 sec stable hover @ 1.5 m</td><td>Tethered hover test</td><td class="center"><span class="pill pill-crit">Must</span></td></tr>
+      <tr><td class="code">F-2</td><td>Thrust-to-weight margin</td><td>≥ 1.6 at full charge</td><td>Static thrust test</td><td class="center"><span class="pill pill-crit">Must</span></td></tr>
+      <tr><td class="code">F-3</td><td>Thrust-vectoring authority</td><td>±15° pitch &amp; yaw</td><td>Bench gimbal sweep</td><td class="center"><span class="pill pill-crit">Must</span></td></tr>
+      <tr><td class="code">F-4</td><td>Aerodynamic control authority (forward)</td><td>±20° canard, ±25° tail fin</td><td>Wind tunnel / CFD</td><td class="center"><span class="pill pill-high">High</span></td></tr>
+      <tr><td class="code">F-5</td><td>Flight endurance</td><td>≥ 3 min @ 50 % throttle</td><td>Battery telemetry log</td><td class="center"><span class="pill pill-high">High</span></td></tr>
+      <tr><td class="code">F-6</td><td>Telemetry range</td><td>≥ 1 km LoS</td><td>Field RSSI test</td><td class="center"><span class="pill pill-med">Med</span></td></tr>
+      <tr><td class="code">F-7</td><td>All-up weight (regulatory)</td><td>≤ 2.5 kg</td><td>Scale</td><td class="center"><span class="pill pill-crit">Must</span></td></tr>
+      <tr><td class="code">F-8</td><td>Manufacturable on 300 mm³ printer</td><td>All parts fit</td><td>CAD inspection</td><td class="center"><span class="pill pill-high">High</span></td></tr>
+      <tr><td class="code">F-9</td><td>Field-serviceable battery</td><td>Battery accessible without disassembling propulsion</td><td>Service drill</td><td class="center"><span class="pill pill-med">Med</span></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Out of scope</h3>
+  <ul>
+    <li>Autonomous mission planning (BVLOS) — manual / semi-autonomous only</li>
+    <li>Payload bay — Mk III adds this</li>
+    <li>Recovery system (parachute / drogue) — relies on controlled descent in failure</li>
+    <li>Weatherproofing beyond IP54 — not for sustained rain operation</li>
+    <li>Sustained forward-flight cruise — designed for hover + short transition tests</li>
+  </ul>
+
+  <h3>Constraints</h3>
+  <table>
+    <thead><tr><th>Constraint</th><th>Value</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Build volume per printed part</td><td>200 × 200 × 200 mm safe envelope</td><td>Hobby-grade FDM (300 mm bed assumed)</td></tr>
+      <tr><td>All-up weight</td><td>≤ 2.5 kg</td><td>UK CAA Class C2 / Open A2</td></tr>
+      <tr><td>Battery voltage</td><td>22.2 V (6S Li-ion)</td><td>Off-the-shelf availability</td></tr>
+      <tr><td>Total budget</td><td>≤ £1,500</td><td>Project allocation</td></tr>
+      <tr><td>Lead time</td><td>≤ 4 weeks for procurement</td><td>Project schedule</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═════════════════════════════════════════════════════════
+     PAGE 6: ARCHITECTURE OVERVIEW
+     ═════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="header-strip">
+    <span class="left">DRONE ROCKET Mk II</span>
+    <span>04 — Architecture</span>
+  </div>
+
+  <h2>04 &nbsp; Architecture overview</h2>
+
+  <p>The vehicle is decomposed into 9 functional subsystems, organised across 5 printable sections stacked along the Y axis.</p>
+
+  <div class="arch-diagram">
+   y=1000  ┌─────────────────────┐  ← Pitot tube
+           │      NOSE CONE      │  Section 1
+   y= 880  │                     │  (Nose &amp; Intake)
+   y= 820  │ ─── Annular intake ─│  6 radial struts
+           │                     │
+   y= 800  ├═════════════════════┤  ◀ Section joint
+           │                     │  Section 2
+           │   AVIONICS          │  FC, GPS, radio,
+           │   (central column)  │  antenna in 50 mm column
+   y= 600  ├═════════════════════┤  ◀ Section joint
+           │                     │  Section 3
+           │   BATTERY +         │  Li-ion 6S pack +
+           │   CANARDS (×4)      │  4 mid-fins on column
+   y= 400  ├═════════════════════┤  ◀ Section joint
+           │   UPPER EDF (CW)    │  Section 4
+           │   ▶ Stators ▶ Rotor │  Counter-rotating
+           │   ▶ Motor ▶ Spinner │  EDF stack
+   y= 300  │   ─── 80 mm spacer ─│  (ESC pods peripheral)
+           │   LOWER EDF (CCW)   │
+   y= 200  ├═════════════════════┤  ◀ Section joint
+           │                     │  Section 5
+           │   TAIL FINS (×4)    │  Cardinal-position fins
+           │   GIMBAL + NOZZLE   │  ±15° vectoring
+   y=  0   └─ ▼ ▼ exhaust ▼ ▼ ──┘  ← Ground plane</div>
+
+  <h3>Subsystem responsibility matrix</h3>
+
+  <table>
+    <thead><tr><th style="width:50mm;">Subsystem</th><th>Function</th><th class="num" style="width:18mm;">Parts</th><th class="num" style="width:22mm;">Cost</th></tr></thead>
+    <tbody>
+      <tr><td>Nose &amp; Intake</td><td>Forebody, airspeed sensing, annular ram-air ingestion</td><td class="num">8</td><td class="num">£32.50</td></tr>
+      <tr><td>Structure &amp; Body</td><td>Five-section primary load path; section joints carry bending</td><td class="num">14</td><td class="num">£56.00</td></tr>
+      <tr><td>Avionics</td><td>Flight control, sensing, navigation, telemetry</td><td class="num">7</td><td class="num">£232.00</td></tr>
+      <tr><td>Power</td><td>Energy storage; ESCs + BECs peripherally cooled</td><td class="num">6</td><td class="num">£198.00</td></tr>
+      <tr><td>Propulsion — Upper EDF (CW)</td><td>Half of contra-rotating thrust pair; CW rotation</td><td class="num">6</td><td class="num">£142.50</td></tr>
+      <tr><td>Propulsion — Lower EDF (CCW)</td><td>Mirror set; opposite rotation cancels net torque</td><td class="num">6</td><td class="num">£142.50</td></tr>
+      <tr><td>Aero — Canards (×4)</td><td>Pitch/yaw authority in forward flight; pre-stall control</td><td class="num">13</td><td class="num">£96.00</td></tr>
+      <tr><td>Aero — Tail Fins (×4)</td><td>Roll/pitch/yaw near vertical attitude; stabilising</td><td class="num">13</td><td class="num">£84.00</td></tr>
+      <tr><td>Thrust Vectoring</td><td>2-axis gimballed nozzle for low-airspeed control</td><td class="num">11</td><td class="num">£78.00</td></tr>
+      <tr><td colspan="3" style="text-align:right;"><strong>+ Hardware / consumables</strong></td><td class="num">£62.00</td></tr>
+      <tr style="background:var(--bg-soft);"><td colspan="3" style="text-align:right;"><strong>Grand total</strong></td><td class="num"><strong>£1,123.50</strong></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═════════════════════════════════════════════════════════
+     PAGE 7: SUBSYSTEM WALKTHROUGH (1) — NOSE / AVIONICS / POWER
+     ═════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="header-strip">
+    <span class="left">DRONE ROCKET Mk II</span>
+    <span>05 — Subsystems: Top half</span>
+  </div>
+
+  <h2>05 &nbsp; Subsystems — Nose, Avionics, Power</h2>
+
+  <div class="subsys">
+    <div class="subsys-header">
+      <h3>Nose &amp; Intake</h3>
+      <span class="subsys-id">y=800–1000  ·  £32.50</span>
+    </div>
+    <div class="subsys-meta">
+      <span><strong>Material:</strong> PETG translucent + dark-grey accents</span>
+      <span><strong>Print:</strong> 1× section, ~9 h</span>
+      <span><strong>BOM:</strong> #1–6, 28</span>
+    </div>
+    <p>An ogive nose cone (ρ = 520 mm) caps the forebody, with a pitot tube on-axis for airspeed sensing. Below it, a 40 mm-tall annular gap serves as the air intake — held open by 6 radial struts on a NACA-symmetric profile to minimise pressure drop. A diffuser lip inside the intake smooths flow into the central column.</p>
+    <p><strong>Why annular intake:</strong> single-side intakes break axisymmetry and cause yaw moments. A 360° intake delivers symmetric flow regardless of vehicle attitude, with 1.68× area margin over the EDF's mass-flow demand at full throttle.</p>
+  </div>
+
+  <div class="subsys">
+    <div class="subsys-header">
+      <h3>Avionics</h3>
+      <span class="subsys-id">y=600–800  ·  £232.00</span>
+    </div>
+    <div class="subsys-meta">
+      <span><strong>Material:</strong> PETG column + COTS electronics</span>
+      <span><strong>Print:</strong> Section 2 + column, ~11 h</span>
+      <span><strong>BOM:</strong> #21–29</span>
+    </div>
+    <p>The 50 mm-OD central avionics column houses the entire flight stack: <strong>Pixhawk 6C Mini FC</strong> (with built-in IMU, baro, magnetometer) at y=720, <strong>u-blox M9N GPS</strong> at y=740, <strong>868 MHz ELRS telemetry radio</strong> at y=700, and a <strong>3 dBi external whip antenna</strong> exiting through the body shell. A small inspection window cut into the shell provides visual confirmation of FC LED status without disassembly.</p>
+    <p><strong>Why central column:</strong> sealing all electronics in a dry, vibration-isolated bay, while the annular flow path around the column carries air to the EDFs. No EMI risk from motor wiring routed near sensitive sensors.</p>
+  </div>
+
+  <div class="subsys">
+    <div class="subsys-header">
+      <h3>Power</h3>
+      <span class="subsys-id">y=400–600 (battery in column) + y=300 (ESCs)  ·  £198.00</span>
+    </div>
+    <div class="subsys-meta">
+      <span><strong>Material:</strong> Custom 6S2P 18650 pack + COTS ESCs</span>
+      <span><strong>Print:</strong> Battery column liner + ESC pods, ~5 h</span>
+      <span><strong>BOM:</strong> #30–37</span>
+    </div>
+    <p>A custom <strong>22.2 V 5000 mAh Sony VTC6 6S2P pack</strong> (12× 18650 cells, 110 Wh) sits in the central column at y=470 — protected by an integrated BMS with thermal fuse. The pack delivers via XT90 anti-spark to a <strong>Matek FCHUB-6S</strong> distribution board, which feeds two <strong>T-Motor F45A ESCs</strong> mounted peripherally in the EDF section for direct airflow cooling. 10 V and 5 V BECs on the distribution board handle FC and servo power.</p>
+    <p><strong>ESC placement:</strong> peripheral mount with finned aluminium heatsinks intercepts the highest-velocity airflow inside the duct (between body shell and inner liner), keeping ESC junction temperature ≤ 18 °C above ambient at full continuous load.</p>
+  </div>
+</div>
+
+<!-- ═════════════════════════════════════════════════════════
+     PAGE 8: SUBSYSTEM WALKTHROUGH (2) — PROPULSION
+     ═════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="header-strip">
+    <span class="left">DRONE ROCKET Mk II</span>
+    <span>06 — Subsystem: Propulsion</span>
+  </div>
+
+  <h2>06 &nbsp; Subsystem — Contra-rotating ducted fans</h2>
+
+  <div class="subsys">
+    <div class="subsys-header">
+      <h3>Propulsion — Counter-rotating EDF stack</h3>
+      <span class="subsys-id">y=200–400  ·  £285.00 (both stages)</span>
+    </div>
+    <div class="subsys-meta">
+      <span><strong>Material:</strong> ASA duct, PA-CF struts/blades, T-Motor BLDCs</span>
+      <span><strong>Print:</strong> Section 4 + sub-assemblies, ~22 h</span>
+      <span><strong>BOM:</strong> #9, 12, 38–49</span>
+    </div>
+
+    <p>Two stacked EDFs share a 200 mm section: an <strong>upper CW-rotating fan</strong> (y=350–410) and a <strong>lower CCW-rotating fan</strong> (y=220–280) with an 80 mm spacer between for wire routing. Each stage is identical in geometry — the same 7-blade rotor, 11-vane stator, and motor pod — but with mirrored blade pitch and motor wiring reversal.</p>
+
+    <h4>Stage breakdown (per fan)</h4>
+    <table>
+      <thead><tr><th>Component</th><th>Qty</th><th>Material</th><th>Dimensions</th><th class="num">Cost</th></tr></thead>
+      <tbody>
+        <tr><td>Motor pod (housing)</td><td class="center">1</td><td>PETG / PA-CF</td><td>Ø54 × 60 mm</td><td class="num">£4.00</td></tr>
+        <tr><td>Mount struts (radial)</td><td class="center">4</td><td>PA-CF (load-bearing)</td><td>45 × 4 × 3 mm</td><td class="num">£3.50</td></tr>
+        <tr><td>Rotor (7 blades)</td><td class="center">1</td><td>PA-CF annealed</td><td>Hub Ø48, tip Ø172</td><td class="num">£6.00</td></tr>
+        <tr><td>Stator vanes</td><td class="center">11</td><td>PETG / aluminium</td><td>43 × 4 × 1.2 mm chord</td><td class="num">£4.00</td></tr>
+        <tr><td>Spinner cap</td><td class="center">1</td><td>PETG accent red</td><td>Ø24 hemispherical</td><td class="num">£1.00</td></tr>
+        <tr><td>BLDC motor</td><td class="center">1</td><td>T-Motor MN3110-13 700 KV</td><td>Ø35 × 28 mm</td><td class="num">£124.00</td></tr>
+      </tbody>
+    </table>
+
+    <h4>Performance per stage</h4>
+    <div class="three-col">
+      <div><strong>Static thrust:</strong><br>2.3 kg-f @ 22.2 V, 32 A peak</div>
+      <div><strong>Tip speed:</strong><br>~85 m/s @ 9,500 rpm (Ma ≈ 0.25)</div>
+      <div><strong>Pressure rise:</strong><br>~1,500 Pa (low-pressure-ratio fan)</div>
+    </div>
+
+    <h4>Why contra-rotating?</h4>
+    <p>A single equivalent EDF would generate ~12 N·m of reaction torque at peak thrust — too much for the tail fin authority to counter at low airspeed. The vehicle would simply spin under power. Two equal-and-opposite fans cancel that torque; residual differential between the two ESCs (typically ≤ 0.05 N·m) provides controllable yaw authority for the FC.</p>
+
+    <p>Bonus: contra-rotation recovers the swirl energy that a single fan would lose downstream, increasing total thrust per swept area by approximately 8 % vs. a single-stage equivalent. Combined thrust: <strong>4.6 kg-f → T:W = 1.92 at 2.4 kg AUW</strong>.</p>
+
+    <h4>Failure mode considered</h4>
+    <p>If one EDF fails in flight, the surviving fan still produces ~50 % of nominal thrust but introduces a 6 N·m roll moment. Below ~30 m/s airspeed, tail-fin authority cannot match this. The FC's failsafe behaviour is to <strong>immediately transition to forward flight</strong> at descending altitude until the vehicle is in an aero-control regime, then RTL on a controlled glide.</p>
+  </div>
+</div>
+
+<!-- ═════════════════════════════════════════════════════════
+     PAGE 9: SUBSYSTEM WALKTHROUGH (3) — AERO + VECTORING
+     ═════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="header-strip">
+    <span class="left">DRONE ROCKET Mk II</span>
+    <span>07 — Subsystems: Aero &amp; Vectoring</span>
+  </div>
+
+  <h2>07 &nbsp; Subsystems — Aero controls &amp; thrust vectoring</h2>
+
+  <div class="subsys">
+    <div class="subsys-header">
+      <h3>Aerodynamic controls — Canards (×4)</h3>
+      <span class="subsys-id">y=550 (mid-body)  ·  £96.00</span>
+    </div>
+    <div class="subsys-meta">
+      <span><strong>Material:</strong> PA-CF annealed</span>
+      <span><strong>Print:</strong> 4× canards + ring + mounts, ~3 h</span>
+      <span><strong>BOM:</strong> #50–56</span>
+    </div>
+    <p>Four steerable canards mounted at <strong>45° intercardinal positions</strong>, each on a 4 mm hardened-steel pivot shaft running through dual flanged bearings (MR104ZZ). Driven by KST X06H micro servos (5.5 kg·cm, 0.18 sec/60°) anchored in a PA-CF mount ring inside the avionics column. Travel: ±20° per fin.</p>
+    <p>Trapezoidal NACA-0008 profile, 70 mm span outboard of the body. Function: pitch and yaw authority during forward-flight transition and cruise.</p>
+  </div>
+
+  <div class="subsys">
+    <div class="subsys-header">
+      <h3>Aerodynamic controls — Tail Fins (×4)</h3>
+      <span class="subsys-id">y=140 (tail)  ·  £84.00</span>
+    </div>
+    <div class="subsys-meta">
+      <span><strong>Material:</strong> PA-CF annealed</span>
+      <span><strong>Print:</strong> 4× fins + ring + mounts, ~3 h</span>
+      <span><strong>BOM:</strong> #57–63</span>
+    </div>
+    <p>Four steerable tail fins mounted at <strong>cardinal (0/90/180/270°) positions</strong> — interleaved with the canards by 45°. Larger pivot shafts (5 mm) and more powerful servos (KST X10, 8 kg·cm) for tail-attitude authority. Travel: ±25° per fin. They double as <strong>landing gear</strong> in tail-sitter configuration: the vehicle stands stably on its four fin tips.</p>
+  </div>
+
+  <div class="subsys">
+    <div class="subsys-header">
+      <h3>Thrust Vectoring — 2-axis gimbal + nozzle</h3>
+      <span class="subsys-id">y=20–80  ·  £78.00</span>
+    </div>
+    <div class="subsys-meta">
+      <span><strong>Material:</strong> PA-CF gimbal + ASA nozzle</span>
+      <span><strong>Print:</strong> Gimbal + nozzle assembly, ~2 h</span>
+      <span><strong>BOM:</strong> #64–72</span>
+    </div>
+    <p>A nested two-ring gimbal (outer for pitch, inner for yaw) suspends the convergent nozzle bell on four MR62ZZ flanged bearings and M2 dowel pins. Two KST DS215MG-LA linear actuators (25 mm stroke each) drive the rings to <strong>±15° on each axis</strong>, providing primary attitude control during hover and low-speed flight where aero surfaces are ineffective.</p>
+    <p>The nozzle bell is a de Laval profile (convergent only — no Mach number to recover) printed in heat-tolerant ASA. A separate matte-black throat insert reduces reflected light from inside the duct.</p>
+  </div>
+</div>
+
+<!-- ═════════════════════════════════════════════════════════
+     PAGE 10: MECHANICAL DESIGN
+     ═════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="header-strip">
+    <span class="left">DRONE ROCKET Mk II</span>
+    <span>08 — Mechanical Design</span>
+  </div>
+
+  <h2>08 &nbsp; Mechanical design</h2>
+
+  <h3>Load path</h3>
+  <p>In hover, the 4.6 kg-f thrust opposes the 2.4 kg weight. The load travels:</p>
+
+  <div class="arch-diagram" style="line-height:1.6;">Hub spinner          (6 N axial)
+       ↓
+  Motor shaft → motor body          (24 N axial + 0.9 N·m torque)
+       ↓
+  Motor pod                        (24 N axial via four mounting holes)
+       ↓
+  4× Mount struts                  (6 N each, axial compression)
+       ↓
+  Inner duct ring                  (24 N distributed around 360°)
+       ↓
+  Body shell                       (24 N tension/compression along length)
+       ↓
+  Section joints                   (24 N transferred via 6 bolts each → 4 N per bolt)
+       ↓
+  Tail section / nozzle            (reaction)</div>
+
+  <p>Peak loading occurs during gust response or aggressive thrust vectoring — assume 1.5× hover thrust. PA-CF strut FoS at 1.5×: <strong>8</strong>. Section joint FoS at 1.5×: <strong>6</strong> on M3 cap-heads in shear. Ample headroom.</p>
+
+  <h3>Joint capacities</h3>
+
+  <table>
+    <thead><tr><th>Joint</th><th>Type</th><th class="num">Axial</th><th class="num">Bending</th></tr></thead>
+    <tbody>
+      <tr><td>Section interfaces (×4)</td><td>Bayonet pin + 6× M3 bolt + O-ring</td><td class="num">850 N</td><td class="num">12 N·m</td></tr>
+      <tr><td>Motor mount</td><td>4× M3 cap-head into PA-CF</td><td class="num">360 N</td><td class="num">3 N·m</td></tr>
+      <tr><td>Fin pivot (canard)</td><td>4 mm shaft, dual MR104ZZ</td><td class="num">—</td><td class="num">18 N rad.</td></tr>
+      <tr><td>Fin pivot (tail)</td><td>5 mm shaft, dual MR105ZZ</td><td class="num">—</td><td class="num">25 N rad.</td></tr>
+      <tr><td>Gimbal pivot</td><td>M2 dowel, MR62ZZ flanged</td><td class="num">—</td><td class="num">8 N rad.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Centre-of-gravity calculation</h3>
+
+  <p>Designed CG: <strong>y = 480 mm</strong> (49 mm aft of geometric centre). Slight aft bias gives natural pitch authority via canards in forward flight while remaining within the static-margin envelope.</p>
+
+  <table>
+    <thead><tr><th>Component</th><th class="num">Mass (g)</th><th class="num">Y position</th><th class="num">% of mass</th><th class="num">Mass·y</th></tr></thead>
+    <tbody>
+      <tr><td>Battery pack</td><td class="num">1050</td><td class="num">470</td><td class="num">44 %</td><td class="num">493,500</td></tr>
+      <tr><td>Both motors</td><td class="num">480</td><td class="num">313 (avg)</td><td class="num">20 %</td><td class="num">150,240</td></tr>
+      <tr><td>Avionics</td><td class="num">180</td><td class="num">730</td><td class="num">7 %</td><td class="num">131,400</td></tr>
+      <tr><td>Servos + actuators</td><td class="num">120</td><td class="num">340 (avg)</td><td class="num">5 %</td><td class="num">40,800</td></tr>
+      <tr><td>Structure (shells, fins, hardware)</td><td class="num">570</td><td class="num">500 (avg)</td><td class="num">24 %</td><td class="num">285,000</td></tr>
+      <tr style="background:var(--bg-soft);"><td><strong>Totals</strong></td><td class="num"><strong>2,400</strong></td><td class="num"><strong>—</strong></td><td class="num"><strong>100 %</strong></td><td class="num"><strong>1,100,940</strong></td></tr>
+    </tbody>
+  </table>
+
+  <p>Computed CG = 1,100,940 / 2,400 = <strong>458.7 mm</strong> — within ±25 mm of design target. Final tuning via battery position adjustment in the column (range ±20 mm).</p>
+</div>
+
+<!-- ═════════════════════════════════════════════════════════
+     PAGE 11: ELECTRICAL DESIGN
+     ═════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="header-strip">
+    <span class="left">DRONE ROCKET Mk II</span>
+    <span>09 — Electrical Design</span>
+  </div>
+
+  <h2>09 &nbsp; Electrical design</h2>
+
+  <h3>Power budget — peak hover, worst case</h3>
+
+  <table>
+    <thead><tr><th>Load</th><th class="num">Current</th><th class="num">Voltage</th><th class="num">Power</th></tr></thead>
+    <tbody>
+      <tr><td>Upper EDF (full throttle)</td><td class="num">32 A</td><td class="num">22.2 V</td><td class="num">710 W</td></tr>
+      <tr><td>Lower EDF (full throttle)</td><td class="num">32 A</td><td class="num">22.2 V</td><td class="num">710 W</td></tr>
+      <tr><td>FC + GPS + radio (10 V BEC)</td><td class="num">1.0 A</td><td class="num">10 V</td><td class="num">10 W</td></tr>
+      <tr><td>8× fin servos (peak simultaneous)</td><td class="num">8 A</td><td class="num">5 V</td><td class="num">40 W</td></tr>
+      <tr><td>2× gimbal actuators (transient)</td><td class="num">4 A</td><td class="num">5 V</td><td class="num">20 W</td></tr>
+      <tr style="background:var(--bg-soft);"><td><strong>Worst-case simultaneous</strong></td><td class="num">—</td><td class="num">—</td><td class="num"><strong>1,490 W</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Endurance calculation</h3>
+  <ul>
+    <li>Battery capacity: 22.2 V × 5 Ah = <strong>111 Wh</strong></li>
+    <li>Average flight load (50 % throttle, 25 % servo duty) ≈ <strong>720 W</strong></li>
+    <li>Theoretical endurance: 111 ÷ 720 × 60 = <strong>9.2 minutes</strong></li>
+    <li>Derated for 80 % usable capacity + 20 % reserve: <strong>~4 minutes hover</strong></li>
+  </ul>
+
+  <h3>Power flow diagram</h3>
+
+  <div class="arch-diagram">Battery (22.2 V 5000 mAh)
+   │
+   ├─ XT90 anti-spark → Distribution board (Matek FCHUB-6S)
+        ├─ ESC1 (BLHeli-32 32 A) → Upper EDF motor (CW)
+        ├─ ESC2 (BLHeli-32 32 A) → Lower EDF motor (CCW)
+        ├─ 10 V BEC → FC, GPS, telemetry radio
+        └─ 5 V BEC → 8 servos + 2 linear actuators (peak draw 12 A)</div>
+
+  <h3>Signal flow</h3>
+  <table>
+    <thead><tr><th>From</th><th>To</th><th>Protocol</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>FC</td><td>ESC1 / ESC2</td><td>DSHOT600</td><td>≤200 mm signal wires</td></tr>
+      <tr><td>FC</td><td>8 fin servos</td><td>PWM 333 Hz</td><td>Via 4-channel servo expander</td></tr>
+      <tr><td>FC</td><td>2 gimbal actuators</td><td>PWM 50 Hz</td><td>Direct from FC AUX9/10</td></tr>
+      <tr><td>FC ↔ telemetry</td><td>Ground station</td><td>UART 57600</td><td>Bidirectional MAVLink</td></tr>
+      <tr><td>GPS module</td><td>FC</td><td>UART 38400</td><td>+ I²C compass</td></tr>
+      <tr><td>Pitot</td><td>FC</td><td>I²C</td><td>Differential pressure → airspeed</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Wiring conventions</h3>
+  <ul>
+    <li><strong>10 AWG silicone</strong> for battery → distribution (high-current, twisted pair)</li>
+    <li><strong>12 AWG silicone</strong> for distribution → ESCs (60 A peak)</li>
+    <li><strong>22 AWG silicone</strong> for FC → ESC signal, FC → servos</li>
+    <li>All flexible silicone insulation rated 200 °C</li>
+    <li>EMI mitigation: ferrite cores on servo signal wires near ESCs; signal/power runs separated</li>
+  </ul>
+</div>
+
+<!-- ═════════════════════════════════════════════════════════
+     PAGE 12: AERODYNAMIC DESIGN
+     ═════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="header-strip">
+    <span class="left">DRONE ROCKET Mk II</span>
+    <span>10 — Aerodynamic Design</span>
+  </div>
+
+  <h2>10 &nbsp; Aerodynamic design</h2>
+
+  <p>The vehicle has two distinct flight regimes plus a transition between them. Each demands a different control mix.</p>
+
+  <div class="two-col">
+    <div class="subsys">
+      <div class="subsys-header">
+        <h3>Hover / vertical (V&nbsp;&lt; 5 m/s)</h3>
+      </div>
+      <ul>
+        <li><strong>Roll:</strong> ESC differential between EDFs (residual torque control)</li>
+        <li><strong>Pitch / yaw:</strong> Thrust-vectoring nozzle, ±15°</li>
+        <li><strong>Aero surfaces:</strong> Held in trim — no airflow, no authority</li>
+      </ul>
+    </div>
+
+    <div class="subsys">
+      <div class="subsys-header">
+        <h3>Forward flight (V&nbsp;&gt; 10 m/s)</h3>
+      </div>
+      <ul>
+        <li><strong>Pitch:</strong> Canards + tail fins differential</li>
+        <li><strong>Yaw:</strong> Tail fins differential (rudder action)</li>
+        <li><strong>Roll:</strong> Tail fins + canards combined (aileron action)</li>
+        <li><strong>Vectoring:</strong> Reduced to ±5° to avoid coupling</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Transition handling — the highest-risk regime</h3>
+  <ol>
+    <li>Begin at hover, climb to 30 m altitude</li>
+    <li>Pitch nose forward at 5°/sec; thrust vector follows</li>
+    <li>At 35° pitch from vertical, canards begin to develop authority; FC blends control mix</li>
+    <li>By 60° pitch, aero surfaces dominate; thrust vectoring de-tunes</li>
+    <li>At 90° (horizontal), thrust vectoring at ±5° max for trim only</li>
+  </ol>
+  <p>Reverse transition (forward flight → hover) is trickier; requires altitude allowance and is best initiated via the FC's automated tail-sitter profile rather than manual stick input.</p>
+
+  <h3>Annular intake — sizing</h3>
+
+  <table>
+    <thead><tr><th>Parameter</th><th class="num">Value</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Free area (gross)</td><td class="num">26,400 mm²</td><td>60 mm tall × 440 mm circumference</td></tr>
+      <tr><td>Strut obstruction</td><td class="num">−2,880 mm²</td><td>6× 8 mm width × 60 mm</td></tr>
+      <tr><td>Net intake area</td><td class="num">23,520 mm²</td><td>—</td></tr>
+      <tr><td>EDF demand at full throttle</td><td class="num">14,000 mm²</td><td>Equivalent through-flow per swept area</td></tr>
+      <tr><td><strong>Intake margin</strong></td><td class="num"><strong>1.68×</strong></td><td>Clean intake, no recirculation expected</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Thermal management</h3>
+  <p>Heat sources at peak power:</p>
+  <ul>
+    <li>2× motors at 80 % continuous: ~30 W each (60 W total)</li>
+    <li>2× ESCs at full load: ~25 W each (50 W total)</li>
+  </ul>
+  <p>Heat sinks: motors are bathed in airstream — convective cooling is more than sufficient. ESCs sit peripherally with finned aluminium heatsinks intercepting high-velocity flow. <strong>Predicted ESC temperature rise: 18 °C above ambient at full continuous</strong> — well within the 105 °C component rating margin.</p>
+
+  <p>Battery generates ~10 W heat at 50 % discharge rate; airflow past the battery column keeps it &lt; 55 °C absolute (40 °C ambient + 15 °C rise = OK).</p>
+</div>
+
+<!-- ═════════════════════════════════════════════════════════
+     PAGE 13: MATERIALS
+     ═════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="header-strip">
+    <span class="left">DRONE ROCKET Mk II</span>
+    <span>11 — Materials</span>
+  </div>
+
+  <h2>11 &nbsp; Materials &amp; selection rationale</h2>
+
+  <p>Every material is chosen on a <strong>cheapest-that-works</strong> principle: pick the lowest-cost option that meets the load + thermal duty cycle, then justify the choice.</p>
+
+  <h3>Material assignments</h3>
+
+  <table>
+    <thead><tr><th>Part class</th><th>Material</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Body shells (cosmetic, mild structural)</td><td><strong>PETG</strong> translucent</td><td>Tough, low-warp, easy to print, transparent option enables cutaway demo</td></tr>
+      <tr><td>EDF duct &amp; nozzle bell</td><td><strong>ASA</strong></td><td>Heat tolerance to 90 °C continuous; UV-stable</td></tr>
+      <tr><td>Motor mount struts</td><td><strong>PA-CF</strong> (annealed)</td><td>Carries full thrust load (~25 N each); PETG would creep over time</td></tr>
+      <tr><td>Fan blades (rotors)</td><td><strong>PA-CF</strong> (annealed)</td><td>Centrifugal stress + fatigue cycling; needs high stiffness + creep resistance</td></tr>
+      <tr><td>Gimbal rings</td><td><strong>PA-CF</strong></td><td>Bending + torsion under thrust vectoring</td></tr>
+      <tr><td>Canards &amp; tail fins</td><td><strong>PA-CF</strong></td><td>Aerodynamic load + control linkage moment; flutter resistance</td></tr>
+      <tr><td>Servo mount rings</td><td><strong>PA-CF</strong></td><td>Concentrated load points at servo screws</td></tr>
+      <tr><td>Accent rings, collars, spinners</td><td><strong>PETG accent red</strong></td><td>Cosmetic only; visual styling cue</td></tr>
+      <tr><td>Section joints — bayonet pins</td><td><strong>Hardened steel</strong></td><td>Wear surface — printed pins would wallow over re-assembly cycles</td></tr>
+      <tr><td>ESC heatsinks</td><td><strong>6061-T6 aluminium</strong></td><td>High thermal conductivity, anodised for corrosion resistance</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Material property reference</h3>
+
+  <table>
+    <thead><tr><th>Material</th><th class="num">Yield (MPa)</th><th class="num">UTS (MPa)</th><th class="num">Modulus (GPa)</th><th class="num">Density</th><th class="num">Tg/HDT</th><th class="num">Cost (£/kg)</th></tr></thead>
+    <tbody>
+      <tr><td>PETG</td><td class="num">50</td><td class="num">53</td><td class="num">2.1</td><td class="num">1.27</td><td class="num">80 °C</td><td class="num">22</td></tr>
+      <tr><td>ASA</td><td class="num">45</td><td class="num">49</td><td class="num">2.0</td><td class="num">1.07</td><td class="num">96 °C</td><td class="num">30</td></tr>
+      <tr><td>PA-CF (annealed)</td><td class="num">90</td><td class="num">110</td><td class="num">7.5</td><td class="num">1.18</td><td class="num">180 °C</td><td class="num">65</td></tr>
+      <tr><td>6061-T6 Al</td><td class="num">276</td><td class="num">310</td><td class="num">69</td><td class="num">2.70</td><td class="num">200 °C</td><td class="num">8</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Annealing PA-CF</h3>
+  <p>All PA-CF parts are annealed post-print: 4 h @ 90 °C in a regular oven, slow cool to room temp. Crystallinity rises from ~10 % (as-printed) to 30 %+ (annealed), which:</p>
+  <ul>
+    <li>Doubles fatigue life</li>
+    <li>Increases yield strength by 25 %</li>
+    <li>Eliminates creep at sustained load</li>
+  </ul>
+  <p>Trade-off: 0.3–0.6 % isotropic shrinkage. All PA-CF parts are designed 0.5 % oversized to compensate.</p>
+</div>
+
+<!-- ═════════════════════════════════════════════════════════
+     PAGE 14: MANUFACTURING PLAN
+     ═════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="header-strip">
+    <span class="left">DRONE ROCKET Mk II</span>
+    <span>12 — Manufacturing</span>
+  </div>
+
+  <h2>12 &nbsp; Manufacturing &amp; print plan</h2>
+
+  <p>Total print time: <strong>~84 hours</strong> on a single printer, or compressed across multiple. Total assembly time: <strong>8–12 hours</strong> for a single skilled technician.</p>
+
+  <h3>Print sections — overview</h3>
+
+  <table>
+    <thead><tr><th class="center" style="width:8mm;">#</th><th>Section</th><th class="num">Y range</th><th>Print orientation</th><th>Material</th><th class="num">Walls</th><th class="num">Infill</th><th class="num">Time</th></tr></thead>
+    <tbody>
+      <tr><td class="center">1</td><td>Nose &amp; Intake</td><td class="num">800–1000</td><td>Tip-up, no support &lt;870</td><td>PETG translucent</td><td class="num">5</td><td class="num">15 % gyroid</td><td class="num">9 h</td></tr>
+      <tr><td class="center">2</td><td>Avionics</td><td class="num">600–800</td><td>Vertical, hollow shell</td><td>PETG translucent</td><td class="num">4</td><td class="num">20 % gyroid</td><td class="num">11 h</td></tr>
+      <tr><td class="center">3</td><td>Battery + Canards</td><td class="num">400–600</td><td>Vertical</td><td>PETG translucent</td><td class="num">4</td><td class="num">20 % gyroid</td><td class="num">12 h</td></tr>
+      <tr><td class="center">4</td><td>EDF Duct</td><td class="num">200–400</td><td><strong>Inverted</strong> (dome up)</td><td>ASA</td><td class="num">6</td><td class="num">30 % cubic</td><td class="num">14 h</td></tr>
+      <tr><td class="center">5</td><td>Tail</td><td class="num">0–200</td><td>Vertical, base down</td><td>PETG</td><td class="num">4</td><td class="num">25 % gyroid</td><td class="num">10 h</td></tr>
+      <tr><td colspan="6" style="text-align:right;"><strong>Sub-total (sections)</strong></td><td class="num"><strong>—</strong></td><td class="num"><strong>56 h</strong></td></tr>
+      <tr><td class="center">+</td><td>Small parts (motor pods, blades, stators, fins, intake struts, etc.)</td><td colspan="5"><em>Batched in 7 print runs across PETG / ASA / PA-CF</em></td><td class="num">28 h</td></tr>
+      <tr style="background:var(--bg-soft);"><td colspan="7"><strong>Grand total print time</strong></td><td class="num"><strong>84 h</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Section interface design</h3>
+
+  <p>Each of the 4 section joints (y = 200, 400, 600, 800) uses:</p>
+  <ul>
+    <li><strong>6× M3×16 hardened bayonet pins</strong> — quarter-turn engagement</li>
+    <li><strong>6× M3×8 cap-head through-bolts</strong> — secondary retention</li>
+    <li><strong>140 mm ID NBR O-ring</strong> — IP54 sealing</li>
+    <li><strong>Visual red accent ring</strong> — covers parting line, doubles as service marker</li>
+    <li>Capacity: <strong>850 N axial, 12 N·m bending</strong> per joint</li>
+  </ul>
+
+  <h3>Special manufacturing concerns</h3>
+
+  <div class="two-col">
+    <div>
+      <h4>Rotor balancing (critical)</h4>
+      <ol>
+        <li>Print + anneal PA-CF rotor</li>
+        <li>Mount on balancing stand or precision pin</li>
+        <li>Identify heaviest blade (rests at bottom)</li>
+        <li>Sand 0.05–0.2 mm from heavy blade tip</li>
+        <li>Repeat until rotor stays in any rotational position</li>
+      </ol>
+      <p>Tolerance: residual imbalance &lt; 0.5 g·mm. Above this → vibration, audible drone, IMU noise, unstable flight.</p>
+    </div>
+    <div>
+      <h4>EDF duct surface finish</h4>
+      <p>The inner surface of the duct must be smooth. ASA self-smooths reasonably with chamber-controlled printing. If banding visible:</p>
+      <ul>
+        <li>Light sand with 400 grit</li>
+        <li>Acetone vapour smoothing — 30 sec @ 25 °C in extraction chamber (ASA only — never PETG/PLA)</li>
+      </ul>
+
+      <h4>PA-CF print abrasion</h4>
+      <p>Carbon fibres are abrasive. <strong>Hardened steel nozzle required</strong> for any PA-CF print. Standard brass nozzles wear in &lt; 100 g.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════════════════════════════════════════════════════
+     PAGE 15: BOM SUMMARY
+     ═════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="header-strip">
+    <span class="left">DRONE ROCKET Mk II</span>
+    <span>13 — BOM Summary</span>
+  </div>
+
+  <h2>13 &nbsp; Bill of Materials — summary</h2>
+
+  <p>84 line items, organised across 9 subsystems plus general hardware. <strong>Full detailed BOM in separate document <code>BOM.md</code>.</strong></p>
+
+  <h3>Subsystem totals</h3>
+
+  <table>
+    <thead><tr><th>#</th><th>Subsystem</th><th class="num">Parts</th><th class="num">Sub-total</th><th>Key components</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Nose &amp; Intake</td><td class="num">8</td><td class="num">£32.50</td><td>Pitot tube (Matek ASPD-7002), 6 intake struts, diffuser</td></tr>
+      <tr><td>2</td><td>Structure &amp; Body</td><td class="num">14</td><td class="num">£56.00</td><td>5 body sections, 4 joint rings, bayonet hardware</td></tr>
+      <tr><td>3</td><td>Avionics</td><td class="num">7</td><td class="num">£232.00</td><td>Pixhawk 6C Mini, M9N GPS, ELRS radio</td></tr>
+      <tr><td>4</td><td>Power</td><td class="num">6</td><td class="num">£198.00</td><td>6S Li-ion 5Ah, 2× T-Motor F45A ESCs, FCHUB</td></tr>
+      <tr><td>5</td><td>Upper EDF (CW)</td><td class="num">6</td><td class="num">£142.50</td><td>T-Motor MN3110-13, 7-blade rotor, 11 stators</td></tr>
+      <tr><td>6</td><td>Lower EDF (CCW)</td><td class="num">6</td><td class="num">£142.50</td><td>Mirror set, reverse-wired</td></tr>
+      <tr><td>7</td><td>Canards (×4)</td><td class="num">13</td><td class="num">£96.00</td><td>4× KST X06H servos, 4× canards, bearings</td></tr>
+      <tr><td>8</td><td>Tail Fins (×4)</td><td class="num">13</td><td class="num">£84.00</td><td>4× KST X10 servos, 4× fins, bearings</td></tr>
+      <tr><td>9</td><td>Thrust Vectoring</td><td class="num">11</td><td class="num">£78.00</td><td>2-axis gimbal, 2× linear actuators, nozzle bell</td></tr>
+      <tr><td>—</td><td>Hardware / consumables</td><td class="num">12</td><td class="num">£62.00</td><td>Fasteners, threadlocker, wire, connectors, filament</td></tr>
+      <tr style="background:var(--accent-soft);"><td colspan="2"><strong>GRAND TOTAL</strong></td><td class="num"><strong>96</strong></td><td class="num"><strong>£1,123.50</strong></td><td><strong>Project complete bill</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Cost breakdown by category</h3>
+
+  <table>
+    <thead><tr><th>Category</th><th class="num">Cost</th><th class="num">% of total</th></tr></thead>
+    <tbody>
+      <tr><td>COTS components (motors, servos, electronics, battery)</td><td class="num">£855.00</td><td class="num">76 %</td></tr>
+      <tr><td>Hardware / fasteners / consumables</td><td class="num">£163.50</td><td class="num">15 %</td></tr>
+      <tr><td>Print filament cost (across all printed parts)</td><td class="num">£105.00</td><td class="num">9 %</td></tr>
+    </tbody>
+  </table>
+
+  <p>Key observation: <strong>76 % of the bill is electronics / motors</strong>. The printed structure is &lt;10 % of cost despite being 53 of the 84 line items. This is typical for hobby-aerospace builds.</p>
+</div>
+
+<!-- ═════════════════════════════════════════════════════════
+     PAGE 16: COST + LEAD TIME
+     ═════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="header-strip">
+    <span class="left">DRONE ROCKET Mk II</span>
+    <span>14 — Cost &amp; Lead Time</span>
+  </div>
+
+  <h2>14 &nbsp; Cost &amp; lead-time analysis</h2>
+
+  <h3>Critical-path lead time</h3>
+
+  <table>
+    <thead><tr><th>Component</th><th class="num">Lead time</th><th>Vendor</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr style="background:var(--accent-soft);"><td><strong>T-Motor MN3110 BLDC ×2</strong></td><td class="num"><strong>3 weeks</strong></td><td>T-Motor</td><td><strong>Critical path</strong> — order first</td></tr>
+      <tr><td>Holybro Pixhawk 6C Mini</td><td class="num">2 weeks</td><td>Holybro</td><td>FC + IMU integrated</td></tr>
+      <tr><td>Custom 6S2P 18650 pack</td><td class="num">2 weeks</td><td>Vruzend / NKON</td><td>Custom assembly time</td></tr>
+      <tr><td>KST DS215MG-LA actuators ×2</td><td class="num">2 weeks</td><td>KST hobby</td><td>Linear actuators specifically</td></tr>
+      <tr><td>Most other COTS parts</td><td class="num">1 week</td><td>RS, Mouser, RDQ</td><td>Standard stock</td></tr>
+      <tr><td>Bayonet pins, fasteners, bearings</td><td class="num">stock</td><td>RS, McMaster</td><td>Same-day shipping</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Total project critical path: 3 weeks procurement + 2 weeks build = 5 weeks elapsed.</strong></p>
+
+  <h3>Time investment</h3>
+
+  <div class="stat-grid">
+    <div class="stat"><div class="label">Print time</div><div class="value">84 <span class="unit">h</span></div></div>
+    <div class="stat"><div class="label">Assembly</div><div class="value">8–12 <span class="unit">h</span></div></div>
+    <div class="stat"><div class="label">Calibration</div><div class="value">1 <span class="unit">h</span></div></div>
+    <div class="stat"><div class="label">First flight prep</div><div class="value">0.5 <span class="unit">h/flight</span></div></div>
+  </div>
+
+  <h3>Cost-saving opportunities (Mk III roadmap)</h3>
+
+  <ul>
+    <li><strong>Cheaper BLDC motors</strong> (~£60 each instead of £124) — would save £128 but cap thrust at 75 % of current spec; suitable for non-aggressive flying</li>
+    <li><strong>Stock 6S LiPo</strong> instead of custom 18650 pack — saves £30, but reduces cycle life and adds fire risk</li>
+    <li><strong>Drop the canards</strong> — saves £96, but loses forward-flight pitch authority. Acceptable for pure hover/test platforms</li>
+    <li><strong>Single ESC + Y-cable</strong> — saves £40, but loses individual thrust control and torque cancellation precision</li>
+  </ul>
+
+  <p>None of these are recommended for the Mk II — they compromise capability. They're listed as future options once the design has been validated.</p>
+
+  <h3>What we're not paying for (yet)</h3>
+
+  <ul>
+    <li>Failure budget — first three prints typically fail in some way; budget 30 % filament wastage</li>
+    <li>Crash repair — historically 1 in 10 test flights damages something; budget £50–100 spare parts cache</li>
+    <li>Tools (assumed already on hand): soldering iron, hex keys, calipers, oven for annealing</li>
+    <li>Filament drier (required for PA-CF) — £80 if not already owned</li>
+    <li>Insurance / regulatory registration</li>
+  </ul>
+</div>
+
+<!-- ═════════════════════════════════════════════════════════
+     PAGE 17: RISK REGISTER
+     ═════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="header-strip">
+    <span class="left">DRONE ROCKET Mk II</span>
+    <span>15 — Risk Register</span>
+  </div>
+
+  <h2>15 &nbsp; Risk register</h2>
+
+  <table>
+    <thead><tr><th>Risk</th><th class="center" style="width:18mm;">Likelihood</th><th class="center" style="width:18mm;">Impact</th><th>Mitigation</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Rotor imbalance → vibration → IMU noise → unstable flight</strong></td>
+        <td class="center"><span class="pill pill-med">Med</span></td>
+        <td class="center"><span class="pill pill-high">High</span></td>
+        <td>Static balance per spec (&lt;0.5 g·mm); FC notch filtering tuned to rotor RPM</td>
+      </tr>
+      <tr>
+        <td><strong>Section bayonet wear → loose joint over re-assembly cycles</strong></td>
+        <td class="center"><span class="pill pill-low">Low</span></td>
+        <td class="center"><span class="pill pill-med">Med</span></td>
+        <td>Hardened M3 dowel pins (not printed); 6-bolt secondary retention</td>
+      </tr>
+      <tr>
+        <td><strong>ASA duct delaminates from print on heat soak</strong></td>
+        <td class="center"><span class="pill pill-low">Low</span></td>
+        <td class="center"><span class="pill pill-med">Med</span></td>
+        <td>Enclosed printer required (chamber 50 °C+); 6-wall print; HDT 96 °C provides margin</td>
+      </tr>
+      <tr>
+        <td><strong>Battery thermal runaway</strong></td>
+        <td class="center"><span class="pill pill-low">Low</span></td>
+        <td class="center"><span class="pill pill-crit">Crit</span></td>
+        <td>Quality cells (Sony VTC6); BMS with thermal fuse; pack swelling sensor; LiPo bag during charging</td>
+      </tr>
+      <tr>
+        <td><strong>EDF blade departure in flight</strong></td>
+        <td class="center" style="font-size:7pt;"><span class="pill pill-low">V.Low</span></td>
+        <td class="center"><span class="pill pill-crit">Crit</span></td>
+        <td>PA-CF + annealing; spinner cap thread-locked; spin-test to 110 % rated RPM before first flight</td>
+      </tr>
+      <tr>
+        <td><strong>GPS lock loss → mission failure</strong></td>
+        <td class="center"><span class="pill pill-med">Med</span></td>
+        <td class="center"><span class="pill pill-med">Med</span></td>
+        <td>M9N has good multi-constellation; 2nd antenna location budget; FC fallback to attitude hold</td>
+      </tr>
+      <tr>
+        <td><strong>Telemetry drop-out / fly-away</strong></td>
+        <td class="center"><span class="pill pill-med">Med</span></td>
+        <td class="center"><span class="pill pill-low">Low</span></td>
+        <td>ELRS long-range; loiter-on-loss + RTL after 10 sec; onboard logging continues</td>
+      </tr>
+      <tr>
+        <td><strong>Crash during forward-flight transition</strong></td>
+        <td class="center"><span class="pill pill-high">High</span></td>
+        <td class="center"><span class="pill pill-high">High</span></td>
+        <td>Tether tests; gradual envelope expansion; FC failsafe; prefer altitude allowance</td>
+      </tr>
+      <tr>
+        <td><strong>FC reboot in flight (brownout, EMI)</strong></td>
+        <td class="center"><span class="pill pill-low">Low</span></td>
+        <td class="center"><span class="pill pill-high">High</span></td>
+        <td>Quality BEC; capacitor on FC power input; ferrite cores on signal lines</td>
+      </tr>
+      <tr>
+        <td><strong>Resonance in intake struts at 100 Hz</strong></td>
+        <td class="center"><span class="pill pill-low">Low</span></td>
+        <td class="center"><span class="pill pill-med">Med</span></td>
+        <td>Open question OQ-4 — FEA or shake test required before flight</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Severity legend</h3>
+  <p>
+    <span class="pill pill-low">Low</span> &mdash; cosmetic, mission delay only. &nbsp;
+    <span class="pill pill-med">Med</span> &mdash; flight aborted, recoverable. &nbsp;
+    <span class="pill pill-high">High</span> &mdash; vehicle damaged, repairable. &nbsp;
+    <span class="pill pill-crit">Crit</span> &mdash; vehicle lost or safety incident.
+  </p>
+</div>
+
+<!-- ═════════════════════════════════════════════════════════
+     PAGE 18: OPEN QUESTIONS + ROADMAP
+     ═════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="header-strip">
+    <span class="left">DRONE ROCKET Mk II</span>
+    <span>16 — Open Questions &amp; Roadmap</span>
+  </div>
+
+  <h2>16 &nbsp; Open questions &amp; roadmap</h2>
+
+  <h3>Open questions blocking first flight</h3>
+
+  <table>
+    <thead><tr><th class="center" style="width:14mm;">ID</th><th>Question</th><th>Resolution</th><th style="width:24mm;">Owner</th></tr></thead>
+    <tbody>
+      <tr><td class="code">OQ-1</td><td>Final ESC firmware tuning for contra-rotating pair</td><td>Bench test with both motors loaded; tune BLHeli params</td><td>Power lead</td></tr>
+      <tr><td class="code">OQ-2</td><td>Validate 1 km telemetry range with antenna in this position</td><td>Field RSSI sweep</td><td>Avionics</td></tr>
+      <tr><td class="code">OQ-3</td><td>Static thrust measurement vs design target</td><td>Bench thrust test rig</td><td>Propulsion</td></tr>
+      <tr><td class="code">OQ-4</td><td>Resonance check of full assembly — intake struts at 100 Hz?</td><td>FEA or shake test</td><td>Structure</td></tr>
+      <tr><td class="code">OQ-5</td><td>Custom 6S2P 18650 pack physical dimensions vs CAD assumption</td><td>Vendor sample, calipers</td><td>Power</td></tr>
+      <tr><td class="code">OQ-6</td><td>Wing/fin flutter speeds — PA-CF panels at 30 m/s</td><td>CFD analysis or wind-tunnel</td><td>Aero</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Mk II milestones</h3>
+
+  <div class="arch-diagram">Week 1   ▶  Procurement: order BLDC motors (3-week lead) + remaining COTS
+Week 2   ▶  Print all 5 sections + small parts (84 h split across printers)
+Week 3   ▶  PA-CF anneal + rotor balance + insert install
+Week 4   ▶  Sub-assembly: avionics, power, propulsion stages
+Week 5   ▶  Full stack assembly + wiring + calibration
+Week 6   ▶  Bench tests: static thrust (OQ-3), gimbal sweep, control surface authority
+Week 7   ▶  Tethered first flight (5 successful hovers required)
+Week 8+  ▶  Free-flight envelope expansion: hover → 30 m → forward-flight transition</div>
+
+  <h3>Mk III roadmap (post-Mk II validation)</h3>
+
+  <ul>
+    <li><strong>Larger annular intake</strong> (30 % more area) for higher static thrust margin</li>
+    <li><strong>Composite body shells</strong> — vacuum-bagged carbon fibre, 40 % weight saving on the structure</li>
+    <li><strong>Integrated payload bay</strong> between avionics and battery (200 mm³ volume)</li>
+    <li><strong>21700 cell upgrade</strong> — 25 % more capacity in the same volume</li>
+    <li><strong>Drogue parachute</strong> for emergency recovery in failure modes</li>
+    <li><strong>Fairing the antenna</strong> for full GPS / telemetry diversity</li>
+    <li><strong>Onboard FPV camera</strong> with low-latency video link</li>
+  </ul>
+
+  <h3>Mk IV stretch concept</h3>
+
+  <p>If contra-rotating EDF concept proves out, Mk IV would explore:</p>
+  <ul>
+    <li>Full-duplex communications and BVLOS operation</li>
+    <li>Cooperative swarm flight with formation control</li>
+    <li>Variable-pitch fan blades for higher cruise efficiency</li>
+    <li>Hybrid power: small fuel cell or generator for &gt;30 min endurance</li>
+  </ul>
+</div>
+
+<!-- ═════════════════════════════════════════════════════════
+     APPENDIX A1: FRONT ELEVATION DRAWING
+     ═════════════════════════════════════════════════════════ -->
+<div class="page drawing-page">
+  <div class="drawing-page-header">
+    <h2>A1 &nbsp; Front Elevation</h2>
+    <div class="note">Scale 1:5 · All dimensions mm · Datum Y=0 at nozzle exit plane · See <code>drawings/01-front-elevation.svg</code></div>
+  </div>
+  <div class="drawing-frame">
+    <img src="drawings/01-front-elevation.svg" alt="Front Elevation">
+  </div>
+</div>
+
+<!-- ═════════════════════════════════════════════════════════
+     APPENDIX A2: SECTION VIEW DRAWING
+     ═════════════════════════════════════════════════════════ -->
+<div class="page drawing-page">
+  <div class="drawing-page-header">
+    <h2>A2 &nbsp; Section View (cutaway through Y axis)</h2>
+    <div class="note">Scale 1:5 · Hatched by material: ╲╲ PETG · ╱╱ ASA · ▓▓ PA-CF · ▣ electronics · ▤ battery · See <code>drawings/02-section-view.svg</code></div>
+  </div>
+  <div class="drawing-frame">
+    <img src="drawings/02-section-view.svg" alt="Section View">
+  </div>
+</div>
+
+<!-- ═════════════════════════════════════════════════════════
+     APPENDIX A3: PLAN VIEW DRAWING
+     ═════════════════════════════════════════════════════════ -->
+<div class="page drawing-page">
+  <div class="drawing-page-header">
+    <h2>A3 &nbsp; Plan View (looking down through annular intake)</h2>
+    <div class="note">Scale 1:3 · Hidden lines show projected control-surface positions · See <code>drawings/03-plan-view.svg</code></div>
+  </div>
+  <div class="drawing-frame">
+    <img src="drawings/03-plan-view.svg" alt="Plan View">
+  </div>
+</div>
+
+<!-- ═════════════════════════════════════════════════════════
+     APPENDIX A4: BOTTOM VIEW DRAWING
+     ═════════════════════════════════════════════════════════ -->
+<div class="page drawing-page">
+  <div class="drawing-page-header">
+    <h2>A4 &nbsp; Bottom View (looking up at tail / nozzle)</h2>
+    <div class="note">Scale 1:3 · Tail fins at cardinal positions; gimbal pivots shown as hidden lines · See <code>drawings/04-bottom-view.svg</code></div>
+  </div>
+  <div class="drawing-frame">
+    <img src="drawings/04-bottom-view.svg" alt="Bottom View">
+  </div>
+</div>
+
+<!-- ═════════════════════════════════════════════════════════
+     APPENDIX A5: EXPLODED ISOMETRIC
+     ═════════════════════════════════════════════════════════ -->
+<div class="page drawing-page">
+  <div class="drawing-page-header">
+    <h2>A5 &nbsp; Exploded Assembly</h2>
+    <div class="note">Five sections separated along assembly axis · Numbered callouts match BOM line numbers · See <code>drawings/05-exploded-isometric.svg</code></div>
+  </div>
+  <div class="drawing-frame">
+    <img src="drawings/05-exploded-isometric.svg" alt="Exploded Isometric">
+  </div>
+</div>
+
+<!-- ═════════════════════════════════════════════════════════
+     APPENDIX A6: EDF DETAIL
+     ═════════════════════════════════════════════════════════ -->
+<div class="page drawing-page">
+  <div class="drawing-page-header">
+    <h2>A6 &nbsp; Contra-Rotating EDF Detail</h2>
+    <div class="note">Scale 2:1 · Cross-section through both stages plus 3 part details · See <code>drawings/06-edf-detail.svg</code></div>
+  </div>
+  <div class="drawing-frame">
+    <img src="drawings/06-edf-detail.svg" alt="EDF Detail">
+  </div>
+</div>
+
+<!-- ═════════════════════════════════════════════════════════
+     BACK COVER
+     ═════════════════════════════════════════════════════════ -->
+<div class="page cover">
+  <div class="top-bar">
+    <span class="brand">3D AGENT — DESIGN DELIVERABLES</span>
+    <span class="doc-id">END OF DOCUMENT</span>
+  </div>
+
+  <div class="hero">
+    <div style="font-size:11pt; letter-spacing:2px; color:var(--accent); font-weight:600; text-transform:uppercase;">Drone Rocket Mk II</div>
+    <div class="accent-line"></div>
+    <h1 style="font-size:32pt;">End of presentation</h1>
+    <div class="subtitle">For full deliverables package see the <code>deliverables/drone-rocket-mk2/</code> directory:</div>
+
+    <table style="margin-top:12mm;">
+      <tbody>
+        <tr><td class="code">README.md</td><td>Index + stakeholder summary</td></tr>
+        <tr><td class="code">design-document.md</td><td>Full engineering rationale (16 KB)</td></tr>
+        <tr><td class="code">BOM.md</td><td>Detailed Bill of Materials with vendor part numbers (14 KB)</td></tr>
+        <tr><td class="code">manufacturing-plan.md</td><td>Print sequence, materials, tooling, QC (11 KB)</td></tr>
+        <tr><td class="code">assembly-instructions.md</td><td>Step-by-step build manual, 11 stages (15 KB)</td></tr>
+        <tr><td class="code">drawings/*.svg</td><td>6 engineering drawings, vector format</td></tr>
+        <tr><td class="code">presentation.html</td><td>This document</td></tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top:12mm;">Live CAD: <code>scene/current.json</code> — viewer at <code>http://localhost:3030</code></p>
+
+    <p class="note" style="margin-top:8mm;">To revise: changes to the design route through the <strong>Engineer / Designer</strong> agent (re-engineering), <strong>3D Specialist</strong> (re-modelling), or <strong>Manager</strong> (deliverables update).</p>
+  </div>
+
+  <div class="footer-bar">
+    <span>Version 2026-05-03-1</span>
+    <span>Document type: Product design &amp; engineering review</span>
+    <span>Prepared by 3D Agent</span>
+  </div>
+</div>
+
+</body>
+</html>

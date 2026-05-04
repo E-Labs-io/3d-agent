@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Agent — E_Labs</title>
+  <link rel="stylesheet" href="/css/styles.css">
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+
+<!-- ── Toolbar ──────────────────────────────────────────────── -->
+<div id="toolbar">
+  <!-- File group -->
+  <div class="toolbar-group">
+    <span class="toolbar-label">3D Agent</span>
+    <button class="btn" id="btn-import" title="Import 3D file (drag & drop supported)">
+      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/></svg>
+      Import
+    </button>
+    <button class="btn" id="btn-export" title="Export current scene">
+      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+      Export
+    </button>
+    <button class="btn btn-icon" id="btn-undo" title="Undo (⌘Z)" disabled>↶</button>
+    <button class="btn btn-icon" id="btn-redo" title="Redo (⇧⌘Z)" disabled>↷</button>
+  </div>
+
+  <!-- Project menu -->
+  <div class="toolbar-group menu-host">
+    <button class="btn" id="btn-project" title="Project">📁 Project ▾</button>
+    <div class="menu" id="menu-project">
+      <button class="menu-item" data-act="project-new">New project…</button>
+      <button class="menu-item" data-act="project-open">Open .3dap…</button>
+      <button class="menu-item" data-act="project-save">Save bundle (.3dap)</button>
+      <hr>
+      <button class="menu-item" data-act="project-docs">Open Docs panel</button>
+      <button class="menu-item" data-act="project-export-svgs">Export all drawings (.zip)</button>
+    </div>
+  </div>
+
+  <!-- Generate menu -->
+  <div class="toolbar-group menu-host">
+    <button class="btn" id="btn-generate" title="Regenerate paperwork from current scene">⚙ Generate ▾</button>
+    <div class="menu" id="menu-generate">
+      <div class="menu-header">Ask Claude to regenerate:</div>
+      <button class="menu-item" data-act="gen-bom">📋 Bill of Materials</button>
+      <button class="menu-item" data-act="gen-plan">🛠 Manufacturing plan</button>
+      <button class="menu-item" data-act="gen-design">📐 Design document</button>
+      <button class="menu-item" data-act="gen-assembly">🔧 Assembly instructions</button>
+      <button class="menu-item" data-act="gen-drawings">✏ All drawings</button>
+      <hr>
+      <button class="menu-item" data-act="gen-all">🌐 Regenerate everything</button>
+    </div>
+  </div>
+
+  <!-- Projection / Ortho views -->
+  <div class="toolbar-group">
+    <span class="toolbar-label">Proj</span>
+    <button class="btn active btn-icon" id="btn-persp" title="Perspective">⌒</button>
+    <button class="btn btn-icon" id="btn-ortho-plan" title="Plan (top, ortho)">⊟</button>
+    <button class="btn btn-icon" id="btn-ortho-elev" title="Elevation (front, ortho)">▭</button>
+    <button class="btn btn-icon" id="btn-ortho-side" title="Section (side, ortho)">▯</button>
+  </div>
+
+  <!-- View mode -->
+  <div class="toolbar-group">
+    <span class="toolbar-label">View</span>
+    <button class="btn active" id="btn-solid" title="Solid view">Solid</button>
+    <button class="btn" id="btn-wire" title="Wireframe view">Wire</button>
+    <button class="btn" id="btn-both" title="Solid + wireframe">Both</button>
+  </div>
+
+  <!-- Shading -->
+  <div class="toolbar-group">
+    <button class="btn active" id="btn-material" title="Material shading">Material</button>
+    <button class="btn" id="btn-flat" title="Flat shading">Flat</button>
+    <button class="btn" id="btn-xray" title="X-ray mode">X-Ray</button>
+  </div>
+
+  <!-- Helpers -->
+  <div class="toolbar-group">
+    <button class="btn active btn-icon" id="btn-grid" title="Toggle grid">
+      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M1 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zM1 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zM1 12a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1z"/></svg>
+    </button>
+    <button class="btn active btn-icon" id="btn-axes" title="Toggle axes">
+      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 0 1 0V2h3a.5.5 0 0 0 0-1h-3.5z"/><path d="M.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 1 1-.708.708l-3-3a.5.5 0 0 1 0-.708z"/></svg>
+    </button>
+    <button class="btn active btn-icon" id="btn-shadows" title="Toggle shadows">
+      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8z"/></svg>
+    </button>
+  </div>
+
+  <!-- Analysis -->
+  <div class="toolbar-group">
+    <button class="btn" id="btn-analyze" title="Analyze for 3D printing / manufacturing">
+      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.54 3.87.5 3a2 2 0 0 1 2-2h3a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-.95zM8 1a1 1 0 0 1 1-1h3a2 2 0 0 1 2 2l-.04.87a1.99 1.99 0 0 1-.8.48l-1.95.65a1 1 0 0 0-.65.94V6a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1V1zm3 10a1 1 0 0 0-1 1v1.5a1 1 0 0 0 1.447.894l1.5-.75a1 1 0 0 0 .553-.894v-1a1 1 0 0 0-1-1H11z"/></svg>
+      Analyze
+    </button>
+    <button class="btn" id="btn-measure" title="Measure distance between two points">
+      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M1 2a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v6.5a2.5 2.5 0 0 1-5 0V5H7v6.5a2.5 2.5 0 0 1-5 0V5a1 1 0 0 1-1-1V2z"/></svg>
+      Measure
+    </button>
+  </div>
+
+  <!-- Units -->
+  <!-- Panel toggles -->
+  <div class="toolbar-group" style="margin-left: auto;">
+    <button class="btn btn-icon" id="btn-toggle-docs" title="Toggle Docs panel (paperwork, BOM, drawings)">📄</button>
+    <button class="btn btn-icon" id="btn-env" title="Environment settings">⚙</button>
+    <button class="btn active btn-icon" id="btn-toggle-left" title="Toggle scene panel">☰</button>
+    <button class="btn btn-icon" id="btn-toggle-right" title="Toggle properties panel">⊞</button>
+  </div>
+
+  <div class="toolbar-group">
+    <span class="toolbar-label">Units</span>
+    <select id="unit-select">
+      <option value="mm">mm</option>
+      <option value="cm">cm</option>
+      <option value="m">m</option>
+      <option value="in">in</option>
+    </select>
+  </div>
+
+  <input type="file" id="file-input" style="display:none" accept=".obj,.stl,.gltf,.glb,.fbx,.3ds,.dxf,.ply">
+  <input type="color" id="color-picker" style="display:none">
+</div>
+
+<!-- ── Main area ──────────────────────────────────────────────── -->
+<div id="main">
+
+  <!-- Left: Object Hierarchy -->
+  <div id="panel-left">
+    <div class="panel-section">
+      <div class="panel-header">
+        <span>Scene</span>
+        <button class="btn-sm" id="btn-add-obj" title="Add object">+</button>
+      </div>
+    </div>
+    <div id="object-tree"></div>
+    <div class="resize-handle" id="left-resize"></div>
+  </div>
+
+  <!-- Viewport -->
+  <div id="viewport-container">
+    <canvas id="viewport"></canvas>
+    <canvas id="ruler-top" class="ruler ruler-top"></canvas>
+    <canvas id="ruler-left" class="ruler ruler-left"></canvas>
+    <div id="ruler-corner"></div>
+    <div id="drop-overlay">Drop 3D file to import</div>
+    <div id="loading">
+      <div class="spinner"></div>
+      <span id="loading-text">Loading...</span>
+    </div>
+    <div id="analysis-overlay">
+      <h4>Analysis</h4>
+      <div id="analysis-content"></div>
+    </div>
+    <canvas id="gizmo-canvas"></canvas>
+    <div id="view-overlay">
+      <button class="view-btn" id="vbtn-persp" title="Perspective view">P</button>
+      <button class="view-btn" id="vbtn-front" title="Front view">F</button>
+      <button class="view-btn" id="vbtn-top" title="Top view">T</button>
+      <button class="view-btn" id="vbtn-side" title="Side view">S</button>
+      <button class="view-btn" id="vbtn-fit" title="Fit all in view">⊡</button>
+    </div>
+    <div id="toast-container"></div>
+  </div>
+
+  <!-- Right: Properties -->
+  <div id="panel-right">
+    <div class="tab-bar">
+      <button class="tab active" data-tab="props">Props</button>
+      <button class="tab" data-tab="material">Mat</button>
+      <button class="tab" data-tab="scene">Scene</button>
+    </div>
+
+    <!-- Transform / Properties tab -->
+    <div class="tab-panel active" id="tab-props">
+      <div id="no-selection" class="no-selection">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        <p>Select an object to<br>view its properties</p>
+      </div>
+      <div id="props-content" style="display:none">
+        <div class="tab-content">
+          <div class="prop-group">
+            <div class="prop-label">Name</div>
+            <input type="text" class="prop-input-full" id="prop-name">
+          </div>
+
+          <div class="prop-group">
+            <div class="prop-label">Position</div>
+            <div class="prop-row"><label>X</label><input type="number" class="prop-input" id="pos-x" step="0.1"></div>
+            <div class="prop-row"><label>Y</label><input type="number" class="prop-input" id="pos-y" step="0.1"></div>
+            <div class="prop-row"><label>Z</label><input type="number" class="prop-input" id="pos-z" step="0.1"></div>
+          </div>
+
+          <div class="prop-group">
+            <div class="prop-label">Rotation (°)</div>
+            <div class="prop-row"><label>X</label><input type="number" class="prop-input" id="rot-x" step="1"></div>
+            <div class="prop-row"><label>Y</label><input type="number" class="prop-input" id="rot-y" step="1"></div>
+            <div class="prop-row"><label>Z</label><input type="number" class="prop-input" id="rot-z" step="1"></div>
+          </div>
+
+          <div class="prop-group">
+            <div class="prop-label">Scale</div>
+            <div class="prop-row"><label>X</label><input type="number" class="prop-input" id="scl-x" step="0.01" min="0.001"></div>
+            <div class="prop-row"><label>Y</label><input type="number" class="prop-input" id="scl-y" step="0.01" min="0.001"></div>
+            <div class="prop-row"><label>Z</label><input type="number" class="prop-input" id="scl-z" step="0.01" min="0.001"></div>
+          </div>
+
+          <div class="prop-group" id="dimensions-group">
+            <div class="prop-label">Dimensions (mm)</div>
+            <div id="dimensions-content" style="color:var(--muted); font-size:11px; line-height:1.8;"></div>
+          </div>
+
+          <div class="prop-group">
+            <div class="prop-label">Visibility</div>
+            <label class="checkbox-row">
+              <input type="checkbox" id="prop-visible" checked>
+              Visible
+            </label>
+            <label class="checkbox-row">
+              <input type="checkbox" id="prop-cast-shadow" checked>
+              Cast Shadow
+            </label>
+            <label class="checkbox-row">
+              <input type="checkbox" id="prop-receive-shadow" checked>
+              Receive Shadow
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Material tab -->
+    <div class="tab-panel" id="tab-material">
+      <div id="no-selection-mat" class="no-selection">
+        <p>Select an object to<br>edit its material</p>
+      </div>
+      <div id="material-content" style="display:none">
+        <div class="tab-content">
+          <div class="prop-group">
+            <div class="prop-label">Type</div>
+            <div class="mat-type-row">
+              <button class="mat-type-btn active" data-mat="standard">Standard</button>
+              <button class="mat-type-btn" data-mat="phong">Phong</button>
+              <button class="mat-type-btn" data-mat="basic">Basic</button>
+              <button class="mat-type-btn" data-mat="toon">Toon</button>
+              <button class="mat-type-btn" data-mat="physical">Physical</button>
+            </div>
+          </div>
+
+          <div class="prop-group">
+            <div class="prop-label">Color</div>
+            <div class="color-row">
+              <div class="color-swatch" id="mat-color-swatch"></div>
+              <input type="text" class="prop-input-full" id="mat-color-text" placeholder="#4a9eff">
+            </div>
+          </div>
+
+          <div class="prop-group" id="pbr-props">
+            <div class="prop-label">PBR Properties</div>
+            <div class="range-row">
+              <label>Metalness</label>
+              <input type="range" id="mat-metalness" min="0" max="1" step="0.01">
+              <span class="range-val" id="mat-metalness-val">0.0</span>
+            </div>
+            <div class="range-row">
+              <label>Roughness</label>
+              <input type="range" id="mat-roughness" min="0" max="1" step="0.01">
+              <span class="range-val" id="mat-roughness-val">0.5</span>
+            </div>
+          </div>
+
+          <div class="prop-group">
+            <div class="prop-label">Opacity</div>
+            <div class="range-row">
+              <label>Opacity</label>
+              <input type="range" id="mat-opacity" min="0" max="1" step="0.01">
+              <span class="range-val" id="mat-opacity-val">1.0</span>
+            </div>
+            <label class="checkbox-row">
+              <input type="checkbox" id="mat-transparent">
+              Transparent
+            </label>
+          </div>
+
+          <div class="prop-group">
+            <div class="prop-label">Display</div>
+            <label class="checkbox-row">
+              <input type="checkbox" id="mat-wireframe">
+              Wireframe
+            </label>
+            <label class="checkbox-row">
+              <input type="checkbox" id="mat-double-side">
+              Double Sided
+            </label>
+            <label class="checkbox-row">
+              <input type="checkbox" id="mat-flat-shading">
+              Flat Shading
+            </label>
+          </div>
+
+          <div class="prop-group">
+            <div class="prop-label">Emissive</div>
+            <div class="color-row">
+              <div class="color-swatch" id="mat-emissive-swatch" style="background:#000000"></div>
+              <input type="text" class="prop-input-full" id="mat-emissive-text" placeholder="#000000">
+            </div>
+            <div class="range-row">
+              <label>Intensity</label>
+              <input type="range" id="mat-emissive-intensity" min="0" max="5" step="0.1">
+              <span class="range-val" id="mat-emissive-intensity-val">1.0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scene Settings tab -->
+    <div class="tab-panel" id="tab-scene">
+      <div class="tab-content">
+        <div class="prop-group">
+          <div class="prop-label">Scene Name</div>
+          <input type="text" class="prop-input-full" id="scene-name" placeholder="My Scene">
+        </div>
+        <div class="prop-group">
+          <div class="prop-label">Background</div>
+          <div class="color-row">
+            <div class="color-swatch" id="bg-color-swatch" style="background:#1a1f29"></div>
+            <input type="text" class="prop-input-full" id="bg-color-text" placeholder="#1a1f29">
+          </div>
+        </div>
+        <div class="prop-group">
+          <div class="prop-label">Environment</div>
+          <label class="checkbox-row">
+            <input type="checkbox" id="env-grid" checked>
+            Show Grid
+          </label>
+          <label class="checkbox-row">
+            <input type="checkbox" id="env-axes" checked>
+            Show Axes
+          </label>
+          <label class="checkbox-row">
+            <input type="checkbox" id="env-shadows" checked>
+            Shadows
+          </label>
+        </div>
+        <div class="prop-group">
+          <div class="prop-label">Ambient Light</div>
+          <div class="range-row">
+            <label>Intensity</label>
+            <input type="range" id="ambient-intensity" min="0" max="2" step="0.05">
+            <span class="range-val" id="ambient-intensity-val">0.5</span>
+          </div>
+        </div>
+        <div class="prop-group">
+          <div class="prop-label">Stats</div>
+          <div id="scene-stats" style="color:var(--muted); font-size:11px; line-height:1.8;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Status bar ──────────────────────────────────────────────── -->
+<div id="statusbar">
+  <div class="status-item">
+    <div class="status-dot connecting" id="ws-dot"></div>
+    <span id="ws-status">Connecting...</span>
+  </div>
+  <div class="status-item" id="status-objects">0 objects</div>
+  <div class="status-item" id="status-triangles">0 triangles</div>
+  <div class="status-item" id="status-selected">—</div>
+  <div class="status-item" id="status-cursor" style="margin-left:auto; font-family: monospace;"></div>
+</div>
+
+<!-- ── Context menu ──────────────────────────────────────────────── -->
+<div id="context-menu">
+  <div class="ctx-item" id="ctx-focus">Focus selected</div>
+  <div class="ctx-item" id="ctx-duplicate">Duplicate</div>
+  <div class="ctx-item" id="ctx-reset-transform">Reset transform</div>
+  <div class="ctx-separator"></div>
+  <div class="ctx-item" id="ctx-export-obj">Export as OBJ</div>
+  <div class="ctx-item" id="ctx-export-stl">Export as STL</div>
+  <div class="ctx-separator"></div>
+  <div class="ctx-item danger" id="ctx-delete">Delete</div>
+</div>
+
+<!-- ── Export modal ──────────────────────────────────────────────── -->
+<div id="export-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:300; align-items:center; justify-content:center;">
+  <div style="background:var(--panel); border:1px solid var(--border); border-radius:6px; padding:20px; width:320px;">
+    <h3 style="margin-bottom:16px; font-size:14px;">Export Scene</h3>
+    <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:16px;">
+      <button class="btn" data-format="stl">STL — 3D Printing / CAD</button>
+      <button class="btn" data-format="obj">OBJ — Universal 3D</button>
+      <button class="btn" data-format="gltf">GLTF — Game / Web 3D</button>
+      <button class="btn" data-format="glb">GLB — Game / Web 3D (binary)</button>
+      <button class="btn" data-format="ply">PLY — Point cloud / scan</button>
+    </div>
+    <div style="display:flex; justify-content:flex-end; gap:8px;">
+      <button class="btn" id="export-close">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Add Object modal ──────────────────────────────────────────────── -->
+<div id="add-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:300; align-items:center; justify-content:center;">
+  <div style="background:var(--panel); border:1px solid var(--border); border-radius:6px; padding:20px; width:320px;">
+    <h3 style="margin-bottom:16px; font-size:14px;">Add Object</h3>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:16px;">
+      <button class="btn" data-type="box">📦 Box</button>
+      <button class="btn" data-type="sphere">⚾ Sphere</button>
+      <button class="btn" data-type="cylinder">🥫 Cylinder</button>
+      <button class="btn" data-type="cone">🔺 Cone</button>
+      <button class="btn" data-type="torus">🍩 Torus</button>
+      <button class="btn" data-type="plane">▬ Plane</button>
+      <button class="btn" data-type="gear">⚙️ Gear</button>
+      <button class="btn" data-type="spring">🌀 Spring</button>
+      <button class="btn" data-type="pipe">🔧 Pipe</button>
+      <button class="btn" data-type="hex_bolt">🔩 Hex Bolt</button>
+    </div>
+    <div style="display:flex; justify-content:flex-end;">
+      <button class="btn" id="add-close">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Docs panel (relocated into #main by JS on open) ─────────────────── -->
+<div id="docs-panel" style="display:none;">
+  <div class="docs-resize-handle" id="docs-resize"></div>
+  <div class="docs-header">
+    <span class="docs-title">Project Docs</span>
+    <span class="docs-project-name" id="docs-project-name"></span>
+    <div style="margin-left:auto; display:flex; gap:6px;">
+      <button class="btn btn-sm" id="docs-refresh" title="Refresh">⟳</button>
+      <button class="btn btn-sm" id="docs-close" title="Close">✕</button>
+    </div>
+  </div>
+  <div class="docs-body">
+    <div class="docs-list" id="docs-list">
+      <div class="docs-section-title">Documents</div>
+      <div id="docs-list-documents"></div>
+      <div class="docs-section-title">Drawings</div>
+      <div id="docs-list-drawings"></div>
+    </div>
+    <div class="docs-viewer" id="docs-viewer">
+      <div class="docs-empty">Select a document or drawing to view</div>
+    </div>
+  </div>
+</div>
+
+<!-- File inputs for project import -->
+<input type="file" id="project-file-input" accept=".3dap,.json" style="display:none">
+
+<!-- ── Environment modal ──────────────────────────────────────────────── -->
+<div id="env-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:300; align-items:center; justify-content:center;">
+  <div style="background:var(--panel); border:1px solid var(--border); border-radius:6px; padding:20px; width:340px; max-height:80vh; overflow-y:auto;">
+    <h3 style="margin-bottom:16px; font-size:14px; display:flex; justify-content:space-between; align-items:center;">
+      Environment
+      <button class="btn btn-sm" id="env-close" style="background:none;">✕</button>
+    </h3>
+
+    <div class="prop-group">
+      <div class="prop-label">Background colour</div>
+      <input type="color" id="env-bg" style="width:100%; height:30px;">
+    </div>
+
+    <div class="prop-group">
+      <div class="prop-label">Background brightness <span id="env-bg-bright-val" class="muted-val">1.00</span></div>
+      <input type="range" id="env-bg-bright" min="0" max="2" step="0.01" value="1" style="width:100%;">
+    </div>
+
+    <div class="prop-group">
+      <div class="prop-label">Ambient intensity <span id="env-ambient-val" class="muted-val">0.30</span></div>
+      <input type="range" id="env-ambient" min="0" max="3" step="0.01" value="0.3" style="width:100%;">
+    </div>
+
+    <div class="prop-group">
+      <div class="prop-label">Ambient colour</div>
+      <input type="color" id="env-ambient-color" style="width:100%; height:30px;" value="#c8d4ff">
+    </div>
+
+    <div class="prop-group">
+      <div class="prop-label">Key light intensity <span id="env-key-val" class="muted-val">1.45</span></div>
+      <input type="range" id="env-key" min="0" max="5" step="0.01" value="1.45" style="width:100%;">
+    </div>
+
+    <div class="prop-group">
+      <div class="prop-label">Fill light intensity <span id="env-fill-val" class="muted-val">0.45</span></div>
+      <input type="range" id="env-fill" min="0" max="3" step="0.01" value="0.45" style="width:100%;">
+    </div>
+
+    <div class="prop-group">
+      <div class="prop-label">Rim light intensity <span id="env-rim-val" class="muted-val">0.50</span></div>
+      <input type="range" id="env-rim" min="0" max="3" step="0.01" value="0.5" style="width:100%;">
+    </div>
+
+    <div class="prop-group">
+      <div class="prop-label">Tone mapping exposure <span id="env-exposure-val" class="muted-val">1.00</span></div>
+      <input type="range" id="env-exposure" min="0.1" max="3" step="0.01" value="1" style="width:100%;">
+    </div>
+
+    <div class="prop-group" style="display:flex; gap:8px; flex-wrap:wrap;">
+      <label style="display:flex; align-items:center; gap:6px; font-size:11px;">
+        <input type="checkbox" id="env-grid" checked> Grid
+      </label>
+      <label style="display:flex; align-items:center; gap:6px; font-size:11px;">
+        <input type="checkbox" id="env-axes"> Axes
+      </label>
+      <label style="display:flex; align-items:center; gap:6px; font-size:11px;">
+        <input type="checkbox" id="env-shadows" checked> Shadows
+      </label>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="/js/geometry-builders.js"></script>
+<script type="module" src="/js/app.js"></script>
+</body>
+</html>

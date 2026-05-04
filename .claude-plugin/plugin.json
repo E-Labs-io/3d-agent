@@ -1,0 +1,46 @@
+{
+  "name": "3d-agent",
+  "version": "0.1.0",
+  "description": "Live AI-powered 3D design environment. Build, modify and export 3D objects via chat with realtime viewer at http://localhost:3030. Includes Engineer/Designer + 3D Specialist + Manager subagents for full product-design workflow.",
+  "author": {
+    "name": "E-Labs",
+    "url": "https://github.com/e-labs"
+  },
+  "license": "MIT",
+  "keywords": [
+    "3d",
+    "cad",
+    "design",
+    "3d-printing",
+    "manufacturing",
+    "engineering",
+    "viewer",
+    "three.js",
+    "drone",
+    "rocket",
+    "product-design"
+  ],
+  "agents": [
+    "./agents/engineer-designer.md",
+    "./agents/3d-specialist.md",
+    "./agents/manager.md",
+    "./agents/3d-modeler.md",
+    "./agents/3d-printing.md",
+    "./agents/manufacturing.md",
+    "./agents/materials.md",
+    "./agents/cad-designer.md"
+  ],
+  "commands": [
+    "./commands/3d-start.md",
+    "./commands/3d-stop.md",
+    "./commands/3d-new.md",
+    "./commands/3d-design.md",
+    "./commands/3d-bom.md",
+    "./commands/3d-plans.md",
+    "./commands/3d-bundle.md",
+    "./commands/3d-status.md"
+  ],
+  "skills": [
+    "./skills/3d-design"
+  ]
+}

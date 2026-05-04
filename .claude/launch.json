@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "3d-agent",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["server.js"],
+      "port": 3030
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "name": "New Scene",
+    "units": "mm",
+    "description": ""
+  },
+  "environment": {
+    "background": "#1a1f29",
+    "ambientIntensity": 0.5,
+    "grid": true,
+    "gridSize": 200,
+    "gridDivisions": 20,
+    "axes": true,
+    "shadows": true
+  },
+  "camera": {
+    "position": [60, 60, 60],
+    "target": [0, 0, 0],
+    "fov": 45
+  },
+  "lights": [
+    {
+      "id": "ambient",
+      "type": "ambient",
+      "color": "#ffffff",
+      "intensity": 0.4
+    },
+    {
+      "id": "key",
+      "type": "directional",
+      "color": "#ffffff",
+      "intensity": 1.2,
+      "position": [80, 120, 60],
+      "castShadow": true
+    },
+    {
+      "id": "fill",
+      "type": "directional",
+      "color": "#aaccff",
+      "intensity": 0.4,
+      "position": [-60, 40, -40],
+      "castShadow": false
+    }
+  ],
+  "objects": [
+    {
+      "id": "demo_box",
+      "name": "Demo Box",
+      "type": "box",
+      "params": {
+        "width": 20,
+        "height": 20,
+        "depth": 20
+      },
+      "material": {
+        "type": "standard",
+        "color": "#4a9eff",
+        "metalness": 0.1,
+        "roughness": 0.4
+      },
+      "transform": {
+        "position": [0, 10, 0],
+        "rotation": [0, 0, 0],
+        "scale": [1, 1, 1]
+      },
+      "visible": true,
+      "castShadow": true,
+      "receiveShadow": true
+    }
+  ],
+  "annotations": [],
+  "measurements": []
+}
