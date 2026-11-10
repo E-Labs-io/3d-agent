@@ -1,6 +1,6 @@
 ---
 description: Generate the bill of materials for the current project
-argument-hint: [project slug]
+argument-hint: "[project slug]"
 ---
 
 1. Project: "$ARGUMENTS", or the one shown in the viewer.

@@ -1,6 +1,6 @@
 ---
 description: Run every design check on the current project and report pass or fail
-argument-hint: [project slug]
+argument-hint: "[project slug]"
 ---
 
 1. Use the project named in "$ARGUMENTS", or the one shown in the viewer (`project_list` if unsure).
