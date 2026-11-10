@@ -1,183 +1,50 @@
-# 3D Agent — Claude Instructions
+# 3D Agent
 
-## What this project is
+An engineering design environment for Claude. Designs are parametric CAD code, checked and analysed by tools, shown in a live viewer.
 
-A live 3D design environment. Claude builds and modifies 3D objects by writing `scene/current.json`. The file is watched by `server.js`, which pushes updates to the Three.js viewer at `http://localhost:3030` via WebSocket. Changes appear instantly.
+## Layout
 
-## How to interact with the scene
+| Path | What it is |
+|---|---|
+| `toolbox/` | Python MCP server (`server.py`) and tool modules (`tb/`). Run with `uv`. |
+| `toolbox/data/` | Sourced data: materials, process rules, standards, electronics tables. |
+| `toolbox/tests/` | `uv run pytest -q` from `toolbox/`. |
+| `server.js`, `public/` | The viewer: Node server plus Three.js front end, port 3030. |
+| `agents/`, `commands/`, `skills/` | The Claude Code plugin layer. |
+| `examples/` | Example projects (copied into the data folder by tests). |
+| `docs/` | Research notes and design decisions. |
 
-**To build or modify:** Write the updated `scene/current.json` using the Write tool. The viewer updates automatically — no server restart needed.
-
-**To check the current state:** Read `scene/current.json`.
-
-**The viewer runs at:** `http://localhost:3030` (start with `npm start` in this directory)
-
----
-
-## Scene JSON format
-
-```json
-{
-  "metadata": {
-    "version": "1.0",
-    "name": "Scene name",
-    "units": "mm"
-  },
-  "environment": {
-    "background": "#1a1f29",
-    "grid": true,
-    "axes": true,
-    "shadows": true,
-    "gridSize": 200,
-    "gridDivisions": 20
-  },
-  "camera": {
-    "position": [60, 60, 60],
-    "target": [0, 0, 0],
-    "fov": 45
-  },
-  "lights": [
-    { "id": "ambient", "type": "ambient", "color": "#ffffff", "intensity": 0.4 },
-    { "id": "key", "type": "directional", "color": "#ffffff", "intensity": 1.2,
-      "position": [80, 120, 60], "castShadow": true }
-  ],
-  "objects": [ /* see object schema below */ ]
-}
-```
-
-## Object schema
-
-```json
-{
-  "id": "unique_snake_case_id",
-  "name": "Human readable name",
-  "type": "box",
-  "params": { "width": 20, "height": 10, "depth": 15 },
-  "material": {
-    "type": "standard",
-    "color": "#4a9eff",
-    "metalness": 0.1,
-    "roughness": 0.4,
-    "transparent": false,
-    "opacity": 1.0,
-    "wireframe": false,
-    "doubleSide": false,
-    "flatShading": false,
-    "emissive": "#000000",
-    "emissiveIntensity": 1.0
-  },
-  "transform": {
-    "position": [0, 5, 0],
-    "rotation": [0, 0, 0],
-    "scale": [1, 1, 1]
-  },
-  "visible": true,
-  "castShadow": true,
-  "receiveShadow": true
-}
-```
-
-**Positioning convention:** place flat-bottom objects at `position.y = height/2` so the base rests on the ground plane (Y=0).
-
-## Geometry types and params
+User designs are **not** in this repo. They live in `~/Documents/3D-Agent` (override with `THREED_AGENT_HOME`):
 
 ```
-box         → width, height, depth, widthSegments, heightSegments, depthSegments
-sphere      → radius, widthSegments (32), heightSegments (16)
-cylinder    → radiusTop, radiusBottom, height, radialSegments (32), openEnded
-cone        → radius, height, radialSegments (32)
-torus       → radius, tube, radialSegments (16), tubularSegments (64)
-torusKnot  → radius, tube, tubularSegments, radialSegments, p, q
-plane       → width, height
-capsule     → radius, length
-pipe        → outerRadius, innerRadius, height, segments
-roundedBox  → width, height, depth, radius, segments
-gear        → teeth, module_ (tooth size), thickness, pressureAngle (20), holeRadius
-spring      → coilRadius, wireRadius, turns, height, segments
-hex_bolt    → drive (hex across-flats), shankDiameter, shankLength, headHeight
-nut         → drive, thickness, holeRadius
-lathe       → points [[x,y], ...], segments (32)
-extrude     → pathPoints [[x,y], ...], depth, bevel, bevelThickness, bevelSize
-file        → url, format (stl|obj|gltf|glb|fbx|3ds|ply)
-custom_code → geometry_code (Three.js JS string that returns a BufferGeometry)
-group       → children (array of object schemas)
+~/Documents/3D-Agent/
+  scene/current.json        what the viewer shows
+  projects/<slug>/
+    model.py                the design (build123d)
+    brief.md, circuit.py    optional
+    imports/                STEP/STL brought in, each with a source sidecar
+    out/                    everything generated: STEP, STL, 3MF, drawings, bom, fea
+  exports/                  zips and viewer exports
 ```
 
-## Material presets
+## How a design is made
 
-```
-stainless_steel  → color:#c0c0c0, metalness:0.85, roughness:0.10
-aluminium        → color:#b8b8c0, metalness:0.70, roughness:0.25
-mild_steel       → color:#808080, metalness:0.75, roughness:0.30
-brass            → color:#d4a017, metalness:0.80, roughness:0.20
-copper           → color:#b87333, metalness:0.90, roughness:0.15
-gold             → color:#ffd700, metalness:1.00, roughness:0.05
-pla_white        → color:#f0f0f0, metalness:0.00, roughness:0.70
-abs_grey         → color:#d0d0d0, metalness:0.00, roughness:0.60
-rubber           → color:#2a2a2a, metalness:0.00, roughness:0.95
-wood_pine        → color:#c8a87a, metalness:0.00, roughness:0.85
-glass            → color:#a8d8f0, metalness:0.00, roughness:0.05, transparent:true, opacity:0.3
-```
+1. `model.py` defines `PARTS` (name to `part(shape, material=..., ...)`) and optionally `HARDWARE`.
+2. `cad_build` runs it in a subprocess and writes STEP, STL and 3MF per part, an assembly STEP, `out/build.json`, and the viewer scene.
+3. `check_all` gates it: mesh health, wall thickness, printability, clashes.
+4. Analysis, drawings, BOM and making tools all read `out/build.json` and the files beside it.
 
-## Custom geometry code example
+Units are millimetres. CAD is Z-up; the viewer is Y-up and the build converts.
 
-```json
-{
-  "type": "custom_code",
-  "params": {
-    "geometry_code": "const shape = new THREE.Shape(); shape.moveTo(-10,0); shape.lineTo(10,0); shape.lineTo(0,20); shape.closePath(); const geo = new THREE.ExtrudeGeometry(shape, {depth:5, bevelEnabled:false}); geo.rotateX(-Math.PI/2); geo.computeVertexNormals(); return geo;"
-  }
-}
-```
+## Working on this repo
 
-## Agent specialisms
+- **Tool modules** follow `toolbox/CONTRIBUTING.md`: plain functions, dict out with `ok`, numbers with units, sources on all data, optional programs detected and never installed.
+- **No value from memory.** Material properties, standard dimensions and prices come from `toolbox/data/` (with a source) or a live lookup.
+- **GPL and AGPL programs are subprocesses,** never imports.
+- **Dependencies** are pinned in `toolbox/pyproject.toml`. The lockfile is committed.
+- **The viewer server** binds to 127.0.0.1 and refuses cross-origin requests. Keep it that way.
+- **Tests must pass offline** and must not need KiCad, ngspice, a slicer or a printer.
 
-Read the relevant agent file before responding to specialist requests. The three "core" subagents handle full project workflows; the rest are reference material the core agents draw on.
+## Viewer scene format
 
-### Core workflow agents
-
-| Task | Agent file |
-|------|-----------|
-| Research and design a product end-to-end (function, materials, mechanics, electronics, DfM) | `agents/engineer-designer.md` |
-| Take a design brief and build it in 3D / iterate / redesign | `agents/3d-specialist.md` |
-| Produce BOMs, 2D plans, exploded views (2D + 3D animation), build instructions | `agents/manager.md` |
-
-### Expertise reference
-
-| Task | Agent file |
-|------|-----------|
-| Build / modify 3D geometry (basic) | `agents/3d-modeler.md` |
-| 3D printing advice / analysis | `agents/3d-printing.md` |
-| Manufacturing process / DFM | `agents/manufacturing.md` |
-| Material selection | `agents/materials.md` |
-| Precision CAD / tolerances | `agents/cad-designer.md` |
-
-### Typical workflow
-
-For a new product: **Engineer/Designer** writes a brief → **3D Specialist** builds it in `scene/current.json` → **Manager** produces BOM, plans, exploded views, build instructions.
-
-For modifications to an existing design: skip straight to the **3D Specialist** (or **Engineer/Designer** if the change has design-level implications), then **Manager** updates the deliverables.
-
-The 3D Specialist always auto-groups assemblies — read `agents/3d-modeler.md` § "Auto-grouping" for the spec on how groups are encoded in the scene JSON.
-
-## Print parts and export
-
-STL export writes one file per print part to `exports/`, Z-up, centred, on the bed.
-
-```
-_printPart: "name"   objects sharing a value merge into one STL named after it
-_printFlip: true     rotate that part 180° on export (pockets face up)
-_reference: true     fit ghosts and datum aids, never exported
-```
-
-Untagged objects land in `untagged.stl`. Give separate parts contrasting colours.
-
-## Critical rules
-
-1. **Always write scene/current.json** — never just describe the scene in text. Write it.
-2. **Preserve existing objects** unless explicitly asked to remove them.
-3. **All units are mm** unless `metadata.units` says otherwise.
-4. **Object IDs are unique** — use `type_timestamp` format for new objects.
-5. **Never leave malformed JSON** — validate mentally before writing.
-6. **After every scene write**, briefly describe what changed.
-7. **For analysis requests**, first check that the server is running and the object exists in the scene.
+The toolbox writes `scene/current.json`; you rarely edit it by hand. Each built part is an object of `type: "file"` pointing at its mesh, tagged `_printPart`, or `_reference: true` for fit ghosts. The older primitive types (`box`, `cylinder`, `custom_code` and so on) still render and are fine for a quick sketch, but they are meshes only: no STEP, no checks. Anything real goes through `model.py`.

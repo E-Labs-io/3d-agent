@@ -611,6 +611,15 @@ function updateObject(objDef) {
   const existing = sceneObjects.get(objDef.id);
   if (!existing) { addObject(objDef); return; }
 
+  // Imported files have no params to rebuild from; a changed url means new geometry.
+  if (objDef.type === 'file' && existing.userData.fileUrl !== objDef.url) {
+    if (selectedId === objDef.id) deselect();
+    scene.remove(existing);
+    sceneObjects.delete(objDef.id);
+    addObject(objDef);
+    return;
+  }
+
   // Update transform
   applyTransform(existing, objDef.transform);
   existing.visible = objDef.visible !== false;
@@ -633,7 +642,7 @@ function updateObject(objDef) {
 
   // Rebuild geometry if params changed (simple deep-equal check)
   const oldDef = existing.userData.objDef || {};
-  if (JSON.stringify(oldDef.params) !== JSON.stringify(objDef.params) || oldDef.type !== objDef.type) {
+  if (objDef.type !== 'file' && (JSON.stringify(oldDef.params) !== JSON.stringify(objDef.params) || oldDef.type !== objDef.type)) {
     if (existing.isMesh) {
       existing.geometry.dispose();
       existing.geometry = buildGeometry(objDef);
@@ -649,7 +658,6 @@ function updateObject(objDef) {
 function loadExternalFile(objDef) {
   const url = objDef.url;
   const ext = (objDef.format || url.split('.').pop()).toLowerCase();
-  showLoading(`Loading ${ext.toUpperCase()}...`);
 
   const onLoad = (geo) => {
     hideLoading();
@@ -665,7 +673,15 @@ function loadExternalFile(objDef) {
     }
     obj3d.userData.id = objDef.id;
     obj3d.userData.name = objDef.name || objDef.id;
+    obj3d.userData.fileUrl = objDef.url;
+    obj3d.userData.objDef = objDef;
     obj3d.name = obj3d.userData.name;
+    obj3d.visible = objDef.visible !== false;
+    if (obj3d.isMesh) {
+      obj3d.geometry.computeVertexNormals();
+      obj3d.castShadow = objDef.castShadow !== false;
+      obj3d.receiveShadow = objDef.receiveShadow !== false;
+    }
     applyTransform(obj3d, objDef.transform);
 
     // Auto-center and fit on first import
@@ -676,11 +692,14 @@ function loadExternalFile(objDef) {
       fitObjectInView(obj3d);
     }
 
+    const current = currentScene?.objects?.find(o => o.id === objDef.id);
+    if (current && current.url !== objDef.url) return;
+    const prev = sceneObjects.get(objDef.id);
+    if (prev) scene.remove(prev);
     scene.add(obj3d);
     sceneObjects.set(objDef.id, obj3d);
     rebuildObjectTree();
     updateSceneStats();
-    toast(`Imported ${obj3d.name}`, 'success');
   };
 
   const onError = (e) => { hideLoading(); toast(`Import failed: ${e.message || e}`, 'error'); };
@@ -1609,18 +1628,18 @@ document.getElementById('menu-project')?.addEventListener('click', async (e) => 
 
 // Generate menu actions — these surface a prompt the user can copy to Claude
 const GEN_PROMPTS = {
-  'gen-bom':      'Regenerate the Bill of Materials in deliverables/{project}/BOM.md based on the current scene/current.json. Cross-check every object has a BOM line.',
-  'gen-plan':     'Regenerate the manufacturing plan in deliverables/{project}/manufacturing-plan.md based on the current scene. Update print times and section assignments.',
-  'gen-design':   'Regenerate the design document in deliverables/{project}/design-document.md from the current scene. Preserve open questions and risks unless they no longer apply.',
-  'gen-assembly': 'Regenerate the assembly instructions in deliverables/{project}/assembly-instructions.md based on the current scene and BOM cross-references.',
-  'gen-drawings': 'Regenerate all SVG drawings in deliverables/{project}/drawings/ based on current geometry: 01-front-elevation, 02-section-view, 03-plan-view, 04-bottom-view, 05-exploded-isometric, 06-edf-detail (or appropriate subsystem detail).',
-  'gen-all':      'Regenerate ALL deliverables in deliverables/{project}/ from the current scene: BOM, manufacturing plan, design document, assembly instructions, all drawings, and the README index.'
+  'gen-bom':      '/3d-bom {project}',
+  'gen-plan':     'Use the manager agent to write the making plan for project {project}: print orientation, estimate and bed layout from the toolbox, saved as making-plan.md in the project.',
+  'gen-design':   'Use the engineer agent to update brief.md for project {project} so it matches the current model and its check results.',
+  'gen-assembly': 'Use the manager agent to write numbered assembly steps for project {project}, referencing BOM item numbers, saved as assembly.md in the project.',
+  'gen-drawings': '/3d-plans {project}',
+  'gen-all':      'For project {project}: run /3d-check, then /3d-plans and /3d-bom, then have the manager agent refresh making-plan.md and assembly.md.'
 };
 
 document.getElementById('menu-generate')?.addEventListener('click', async (e) => {
   const act = e.target?.dataset?.act;
   if (!act || !GEN_PROMPTS[act]) return;
-  const slug = currentProjectSlug || 'drone-rocket-mk2';
+  const slug = currentProjectSlug || currentScene?.metadata?.project || '';
   const prompt = GEN_PROMPTS[act].replaceAll('{project}', slug);
   // Copy to clipboard + show toast with instructions
   try {

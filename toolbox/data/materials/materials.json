@@ -1,0 +1,1350 @@
+{
+ "about": "Curated material properties. Every property carries the URL it was read from (fetched 2026-11-10). Where a source gives a range the conservative end is stored and the range is in the note. Printed-material values depend strongly on print settings; treat them as indicative.",
+ "not_sourced": [
+  "PA12 filament for FDM (the PA12 record is SLS powder; FDM nylon records are PA11, PA11-CF and PA12-CF)",
+  "Brass strength and modulus",
+  "Acrylic strength and modulus",
+  "HDPE modulus and heat deflection",
+  "304 and A36 elongation",
+  "POM, PEEK heat deflection"
+ ],
+ "materials": [
+  {
+   "id": "pla_prusament",
+   "name": "Prusament PLA",
+   "family": "PLA",
+   "category": "plastic",
+   "processes": [
+    "fdm"
+   ],
+   "aliases": [
+    "pla",
+    "prusament pla"
+   ],
+   "form": "FDM filament",
+   "properties": {
+    "density_g_cm3": {
+     "value": 1.24,
+     "source": "https://prusament.com/wp-content/uploads/2022/10/PLA_Prusament_TDS_2021_10_EN.pdf",
+     "note": "ISO 1183"
+    },
+    "heat_deflection_c": {
+     "value": 55,
+     "source": "https://prusament.com/wp-content/uploads/2022/10/PLA_Prusament_TDS_2021_10_EN.pdf",
+     "note": "ISO 75 at 0.45 MPa"
+    },
+    "heat_deflection_1_8mpa_c": {
+     "value": 55,
+     "source": "https://prusament.com/wp-content/uploads/2022/10/PLA_Prusament_TDS_2021_10_EN.pdf",
+     "note": "ISO 75 at 1.80 MPa"
+    },
+    "tensile_yield_xy_mpa": {
+     "value": 51,
+     "source": "https://prusament.com/wp-content/uploads/2022/10/PLA_Prusament_TDS_2021_10_EN.pdf",
+     "note": "3D-printed specimens, 100% rectilinear infill, ISO 527-1. 'Horizontal' (flat) is stored as xy; 'Vertical xz' is an on-edge specimen still loaded along the layers, so it is stored as xz, not z."
+    },
+    "tensile_yield_xz_mpa": {
+     "value": 59,
+     "source": "https://prusament.com/wp-content/uploads/2022/10/PLA_Prusament_TDS_2021_10_EN.pdf",
+     "note": "3D-printed specimens, 100% rectilinear infill, ISO 527-1. 'Horizontal' (flat) is stored as xy; 'Vertical xz' is an on-edge specimen still loaded along the layers, so it is stored as xz, not z."
+    },
+    "youngs_modulus_xy_mpa": {
+     "value": 2300,
+     "source": "https://prusament.com/wp-content/uploads/2022/10/PLA_Prusament_TDS_2021_10_EN.pdf",
+     "note": "Tensile modulus, horizontal specimen. 3D-printed specimens, 100% rectilinear infill, ISO 527-1. 'Horizontal' (flat) is stored as xy; 'Vertical xz' is an on-edge specimen still loaded along the layers, so it is stored as xz, not z."
+    },
+    "youngs_modulus_xz_mpa": {
+     "value": 2400,
+     "source": "https://prusament.com/wp-content/uploads/2022/10/PLA_Prusament_TDS_2021_10_EN.pdf",
+     "note": "Tensile modulus, vertical xz specimen. 3D-printed specimens, 100% rectilinear infill, ISO 527-1. 'Horizontal' (flat) is stored as xy; 'Vertical xz' is an on-edge specimen still loaded along the layers, so it is stored as xz, not z."
+    },
+    "elongation_at_yield_xy_pct": {
+     "value": 2.9,
+     "source": "https://prusament.com/wp-content/uploads/2022/10/PLA_Prusament_TDS_2021_10_EN.pdf",
+     "note": "Elongation at yield point, horizontal"
+    },
+    "elongation_at_yield_xz_pct": {
+     "value": 3.2,
+     "source": "https://prusament.com/wp-content/uploads/2022/10/PLA_Prusament_TDS_2021_10_EN.pdf",
+     "note": "Elongation at yield point, vertical xz"
+    },
+    "interlayer_strength_z_mpa": {
+     "value": 17,
+     "source": "https://prusament.com/wp-content/uploads/2022/10/PLA_Prusament_TDS_2021_10_EN.pdf",
+     "note": "Published as 'Interlayer Adhesion' (Prusa Polymers method): the through-layer (Z) tensile strength"
+    },
+    "filament_tensile_yield_mpa": {
+     "value": 57,
+     "source": "https://prusament.com/wp-content/uploads/2022/10/PLA_Prusament_TDS_2021_10_EN.pdf",
+     "note": "Unprinted filament, ISO 527. Not a printed-part value"
+    }
+   }
+  },
+  {
+   "id": "pla_bambu_basic",
+   "name": "Bambu PLA Basic",
+   "family": "PLA",
+   "category": "plastic",
+   "processes": [
+    "fdm"
+   ],
+   "aliases": [
+    "bambu pla",
+    "pla basic"
+   ],
+   "form": "FDM filament",
+   "properties": {
+    "density_g_cm3": {
+     "value": 1.24,
+     "source": "https://store.bblcdn.com/s1/default/58b85d0f3db94878854a28fdb8a0006e/Bambu_PLA_Basic_Technical_Data_Sheet.pdf",
+     "note": "ISO 1183"
+    },
+    "glass_transition_c": {
+     "value": 60,
+     "source": "https://store.bblcdn.com/s1/default/58b85d0f3db94878854a28fdb8a0006e/Bambu_PLA_Basic_Technical_Data_Sheet.pdf",
+     "note": "DSC, 10 C/min"
+    },
+    "heat_deflection_c": {
+     "value": 57,
+     "source": "https://store.bblcdn.com/s1/default/58b85d0f3db94878854a28fdb8a0006e/Bambu_PLA_Basic_Technical_Data_Sheet.pdf",
+     "note": "ISO 75 at 0.45 MPa"
+    },
+    "heat_deflection_1_8mpa_c": {
+     "value": 54,
+     "source": "https://store.bblcdn.com/s1/default/58b85d0f3db94878854a28fdb8a0006e/Bambu_PLA_Basic_Technical_Data_Sheet.pdf",
+     "note": "ISO 75 at 1.8 MPa"
+    },
+    "tensile_strength_xy_mpa": {
+     "value": 35,
+     "source": "https://store.bblcdn.com/s1/default/58b85d0f3db94878854a28fdb8a0006e/Bambu_PLA_Basic_Technical_Data_Sheet.pdf",
+     "note": "3D-printed specimens, 100% infill, ISO 527 / GB/T 1040, dried/annealed before test"
+    },
+    "tensile_strength_z_mpa": {
+     "value": 31,
+     "source": "https://store.bblcdn.com/s1/default/58b85d0f3db94878854a28fdb8a0006e/Bambu_PLA_Basic_Technical_Data_Sheet.pdf",
+     "note": "3D-printed specimens, 100% infill, ISO 527 / GB/T 1040, dried/annealed before test. Through-layer"
+    },
+    "youngs_modulus_xy_mpa": {
+     "value": 2580,
+     "source": "https://store.bblcdn.com/s1/default/58b85d0f3db94878854a28fdb8a0006e/Bambu_PLA_Basic_Technical_Data_Sheet.pdf",
+     "note": "3D-printed specimens, 100% infill, ISO 527 / GB/T 1040, dried/annealed before test"
+    },
+    "youngs_modulus_z_mpa": {
+     "value": 2060,
+     "source": "https://store.bblcdn.com/s1/default/58b85d0f3db94878854a28fdb8a0006e/Bambu_PLA_Basic_Technical_Data_Sheet.pdf",
+     "note": "3D-printed specimens, 100% infill, ISO 527 / GB/T 1040, dried/annealed before test. Through-layer"
+    },
+    "elongation_xy_pct": {
+     "value": 12.2,
+     "source": "https://store.bblcdn.com/s1/default/58b85d0f3db94878854a28fdb8a0006e/Bambu_PLA_Basic_Technical_Data_Sheet.pdf",
+     "note": "Breaking elongation, X-Y"
+    },
+    "elongation_z_pct": {
+     "value": 7.5,
+     "source": "https://store.bblcdn.com/s1/default/58b85d0f3db94878854a28fdb8a0006e/Bambu_PLA_Basic_Technical_Data_Sheet.pdf",
+     "note": "Breaking elongation, Z"
+    }
+   }
+  },
+  {
+   "id": "petg_prusament",
+   "name": "Prusament PETG",
+   "family": "PETG",
+   "category": "plastic",
+   "processes": [
+    "fdm"
+   ],
+   "aliases": [
+    "petg",
+    "prusament petg",
+    "pet-g"
+   ],
+   "form": "FDM filament",
+   "properties": {
+    "density_g_cm3": {
+     "value": 1.27,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2023/10/9f8d2165-tds_prusament-petg_n_en.pdf",
+     "note": "ISO 1183"
+    },
+    "heat_deflection_c": {
+     "value": 68,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2023/10/9f8d2165-tds_prusament-petg_n_en.pdf",
+     "note": "ISO 75 at 0.45 MPa"
+    },
+    "heat_deflection_1_8mpa_c": {
+     "value": 68,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2023/10/9f8d2165-tds_prusament-petg_n_en.pdf",
+     "note": "ISO 75 at 1.80 MPa"
+    },
+    "tensile_yield_xy_mpa": {
+     "value": 47,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2023/10/9f8d2165-tds_prusament-petg_n_en.pdf",
+     "note": "3D-printed specimens, 100% rectilinear infill, ISO 527-1. 'Horizontal' (flat) is stored as xy; 'Vertical xz' is an on-edge specimen still loaded along the layers, so it is stored as xz, not z."
+    },
+    "tensile_yield_xz_mpa": {
+     "value": 50,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2023/10/9f8d2165-tds_prusament-petg_n_en.pdf",
+     "note": "3D-printed specimens, 100% rectilinear infill, ISO 527-1. 'Horizontal' (flat) is stored as xy; 'Vertical xz' is an on-edge specimen still loaded along the layers, so it is stored as xz, not z."
+    },
+    "youngs_modulus_xy_mpa": {
+     "value": 1500,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2023/10/9f8d2165-tds_prusament-petg_n_en.pdf",
+     "note": "Tensile modulus, horizontal specimen. 3D-printed specimens, 100% rectilinear infill, ISO 527-1. 'Horizontal' (flat) is stored as xy; 'Vertical xz' is an on-edge specimen still loaded along the layers, so it is stored as xz, not z."
+    },
+    "youngs_modulus_xz_mpa": {
+     "value": 1600,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2023/10/9f8d2165-tds_prusament-petg_n_en.pdf",
+     "note": "Tensile modulus, vertical xz specimen. 3D-printed specimens, 100% rectilinear infill, ISO 527-1. 'Horizontal' (flat) is stored as xy; 'Vertical xz' is an on-edge specimen still loaded along the layers, so it is stored as xz, not z."
+    },
+    "elongation_at_yield_xy_pct": {
+     "value": 5.1,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2023/10/9f8d2165-tds_prusament-petg_n_en.pdf",
+     "note": "Elongation at yield point, horizontal"
+    },
+    "elongation_at_yield_xz_pct": {
+     "value": 5.1,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2023/10/9f8d2165-tds_prusament-petg_n_en.pdf",
+     "note": "Elongation at yield point, vertical xz"
+    },
+    "interlayer_strength_z_mpa": {
+     "value": 18,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2023/10/9f8d2165-tds_prusament-petg_n_en.pdf",
+     "note": "Published as 'Interlayer Adhesion' (Prusa Polymers method): the through-layer (Z) tensile strength"
+    },
+    "filament_tensile_yield_mpa": {
+     "value": 46,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2023/10/9f8d2165-tds_prusament-petg_n_en.pdf",
+     "note": "Unprinted filament, ISO 527. Not a printed-part value"
+    }
+   }
+  },
+  {
+   "id": "abs_bambu",
+   "name": "Bambu ABS",
+   "family": "ABS",
+   "category": "plastic",
+   "processes": [
+    "fdm"
+   ],
+   "aliases": [
+    "abs",
+    "bambu abs"
+   ],
+   "form": "FDM filament",
+   "properties": {
+    "density_g_cm3": {
+     "value": 1.05,
+     "source": "https://store.bblcdn.com/s7/default/23b4cf2b83d5470bb96d19970b5f3ae8/Bambu_ABS_Technical_Data_Sheet_V3.pdf",
+     "note": "ISO 1183"
+    },
+    "heat_deflection_c": {
+     "value": 87,
+     "source": "https://store.bblcdn.com/s7/default/23b4cf2b83d5470bb96d19970b5f3ae8/Bambu_ABS_Technical_Data_Sheet_V3.pdf",
+     "note": "ISO 75 at 0.45 MPa"
+    },
+    "heat_deflection_1_8mpa_c": {
+     "value": 84,
+     "source": "https://store.bblcdn.com/s7/default/23b4cf2b83d5470bb96d19970b5f3ae8/Bambu_ABS_Technical_Data_Sheet_V3.pdf",
+     "note": "ISO 75 at 1.8 MPa"
+    },
+    "tensile_strength_xy_mpa": {
+     "value": 33,
+     "source": "https://store.bblcdn.com/s7/default/23b4cf2b83d5470bb96d19970b5f3ae8/Bambu_ABS_Technical_Data_Sheet_V3.pdf",
+     "note": "3D-printed specimens, 100% infill, ISO 527 / GB/T 1040, dried/annealed before test"
+    },
+    "tensile_strength_z_mpa": {
+     "value": 28,
+     "source": "https://store.bblcdn.com/s7/default/23b4cf2b83d5470bb96d19970b5f3ae8/Bambu_ABS_Technical_Data_Sheet_V3.pdf",
+     "note": "3D-printed specimens, 100% infill, ISO 527 / GB/T 1040, dried/annealed before test. Through-layer"
+    },
+    "youngs_modulus_xy_mpa": {
+     "value": 2200,
+     "source": "https://store.bblcdn.com/s7/default/23b4cf2b83d5470bb96d19970b5f3ae8/Bambu_ABS_Technical_Data_Sheet_V3.pdf",
+     "note": "3D-printed specimens, 100% infill, ISO 527 / GB/T 1040, dried/annealed before test"
+    },
+    "youngs_modulus_z_mpa": {
+     "value": 1960,
+     "source": "https://store.bblcdn.com/s7/default/23b4cf2b83d5470bb96d19970b5f3ae8/Bambu_ABS_Technical_Data_Sheet_V3.pdf",
+     "note": "3D-printed specimens, 100% infill, ISO 527 / GB/T 1040, dried/annealed before test. Through-layer"
+    },
+    "elongation_xy_pct": {
+     "value": 10.5,
+     "source": "https://store.bblcdn.com/s7/default/23b4cf2b83d5470bb96d19970b5f3ae8/Bambu_ABS_Technical_Data_Sheet_V3.pdf",
+     "note": "Breaking elongation, X-Y"
+    },
+    "elongation_z_pct": {
+     "value": 4.7,
+     "source": "https://store.bblcdn.com/s7/default/23b4cf2b83d5470bb96d19970b5f3ae8/Bambu_ABS_Technical_Data_Sheet_V3.pdf",
+     "note": "Breaking elongation, Z"
+    }
+   }
+  },
+  {
+   "id": "asa_prusament",
+   "name": "Prusament ASA",
+   "family": "ASA",
+   "category": "plastic",
+   "processes": [
+    "fdm"
+   ],
+   "aliases": [
+    "asa",
+    "prusament asa"
+   ],
+   "form": "FDM filament",
+   "properties": {
+    "density_g_cm3": {
+     "value": 1.07,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2024/05/bc8551ef-tds_prusament-asa_2024_en.pdf",
+     "note": "ISO 1183"
+    },
+    "heat_deflection_c": {
+     "value": 93,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2024/05/bc8551ef-tds_prusament-asa_2024_en.pdf",
+     "note": "ISO 75 at 0.45 MPa"
+    },
+    "heat_deflection_1_8mpa_c": {
+     "value": 86,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2024/05/bc8551ef-tds_prusament-asa_2024_en.pdf",
+     "note": "ISO 75 at 1.80 MPa"
+    },
+    "tensile_yield_xy_mpa": {
+     "value": 42,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2024/05/bc8551ef-tds_prusament-asa_2024_en.pdf",
+     "note": "3D-printed specimens, 100% rectilinear infill, ISO 527-1. 'Horizontal' (flat) is stored as xy; 'Vertical xz' is an on-edge specimen still loaded along the layers, so it is stored as xz, not z."
+    },
+    "tensile_yield_xz_mpa": {
+     "value": 45,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2024/05/bc8551ef-tds_prusament-asa_2024_en.pdf",
+     "note": "3D-printed specimens, 100% rectilinear infill, ISO 527-1. 'Horizontal' (flat) is stored as xy; 'Vertical xz' is an on-edge specimen still loaded along the layers, so it is stored as xz, not z."
+    },
+    "youngs_modulus_xy_mpa": {
+     "value": 1600,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2024/05/bc8551ef-tds_prusament-asa_2024_en.pdf",
+     "note": "Tensile modulus, horizontal specimen. 3D-printed specimens, 100% rectilinear infill, ISO 527-1. 'Horizontal' (flat) is stored as xy; 'Vertical xz' is an on-edge specimen still loaded along the layers, so it is stored as xz, not z."
+    },
+    "youngs_modulus_xz_mpa": {
+     "value": 1700,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2024/05/bc8551ef-tds_prusament-asa_2024_en.pdf",
+     "note": "Tensile modulus, vertical xz specimen. 3D-printed specimens, 100% rectilinear infill, ISO 527-1. 'Horizontal' (flat) is stored as xy; 'Vertical xz' is an on-edge specimen still loaded along the layers, so it is stored as xz, not z."
+    },
+    "elongation_at_yield_xy_pct": {
+     "value": 3.4,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2024/05/bc8551ef-tds_prusament-asa_2024_en.pdf",
+     "note": "Elongation at yield point, horizontal"
+    },
+    "elongation_at_yield_xz_pct": {
+     "value": 3.8,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2024/05/bc8551ef-tds_prusament-asa_2024_en.pdf",
+     "note": "Elongation at yield point, vertical xz"
+    },
+    "interlayer_strength_z_mpa": {
+     "value": 11,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2024/05/bc8551ef-tds_prusament-asa_2024_en.pdf",
+     "note": "Published as 'Interlayer Adhesion' (Prusa Polymers method): the through-layer (Z) tensile strength"
+    },
+    "filament_tensile_yield_mpa": {
+     "value": 40,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2024/05/bc8551ef-tds_prusament-asa_2024_en.pdf",
+     "note": "Unprinted filament, ISO 527. Not a printed-part value"
+    }
+   }
+  },
+  {
+   "id": "pc_blend_prusament",
+   "name": "Prusament PC Blend",
+   "family": "PC",
+   "category": "plastic",
+   "processes": [
+    "fdm"
+   ],
+   "aliases": [
+    "pc",
+    "pc blend",
+    "prusament pc blend",
+    "polycarbonate filament"
+   ],
+   "form": "FDM filament",
+   "properties": {
+    "density_g_cm3": {
+     "value": 1.22,
+     "source": "https://prusament.com/wp-content/uploads/2022/10/PCBlend_Prusament_TDS_2022_16_EN.pdf",
+     "note": "ISO 1183"
+    },
+    "heat_deflection_c": {
+     "value": 113,
+     "source": "https://prusament.com/wp-content/uploads/2022/10/PCBlend_Prusament_TDS_2022_16_EN.pdf",
+     "note": "ISO 75 at 0.45 MPa"
+    },
+    "heat_deflection_1_8mpa_c": {
+     "value": 93,
+     "source": "https://prusament.com/wp-content/uploads/2022/10/PCBlend_Prusament_TDS_2022_16_EN.pdf",
+     "note": "ISO 75 at 1.80 MPa"
+    },
+    "tensile_yield_xy_mpa": {
+     "value": 63,
+     "source": "https://prusament.com/wp-content/uploads/2022/10/PCBlend_Prusament_TDS_2022_16_EN.pdf",
+     "note": "3D-printed specimens, 100% rectilinear infill, ISO 527-1. 'Horizontal' (flat) is stored as xy; 'Vertical xz' is an on-edge specimen still loaded along the layers, so it is stored as xz, not z."
+    },
+    "tensile_yield_xz_mpa": {
+     "value": 63,
+     "source": "https://prusament.com/wp-content/uploads/2022/10/PCBlend_Prusament_TDS_2022_16_EN.pdf",
+     "note": "3D-printed specimens, 100% rectilinear infill, ISO 527-1. 'Horizontal' (flat) is stored as xy; 'Vertical xz' is an on-edge specimen still loaded along the layers, so it is stored as xz, not z."
+    },
+    "youngs_modulus_xy_mpa": {
+     "value": 1900,
+     "source": "https://prusament.com/wp-content/uploads/2022/10/PCBlend_Prusament_TDS_2022_16_EN.pdf",
+     "note": "Tensile modulus, horizontal specimen. 3D-printed specimens, 100% rectilinear infill, ISO 527-1. 'Horizontal' (flat) is stored as xy; 'Vertical xz' is an on-edge specimen still loaded along the layers, so it is stored as xz, not z."
+    },
+    "youngs_modulus_xz_mpa": {
+     "value": 2000,
+     "source": "https://prusament.com/wp-content/uploads/2022/10/PCBlend_Prusament_TDS_2022_16_EN.pdf",
+     "note": "Tensile modulus, vertical xz specimen. 3D-printed specimens, 100% rectilinear infill, ISO 527-1. 'Horizontal' (flat) is stored as xy; 'Vertical xz' is an on-edge specimen still loaded along the layers, so it is stored as xz, not z."
+    },
+    "elongation_at_yield_xy_pct": {
+     "value": 5.8,
+     "source": "https://prusament.com/wp-content/uploads/2022/10/PCBlend_Prusament_TDS_2022_16_EN.pdf",
+     "note": "Elongation at yield point, horizontal"
+    },
+    "elongation_at_yield_xz_pct": {
+     "value": 5.8,
+     "source": "https://prusament.com/wp-content/uploads/2022/10/PCBlend_Prusament_TDS_2022_16_EN.pdf",
+     "note": "Elongation at yield point, vertical xz"
+    },
+    "interlayer_strength_z_mpa": {
+     "value": 21,
+     "source": "https://prusament.com/wp-content/uploads/2022/10/PCBlend_Prusament_TDS_2022_16_EN.pdf",
+     "note": "Published as 'Interlayer Adhesion' (Prusa Polymers method): the through-layer (Z) tensile strength"
+    },
+    "filament_tensile_yield_mpa": {
+     "value": 58,
+     "source": "https://prusament.com/wp-content/uploads/2022/10/PCBlend_Prusament_TDS_2022_16_EN.pdf",
+     "note": "Unprinted filament, ISO 527. Not a printed-part value"
+    }
+   }
+  },
+  {
+   "id": "pc_bambu",
+   "name": "Bambu PC",
+   "family": "PC",
+   "category": "plastic",
+   "processes": [
+    "fdm"
+   ],
+   "aliases": [
+    "bambu pc"
+   ],
+   "form": "FDM filament",
+   "properties": {
+    "density_g_cm3": {
+     "value": 1.2,
+     "source": "https://store.bblcdn.com/a52afdccddfd448583d119587122c8c5.pdf",
+     "note": "ISO 1183"
+    },
+    "glass_transition_c": {
+     "value": 145,
+     "source": "https://store.bblcdn.com/a52afdccddfd448583d119587122c8c5.pdf",
+     "note": "DSC, 10 C/min"
+    },
+    "heat_deflection_c": {
+     "value": 112,
+     "source": "https://store.bblcdn.com/a52afdccddfd448583d119587122c8c5.pdf",
+     "note": "ISO 75 at 0.45 MPa. The data sheet lists 112 C at 0.45 MPa and 117 C at 1.8 MPa, the reverse of the usual order; values kept as published"
+    },
+    "heat_deflection_1_8mpa_c": {
+     "value": 117,
+     "source": "https://store.bblcdn.com/a52afdccddfd448583d119587122c8c5.pdf",
+     "note": "ISO 75 at 1.8 MPa"
+    },
+    "tensile_strength_xy_mpa": {
+     "value": 62,
+     "source": "https://store.bblcdn.com/a52afdccddfd448583d119587122c8c5.pdf",
+     "note": "3D-printed specimens, 100% infill, ISO 527 / GB/T 1040, dried/annealed before test, dry state"
+    },
+    "tensile_strength_z_mpa": {
+     "value": 56,
+     "source": "https://store.bblcdn.com/a52afdccddfd448583d119587122c8c5.pdf",
+     "note": "3D-printed specimens, 100% infill, ISO 527 / GB/T 1040, dried/annealed before test, dry state. Through-layer"
+    },
+    "youngs_modulus_xy_mpa": {
+     "value": 2110,
+     "source": "https://store.bblcdn.com/a52afdccddfd448583d119587122c8c5.pdf",
+     "note": "3D-printed specimens, 100% infill, ISO 527 / GB/T 1040, dried/annealed before test, dry state"
+    },
+    "youngs_modulus_z_mpa": {
+     "value": 1450,
+     "source": "https://store.bblcdn.com/a52afdccddfd448583d119587122c8c5.pdf",
+     "note": "3D-printed specimens, 100% infill, ISO 527 / GB/T 1040, dried/annealed before test, dry state. Through-layer"
+    },
+    "elongation_xy_pct": {
+     "value": 3.8,
+     "source": "https://store.bblcdn.com/a52afdccddfd448583d119587122c8c5.pdf",
+     "note": "Breaking elongation, X-Y"
+    },
+    "elongation_z_pct": {
+     "value": 2.1,
+     "source": "https://store.bblcdn.com/a52afdccddfd448583d119587122c8c5.pdf",
+     "note": "Breaking elongation, Z"
+    }
+   }
+  },
+  {
+   "id": "pa11_prusament",
+   "name": "Prusament PA11",
+   "family": "PA11",
+   "category": "plastic",
+   "processes": [
+    "fdm"
+   ],
+   "aliases": [
+    "pa11",
+    "nylon",
+    "nylon filament",
+    "prusament pa11"
+   ],
+   "form": "FDM filament",
+   "properties": {
+    "density_g_cm3": {
+     "value": 1.02,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2026/08/2d2145fc-pa11_tds_eng.pdf",
+     "note": "ISO 1183"
+    },
+    "heat_deflection_c": {
+     "value": 58.7,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2026/08/2d2145fc-pa11_tds_eng.pdf",
+     "note": "ISO 75 at 0.45 MPa"
+    },
+    "heat_deflection_1_8mpa_c": {
+     "value": 49.9,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2026/08/2d2145fc-pa11_tds_eng.pdf",
+     "note": "ISO 75 at 1.80 MPa"
+    },
+    "tensile_yield_xy_mpa": {
+     "value": 38.3,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2026/08/2d2145fc-pa11_tds_eng.pdf",
+     "note": "3D-printed specimens, 100% rectilinear infill, ISO 527-1. 'Horizontal' (flat) is stored as xy; 'Vertical xz' is an on-edge specimen still loaded along the layers, so it is stored as xz, not z."
+    },
+    "tensile_yield_xz_mpa": {
+     "value": 39.5,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2026/08/2d2145fc-pa11_tds_eng.pdf",
+     "note": "3D-printed specimens, 100% rectilinear infill, ISO 527-1. 'Horizontal' (flat) is stored as xy; 'Vertical xz' is an on-edge specimen still loaded along the layers, so it is stored as xz, not z."
+    },
+    "youngs_modulus_xy_mpa": {
+     "value": 1200,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2026/08/2d2145fc-pa11_tds_eng.pdf",
+     "note": "Tensile modulus, horizontal specimen. 3D-printed specimens, 100% rectilinear infill, ISO 527-1. 'Horizontal' (flat) is stored as xy; 'Vertical xz' is an on-edge specimen still loaded along the layers, so it is stored as xz, not z."
+    },
+    "youngs_modulus_xz_mpa": {
+     "value": 1200,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2026/08/2d2145fc-pa11_tds_eng.pdf",
+     "note": "Tensile modulus, vertical xz specimen. 3D-printed specimens, 100% rectilinear infill, ISO 527-1. 'Horizontal' (flat) is stored as xy; 'Vertical xz' is an on-edge specimen still loaded along the layers, so it is stored as xz, not z."
+    },
+    "elongation_at_yield_xy_pct": {
+     "value": 5.6,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2026/08/2d2145fc-pa11_tds_eng.pdf",
+     "note": "Elongation at yield point, horizontal"
+    },
+    "elongation_at_yield_xz_pct": {
+     "value": 5.6,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2026/08/2d2145fc-pa11_tds_eng.pdf",
+     "note": "Elongation at yield point, vertical xz"
+    },
+    "interlayer_strength_z_mpa": {
+     "value": 32,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2026/08/2d2145fc-pa11_tds_eng.pdf",
+     "note": "Published as 'Interlayer Adhesion' (Prusa Polymers method): the through-layer (Z) tensile strength"
+    },
+    "filament_tensile_yield_mpa": {
+     "value": 44.8,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2026/08/2d2145fc-pa11_tds_eng.pdf",
+     "note": "Unprinted filament, ISO 527. Not a printed-part value"
+    }
+   }
+  },
+  {
+   "id": "pa11cf_prusament",
+   "name": "Prusament PA11 Carbon Fiber",
+   "family": "PA-CF",
+   "category": "plastic",
+   "processes": [
+    "fdm"
+   ],
+   "aliases": [
+    "pa11cf",
+    "pa11-cf",
+    "prusament pa11cf"
+   ],
+   "form": "FDM filament, carbon-fibre filled",
+   "properties": {
+    "density_g_cm3": {
+     "value": 1.11,
+     "source": "https://prusament.com/wp-content/uploads/2022/08/TDS_PA11CFB.pdf",
+     "note": "ISO 1183"
+    },
+    "heat_deflection_c": {
+     "value": 192,
+     "source": "https://prusament.com/wp-content/uploads/2022/08/TDS_PA11CFB.pdf",
+     "note": "ISO 75 at 0.45 MPa"
+    },
+    "heat_deflection_1_8mpa_c": {
+     "value": 152,
+     "source": "https://prusament.com/wp-content/uploads/2022/08/TDS_PA11CFB.pdf",
+     "note": "ISO 75 at 1.80 MPa"
+    },
+    "tensile_yield_xy_mpa": {
+     "value": 42,
+     "source": "https://prusament.com/wp-content/uploads/2022/08/TDS_PA11CFB.pdf",
+     "note": "3D-printed specimens, 100% rectilinear infill, ISO 527-1. 'Horizontal' (flat) is stored as xy; 'Vertical xz' is an on-edge specimen still loaded along the layers, so it is stored as xz, not z."
+    },
+    "tensile_yield_xz_mpa": {
+     "value": 49,
+     "source": "https://prusament.com/wp-content/uploads/2022/08/TDS_PA11CFB.pdf",
+     "note": "3D-printed specimens, 100% rectilinear infill, ISO 527-1. 'Horizontal' (flat) is stored as xy; 'Vertical xz' is an on-edge specimen still loaded along the layers, so it is stored as xz, not z."
+    },
+    "youngs_modulus_xy_mpa": {
+     "value": 2500,
+     "source": "https://prusament.com/wp-content/uploads/2022/08/TDS_PA11CFB.pdf",
+     "note": "Tensile modulus, horizontal specimen. 3D-printed specimens, 100% rectilinear infill, ISO 527-1. 'Horizontal' (flat) is stored as xy; 'Vertical xz' is an on-edge specimen still loaded along the layers, so it is stored as xz, not z."
+    },
+    "youngs_modulus_xz_mpa": {
+     "value": 3300,
+     "source": "https://prusament.com/wp-content/uploads/2022/08/TDS_PA11CFB.pdf",
+     "note": "Tensile modulus, vertical xz specimen. 3D-printed specimens, 100% rectilinear infill, ISO 527-1. 'Horizontal' (flat) is stored as xy; 'Vertical xz' is an on-edge specimen still loaded along the layers, so it is stored as xz, not z."
+    },
+    "elongation_at_yield_xy_pct": {
+     "value": 3.3,
+     "source": "https://prusament.com/wp-content/uploads/2022/08/TDS_PA11CFB.pdf",
+     "note": "Elongation at yield point, horizontal"
+    },
+    "elongation_at_yield_xz_pct": {
+     "value": 2.6,
+     "source": "https://prusament.com/wp-content/uploads/2022/08/TDS_PA11CFB.pdf",
+     "note": "Elongation at yield point, vertical xz"
+    },
+    "interlayer_strength_z_mpa": {
+     "value": 20,
+     "source": "https://prusament.com/wp-content/uploads/2022/08/TDS_PA11CFB.pdf",
+     "note": "Published as 'Interlayer Adhesion' (Prusa Polymers method): the through-layer (Z) tensile strength"
+    },
+    "filament_tensile_yield_mpa": {
+     "value": 61,
+     "source": "https://prusament.com/wp-content/uploads/2022/08/TDS_PA11CFB.pdf",
+     "note": "Unprinted filament, ISO 527. Not a printed-part value"
+    }
+   }
+  },
+  {
+   "id": "pahtcf_bambu",
+   "name": "Bambu PAHT-CF (PA12-CF)",
+   "family": "PA-CF",
+   "category": "plastic",
+   "processes": [
+    "fdm"
+   ],
+   "aliases": [
+    "pa-cf",
+    "pacf",
+    "pa cf",
+    "paht-cf",
+    "pahtcf",
+    "pa12-cf",
+    "pa12cf",
+    "nylon cf"
+   ],
+   "form": "FDM filament, carbon-fibre filled",
+   "properties": {
+    "density_g_cm3": {
+     "value": 1.06,
+     "source": "https://store.bblcdn.com/7166b20bc68f4c87b32c972b856eeb4b.pdf",
+     "note": "ISO 1183"
+    },
+    "glass_transition_c": {
+     "value": 70,
+     "source": "https://store.bblcdn.com/7166b20bc68f4c87b32c972b856eeb4b.pdf",
+     "note": "DSC, 10 C/min"
+    },
+    "heat_deflection_c": {
+     "value": 194,
+     "source": "https://store.bblcdn.com/7166b20bc68f4c87b32c972b856eeb4b.pdf",
+     "note": "ISO 75 at 0.45 MPa"
+    },
+    "heat_deflection_1_8mpa_c": {
+     "value": 170,
+     "source": "https://store.bblcdn.com/7166b20bc68f4c87b32c972b856eeb4b.pdf",
+     "note": "ISO 75 at 1.8 MPa"
+    },
+    "tensile_strength_xy_mpa": {
+     "value": 92,
+     "source": "https://store.bblcdn.com/7166b20bc68f4c87b32c972b856eeb4b.pdf",
+     "note": "3D-printed specimens, 100% infill, ISO 527 / GB/T 1040, dried/annealed before test, dry state"
+    },
+    "tensile_strength_z_mpa": {
+     "value": 47,
+     "source": "https://store.bblcdn.com/7166b20bc68f4c87b32c972b856eeb4b.pdf",
+     "note": "3D-printed specimens, 100% infill, ISO 527 / GB/T 1040, dried/annealed before test, dry state. Through-layer"
+    },
+    "youngs_modulus_xy_mpa": {
+     "value": 3860,
+     "source": "https://store.bblcdn.com/7166b20bc68f4c87b32c972b856eeb4b.pdf",
+     "note": "3D-printed specimens, 100% infill, ISO 527 / GB/T 1040, dried/annealed before test, dry state"
+    },
+    "youngs_modulus_z_mpa": {
+     "value": 2180,
+     "source": "https://store.bblcdn.com/7166b20bc68f4c87b32c972b856eeb4b.pdf",
+     "note": "3D-printed specimens, 100% infill, ISO 527 / GB/T 1040, dried/annealed before test, dry state. Through-layer"
+    },
+    "elongation_xy_pct": {
+     "value": 8.4,
+     "source": "https://store.bblcdn.com/7166b20bc68f4c87b32c972b856eeb4b.pdf",
+     "note": "Breaking elongation, X-Y"
+    },
+    "elongation_z_pct": {
+     "value": 4.1,
+     "source": "https://store.bblcdn.com/7166b20bc68f4c87b32c972b856eeb4b.pdf",
+     "note": "Breaking elongation, Z"
+    }
+   }
+  },
+  {
+   "id": "tpu95a_prusament",
+   "name": "Prusament TPU 95A",
+   "family": "TPU",
+   "category": "plastic",
+   "processes": [
+    "fdm"
+   ],
+   "aliases": [
+    "tpu",
+    "tpu 95a",
+    "tpu95a",
+    "tpu95",
+    "prusament tpu"
+   ],
+   "form": "FDM filament, flexible",
+   "properties": {
+    "density_g_cm3": {
+     "value": 1.25,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2025/05/80316f6d-tds-prusament_tpu_95a_en-1.pdf",
+     "note": "ISO 1183"
+    },
+    "heat_deflection_1_8mpa_c": {
+     "value": 78.6,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2025/05/80316f6d-tds-prusament_tpu_95a_en-1.pdf",
+     "note": "ISO 75 at 1.80 MPa; no 0.45 MPa value published"
+    },
+    "tensile_strength_xy_mpa": {
+     "value": 41.4,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2025/05/80316f6d-tds-prusament_tpu_95a_en-1.pdf",
+     "note": "3D-printed horizontal specimen, ISO 37"
+    },
+    "elongation_xy_pct": {
+     "value": 563.3,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2025/05/80316f6d-tds-prusament_tpu_95a_en-1.pdf",
+     "note": "Maximum elongation, printed horizontal specimen, ISO 37"
+    },
+    "modulus_100pct_mpa": {
+     "value": 8.9,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2025/05/80316f6d-tds-prusament_tpu_95a_en-1.pdf",
+     "note": "Stress at 100% elongation (ISO 37). Not a Young's modulus"
+    },
+    "interlayer_strength_z_mpa": {
+     "value": 9.5,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2025/05/80316f6d-tds-prusament_tpu_95a_en-1.pdf",
+     "note": "Published as 'Interlayer Adhesion', ISO 527"
+    },
+    "hardness_shore_a": {
+     "value": 92,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2025/05/80316f6d-tds-prusament_tpu_95a_en-1.pdf",
+     "note": "Measured Shore A (product is sold as 95A)"
+    },
+    "filament_tensile_strength_mpa": {
+     "value": 64,
+     "source": "https://storage.googleapis.com/prusa3d-content-prod-14e8-wordpress-prusament-prod/2025/05/80316f6d-tds-prusament_tpu_95a_en-1.pdf",
+     "note": "Unprinted filament, ISO 527"
+    }
+   }
+  },
+  {
+   "id": "resin_standard_formlabs",
+   "name": "Formlabs Clear/Grey Resin V4 (general purpose)",
+   "family": "photopolymer resin",
+   "category": "plastic",
+   "processes": [
+    "sla"
+   ],
+   "aliases": [
+    "resin",
+    "standard resin",
+    "clear resin",
+    "grey resin",
+    "formlabs clear",
+    "sla resin"
+   ],
+   "form": "SLA resin, post-cured",
+   "properties": {
+    "density_g_cm3": {
+     "value": 1.17,
+     "source": "https://formlabs.com/support/Density-of-selected-Formlabs-SLA-resins/",
+     "note": "Clear Resin V4, post-cured. Grey V4 is listed at 1.14"
+    },
+    "tensile_strength_mpa": {
+     "value": 65,
+     "source": "https://formlabs-media.formlabs.com/datasheets/1801089-TDS-ENUS-0P.pdf",
+     "note": "Ultimate tensile strength, post-cured, ASTM D638-14. Green (uncured) value is 38 MPa"
+    },
+    "youngs_modulus_mpa": {
+     "value": 2800,
+     "source": "https://formlabs-media.formlabs.com/datasheets/1801089-TDS-ENUS-0P.pdf",
+     "note": "Tensile modulus, post-cured, ASTM D638-14. Green value is 1600 MPa"
+    },
+    "elongation_pct": {
+     "value": 6,
+     "source": "https://formlabs-media.formlabs.com/datasheets/1801089-TDS-ENUS-0P.pdf",
+     "note": "Elongation at break, post-cured. Green value is 12%"
+    },
+    "heat_deflection_c": {
+     "value": 73,
+     "source": "https://formlabs-media.formlabs.com/datasheets/1801089-TDS-ENUS-0P.pdf",
+     "note": "ASTM D648 at 0.45 MPa, post-cured"
+    },
+    "heat_deflection_1_8mpa_c": {
+     "value": 58,
+     "source": "https://formlabs-media.formlabs.com/datasheets/1801089-TDS-ENUS-0P.pdf",
+     "note": "ASTM D648 at 1.8 MPa, post-cured"
+    }
+   }
+  },
+  {
+   "id": "resin_rigid_10k_formlabs",
+   "name": "Formlabs Rigid 10K Resin",
+   "family": "photopolymer resin, glass filled",
+   "category": "plastic",
+   "processes": [
+    "sla"
+   ],
+   "aliases": [
+    "rigid 10k",
+    "rigid10k",
+    "rigid resin"
+   ],
+   "form": "SLA resin, post-cured",
+   "properties": {
+    "density_g_cm3": {
+     "value": 1.7,
+     "source": "https://formlabs.com/support/Density-of-selected-Formlabs-SLA-resins/",
+     "note": "Rigid 10K Resin, post-cured"
+    },
+    "tensile_strength_mpa": {
+     "value": 65,
+     "source": "https://formlabs-media.formlabs.com/datasheets/2001479-TDS-ENUS-0.pdf",
+     "note": "Ultimate tensile strength, UV cure (Form Cure 60 min at 70 C), ASTM D638-14. 53 MPa with added thermal cure"
+    },
+    "youngs_modulus_mpa": {
+     "value": 10000,
+     "source": "https://formlabs-media.formlabs.com/datasheets/2001479-TDS-ENUS-0.pdf",
+     "note": "Tensile modulus, UV cure, ASTM D638-14"
+    },
+    "elongation_pct": {
+     "value": 1,
+     "source": "https://formlabs-media.formlabs.com/datasheets/2001479-TDS-ENUS-0.pdf",
+     "note": "Elongation at break, UV cure"
+    },
+    "heat_deflection_c": {
+     "value": 163,
+     "source": "https://formlabs-media.formlabs.com/datasheets/2001479-TDS-ENUS-0.pdf",
+     "note": "ASTM D648 at 0.45 MPa, UV cure. 218 C with added thermal cure"
+    },
+    "heat_deflection_1_8mpa_c": {
+     "value": 82,
+     "source": "https://formlabs-media.formlabs.com/datasheets/2001479-TDS-ENUS-0.pdf",
+     "note": "ASTM D648 at 1.8 MPa, UV cure. 110 C with added thermal cure"
+    }
+   }
+  },
+  {
+   "id": "pa12_sls_formlabs",
+   "name": "Formlabs Nylon 12 Powder (SLS)",
+   "family": "PA12",
+   "category": "plastic",
+   "processes": [
+    "sls"
+   ],
+   "aliases": [
+    "pa12",
+    "pa 12",
+    "nylon 12",
+    "nylon12",
+    "sls nylon",
+    "pa12 sls"
+   ],
+   "form": "SLS powder, printed",
+   "properties": {
+    "density_g_cm3": {
+     "value": 1.01,
+     "source": "https://en.wikipedia.org/wiki/Nylon_12",
+     "note": "Density of solid nylon 12 polymer. The Formlabs data sheet gives no printed-part density; sintered parts can be slightly less dense"
+    },
+    "tensile_strength_mpa": {
+     "value": 50,
+     "source": "https://formlabs-media.formlabs.com/datasheets/2001447-TDS-ENUS-0.pdf",
+     "note": "Ultimate tensile strength, ASTM D638 Type 1"
+    },
+    "youngs_modulus_mpa": {
+     "value": 1850,
+     "source": "https://formlabs-media.formlabs.com/datasheets/2001447-TDS-ENUS-0.pdf",
+     "note": "Tensile modulus, ASTM D638 Type 1"
+    },
+    "elongation_xy_pct": {
+     "value": 11,
+     "source": "https://formlabs-media.formlabs.com/datasheets/2001447-TDS-ENUS-0.pdf",
+     "note": "Elongation at break, X/Y"
+    },
+    "elongation_z_pct": {
+     "value": 6,
+     "source": "https://formlabs-media.formlabs.com/datasheets/2001447-TDS-ENUS-0.pdf",
+     "note": "Elongation at break, Z"
+    },
+    "heat_deflection_c": {
+     "value": 171,
+     "source": "https://formlabs-media.formlabs.com/datasheets/2001447-TDS-ENUS-0.pdf",
+     "note": "ASTM D648 at 0.45 MPa"
+    },
+    "heat_deflection_1_8mpa_c": {
+     "value": 87,
+     "source": "https://formlabs-media.formlabs.com/datasheets/2001447-TDS-ENUS-0.pdf",
+     "note": "ASTM D648 at 1.8 MPa"
+    }
+   }
+  },
+  {
+   "id": "al_6061_t6",
+   "name": "Aluminium 6061-T6",
+   "family": "aluminium alloy",
+   "category": "metal",
+   "processes": [
+    "cnc_milling",
+    "sheet_metal"
+   ],
+   "aliases": [
+    "6061",
+    "6061-t6",
+    "6061 t6",
+    "al6061",
+    "aluminium 6061",
+    "aluminum 6061",
+    "aluminium",
+    "aluminum"
+   ],
+   "form": "wrought",
+   "properties": {
+    "density_g_cm3": {
+     "value": 2.7,
+     "source": "https://en.wikipedia.org/wiki/6061_aluminium_alloy"
+    },
+    "youngs_modulus_mpa": {
+     "value": 68000,
+     "source": "https://en.wikipedia.org/wiki/6061_aluminium_alloy",
+     "note": "68 GPa"
+    },
+    "tensile_yield_mpa": {
+     "value": 270,
+     "source": "https://en.wikipedia.org/wiki/6061_aluminium_alloy",
+     "note": "Typical for T6. Specified minimum is 35 ksi (240 MPa)"
+    },
+    "tensile_strength_mpa": {
+     "value": 310,
+     "source": "https://en.wikipedia.org/wiki/6061_aluminium_alloy",
+     "note": "Typical ultimate for T6. Specified minimum is 42 ksi (290 MPa)"
+    },
+    "elongation_pct": {
+     "value": 8,
+     "source": "https://en.wikipedia.org/wiki/6061_aluminium_alloy",
+     "note": "8% or more up to 6.35 mm thick; 10% in thicker sections"
+    }
+   }
+  },
+  {
+   "id": "al_7075_t6",
+   "name": "Aluminium 7075-T6",
+   "family": "aluminium alloy",
+   "category": "metal",
+   "processes": [
+    "cnc_milling"
+   ],
+   "aliases": [
+    "7075",
+    "7075-t6",
+    "7075 t6",
+    "al7075",
+    "aluminium 7075",
+    "aluminum 7075"
+   ],
+   "form": "wrought",
+   "properties": {
+    "density_g_cm3": {
+     "value": 2.81,
+     "source": "https://en.wikipedia.org/wiki/7075_aluminium_alloy"
+    },
+    "youngs_modulus_mpa": {
+     "value": 71700,
+     "source": "https://en.wikipedia.org/wiki/7075_aluminium_alloy",
+     "note": "71.7 GPa"
+    },
+    "tensile_yield_mpa": {
+     "value": 434,
+     "source": "https://en.wikipedia.org/wiki/7075_aluminium_alloy",
+     "note": "Lower end of the published T6 range 63,000-69,000 psi (434-476 MPa)"
+    },
+    "tensile_strength_mpa": {
+     "value": 510,
+     "source": "https://en.wikipedia.org/wiki/7075_aluminium_alloy",
+     "note": "Lower end of the published T6 range 74,000-78,000 psi (510-538 MPa)"
+    },
+    "elongation_pct": {
+     "value": 5,
+     "source": "https://en.wikipedia.org/wiki/7075_aluminium_alloy",
+     "note": "Lower end of the published 5-11% failure elongation"
+    }
+   }
+  },
+  {
+   "id": "ss_304",
+   "name": "Stainless steel 304",
+   "family": "austenitic stainless steel",
+   "category": "metal",
+   "processes": [
+    "cnc_milling",
+    "sheet_metal"
+   ],
+   "aliases": [
+    "304",
+    "aisi 304",
+    "sae 304",
+    "ss304",
+    "stainless 304",
+    "stainless steel",
+    "stainless",
+    "1.4301"
+   ],
+   "form": "wrought, annealed",
+   "properties": {
+    "density_g_cm3": {
+     "value": 7.92,
+     "source": "https://en.wikipedia.org/wiki/SAE_304_stainless_steel",
+     "note": "Published as 0.286 lb/in3, converted (x 27.68)"
+    },
+    "youngs_modulus_mpa": {
+     "value": 183000,
+     "source": "https://en.wikipedia.org/wiki/SAE_304_stainless_steel",
+     "note": "Lower end of the published 26.6-29.0 x10^6 psi (183-200 GPa)"
+    },
+    "tensile_yield_mpa": {
+     "value": 207,
+     "source": "https://en.wikipedia.org/wiki/SAE_304_stainless_steel",
+     "note": "Annealed (weakest) condition, 30,000 psi. Cold work raises yield up to 153,000 psi (1055 MPa) full hard"
+    }
+   }
+  },
+  {
+   "id": "ss_316",
+   "name": "Stainless steel 316",
+   "family": "austenitic stainless steel",
+   "category": "metal",
+   "processes": [
+    "cnc_milling",
+    "sheet_metal"
+   ],
+   "aliases": [
+    "316",
+    "aisi 316",
+    "sae 316",
+    "ss316",
+    "stainless 316",
+    "316l",
+    "1.4401"
+   ],
+   "form": "wrought",
+   "properties": {
+    "density_g_cm3": {
+     "value": 7.97,
+     "source": "https://www.azom.com/properties.aspx?ArticleID=863",
+     "note": "Midpoint of the published range 7.87-8.07 Mg/m3"
+    },
+    "youngs_modulus_mpa": {
+     "value": 190000,
+     "source": "https://www.azom.com/properties.aspx?ArticleID=863",
+     "note": "Lower end of the published 190-205 GPa"
+    },
+    "tensile_yield_mpa": {
+     "value": 170,
+     "source": "https://www.azom.com/properties.aspx?ArticleID=863",
+     "note": "Published as 'Elastic Limit', range 170-310 MPa; lower end stored"
+    },
+    "tensile_strength_mpa": {
+     "value": 480,
+     "source": "https://www.azom.com/properties.aspx?ArticleID=863",
+     "note": "Lower end of the published 480-620 MPa"
+    }
+   }
+  },
+  {
+   "id": "mild_steel_a36",
+   "name": "Mild steel (ASTM A36)",
+   "family": "carbon steel",
+   "category": "metal",
+   "processes": [
+    "cnc_milling",
+    "sheet_metal"
+   ],
+   "aliases": [
+    "mild steel",
+    "a36",
+    "steel",
+    "carbon steel",
+    "low carbon steel"
+   ],
+   "form": "hot rolled",
+   "properties": {
+    "density_g_cm3": {
+     "value": 7.8,
+     "source": "https://en.wikipedia.org/wiki/A36_steel",
+     "note": "7,800 kg/m3"
+    },
+    "youngs_modulus_mpa": {
+     "value": 200000,
+     "source": "https://en.wikipedia.org/wiki/A36_steel",
+     "note": "200 GPa"
+    },
+    "tensile_yield_mpa": {
+     "value": 250,
+     "source": "https://en.wikipedia.org/wiki/A36_steel",
+     "note": "Minimum yield 36 ksi for plate, bar and shapes under 8 in thick"
+    },
+    "tensile_strength_mpa": {
+     "value": 400,
+     "source": "https://en.wikipedia.org/wiki/A36_steel",
+     "note": "Lower end of the specified 58-80 ksi (400-550 MPa)"
+    }
+   }
+  },
+  {
+   "id": "brass",
+   "name": "Brass (general)",
+   "family": "copper-zinc alloy",
+   "category": "metal",
+   "processes": [
+    "cnc_milling",
+    "sheet_metal"
+   ],
+   "aliases": [
+    "brass alloy"
+   ],
+   "form": "wrought",
+   "properties": {
+    "density_g_cm3": {
+     "value": 8.57,
+     "source": "https://en.wikipedia.org/wiki/Brass",
+     "note": "Midpoint of the published range 8.4-8.73 g/cm3; varies with composition"
+    }
+   }
+  },
+  {
+   "id": "pom",
+   "name": "POM (acetal)",
+   "family": "POM",
+   "category": "plastic",
+   "processes": [
+    "cnc_milling",
+    "injection_moulding"
+   ],
+   "aliases": [
+    "acetal",
+    "delrin",
+    "polyoxymethylene",
+    "pom-c",
+    "pom-h"
+   ],
+   "form": "bulk polymer",
+   "properties": {
+    "density_g_cm3": {
+     "value": 1.41,
+     "source": "https://en.wikipedia.org/wiki/Polyoxymethylene",
+     "note": "Published range 1.41-1.42 g/cm3"
+    },
+    "tensile_yield_mpa": {
+     "value": 62,
+     "source": "https://en.wikipedia.org/wiki/Polyoxymethylene",
+     "note": "Tensile yield stress, typical"
+    },
+    "tensile_strength_mpa": {
+     "value": 67,
+     "source": "https://en.wikipedia.org/wiki/Polyoxymethylene",
+     "note": "Tensile breaking stress, typical"
+    },
+    "youngs_modulus_mpa": {
+     "value": 2700,
+     "source": "https://en.wikipedia.org/wiki/Polyoxymethylene",
+     "note": "Tensile modulus, typical"
+    },
+    "elongation_pct": {
+     "value": 35,
+     "source": "https://en.wikipedia.org/wiki/Polyoxymethylene",
+     "note": "Elongation at break; 2.5% at yield"
+    }
+   }
+  },
+  {
+   "id": "peek",
+   "name": "PEEK",
+   "family": "PEEK",
+   "category": "plastic",
+   "processes": [
+    "cnc_milling",
+    "injection_moulding"
+   ],
+   "aliases": [
+    "polyether ether ketone",
+    "polyetheretherketone"
+   ],
+   "form": "bulk polymer",
+   "properties": {
+    "density_g_cm3": {
+     "value": 1.32,
+     "source": "https://en.wikipedia.org/wiki/Polyether_ether_ketone",
+     "note": "1,320 kg/m3"
+    },
+    "tensile_strength_mpa": {
+     "value": 90,
+     "source": "https://en.wikipedia.org/wiki/Polyether_ether_ketone",
+     "note": "Lower end of the published 90-100 MPa"
+    },
+    "youngs_modulus_mpa": {
+     "value": 3600,
+     "source": "https://en.wikipedia.org/wiki/Polyether_ether_ketone",
+     "note": "3.6 GPa"
+    },
+    "elongation_pct": {
+     "value": 50,
+     "source": "https://en.wikipedia.org/wiki/Polyether_ether_ketone",
+     "note": "Elongation at break"
+    },
+    "glass_transition_c": {
+     "value": 143,
+     "source": "https://en.wikipedia.org/wiki/Polyether_ether_ketone"
+    }
+   }
+  },
+  {
+   "id": "hdpe",
+   "name": "HDPE",
+   "family": "polyethylene",
+   "category": "plastic",
+   "processes": [
+    "cnc_milling",
+    "injection_moulding"
+   ],
+   "aliases": [
+    "high density polyethylene",
+    "pe-hd",
+    "pehd",
+    "polyethylene"
+   ],
+   "form": "bulk polymer",
+   "properties": {
+    "density_g_cm3": {
+     "value": 0.95,
+     "source": "https://en.wikipedia.org/wiki/High-density_polyethylene",
+     "note": "Midpoint of the published range 930-970 kg/m3"
+    },
+    "tensile_strength_mpa": {
+     "value": 38,
+     "source": "https://en.wikipedia.org/wiki/High-density_polyethylene",
+     "note": "Quoted in the article text in comparison with LDPE (21 MPa); grade-dependent"
+    }
+   }
+  },
+  {
+   "id": "acrylic",
+   "name": "Acrylic (PMMA)",
+   "family": "PMMA",
+   "category": "plastic",
+   "processes": [
+    "cnc_milling",
+    "injection_moulding"
+   ],
+   "aliases": [
+    "pmma",
+    "perspex",
+    "plexiglas",
+    "plexiglass",
+    "poly(methyl methacrylate)"
+   ],
+   "form": "bulk polymer",
+   "properties": {
+    "density_g_cm3": {
+     "value": 1.18,
+     "source": "https://en.wikipedia.org/wiki/Poly(methyl_methacrylate)",
+     "note": "Text gives a range of 1.17-1.20 g/cm3"
+    },
+    "glass_transition_c": {
+     "value": 105,
+     "source": "https://en.wikipedia.org/wiki/Poly(methyl_methacrylate)",
+     "note": "Atactic PMMA; commercial grades range 85-165 C"
+    }
+   }
+  },
+  {
+   "id": "pc_sheet",
+   "name": "Polycarbonate (sheet/moulded)",
+   "family": "PC",
+   "category": "plastic",
+   "processes": [
+    "cnc_milling",
+    "injection_moulding"
+   ],
+   "aliases": [
+    "polycarbonate",
+    "lexan",
+    "makrolon",
+    "pc sheet"
+   ],
+   "form": "bulk polymer",
+   "properties": {
+    "density_g_cm3": {
+     "value": 1.2,
+     "source": "https://en.wikipedia.org/wiki/Polycarbonate",
+     "note": "Lower end of the published 1.20-1.22 g/cm3"
+    },
+    "tensile_strength_mpa": {
+     "value": 55,
+     "source": "https://en.wikipedia.org/wiki/Polycarbonate",
+     "note": "Lower end of the published 55-75 MPa"
+    },
+    "youngs_modulus_mpa": {
+     "value": 2000,
+     "source": "https://en.wikipedia.org/wiki/Polycarbonate",
+     "note": "Lower end of the published 2.0-2.4 GPa"
+    },
+    "elongation_pct": {
+     "value": 80,
+     "source": "https://en.wikipedia.org/wiki/Polycarbonate",
+     "note": "Lower end of the published 80-150%"
+    },
+    "glass_transition_c": {
+     "value": 147,
+     "source": "https://en.wikipedia.org/wiki/Polycarbonate"
+    },
+    "heat_deflection_c": {
+     "value": 140,
+     "source": "https://en.wikipedia.org/wiki/Polycarbonate",
+     "note": "At 0.45 MPa"
+    },
+    "heat_deflection_1_8mpa_c": {
+     "value": 128,
+     "source": "https://en.wikipedia.org/wiki/Polycarbonate",
+     "note": "At 1.8 MPa; lower end of the published 128-138 C"
+    }
+   }
+  }
+ ]
+}

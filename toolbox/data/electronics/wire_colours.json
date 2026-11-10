@@ -1,0 +1,42 @@
+{
+ "title": "Wire colour abbreviations and cable colour sequences",
+ "notes": [
+  "Two-letter codes follow IEC 60757. Multi-colour wires concatenate codes (GNYE = green/yellow).",
+  "render_hex values are screen colours for diagrams only; they are not part of any standard."
+ ],
+ "codes": {
+  "source": "IEC 60757 (letter codes for colours); cross-checked 2026-11-10 against https://github.com/wireviz/WireViz/blob/master/src/wireviz/wv_colors.py",
+  "names": {"BK": "black", "BN": "brown", "RD": "red", "OG": "orange", "YE": "yellow", "GN": "green",
+            "BU": "blue", "VT": "violet", "GY": "grey", "WH": "white", "PK": "pink", "TQ": "turquoise",
+            "SL": "slate"},
+  "render_hex": {"BK": "#1b1b1f", "BN": "#8a5a44", "RD": "#d8322f", "OG": "#ee8a1d", "YE": "#f2cf1d",
+                 "GN": "#2fa84f", "BU": "#2f6fde", "VT": "#8a4fd8", "GY": "#9a9aa0", "WH": "#ffffff",
+                 "PK": "#ee7fb8", "TQ": "#27b8b8", "SL": "#708090"}
+ },
+ "sequences": {
+  "DIN": {
+   "source": "DIN 47100 (colour code for telecommunication cable cores); sequence cross-checked 2026-11-10 against https://github.com/wireviz/WireViz/blob/master/src/wireviz/wv_colors.py",
+   "colours": ["WH", "BN", "GN", "YE", "GY", "PK", "BU", "RD", "BK", "VT", "GYPK", "RDBU",
+               "WHGN", "BNGN", "WHYE", "YEBN", "WHGY", "GYBN", "WHPK", "PKBN", "WHBU", "BNBU",
+               "WHRD", "BNRD", "WHBK", "BNBK", "GYGN", "YEGY", "PKGN", "YEPK", "GNBU", "YEBU",
+               "GNRD", "YERD", "GNBK", "YEBK", "GYBU", "PKBU", "GYRD", "PKRD", "GYBK", "PKBK",
+               "BUBK", "RDBK"]
+  },
+  "IEC": {
+   "source": "IEC 60757 colour order as used for the resistor colour code (IEC 60062); cross-checked 2026-11-10 against https://github.com/wireviz/WireViz/blob/master/src/wireviz/wv_colors.py",
+   "colours": ["BN", "RD", "OG", "YE", "GN", "BU", "VT", "GY", "WH", "BK"]
+  },
+  "BW": {
+   "source": "https://github.com/wireviz/WireViz/blob/master/src/wireviz/wv_colors.py",
+   "colours": ["BK", "WH"]
+  },
+  "T568A": {
+   "source": "ANSI/TIA-568 pin/pair assignment T568A; cross-checked 2026-11-10 against https://github.com/wireviz/WireViz/blob/master/src/wireviz/wv_colors.py",
+   "colours": ["WHGN", "GN", "WHOG", "BU", "WHBU", "OG", "WHBN", "BN"]
+  },
+  "T568B": {
+   "source": "ANSI/TIA-568 pin/pair assignment T568B; cross-checked 2026-11-10 against https://github.com/wireviz/WireViz/blob/master/src/wireviz/wv_colors.py",
+   "colours": ["WHOG", "OG", "WHGN", "BU", "WHBU", "GN", "WHBN", "BN"]
+  }
+ }
+}

@@ -6,15 +6,27 @@
   },
   "metadata": {
     "description": "Live AI-powered 3D design environment for Claude Code. Build, modify, and export 3D objects via chat with a real-time viewer at http://localhost:3030.",
-    "version": "0.2.0"
+    "version": "0.3.0"
   },
   "plugins": [
     {
       "name": "3d-agent",
       "source": "./",
-      "description": "Live 3D design environment. Eight subagents (Engineer/Designer, 3D Specialist, Manager, plus expertise in 3D printing, manufacturing, materials, CAD), eight slash commands, and a Three.js viewer with WebSocket live updates. Single-file .3dap project bundles for sharing.",
+      "description": "Parametric CAD, design checks, stress analysis, materials and standards data, drawings, BOM, electronics and printing tools, with a live viewer.",
       "category": "design",
-      "tags": ["3d", "cad", "design", "3d-printing", "manufacturing", "engineering", "viewer", "three.js", "drone", "rocket", "product-design"]
+      "tags": [
+        "3d",
+        "cad",
+        "design",
+        "3d-printing",
+        "manufacturing",
+        "engineering",
+        "viewer",
+        "three.js",
+        "drone",
+        "rocket",
+        "product-design"
+      ]
     }
   ]
 }

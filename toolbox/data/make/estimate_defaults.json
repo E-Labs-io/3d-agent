@@ -1,0 +1,23 @@
+{
+  "about": "Default assumptions for the print_estimate 'estimate' route. Every value is a rule of thumb, not a measurement: override through the profile argument, or use a slicer route for real numbers.",
+  "source": "3D Agent toolbox rule of thumb (tb/make.py); no external standard",
+  "basis": "estimate",
+  "profile": {
+    "layer_height_mm": {"value": 0.2, "basis": "estimate", "source": "common 0.4 mm nozzle default layer height"},
+    "line_width_mm": {"value": 0.45, "basis": "estimate", "source": "common extrusion width for a 0.4 mm nozzle"},
+    "perimeters": {"value": 2, "basis": "estimate", "source": "common slicer default wall count"},
+    "infill_fraction": {"value": 0.15, "basis": "estimate", "source": "common slicer default sparse infill"},
+    "support": {"value": "auto", "basis": "estimate", "source": "support counted only where overhanging faces exist"},
+    "support_density": {"value": 0.15, "basis": "estimate", "source": "typical sparse support fill fraction"},
+    "overhang_angle_deg": {"value": 45, "basis": "estimate", "source": "common FDM rule: overhangs steeper than 45 degrees from vertical need support"},
+    "flow_mm3_s": {"value": 6.0, "basis": "estimate", "source": "average (not peak) volumetric rate: 0.45 mm x 0.2 mm bead at roughly 65 mm/s"},
+    "time_overhead_factor": {"value": 1.25, "basis": "estimate", "source": "allowance for travel, retraction, acceleration and heat-up"},
+    "filament_diameter_mm": {"value": 1.75, "basis": "estimate", "source": "most common FDM filament diameter; 2.85 mm also exists"}
+  },
+  "likely_error": {
+    "filament_pct": 25,
+    "time_pct": 50,
+    "basis": "estimate",
+    "source": "toolbox judgement; not validated against sliced G-code on this machine"
+  }
+}

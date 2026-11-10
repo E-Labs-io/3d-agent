@@ -1,0 +1,750 @@
+{
+ "about": "Unified inch screw threads (UNC/UNF/UNEF), #0 to 1 in. Major diameter, threads per inch and preferred tap drill are from the Wikipedia Unified Thread Standard table (which cites Machinery's Handbook 29, p. 1816). mm values are the inch values x 25.4. Hex nut sizes 1/4 in and up are ASME B18.2.2-2010 as tabulated by amesweb.info.",
+ "fetched": "2026-11-10",
+ "source": "https://en.wikipedia.org/wiki/Unified_Thread_Standard",
+ "threads": [
+  {
+   "size": "#0",
+   "major_diameter_in": 0.06,
+   "major_diameter_mm": 1.524,
+   "series": {
+    "UNF": {
+     "designation": "#0-80 UNF",
+     "tpi": 80,
+     "pitch_mm": 0.3175,
+     "tap_drill_in": 0.047,
+     "tap_drill_mm": 1.1938
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Unified_Thread_Standard",
+   "hex_nut": {
+    "across_flats_in": 0.1563,
+    "across_flats_mm": 3.97,
+    "source": "https://en.wikipedia.org/wiki/Nut_(hardware)",
+    "confidence": "low",
+    "note": "Nominal width across flats from the Wikipedia 'SAE hex nuts' table, which cites no source. Thickness not sourced."
+   }
+  },
+  {
+   "size": "#1",
+   "major_diameter_in": 0.073,
+   "major_diameter_mm": 1.8542,
+   "series": {
+    "UNC": {
+     "designation": "#1-64 UNC",
+     "tpi": 64,
+     "pitch_mm": 0.3969,
+     "tap_drill_in": 0.06,
+     "tap_drill_mm": 1.524
+    },
+    "UNF": {
+     "designation": "#1-72 UNF",
+     "tpi": 72,
+     "pitch_mm": 0.3528,
+     "tap_drill_in": 0.06,
+     "tap_drill_mm": 1.524
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Unified_Thread_Standard",
+   "hex_nut": {
+    "across_flats_in": 0.1563,
+    "across_flats_mm": 3.97,
+    "source": "https://en.wikipedia.org/wiki/Nut_(hardware)",
+    "confidence": "low",
+    "note": "Nominal width across flats from the Wikipedia 'SAE hex nuts' table, which cites no source. Thickness not sourced."
+   }
+  },
+  {
+   "size": "#2",
+   "major_diameter_in": 0.086,
+   "major_diameter_mm": 2.1844,
+   "series": {
+    "UNC": {
+     "designation": "#2-56 UNC",
+     "tpi": 56,
+     "pitch_mm": 0.4536,
+     "tap_drill_in": 0.07,
+     "tap_drill_mm": 1.778
+    },
+    "UNF": {
+     "designation": "#2-64 UNF",
+     "tpi": 64,
+     "pitch_mm": 0.3969,
+     "tap_drill_in": 0.07,
+     "tap_drill_mm": 1.778
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Unified_Thread_Standard",
+   "hex_nut": {
+    "across_flats_in": 0.1875,
+    "across_flats_mm": 4.7625,
+    "source": "https://en.wikipedia.org/wiki/Nut_(hardware)",
+    "confidence": "low",
+    "note": "Nominal width across flats from the Wikipedia 'SAE hex nuts' table, which cites no source. Thickness not sourced."
+   }
+  },
+  {
+   "size": "#3",
+   "major_diameter_in": 0.099,
+   "major_diameter_mm": 2.5146,
+   "series": {
+    "UNC": {
+     "designation": "#3-48 UNC",
+     "tpi": 48,
+     "pitch_mm": 0.5292,
+     "tap_drill_in": 0.079,
+     "tap_drill_mm": 2.0066
+    },
+    "UNF": {
+     "designation": "#3-56 UNF",
+     "tpi": 56,
+     "pitch_mm": 0.4536,
+     "tap_drill_in": 0.082,
+     "tap_drill_mm": 2.0828
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Unified_Thread_Standard",
+   "hex_nut": {
+    "across_flats_in": 0.1875,
+    "across_flats_mm": 4.7625,
+    "source": "https://en.wikipedia.org/wiki/Nut_(hardware)",
+    "confidence": "low",
+    "note": "Nominal width across flats from the Wikipedia 'SAE hex nuts' table, which cites no source. Thickness not sourced."
+   }
+  },
+  {
+   "size": "#4",
+   "major_diameter_in": 0.112,
+   "major_diameter_mm": 2.8448,
+   "series": {
+    "UNC": {
+     "designation": "#4-40 UNC",
+     "tpi": 40,
+     "pitch_mm": 0.635,
+     "tap_drill_in": 0.089,
+     "tap_drill_mm": 2.2606
+    },
+    "UNF": {
+     "designation": "#4-48 UNF",
+     "tpi": 48,
+     "pitch_mm": 0.5292,
+     "tap_drill_in": 0.094,
+     "tap_drill_mm": 2.3876
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Unified_Thread_Standard",
+   "hex_nut": {
+    "across_flats_in": 0.25,
+    "across_flats_mm": 6.35,
+    "source": "https://en.wikipedia.org/wiki/Nut_(hardware)",
+    "confidence": "low",
+    "note": "Nominal width across flats from the Wikipedia 'SAE hex nuts' table, which cites no source. Thickness not sourced."
+   }
+  },
+  {
+   "size": "#5",
+   "major_diameter_in": 0.125,
+   "major_diameter_mm": 3.175,
+   "series": {
+    "UNC": {
+     "designation": "#5-40 UNC",
+     "tpi": 40,
+     "pitch_mm": 0.635,
+     "tap_drill_in": 0.102,
+     "tap_drill_mm": 2.5908
+    },
+    "UNF": {
+     "designation": "#5-44 UNF",
+     "tpi": 44,
+     "pitch_mm": 0.5773,
+     "tap_drill_in": 0.104,
+     "tap_drill_mm": 2.6416
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Unified_Thread_Standard"
+  },
+  {
+   "size": "#6",
+   "major_diameter_in": 0.138,
+   "major_diameter_mm": 3.5052,
+   "series": {
+    "UNC": {
+     "designation": "#6-32 UNC",
+     "tpi": 32,
+     "pitch_mm": 0.7937,
+     "tap_drill_in": 0.107,
+     "tap_drill_mm": 2.7178
+    },
+    "UNF": {
+     "designation": "#6-40 UNF",
+     "tpi": 40,
+     "pitch_mm": 0.635,
+     "tap_drill_in": 0.113,
+     "tap_drill_mm": 2.8702
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Unified_Thread_Standard",
+   "hex_nut": {
+    "across_flats_in": 0.3125,
+    "across_flats_mm": 7.9375,
+    "source": "https://en.wikipedia.org/wiki/Nut_(hardware)",
+    "confidence": "low",
+    "note": "Nominal width across flats from the Wikipedia 'SAE hex nuts' table, which cites no source. Thickness not sourced."
+   }
+  },
+  {
+   "size": "#8",
+   "major_diameter_in": 0.164,
+   "major_diameter_mm": 4.1656,
+   "series": {
+    "UNC": {
+     "designation": "#8-32 UNC",
+     "tpi": 32,
+     "pitch_mm": 0.7937,
+     "tap_drill_in": 0.136,
+     "tap_drill_mm": 3.4544
+    },
+    "UNF": {
+     "designation": "#8-36 UNF",
+     "tpi": 36,
+     "pitch_mm": 0.7056,
+     "tap_drill_in": 0.136,
+     "tap_drill_mm": 3.4544
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Unified_Thread_Standard",
+   "hex_nut": {
+    "across_flats_in": 0.344,
+    "across_flats_mm": 8.7376,
+    "source": "https://en.wikipedia.org/wiki/Nut_(hardware)",
+    "confidence": "low",
+    "note": "Nominal width across flats from the Wikipedia 'SAE hex nuts' table, which cites no source. Thickness not sourced."
+   }
+  },
+  {
+   "size": "#10",
+   "major_diameter_in": 0.19,
+   "major_diameter_mm": 4.826,
+   "series": {
+    "UNC": {
+     "designation": "#10-24 UNC",
+     "tpi": 24,
+     "pitch_mm": 1.0583,
+     "tap_drill_in": 0.15,
+     "tap_drill_mm": 3.81
+    },
+    "UNF": {
+     "designation": "#10-32 UNF",
+     "tpi": 32,
+     "pitch_mm": 0.7937,
+     "tap_drill_in": 0.159,
+     "tap_drill_mm": 4.0386
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Unified_Thread_Standard",
+   "hex_nut": {
+    "across_flats_in": 0.375,
+    "across_flats_mm": 9.525,
+    "source": "https://en.wikipedia.org/wiki/Nut_(hardware)",
+    "confidence": "low",
+    "note": "Nominal width across flats from the Wikipedia 'SAE hex nuts' table, which cites no source. Thickness not sourced."
+   }
+  },
+  {
+   "size": "#12",
+   "major_diameter_in": 0.216,
+   "major_diameter_mm": 5.4864,
+   "series": {
+    "UNC": {
+     "designation": "#12-24 UNC",
+     "tpi": 24,
+     "pitch_mm": 1.0583,
+     "tap_drill_in": 0.177,
+     "tap_drill_mm": 4.4958
+    },
+    "UNF": {
+     "designation": "#12-28 UNF",
+     "tpi": 28,
+     "pitch_mm": 0.9071,
+     "tap_drill_in": 0.182,
+     "tap_drill_mm": 4.6228
+    },
+    "UNEF": {
+     "designation": "#12-32 UNEF",
+     "tpi": 32,
+     "pitch_mm": 0.7937,
+     "tap_drill_in": 0.188,
+     "tap_drill_mm": 4.7752
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Unified_Thread_Standard",
+   "hex_nut": {
+    "across_flats_in": 0.4375,
+    "across_flats_mm": 11.1125,
+    "source": "https://en.wikipedia.org/wiki/Nut_(hardware)",
+    "confidence": "low",
+    "note": "Nominal width across flats from the Wikipedia 'SAE hex nuts' table, which cites no source. Thickness not sourced."
+   }
+  },
+  {
+   "size": "1/4",
+   "major_diameter_in": 0.25,
+   "major_diameter_mm": 6.35,
+   "series": {
+    "UNC": {
+     "designation": "1/4-20 UNC",
+     "tpi": 20,
+     "pitch_mm": 1.27,
+     "tap_drill_in": 0.201,
+     "tap_drill_mm": 5.1054
+    },
+    "UNF": {
+     "designation": "1/4-28 UNF",
+     "tpi": 28,
+     "pitch_mm": 0.9071,
+     "tap_drill_in": 0.213,
+     "tap_drill_mm": 5.4102
+    },
+    "UNEF": {
+     "designation": "1/4-32 UNEF",
+     "tpi": 32,
+     "pitch_mm": 0.7937,
+     "tap_drill_in": 0.219,
+     "tap_drill_mm": 5.5626
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Unified_Thread_Standard",
+   "hex_nut": {
+    "across_flats_min_in": 0.428,
+    "across_flats_max_in": 0.438,
+    "across_corners_min_in": 0.488,
+    "across_corners_max_in": 0.505,
+    "thickness_min_in": 0.212,
+    "thickness_max_in": 0.226,
+    "jam_thickness_min_in": 0.15,
+    "jam_thickness_max_in": 0.163,
+    "across_flats_max_mm": 11.1252,
+    "across_flats_min_mm": 10.8712,
+    "thickness_max_mm": 5.7404,
+    "thickness_min_mm": 5.3848,
+    "jam_thickness_max_mm": 4.1402,
+    "source": "https://amesweb.info/Fasteners/Nut/Hex-Nut-Sizes-Dimensions-Table.aspx",
+    "standard": "ASME B18.2.2-2010 hex nut, as tabulated by amesweb.info"
+   }
+  },
+  {
+   "size": "5/16",
+   "major_diameter_in": 0.3125,
+   "major_diameter_mm": 7.9375,
+   "series": {
+    "UNC": {
+     "designation": "5/16-18 UNC",
+     "tpi": 18,
+     "pitch_mm": 1.4111,
+     "tap_drill_in": 0.257,
+     "tap_drill_mm": 6.5278
+    },
+    "UNF": {
+     "designation": "5/16-24 UNF",
+     "tpi": 24,
+     "pitch_mm": 1.0583,
+     "tap_drill_in": 0.272,
+     "tap_drill_mm": 6.9088
+    },
+    "UNEF": {
+     "designation": "5/16-32 UNEF",
+     "tpi": 32,
+     "pitch_mm": 0.7937,
+     "tap_drill_in": 0.281,
+     "tap_drill_mm": 7.1374
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Unified_Thread_Standard",
+   "hex_nut": {
+    "across_flats_min_in": 0.489,
+    "across_flats_max_in": 0.5,
+    "across_corners_min_in": 0.557,
+    "across_corners_max_in": 0.577,
+    "thickness_min_in": 0.258,
+    "thickness_max_in": 0.273,
+    "jam_thickness_min_in": 0.18,
+    "jam_thickness_max_in": 0.195,
+    "across_flats_max_mm": 12.7,
+    "across_flats_min_mm": 12.4206,
+    "thickness_max_mm": 6.9342,
+    "thickness_min_mm": 6.5532,
+    "jam_thickness_max_mm": 4.953,
+    "source": "https://amesweb.info/Fasteners/Nut/Hex-Nut-Sizes-Dimensions-Table.aspx",
+    "standard": "ASME B18.2.2-2010 hex nut, as tabulated by amesweb.info"
+   }
+  },
+  {
+   "size": "3/8",
+   "major_diameter_in": 0.375,
+   "major_diameter_mm": 9.525,
+   "series": {
+    "UNC": {
+     "designation": "3/8-16 UNC",
+     "tpi": 16,
+     "pitch_mm": 1.5875,
+     "tap_drill_in": 0.313,
+     "tap_drill_mm": 7.9502
+    },
+    "UNF": {
+     "designation": "3/8-24 UNF",
+     "tpi": 24,
+     "pitch_mm": 1.0583,
+     "tap_drill_in": 0.332,
+     "tap_drill_mm": 8.4328
+    },
+    "UNEF": {
+     "designation": "3/8-32 UNEF",
+     "tpi": 32,
+     "pitch_mm": 0.7937,
+     "tap_drill_in": 0.344,
+     "tap_drill_mm": 8.7376
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Unified_Thread_Standard",
+   "hex_nut": {
+    "across_flats_min_in": 0.551,
+    "across_flats_max_in": 0.563,
+    "across_corners_min_in": 0.628,
+    "across_corners_max_in": 0.65,
+    "thickness_min_in": 0.32,
+    "thickness_max_in": 0.337,
+    "jam_thickness_min_in": 0.21,
+    "jam_thickness_max_in": 0.227,
+    "across_flats_max_mm": 14.3002,
+    "across_flats_min_mm": 13.9954,
+    "thickness_max_mm": 8.5598,
+    "thickness_min_mm": 8.128,
+    "jam_thickness_max_mm": 5.7658,
+    "source": "https://amesweb.info/Fasteners/Nut/Hex-Nut-Sizes-Dimensions-Table.aspx",
+    "standard": "ASME B18.2.2-2010 hex nut, as tabulated by amesweb.info"
+   }
+  },
+  {
+   "size": "7/16",
+   "major_diameter_in": 0.4375,
+   "major_diameter_mm": 11.1125,
+   "series": {
+    "UNC": {
+     "designation": "7/16-14 UNC",
+     "tpi": 14,
+     "pitch_mm": 1.8143,
+     "tap_drill_in": 0.368,
+     "tap_drill_mm": 9.3472
+    },
+    "UNF": {
+     "designation": "7/16-20 UNF",
+     "tpi": 20,
+     "pitch_mm": 1.27,
+     "tap_drill_in": 0.391,
+     "tap_drill_mm": 9.9314
+    },
+    "UNEF": {
+     "designation": "7/16-28 UNEF",
+     "tpi": 28,
+     "pitch_mm": 0.9071,
+     "tap_drill_in": 0.404,
+     "tap_drill_mm": 10.2616
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Unified_Thread_Standard",
+   "hex_nut": {
+    "across_flats_min_in": 0.675,
+    "across_flats_max_in": 0.688,
+    "across_corners_min_in": 0.768,
+    "across_corners_max_in": 0.794,
+    "thickness_min_in": 0.365,
+    "thickness_max_in": 0.385,
+    "jam_thickness_min_in": 0.24,
+    "jam_thickness_max_in": 0.26,
+    "across_flats_max_mm": 17.4752,
+    "across_flats_min_mm": 17.145,
+    "thickness_max_mm": 9.779,
+    "thickness_min_mm": 9.271,
+    "jam_thickness_max_mm": 6.604,
+    "source": "https://amesweb.info/Fasteners/Nut/Hex-Nut-Sizes-Dimensions-Table.aspx",
+    "standard": "ASME B18.2.2-2010 hex nut, as tabulated by amesweb.info"
+   }
+  },
+  {
+   "size": "1/2",
+   "major_diameter_in": 0.5,
+   "major_diameter_mm": 12.7,
+   "series": {
+    "UNC": {
+     "designation": "1/2-13 UNC",
+     "tpi": 13,
+     "pitch_mm": 1.9538,
+     "tap_drill_in": 0.422,
+     "tap_drill_mm": 10.7188
+    },
+    "UNF": {
+     "designation": "1/2-20 UNF",
+     "tpi": 20,
+     "pitch_mm": 1.27,
+     "tap_drill_in": 0.453,
+     "tap_drill_mm": 11.5062
+    },
+    "UNEF": {
+     "designation": "1/2-28 UNEF",
+     "tpi": 28,
+     "pitch_mm": 0.9071,
+     "tap_drill_in": 0.469,
+     "tap_drill_mm": 11.9126
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Unified_Thread_Standard",
+   "hex_nut": {
+    "across_flats_min_in": 0.736,
+    "across_flats_max_in": 0.75,
+    "across_corners_min_in": 0.84,
+    "across_corners_max_in": 0.866,
+    "thickness_min_in": 0.427,
+    "thickness_max_in": 0.448,
+    "jam_thickness_min_in": 0.302,
+    "jam_thickness_max_in": 0.323,
+    "across_flats_max_mm": 19.05,
+    "across_flats_min_mm": 18.6944,
+    "thickness_max_mm": 11.3792,
+    "thickness_min_mm": 10.8458,
+    "jam_thickness_max_mm": 8.2042,
+    "source": "https://amesweb.info/Fasteners/Nut/Hex-Nut-Sizes-Dimensions-Table.aspx",
+    "standard": "ASME B18.2.2-2010 hex nut, as tabulated by amesweb.info"
+   }
+  },
+  {
+   "size": "9/16",
+   "major_diameter_in": 0.5625,
+   "major_diameter_mm": 14.2875,
+   "series": {
+    "UNC": {
+     "designation": "9/16-12 UNC",
+     "tpi": 12,
+     "pitch_mm": 2.1167,
+     "tap_drill_in": 0.484,
+     "tap_drill_mm": 12.2936
+    },
+    "UNF": {
+     "designation": "9/16-18 UNF",
+     "tpi": 18,
+     "pitch_mm": 1.4111,
+     "tap_drill_in": 0.5,
+     "tap_drill_mm": 12.7
+    },
+    "UNEF": {
+     "designation": "9/16-24 UNEF",
+     "tpi": 24,
+     "pitch_mm": 1.0583,
+     "tap_drill_in": 0.516,
+     "tap_drill_mm": 13.1064
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Unified_Thread_Standard",
+   "hex_nut": {
+    "across_flats_min_in": 0.861,
+    "across_flats_max_in": 0.875,
+    "across_corners_min_in": 0.982,
+    "across_corners_max_in": 1.01,
+    "thickness_min_in": 0.473,
+    "thickness_max_in": 0.496,
+    "jam_thickness_min_in": 0.301,
+    "jam_thickness_max_in": 0.324,
+    "across_flats_max_mm": 22.225,
+    "across_flats_min_mm": 21.8694,
+    "thickness_max_mm": 12.5984,
+    "thickness_min_mm": 12.0142,
+    "jam_thickness_max_mm": 8.2296,
+    "source": "https://amesweb.info/Fasteners/Nut/Hex-Nut-Sizes-Dimensions-Table.aspx",
+    "standard": "ASME B18.2.2-2010 hex nut, as tabulated by amesweb.info"
+   }
+  },
+  {
+   "size": "5/8",
+   "major_diameter_in": 0.625,
+   "major_diameter_mm": 15.875,
+   "series": {
+    "UNC": {
+     "designation": "5/8-11 UNC",
+     "tpi": 11,
+     "pitch_mm": 2.3091,
+     "tap_drill_in": 0.531,
+     "tap_drill_mm": 13.4874
+    },
+    "UNF": {
+     "designation": "5/8-18 UNF",
+     "tpi": 18,
+     "pitch_mm": 1.4111,
+     "tap_drill_in": 0.563,
+     "tap_drill_mm": 14.3002
+    },
+    "UNEF": {
+     "designation": "5/8-24 UNEF",
+     "tpi": 24,
+     "pitch_mm": 1.0583,
+     "tap_drill_in": 0.578,
+     "tap_drill_mm": 14.6812
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Unified_Thread_Standard",
+   "hex_nut": {
+    "across_flats_min_in": 0.922,
+    "across_flats_max_in": 0.938,
+    "across_corners_min_in": 1.051,
+    "across_corners_max_in": 1.083,
+    "thickness_min_in": 0.535,
+    "thickness_max_in": 0.559,
+    "jam_thickness_min_in": 0.363,
+    "jam_thickness_max_in": 0.387,
+    "across_flats_max_mm": 23.8252,
+    "across_flats_min_mm": 23.4188,
+    "thickness_max_mm": 14.1986,
+    "thickness_min_mm": 13.589,
+    "jam_thickness_max_mm": 9.8298,
+    "source": "https://amesweb.info/Fasteners/Nut/Hex-Nut-Sizes-Dimensions-Table.aspx",
+    "standard": "ASME B18.2.2-2010 hex nut, as tabulated by amesweb.info"
+   }
+  },
+  {
+   "size": "3/4",
+   "major_diameter_in": 0.75,
+   "major_diameter_mm": 19.05,
+   "series": {
+    "UNC": {
+     "designation": "3/4-10 UNC",
+     "tpi": 10,
+     "pitch_mm": 2.54,
+     "tap_drill_in": 0.656,
+     "tap_drill_mm": 16.6624
+    },
+    "UNF": {
+     "designation": "3/4-16 UNF",
+     "tpi": 16,
+     "pitch_mm": 1.5875,
+     "tap_drill_in": 0.688,
+     "tap_drill_mm": 17.4752
+    },
+    "UNEF": {
+     "designation": "3/4-20 UNEF",
+     "tpi": 20,
+     "pitch_mm": 1.27,
+     "tap_drill_in": 0.703,
+     "tap_drill_mm": 17.8562
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Unified_Thread_Standard",
+   "hex_nut": {
+    "across_flats_min_in": 1.088,
+    "across_flats_max_in": 1.125,
+    "across_corners_min_in": 1.24,
+    "across_corners_max_in": 1.299,
+    "thickness_min_in": 0.617,
+    "thickness_max_in": 0.665,
+    "jam_thickness_min_in": 0.398,
+    "jam_thickness_max_in": 0.446,
+    "across_flats_max_mm": 28.575,
+    "across_flats_min_mm": 27.6352,
+    "thickness_max_mm": 16.891,
+    "thickness_min_mm": 15.6718,
+    "jam_thickness_max_mm": 11.3284,
+    "source": "https://amesweb.info/Fasteners/Nut/Hex-Nut-Sizes-Dimensions-Table.aspx",
+    "standard": "ASME B18.2.2-2010 hex nut, as tabulated by amesweb.info"
+   }
+  },
+  {
+   "size": "7/8",
+   "major_diameter_in": 0.875,
+   "major_diameter_mm": 22.225,
+   "series": {
+    "UNC": {
+     "designation": "7/8-9 UNC",
+     "tpi": 9,
+     "pitch_mm": 2.8222,
+     "tap_drill_in": 0.766,
+     "tap_drill_mm": 19.4564
+    },
+    "UNF": {
+     "designation": "7/8-14 UNF",
+     "tpi": 14,
+     "pitch_mm": 1.8143,
+     "tap_drill_in": 0.797,
+     "tap_drill_mm": 20.2438
+    },
+    "UNEF": {
+     "designation": "7/8-20 UNEF",
+     "tpi": 20,
+     "pitch_mm": 1.27,
+     "tap_drill_in": 0.828,
+     "tap_drill_mm": 21.0312
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Unified_Thread_Standard",
+   "hex_nut": {
+    "across_flats_min_in": 1.269,
+    "across_flats_max_in": 1.312,
+    "across_corners_min_in": 1.447,
+    "across_corners_max_in": 1.516,
+    "thickness_min_in": 0.724,
+    "thickness_max_in": 0.776,
+    "jam_thickness_min_in": 0.458,
+    "jam_thickness_max_in": 0.51,
+    "across_flats_max_mm": 33.3248,
+    "across_flats_min_mm": 32.2326,
+    "thickness_max_mm": 19.7104,
+    "thickness_min_mm": 18.3896,
+    "jam_thickness_max_mm": 12.954,
+    "source": "https://amesweb.info/Fasteners/Nut/Hex-Nut-Sizes-Dimensions-Table.aspx",
+    "standard": "ASME B18.2.2-2010 hex nut, as tabulated by amesweb.info"
+   }
+  },
+  {
+   "size": "1",
+   "major_diameter_in": 1.0,
+   "major_diameter_mm": 25.4,
+   "series": {
+    "UNC": {
+     "designation": "1-8 UNC",
+     "tpi": 8,
+     "pitch_mm": 3.175,
+     "tap_drill_in": 0.875,
+     "tap_drill_mm": 22.225
+    },
+    "UNF": {
+     "designation": "1-12 UNF",
+     "tpi": 12,
+     "pitch_mm": 2.1167,
+     "tap_drill_in": 0.922,
+     "tap_drill_mm": 23.4188
+    },
+    "UNEF": {
+     "designation": "1-20 UNEF",
+     "tpi": 20,
+     "pitch_mm": 1.27,
+     "tap_drill_in": 0.953,
+     "tap_drill_mm": 24.2062
+    }
+   },
+   "source": "https://en.wikipedia.org/wiki/Unified_Thread_Standard",
+   "hex_nut": {
+    "across_flats_min_in": 1.45,
+    "across_flats_max_in": 1.5,
+    "across_corners_min_in": 1.653,
+    "across_corners_max_in": 1.732,
+    "thickness_min_in": 0.831,
+    "thickness_max_in": 0.887,
+    "jam_thickness_min_in": 0.519,
+    "jam_thickness_max_in": 0.575,
+    "across_flats_max_mm": 38.1,
+    "across_flats_min_mm": 36.83,
+    "thickness_max_mm": 22.5298,
+    "thickness_min_mm": 21.1074,
+    "jam_thickness_max_mm": 14.605,
+    "source": "https://amesweb.info/Fasteners/Nut/Hex-Nut-Sizes-Dimensions-Table.aspx",
+    "standard": "ASME B18.2.2-2010 hex nut, as tabulated by amesweb.info"
+   }
+  }
+ ]
+}

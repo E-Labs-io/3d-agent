@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "3d-toolbox": {
+      "command": "uv",
+      "args": ["run", "--quiet", "--project", "${CLAUDE_PLUGIN_ROOT}/toolbox", "python", "${CLAUDE_PLUGIN_ROOT}/toolbox/server.py"]
+    }
+  }
+}
