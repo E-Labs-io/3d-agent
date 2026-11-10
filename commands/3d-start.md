@@ -1,35 +1,21 @@
 ---
-description: Start the 3D Agent live viewer server (port 3030)
+description: Start the 3D Agent live viewer (port 3030)
 allowed-tools: Bash, Read
 ---
 
-Start the 3D Agent server. Steps:
+Start the viewer. Steps:
 
-1. Check whether port 3030 is already in use:
+1. Check whether it is already up:
    ```bash
-   lsof -ti:3030 || echo "free"
+   curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:3030/api/scene
+   ```
+   If that prints `200`, say the viewer is already running at http://localhost:3030 and stop.
+
+2. If `${CLAUDE_PLUGIN_ROOT}/node_modules` is missing, run `/3d-setup` first.
+
+3. Start it and record the process id so `/3d-stop` can stop exactly this process:
+   ```bash
+   mkdir -p "${THREED_AGENT_HOME:-$HOME/Documents/3D-Agent}" && cd "${CLAUDE_PLUGIN_ROOT}" && (node server.js > "${THREED_AGENT_HOME:-$HOME/Documents/3D-Agent}/viewer.log" 2>&1 & echo $! > "${THREED_AGENT_HOME:-$HOME/Documents/3D-Agent}/viewer.pid")
    ```
 
-2. If free, find the 3D Agent installation:
-   - First try the current working directory (look for `package.json` mentioning `3d-agent` and a `server.js` plus `public/` and `scene/`).
-   - If not present, fall back to the plugin's bundled location: `${CLAUDE_PLUGIN_ROOT}` (the directory containing this command's plugin manifest). That directory has its own `server.js`.
-   - As a last resort, the canonical install at `/Users/tuck/Documents/E-Labs/Products/e_labs-claude/3D-Agent`.
-
-3. Run dependencies install if `node_modules` is missing:
-   ```bash
-   cd <agent-dir> && npm install
-   ```
-
-4. Launch the server in the background:
-   ```bash
-   cd <agent-dir> && node server.js > /tmp/3d-agent.log 2>&1 &
-   ```
-
-5. Wait 1–2 seconds, then verify it's responding:
-   ```bash
-   curl -s http://localhost:3030/api/scene >/dev/null && echo "ready" || echo "failed"
-   ```
-
-6. Tell the user the viewer is at **http://localhost:3030** and that scene edits land in `<agent-dir>/scene/current.json`.
-
-If the port is already in use, just confirm the existing server and skip the start.
+4. Wait two seconds, repeat the check from step 1, and tell the user the viewer is at http://localhost:3030. If it failed, show the last lines of `viewer.log`.

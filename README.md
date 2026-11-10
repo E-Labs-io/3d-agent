@@ -1,147 +1,62 @@
 # 3D Agent
 
-Live AI-powered 3D design environment for Claude Code. Build, modify, and export 3D objects via chat with a real-time viewer at `http://localhost:3030`.
+A Claude Code plugin that designs physical things properly: parametric CAD on a real kernel, automatic design checks, stress analysis, sourced material and standards data, drawings and a bill of materials generated from the model, circuits and wiring, and print preparation. A live viewer shows the model as it changes.
 
-A Claude Code plugin packaging the live viewer + Node server with eight subagents and eight slash commands for product-design workflows.
-
----
-
-## Features
-
-- **Live 3D viewer** at `http://localhost:3030` — Three.js, no build step. WebSocket pushes updates the moment Claude writes the scene file.
-- **Scene-as-JSON** — `scene/current.json` is the source of truth. Claude writes; the viewer renders.
-- **17 geometry types** — box / sphere / cylinder / cone / torus / lathe / extrude / gear / spring / hex_bolt / nut / pipe / capsule / custom_code (Three.js strings) / file (STL/OBJ/GLTF/GLB/FBX/3DS/PLY import) / group / plane.
-- **Editor UI** — scene panel with hide/lock/duplicate per object, drag-to-group, undo/redo, environment controls, plan/section/elevation orthographic views, ruler overlays, and a Docs panel that splits the page vertically for live BOM/drawings reading.
-- **Project bundles** — single `.3dap` JSON file with scene + all documents + all drawings. Sharable, version-controllable.
-- **Three core workflow subagents** — Engineer/Designer → 3D Specialist → Manager, plus four expertise subagents (3d-modeler, 3d-printing, manufacturing, materials, cad-designer).
-- **Eight slash commands** — `/3d-start`, `/3d-stop`, `/3d-new`, `/3d-design`, `/3d-bom`, `/3d-plans`, `/3d-bundle`, `/3d-status`.
-
----
-
-## Install as a Claude Code plugin
-
-The plugin lives in this directory. Register it as a local plugin:
-
-### Option A — single user, current install location
-
-Add this plugin to `~/.claude/settings.json`:
-
-```json
-{
-  "plugins": {
-    "3d-agent": {
-      "source": "/Users/tuck/Documents/E-Labs/Products/e_labs-claude/3D-Agent",
-      "enabled": true
-    }
-  }
-}
-```
-
-Then restart Claude Code or run `/plugin reload`.
-
-### Option B — Git-based marketplace (recommended for sharing)
-
-1. Push this directory to a Git repo (e.g. `e-labs/3d-agent`)
-2. From any Claude Code session: `/plugin marketplace add e-labs/3d-agent`
-3. `/plugin install 3d-agent`
-
-Updates are then `git pull` away — Claude Code re-pulls on next session start.
-
-### Option C — symlink into ~/.claude/plugins/
-
-```bash
-ln -s "/Users/tuck/Documents/E-Labs/Products/e_labs-claude/3D-Agent" \
-      "$HOME/.claude/plugins/3d-agent"
-```
-
-This makes the plugin available system-wide while leaving the source in the original location, so edits to `agents/`, `commands/`, `skills/`, or scene files take effect immediately.
-
-### Verify install
+## Install
 
 ```
-/plugin list
+/plugin marketplace add E-Labs-io/3d-agent
+/plugin install 3d-agent@3d-agent
+/3d-setup
 ```
 
-You should see `3d-agent` listed with 8 agents, 8 commands, and 1 skill.
+`/3d-setup` needs [uv](https://docs.astral.sh/uv/) and Node. The first run downloads about 900 MB of Python packages.
 
----
-
-## First run
-
-```bash
-cd /Users/tuck/Documents/E-Labs/Products/e_labs-claude/3D-Agent
-npm install
-```
-
-Then in any Claude Code session anywhere on your machine:
+## Use
 
 ```
-/3d-start
-/3d-design "small desktop wind-up clock"
+/3d-design a wall bracket for a 2 kg speaker, printed in PETG on a 256 mm bed
 ```
 
-The Engineer/Designer writes the brief → 3D Specialist builds it in the viewer → Manager produces BOM and drawings.
+or just describe what you want. Other commands: `/3d-start`, `/3d-stop`, `/3d-status`, `/3d-new`, `/3d-check`, `/3d-plans`, `/3d-bom`, `/3d-bundle`.
 
----
+Designs are kept in `~/Documents/3D-Agent` (set `THREED_AGENT_HOME` to move them).
 
-## What's in this repo
+## What is inside
+
+| Job | Works out of the box | Needs something installed or a key |
+|---|---|---|
+| Solid modelling, STEP/STL/3MF | build123d, bd_warehouse | |
+| Design checks | mesh, walls, printability, clashes | |
+| Stress and hand calcs | built-in solver, beams, bolts, buckling | CalculiX route (not implemented yet) |
+| Materials, rules, standards | sourced tables | |
+| Drawings | SVG and DXF projected from the solid | |
+| BOM | generated, with supplier search links | live prices: DigiKey, Mouser, Farnell keys |
+| Circuits | SKiDL netlist and rules check | KiCad for exports, ngspice for simulation |
+| Wiring diagrams | built-in SVG and cut list | WireViz + Graphviz |
+| Print estimates | volume-based estimate, orientation, bed layout | PrusaSlicer or OrcaSlicer for real figures |
+| Printers | | Moonraker, PrusaLink or OctoPrint printer |
+| Finding designs | KiCad libraries, GitHub | OSHWA and EPO keys |
+
+`toolbox_status` reports what is available on your machine. Routes that need a program or key say exactly what is missing.
+
+## Known untested
+
+These are written from published documentation but have not been run against the real thing: supplier APIs, the KiCad and ngspice routes, slicer command lines, and all three printer adapters. Expect a shake-down the first time each is used. See `docs/` for details.
+
+## Development
 
 ```
-3D-Agent/
-├── .claude-plugin/
-│   └── plugin.json          # Plugin manifest (Claude Code reads this)
-├── agents/                  # 8 subagents
-│   ├── engineer-designer.md
-│   ├── 3d-specialist.md
-│   ├── manager.md
-│   ├── 3d-modeler.md
-│   ├── 3d-printing.md
-│   ├── manufacturing.md
-│   ├── materials.md
-│   └── cad-designer.md
-├── commands/                # 8 slash commands
-│   ├── 3d-start.md
-│   ├── 3d-stop.md
-│   ├── 3d-new.md
-│   ├── 3d-design.md
-│   ├── 3d-bom.md
-│   ├── 3d-plans.md
-│   ├── 3d-bundle.md
-│   └── 3d-status.md
-├── skills/3d-design/
-│   └── SKILL.md             # Auto-activated when 3D design is requested
-├── server.js                # Express + WebSocket + chokidar (port 3030)
-├── package.json
-├── public/                  # Three.js viewer (HTML/CSS/JS)
-│   ├── index.html
-│   ├── css/styles.css
-│   └── js/{app.js, geometry-builders.js}
-├── scene/
-│   ├── current.json         # The live scene — Claude writes, viewer renders
-│   └── default.json         # Fallback empty scene
-├── deliverables/
-│   └── {project-slug}/      # Per-project BOM/plans/docs/drawings
-└── CLAUDE.md                # Instructions Claude reads when working in this dir
+cd toolbox && uv sync --extra extras && uv run pytest -q
+npm install && node server.js
 ```
 
----
+See `CLAUDE.md` and `toolbox/CONTRIBUTING.md`.
 
-## Updating the plugin
+## Licence
 
-Edits to any file in this directory take effect on next Claude Code session start (or `/plugin reload`). The Node server picks up scene-file changes live via chokidar; no restart needed for those.
+MIT. Optional programs it can drive (KiCad, slicers, WireViz, Gmsh) keep their own licences and are run as separate processes.
 
-For new agents, commands, or skills:
+## Safety note
 
-1. Add the file under `agents/`, `commands/`, or `skills/{name}/SKILL.md`
-2. Update `.claude-plugin/plugin.json` to register it
-3. `/plugin reload`
-
----
-
-## License
-
-MIT — see project root.
-
-## Author
-
-E-Labs (`tuck@pttrn.live`)
+A project's `model.py` and `circuit.py` are Python and run with your user account's rights when built. Only build projects you wrote or trust, the same as any script.

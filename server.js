@@ -6,21 +6,26 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
-const PORT = 3030;
-const ROOT = __dirname;
+const PORT = Number(process.env.PORT) || 3030;
+const os = require('os');
+
+// Code lives with the plugin; user data lives in its own folder so a plugin
+// update never touches designs. Override with THREED_AGENT_HOME.
+const CODE = __dirname;
+const ROOT = path.resolve(process.env.THREED_AGENT_HOME || path.join(os.homedir(), 'Documents', '3D-Agent'));
 const SCENE_FILE = path.join(ROOT, 'scene', 'current.json');
 const UPLOADS_DIR = path.join(ROOT, 'uploads');
 const EXPORTS_DIR = path.join(ROOT, 'exports');
 
 // Bootstrap directories
-for (const dir of [path.join(ROOT, 'scene'), UPLOADS_DIR, EXPORTS_DIR]) {
+for (const dir of [path.join(ROOT, 'scene'), path.join(ROOT, 'projects'), UPLOADS_DIR, EXPORTS_DIR]) {
   fs.mkdirSync(dir, { recursive: true });
 }
 
 // Seed a default scene on first run
 if (!fs.existsSync(SCENE_FILE)) {
   const defaultScene = JSON.parse(
-    fs.readFileSync(path.join(ROOT, 'scene', 'default.json'), 'utf8')
+    fs.readFileSync(path.join(CODE, 'scene', 'default.json'), 'utf8')
   );
   fs.writeFileSync(SCENE_FILE, JSON.stringify(defaultScene, null, 2));
 }
@@ -42,10 +47,11 @@ app.use((req, res, next) => {
   next();
 });
 app.use(express.json({ limit: '50mb' }));
-app.use(express.static(path.join(ROOT, 'public')));
+app.use(express.static(path.join(CODE, 'public')));
 app.use('/uploads', express.static(UPLOADS_DIR));
 app.use('/exports', express.static(EXPORTS_DIR));
 app.use('/deliverables', express.static(path.join(ROOT, 'deliverables')));
+app.use('/projects', express.static(path.join(ROOT, 'projects')));
 
 // ── WebSocket broadcast ────────────────────────────────────────────────────
 function broadcast(msg) {
@@ -155,87 +161,75 @@ app.post('/api/analyze', (req, res) => {
 
 // ── Project bundle (.3dap) ────────────────────────────────────────────────
 
-// Map of well-known document slug → relative path inside deliverables/
-const DOC_FILES = {
-  'design-brief':          'briefs/brief.md',
-  'design-document':       'design-document.md',
-  'bom':                   'BOM.md',
-  'manufacturing-plan':    'manufacturing-plan.md',
-  'assembly-instructions': 'assembly-instructions.md',
-  'readme':                'README.md'
-};
-
-// Project slugs become directory names under deliverables/, so they must be
+// Project slugs become directory names, so they must be
 // a single plain path segment.
 function safeSlug(slug) {
   return typeof slug === 'string' && /^[a-z0-9][a-z0-9._-]*$/i.test(slug) && !slug.includes('..') ? slug : null;
 }
 
+// A project is projects/<slug>/ (written by the toolbox). deliverables/<slug>/ is the
+// older hand-written layout and is still read.
+function projectBase(slug) {
+  for (const kind of ['projects', 'deliverables']) {
+    const dir = path.join(ROOT, kind, slug);
+    if (fs.existsSync(dir)) return dir;
+  }
+  return path.join(ROOT, 'projects', slug);
+}
+
 function listProjects() {
-  const dir = path.join(ROOT, 'deliverables');
-  if (!fs.existsSync(dir)) return [];
-  return fs.readdirSync(dir, { withFileTypes: true })
-    .filter(d => d.isDirectory())
-    .map(d => d.name);
+  const names = new Set();
+  for (const kind of ['projects', 'deliverables']) {
+    const dir = path.join(ROOT, kind);
+    if (!fs.existsSync(dir)) continue;
+    for (const d of fs.readdirSync(dir, { withFileTypes: true })) if (d.isDirectory()) names.add(d.name);
+  }
+  return [...names].sort();
 }
 
 function activeProject() {
-  // Use the project name from the scene's metadata.name slug, fallback to first deliverables dir
   try {
-    const scene = JSON.parse(fs.readFileSync(SCENE_FILE, 'utf8'));
-    const slug = (scene?.metadata?.name || '').toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-    if (slug) {
-      const candidate = path.join(ROOT, 'deliverables', slug);
-      if (fs.existsSync(candidate)) return slug;
-      // fuzzy match: pick a deliverables dir that starts with slug prefix
-      const dirs = listProjects();
-      const prefix = slug.split('-').slice(0, 2).join('-');
-      const match = dirs.find(d => d.startsWith(prefix));
-      if (match) return match;
-    }
-  } catch {}
-  const dirs = listProjects();
-  return dirs[0] || null;
+    const meta = JSON.parse(fs.readFileSync(SCENE_FILE, 'utf8')).metadata || {};
+    const all = listProjects();
+    if (safeSlug(meta.project) && all.includes(meta.project)) return meta.project;
+    const slug = (meta.name || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    if (all.includes(slug)) return slug;
+    return all[0] || null;
+  } catch {
+    return listProjects()[0] || null;
+  }
 }
 
-function readDocs(projectSlug) {
+// Every file of one type under a project, a few levels deep, as panel entries.
+function collect(projectSlug, ext, format) {
   if (!projectSlug) return {};
-  const projectDir = path.join(ROOT, 'deliverables', projectSlug);
-  const docs = {};
-  for (const [slug, rel] of Object.entries(DOC_FILES)) {
-    const p = path.join(projectDir, rel);
-    if (fs.existsSync(p)) {
-      docs[slug] = {
-        slug,
-        title: rel.split('/').pop().replace(/\.md$/, ''),
-        format: 'markdown',
-        path: rel,
-        content: fs.readFileSync(p, 'utf8')
-      };
+  const base = projectBase(projectSlug);
+  const found = {};
+  const walk = (dir, depth) => {
+    if (depth > 3 || !fs.existsSync(dir)) return;
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (entry.name.startsWith('.') || entry.name === 'view' || entry.name === 'imports') continue;
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) walk(full, depth + 1);
+      else if (entry.name.toLowerCase().endsWith(ext) && fs.statSync(full).size < 5 * 1024 * 1024) {
+        const rel = path.relative(base, full);
+        const slug = rel.replace(/[\\/]/g, '--').slice(0, -ext.length);
+        found[slug] = {
+          slug,
+          title: entry.name.slice(0, -ext.length).replace(/^\d+-/, '').replace(/[-_]/g, ' '),
+          format,
+          path: rel,
+          content: fs.readFileSync(full, 'utf8')
+        };
+      }
     }
-  }
-  return docs;
+  };
+  walk(base, 0);
+  return found;
 }
 
-function readDrawings(projectSlug) {
-  if (!projectSlug) return {};
-  const dir = path.join(ROOT, 'deliverables', projectSlug, 'drawings');
-  if (!fs.existsSync(dir)) return {};
-  const drawings = {};
-  for (const file of fs.readdirSync(dir).sort()) {
-    if (!file.endsWith('.svg')) continue;
-    const slug = file.replace(/\.svg$/, '');
-    drawings[slug] = {
-      slug,
-      title: slug.replace(/^\d+-/, '').replace(/-/g, ' '),
-      format: 'svg',
-      path: `drawings/${file}`,
-      content: fs.readFileSync(path.join(dir, file), 'utf8')
-    };
-  }
-  return drawings;
-}
+const readDocs = (slug) => collect(slug, '.md', 'markdown');
+const readDrawings = (slug) => collect(slug, '.svg', 'svg');
 
 // Read full bundle (scene + docs + drawings)
 app.get('/api/project/bundle', (req, res) => {
@@ -302,7 +296,7 @@ app.post('/api/project/doc/:slug', (req, res) => {
   try {
     const projectSlug = safeSlug(req.query.project) || activeProject();
     if (!projectSlug) return res.status(400).json({ error: 'No active project' });
-    const projectDir = path.join(ROOT, 'deliverables', projectSlug);
+    const projectDir = projectBase(projectSlug);
     fs.mkdirSync(projectDir, { recursive: true });
     const { content, path: relPath } = req.body;
     if (!content || !relPath) return res.status(400).json({ error: 'content and path required' });
@@ -330,7 +324,7 @@ app.post('/api/project/bundle', (req, res) => {
     const slug = safeSlug(bundle.metadata?.projectSlug)
       || (bundle.metadata?.name || 'imported').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')
       || 'imported';
-    const projectDir = path.join(ROOT, 'deliverables', slug);
+    const projectDir = projectBase(slug);
     fs.mkdirSync(projectDir, { recursive: true });
     fs.mkdirSync(path.join(projectDir, 'drawings'), { recursive: true });
 
@@ -358,17 +352,10 @@ app.get('/api/project/list', (req, res) => {
 
 // ── Serve index for any unknown path (SPA) ────────────────────────────────
 app.get('*', (req, res) => {
-  res.sendFile(path.join(ROOT, 'public', 'index.html'));
+  res.sendFile(path.join(CODE, 'public', 'index.html'));
 });
 
 server.listen(PORT, '127.0.0.1', () => {
-  console.log(`
-╔═══════════════════════════════════════╗
-║       3D Agent Server running         ║
-║   http://localhost:${PORT}              ║
-║                                       ║
-║  Scene file: scene/current.json       ║
-║  Edit it → viewer updates live        ║
-╚═══════════════════════════════════════╝
-`);
+  console.log(`3D Agent viewer on http://localhost:${PORT}`);
+  console.log(`Data folder: ${ROOT}`);
 });

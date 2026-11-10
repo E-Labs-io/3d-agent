@@ -4,3 +4,6 @@ exports/
 uploads/
 dist/
 .claude/worktrees/
+projects/*/out/
+toolbox/.venv/
+__pycache__/

@@ -1,0 +1,190 @@
+{
+ "process": "fdm",
+ "title": "Fused deposition modelling (FFF) with a 0.4 mm nozzle unless stated",
+ "fetched": "2026-11-10",
+ "about": "Limits read from published design guides. Where guides disagree the limit carries 'range' and every source is listed with what it says.",
+ "rules": [
+  {
+   "id": "fdm_min_wall",
+   "description": "Minimum wall thickness",
+   "parameter": "min_wall_mm",
+   "limit": {
+    "min": 0.45,
+    "recommended": 0.8,
+    "unit": "mm"
+   },
+   "source": "https://www.protolabs.com/services/3d-printing/fused-deposition-modeling/",
+   "sources": [
+    {
+     "source": "https://www.protolabs.com/services/3d-printing/fused-deposition-modeling/",
+     "says": "Unsupported/supported walls: minimum 0.8 mm"
+    },
+    {
+     "source": "https://www.hubs.com/knowledge-base/key-design-considerations-3d-printing/",
+     "says": "All 3D printers can print walls thicker than 0.8 mm"
+    },
+    {
+     "source": "https://help.prusa3d.com/article/modeling-with-3d-printing-in-mind_164135",
+     "says": "0.4 mm nozzle: 1 perimeter = 0.45 mm, 2 perimeters = 0.9 mm; thinner than one perimeter is not printable"
+    }
+   ],
+   "note": "0.45 mm is the single-perimeter floor for a 0.4 mm nozzle; 0.8 mm is the service-bureau minimum."
+  },
+  {
+   "id": "fdm_min_feature",
+   "description": "Minimum feature size",
+   "parameter": "min_feature_mm",
+   "limit": {
+    "min": 2.0,
+    "unit": "mm"
+   },
+   "source": "https://www.protolabs.com/services/3d-printing/fused-deposition-modeling/",
+   "sources": [
+    {
+     "source": "https://www.protolabs.com/services/3d-printing/fused-deposition-modeling/",
+     "says": "Minimum feature size 2.0 mm"
+    }
+   ]
+  },
+  {
+   "id": "fdm_min_hole",
+   "description": "Minimum hole diameter",
+   "parameter": "min_hole_diameter_mm",
+   "limit": {
+    "min": 2.0,
+    "unit": "mm"
+   },
+   "source": "https://www.protolabs.com/services/3d-printing/fused-deposition-modeling/",
+   "sources": [
+    {
+     "source": "https://www.protolabs.com/services/3d-printing/fused-deposition-modeling/",
+     "says": "Minimum hole diameter 2.0 mm"
+    }
+   ]
+  },
+  {
+   "id": "fdm_min_pin",
+   "description": "Minimum diameter for a strong vertical pin",
+   "parameter": "min_pin_diameter_mm",
+   "limit": {
+    "recommended": 5.0,
+    "unit": "mm"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-fdm-3d-printing/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-fdm-3d-printing/",
+     "says": "Pins under 5 mm diameter may be perimeter-only and weak; add a base fillet or use an inserted pin"
+    }
+   ]
+  },
+  {
+   "id": "fdm_overhang",
+   "description": "Maximum unsupported overhang angle, measured from vertical",
+   "parameter": "max_overhang_angle_deg",
+   "limit": {
+    "max": 45,
+    "range": [
+     45,
+     60
+    ],
+    "unit": "deg from vertical"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-fdm-3d-printing/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-fdm-3d-printing/",
+     "says": "Overhangs print up to 45 degrees without loss of quality; support above 45"
+    },
+    {
+     "source": "https://help.prusa3d.com/article/modeling-with-3d-printing-in-mind_164135",
+     "says": "Clean overhangs between 45 and 60 degrees depending on nozzle and settings; up to 75 on printers with 360-degree cooling"
+    }
+   ],
+   "note": "Guides disagree: 45 is the conservative limit, 60 the upper end for a well-cooled 0.4 mm nozzle."
+  },
+  {
+   "id": "fdm_bridge",
+   "description": "Maximum bridge length without sagging or support marks",
+   "parameter": "max_bridge_length_mm",
+   "limit": {
+    "max": 5.0,
+    "unit": "mm"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-fdm-3d-printing/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-fdm-3d-printing/",
+     "says": "Sagging or support marks are always present unless the bridge is less than 5 mm"
+    }
+   ],
+   "note": "Conservative: longer bridges print on tuned machines but will sag visibly."
+  },
+  {
+   "id": "fdm_clearance",
+   "description": "Clearance between mating or moving parts",
+   "parameter": "clearance_fit_mm",
+   "limit": {
+    "min": 0.3,
+    "unit": "mm"
+   },
+   "source": "https://help.prusa3d.com/article/modeling-with-3d-printing-in-mind_164135",
+   "sources": [
+    {
+     "source": "https://help.prusa3d.com/article/modeling-with-3d-printing-in-mind_164135",
+     "says": "A good starting value for movable parts is at least 0.3 mm; printer accuracy is about 0.2 mm"
+    }
+   ]
+  },
+  {
+   "id": "fdm_tolerance",
+   "description": "Achievable dimensional tolerance",
+   "parameter": "tolerance_mm",
+   "limit": {
+    "typical": 0.5,
+    "percent": 0.5,
+    "unit": "mm"
+   },
+   "source": "https://www.protolabs.com/services/3d-printing/fused-deposition-modeling/",
+   "sources": [
+    {
+     "source": "https://www.protolabs.com/services/3d-printing/fused-deposition-modeling/",
+     "says": "Prototyping FDM +/-0.5% with a lower limit of +/-0.5 mm; industrial FDM +/-0.3% with a lower limit of +/-0.3 mm"
+    }
+   ]
+  },
+  {
+   "id": "fdm_layer_height",
+   "description": "Layer height range",
+   "parameter": "layer_height_mm",
+   "limit": {
+    "min": 0.1,
+    "max": 0.3,
+    "unit": "mm"
+   },
+   "source": "https://www.protolabs.com/services/3d-printing/fused-deposition-modeling/",
+   "sources": [
+    {
+     "source": "https://www.protolabs.com/services/3d-printing/fused-deposition-modeling/",
+     "says": "Layer height options from 100 to 300 micron"
+    }
+   ]
+  },
+  {
+   "id": "fdm_bed_edge_chamfer",
+   "description": "Chamfer or radius on edges touching the build plate",
+   "parameter": "bed_edge_chamfer_deg",
+   "limit": {
+    "recommended": 45,
+    "unit": "deg"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-fdm-3d-printing/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-fdm-3d-printing/",
+     "says": "Include a 45 degree chamfer or radius on all edges touching the build plate where dimensions are critical"
+    }
+   ]
+  }
+ ]
+}

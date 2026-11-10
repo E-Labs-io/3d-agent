@@ -1,0 +1,203 @@
+{
+ "process": "sls",
+ "title": "Selective laser sintering of nylon powder",
+ "fetched": "2026-11-10",
+ "about": "Limits read from published design guides. Where guides disagree the limit carries 'range' and every source is listed with what it says.",
+ "rules": [
+  {
+   "id": "sls_min_wall",
+   "description": "Minimum wall thickness",
+   "parameter": "min_wall_mm",
+   "limit": {
+    "min": 0.762,
+    "recommended": 0.8,
+    "range": [
+     0.762,
+     2.0
+    ],
+    "unit": "mm"
+   },
+   "source": "https://www.protolabs.com/services/3d-printing/selective-laser-sintering/",
+   "sources": [
+    {
+     "source": "https://www.protolabs.com/services/3d-printing/selective-laser-sintering/",
+     "says": "Minimum wall 0.762 mm for nylons, 1.01 mm for PP and TPU"
+    },
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-sls-3d-printing/",
+     "says": "0.8 mm for PA12 up to 2.0 mm for carbon-filled polyamide"
+    }
+   ]
+  },
+  {
+   "id": "sls_uniform_wall",
+   "description": "Uniform thickness recommended to limit warp on large parts",
+   "parameter": "recommended_wall_mm",
+   "limit": {
+    "recommended": 3.175,
+    "unit": "mm"
+   },
+   "source": "https://www.protolabs.com/services/3d-printing/selective-laser-sintering/",
+   "sources": [
+    {
+     "source": "https://www.protolabs.com/services/3d-printing/selective-laser-sintering/",
+     "says": "Parts over 7 in or with thin features warp most; a uniform 3.175 mm thickness is recommended"
+    }
+   ]
+  },
+  {
+   "id": "sls_min_hole",
+   "description": "Minimum hole diameter",
+   "parameter": "min_hole_diameter_mm",
+   "limit": {
+    "min": 1.5,
+    "unit": "mm"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-sls-3d-printing/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-sls-3d-printing/",
+     "says": "All holes should be larger than 1.5 mm in diameter"
+    }
+   ]
+  },
+  {
+   "id": "sls_escape_hole",
+   "description": "Minimum powder escape hole diameter for hollow parts",
+   "parameter": "min_escape_hole_diameter_mm",
+   "limit": {
+    "min": 3.5,
+    "unit": "mm"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-sls-3d-printing/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-sls-3d-printing/",
+     "says": "Escape holes minimum 3.5 mm diameter"
+    }
+   ]
+  },
+  {
+   "id": "sls_min_feature",
+   "description": "Minimum feature size (pins, protrusions)",
+   "parameter": "min_feature_mm",
+   "limit": {
+    "min": 0.8,
+    "unit": "mm"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-sls-3d-printing/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-sls-3d-printing/",
+     "says": "A minimum of 0.8 mm is recommended"
+    }
+   ]
+  },
+  {
+   "id": "sls_text",
+   "description": "Minimum engraving depth and embossing height",
+   "parameter": "min_embossed_detail_mm",
+   "limit": {
+    "min": 1.0,
+    "unit": "mm"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-sls-3d-printing/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-sls-3d-printing/",
+     "says": "Minimum engraving depth 1 mm, embossing height 1 mm, font height 2 mm"
+    }
+   ]
+  },
+  {
+   "id": "sls_clearance",
+   "description": "Clearance between moving surfaces",
+   "parameter": "clearance_fit_mm",
+   "limit": {
+    "min": 0.3,
+    "unit": "mm"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-sls-3d-printing/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-sls-3d-printing/",
+     "says": "Bearing surface clearance 0.3 mm; 0.2 mm between a hinge ball and pocket; 2 mm between axle and clearance hole for powder removal"
+    }
+   ]
+  },
+  {
+   "id": "sls_edge_radius",
+   "description": "Natural radius on edges and corners",
+   "parameter": "min_edge_radius_mm",
+   "limit": {
+    "min": 0.4,
+    "unit": "mm"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-sls-3d-printing/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-sls-3d-printing/",
+     "says": "A radius under 0.4 mm prints as 0.4 mm; add over 2 mm at stress concentrations"
+    }
+   ]
+  },
+  {
+   "id": "sls_tolerance",
+   "description": "Achievable dimensional tolerance",
+   "parameter": "tolerance_mm",
+   "limit": {
+    "typical": 0.3,
+    "percent": 0.3,
+    "unit": "mm"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-sls-3d-printing/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-sls-3d-printing/",
+     "says": "Typical +/-0.3% with a lower limit of +/-0.3 mm"
+    },
+    {
+     "source": "https://www.protolabs.com/services/3d-printing/selective-laser-sintering/",
+     "says": "+/-0.25 mm plus 0.1% of nominal length"
+    }
+   ]
+  },
+  {
+   "id": "sls_layer_height",
+   "description": "Layer thickness",
+   "parameter": "layer_height_mm",
+   "limit": {
+    "typical": 0.1,
+    "unit": "mm"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-sls-3d-printing/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-sls-3d-printing/",
+     "says": "Typically 0.1 mm"
+    },
+    {
+     "source": "https://www.protolabs.com/services/3d-printing/selective-laser-sintering/",
+     "says": "0.1016 mm"
+    }
+   ]
+  },
+  {
+   "id": "sls_living_hinge",
+   "description": "Living hinge thickness",
+   "parameter": "living_hinge_thickness_mm",
+   "limit": {
+    "min": 0.3,
+    "max": 0.8,
+    "unit": "mm"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-sls-3d-printing/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-sls-3d-printing/",
+     "says": "Living hinges 0.3-0.8 mm thick and at least 5 mm long"
+    }
+   ]
+  }
+ ]
+}

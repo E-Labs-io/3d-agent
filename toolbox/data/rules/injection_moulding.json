@@ -1,0 +1,211 @@
+{
+ "process": "injection_moulding",
+ "title": "Thermoplastic injection moulding",
+ "fetched": "2026-11-10",
+ "about": "Limits read from published design guides. Where guides disagree the limit carries 'range' and every source is listed with what it says.",
+ "rules": [
+  {
+   "id": "im_draft",
+   "description": "Draft angle on walls parallel to the pull direction",
+   "parameter": "min_draft_angle_deg",
+   "limit": {
+    "min": 0.5,
+    "recommended": 2.0,
+    "range": [
+     0.5,
+     2.0
+    ],
+    "unit": "deg"
+   },
+   "source": "https://www.protolabs.com/services/injection-molding/plastic-injection-molding/design-guidelines/",
+   "sources": [
+    {
+     "source": "https://www.protolabs.com/services/injection-molding/plastic-injection-molding/design-guidelines/",
+     "says": "0.5 degrees on vertical faces as a minimum; 2 degrees in most situations; 3 for shut-offs and light texture; 5 or more for heavier texture"
+    },
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-injection-molding/",
+     "says": "Minimum 2 degrees on all vertical walls; add 1 degree per 25 mm for features taller than 50 mm; add 1-2 degrees for textured finishes"
+    }
+   ],
+   "note": "Guides disagree on the floor: 0.5 degrees (Protolabs) against 2 degrees (Protolabs Network)."
+  },
+  {
+   "id": "im_min_wall",
+   "description": "Wall thickness (general range across common resins)",
+   "parameter": "min_wall_mm",
+   "limit": {
+    "min": 0.635,
+    "unit": "mm",
+    "by_material_mm": {
+     "abs": [
+      1.143,
+      3.556
+     ],
+     "acetal": [
+      0.762,
+      3.048
+     ],
+     "acrylic": [
+      0.635,
+      12.7
+     ],
+     "nylon": [
+      0.762,
+      2.921
+     ],
+     "polycarbonate": [
+      1.016,
+      3.81
+     ],
+     "polyethylene": [
+      0.762,
+      5.08
+     ],
+     "polypropylene": [
+      0.889,
+      3.81
+     ],
+     "polystyrene": [
+      0.889,
+      3.81
+     ],
+     "polyurethane": [
+      2.032,
+      19.05
+     ]
+    }
+   },
+   "source": "https://www.protolabs.com/services/injection-molding/plastic-injection-molding/design-guidelines/",
+   "sources": [
+    {
+     "source": "https://www.protolabs.com/services/injection-molding/plastic-injection-molding/design-guidelines/",
+     "says": "Recommended wall thickness by resin (table)"
+    },
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-injection-molding/",
+     "says": "Use a uniform wall thickness within the recommended values"
+    }
+   ],
+   "note": "min is the thinnest recommended wall for any listed resin (acrylic, polyester); use by_material_mm [min, max] for the resin in hand."
+  },
+  {
+   "id": "im_internal_radius",
+   "description": "Internal corner radius as a multiple of wall thickness",
+   "parameter": "min_internal_corner_radius_x_wall",
+   "limit": {
+    "min": 0.5,
+    "unit": "x wall thickness"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-injection-molding/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-injection-molding/",
+     "says": "Interior edges: radius at least 0.5x wall thickness; exterior edges: interior radius plus wall thickness"
+    }
+   ]
+  },
+  {
+   "id": "im_rib_thickness",
+   "description": "Rib thickness as a multiple of wall thickness",
+   "parameter": "rib_thickness_x_wall",
+   "limit": {
+    "recommended": 0.5,
+    "unit": "x wall thickness"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-injection-molding/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-injection-molding/",
+     "says": "Rib thickness 0.5x main wall; height under 3x rib thickness; base fillet over 0.25x rib thickness"
+    }
+   ]
+  },
+  {
+   "id": "im_boss",
+   "description": "Boss outer diameter as a multiple of screw or insert diameter",
+   "parameter": "boss_od_x_screw_diameter",
+   "limit": {
+    "recommended": 2.0,
+    "unit": "x screw diameter"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-injection-molding/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-injection-molding/",
+     "says": "Boss outer diameter 2x the nominal diameter of the screw or insert"
+    }
+   ]
+  },
+  {
+   "id": "im_text",
+   "description": "Embossed text height",
+   "parameter": "min_embossed_detail_mm",
+   "limit": {
+    "min": 0.5,
+    "unit": "mm"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-injection-molding/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-injection-molding/",
+     "says": "Embossed text 0.5 mm high, 20 point or larger"
+    }
+   ]
+  },
+  {
+   "id": "im_living_hinge",
+   "description": "Living hinge thickness",
+   "parameter": "living_hinge_thickness_mm",
+   "limit": {
+    "min": 0.2,
+    "max": 0.35,
+    "unit": "mm"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-injection-molding/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-injection-molding/",
+     "says": "Hinge thickness between 0.20 and 0.35 mm"
+    }
+   ]
+  },
+  {
+   "id": "im_tolerance",
+   "description": "Achievable dimensional tolerance",
+   "parameter": "tolerance_mm",
+   "limit": {
+    "typical": 0.25,
+    "min": 0.125,
+    "unit": "mm"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-injection-molding/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-injection-molding/",
+     "says": "Typically +/-0.250 mm; down to +/-0.125 mm at higher cost"
+    },
+    {
+     "source": "https://www.protolabs.com/services/injection-molding/plastic-injection-molding/design-guidelines/",
+     "says": "+/-0.08 mm machining tolerance plus resin tolerance of at least +/-0.002 mm/mm"
+    }
+   ]
+  },
+  {
+   "id": "im_thread_pitch",
+   "description": "Minimum moulded thread pitch",
+   "parameter": "min_thread_pitch_mm",
+   "limit": {
+    "min": 0.8,
+    "unit": "mm"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-injection-molding/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-injection-molding/",
+     "says": "Use a thread pitch greater than 0.8 mm (32 TPI) with a 0.8 mm relief at the thread edges"
+    }
+   ]
+  }
+ ]
+}

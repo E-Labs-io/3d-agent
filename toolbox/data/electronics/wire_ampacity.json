@@ -1,0 +1,304 @@
+{
+ "title": "Copper wire ampacity by AWG (rule-of-thumb limits, not an electrical-code rating)",
+ "source": "https://www.powerstream.com/Wire_Size.htm",
+ "source_note": "PowerStream 'Wire Gauge and Current Limits' table, which credits the Handbook of Electronic Tables and Formulas for American Wire Gauge. Retrieved 2026-11-10.",
+ "basis": "estimate",
+ "notes": [
+  "max_current_chassis_a: single wire in free air / short chassis wiring.",
+  "max_current_power_transmission_a: conservative figure for bundled or long runs.",
+  "Solid copper. Not a substitute for BS 7671 / NEC ratings on mains wiring.",
+  "Metric sizes are matched at run time to the largest AWG row whose area does not exceed the stated mm2."
+ ],
+ "records": [
+  {
+   "awg": 4,
+   "diameter_mm": 5.1892,
+   "area_mm2": 21.1,
+   "resistance_ohm_per_km": 0.815,
+   "max_current_chassis_a": 135.0,
+   "max_current_power_transmission_a": 60.0,
+   "source": "https://www.powerstream.com/Wire_Size.htm",
+   "basis": "estimate"
+  },
+  {
+   "awg": 5,
+   "diameter_mm": 4.6203,
+   "area_mm2": 16.8,
+   "resistance_ohm_per_km": 1.028,
+   "max_current_chassis_a": 118.0,
+   "max_current_power_transmission_a": 47.0,
+   "source": "https://www.powerstream.com/Wire_Size.htm",
+   "basis": "estimate"
+  },
+  {
+   "awg": 6,
+   "diameter_mm": 4.1148,
+   "area_mm2": 13.3,
+   "resistance_ohm_per_km": 1.296,
+   "max_current_chassis_a": 101.0,
+   "max_current_power_transmission_a": 37.0,
+   "source": "https://www.powerstream.com/Wire_Size.htm",
+   "basis": "estimate"
+  },
+  {
+   "awg": 7,
+   "diameter_mm": 3.6652,
+   "area_mm2": 10.6,
+   "resistance_ohm_per_km": 1.634,
+   "max_current_chassis_a": 89.0,
+   "max_current_power_transmission_a": 30.0,
+   "source": "https://www.powerstream.com/Wire_Size.htm",
+   "basis": "estimate"
+  },
+  {
+   "awg": 8,
+   "diameter_mm": 3.2639,
+   "area_mm2": 8.37,
+   "resistance_ohm_per_km": 2.06,
+   "max_current_chassis_a": 73.0,
+   "max_current_power_transmission_a": 24.0,
+   "source": "https://www.powerstream.com/Wire_Size.htm",
+   "basis": "estimate"
+  },
+  {
+   "awg": 9,
+   "diameter_mm": 2.9058,
+   "area_mm2": 6.63,
+   "resistance_ohm_per_km": 2.598,
+   "max_current_chassis_a": 64.0,
+   "max_current_power_transmission_a": 19.0,
+   "source": "https://www.powerstream.com/Wire_Size.htm",
+   "basis": "estimate"
+  },
+  {
+   "awg": 10,
+   "diameter_mm": 2.5883,
+   "area_mm2": 5.26,
+   "resistance_ohm_per_km": 3.276,
+   "max_current_chassis_a": 55.0,
+   "max_current_power_transmission_a": 15.0,
+   "source": "https://www.powerstream.com/Wire_Size.htm",
+   "basis": "estimate"
+  },
+  {
+   "awg": 11,
+   "diameter_mm": 2.3038,
+   "area_mm2": 4.17,
+   "resistance_ohm_per_km": 4.133,
+   "max_current_chassis_a": 47.0,
+   "max_current_power_transmission_a": 12.0,
+   "source": "https://www.powerstream.com/Wire_Size.htm",
+   "basis": "estimate"
+  },
+  {
+   "awg": 12,
+   "diameter_mm": 2.0523,
+   "area_mm2": 3.31,
+   "resistance_ohm_per_km": 5.209,
+   "max_current_chassis_a": 41.0,
+   "max_current_power_transmission_a": 9.3,
+   "source": "https://www.powerstream.com/Wire_Size.htm",
+   "basis": "estimate"
+  },
+  {
+   "awg": 13,
+   "diameter_mm": 1.8288,
+   "area_mm2": 2.63,
+   "resistance_ohm_per_km": 6.57,
+   "max_current_chassis_a": 35.0,
+   "max_current_power_transmission_a": 7.4,
+   "source": "https://www.powerstream.com/Wire_Size.htm",
+   "basis": "estimate"
+  },
+  {
+   "awg": 14,
+   "diameter_mm": 1.6281,
+   "area_mm2": 2.08,
+   "resistance_ohm_per_km": 8.282,
+   "max_current_chassis_a": 32.0,
+   "max_current_power_transmission_a": 5.9,
+   "source": "https://www.powerstream.com/Wire_Size.htm",
+   "basis": "estimate"
+  },
+  {
+   "awg": 15,
+   "diameter_mm": 1.4503,
+   "area_mm2": 1.65,
+   "resistance_ohm_per_km": 10.444,
+   "max_current_chassis_a": 28.0,
+   "max_current_power_transmission_a": 4.7,
+   "source": "https://www.powerstream.com/Wire_Size.htm",
+   "basis": "estimate"
+  },
+  {
+   "awg": 16,
+   "diameter_mm": 1.2903,
+   "area_mm2": 1.31,
+   "resistance_ohm_per_km": 13.172,
+   "max_current_chassis_a": 22.0,
+   "max_current_power_transmission_a": 3.7,
+   "source": "https://www.powerstream.com/Wire_Size.htm",
+   "basis": "estimate"
+  },
+  {
+   "awg": 17,
+   "diameter_mm": 1.1506,
+   "area_mm2": 1.04,
+   "resistance_ohm_per_km": 16.61,
+   "max_current_chassis_a": 19.0,
+   "max_current_power_transmission_a": 2.9,
+   "source": "https://www.powerstream.com/Wire_Size.htm",
+   "basis": "estimate"
+  },
+  {
+   "awg": 18,
+   "diameter_mm": 1.0236,
+   "area_mm2": 0.823,
+   "resistance_ohm_per_km": 20.943,
+   "max_current_chassis_a": 16.0,
+   "max_current_power_transmission_a": 2.3,
+   "source": "https://www.powerstream.com/Wire_Size.htm",
+   "basis": "estimate"
+  },
+  {
+   "awg": 19,
+   "diameter_mm": 0.9119,
+   "area_mm2": 0.653,
+   "resistance_ohm_per_km": 26.407,
+   "max_current_chassis_a": 14.0,
+   "max_current_power_transmission_a": 1.8,
+   "source": "https://www.powerstream.com/Wire_Size.htm",
+   "basis": "estimate"
+  },
+  {
+   "awg": 20,
+   "diameter_mm": 0.8128,
+   "area_mm2": 0.519,
+   "resistance_ohm_per_km": 33.292,
+   "max_current_chassis_a": 11.0,
+   "max_current_power_transmission_a": 1.5,
+   "source": "https://www.powerstream.com/Wire_Size.htm",
+   "basis": "estimate"
+  },
+  {
+   "awg": 21,
+   "diameter_mm": 0.7239,
+   "area_mm2": 0.412,
+   "resistance_ohm_per_km": 41.984,
+   "max_current_chassis_a": 9.0,
+   "max_current_power_transmission_a": 1.2,
+   "source": "https://www.powerstream.com/Wire_Size.htm",
+   "basis": "estimate"
+  },
+  {
+   "awg": 22,
+   "diameter_mm": 0.6452,
+   "area_mm2": 0.327,
+   "resistance_ohm_per_km": 52.939,
+   "max_current_chassis_a": 7.0,
+   "max_current_power_transmission_a": 0.92,
+   "source": "https://www.powerstream.com/Wire_Size.htm",
+   "basis": "estimate"
+  },
+  {
+   "awg": 23,
+   "diameter_mm": 0.574,
+   "area_mm2": 0.259,
+   "resistance_ohm_per_km": 66.781,
+   "max_current_chassis_a": 4.7,
+   "max_current_power_transmission_a": 0.729,
+   "source": "https://www.powerstream.com/Wire_Size.htm",
+   "basis": "estimate"
+  },
+  {
+   "awg": 24,
+   "diameter_mm": 0.5105,
+   "area_mm2": 0.205,
+   "resistance_ohm_per_km": 84.198,
+   "max_current_chassis_a": 3.5,
+   "max_current_power_transmission_a": 0.577,
+   "source": "https://www.powerstream.com/Wire_Size.htm",
+   "basis": "estimate"
+  },
+  {
+   "awg": 25,
+   "diameter_mm": 0.4547,
+   "area_mm2": 0.162,
+   "resistance_ohm_per_km": 106.174,
+   "max_current_chassis_a": 2.7,
+   "max_current_power_transmission_a": 0.457,
+   "source": "https://www.powerstream.com/Wire_Size.htm",
+   "basis": "estimate"
+  },
+  {
+   "awg": 26,
+   "diameter_mm": 0.4039,
+   "area_mm2": 0.128,
+   "resistance_ohm_per_km": 133.857,
+   "max_current_chassis_a": 2.2,
+   "max_current_power_transmission_a": 0.361,
+   "source": "https://www.powerstream.com/Wire_Size.htm",
+   "basis": "estimate"
+  },
+  {
+   "awg": 27,
+   "diameter_mm": 0.3607,
+   "area_mm2": 0.102,
+   "resistance_ohm_per_km": 168.822,
+   "max_current_chassis_a": 1.7,
+   "max_current_power_transmission_a": 0.288,
+   "source": "https://www.powerstream.com/Wire_Size.htm",
+   "basis": "estimate"
+  },
+  {
+   "awg": 28,
+   "diameter_mm": 0.32,
+   "area_mm2": 0.08,
+   "resistance_ohm_per_km": 212.872,
+   "max_current_chassis_a": 1.4,
+   "max_current_power_transmission_a": 0.226,
+   "source": "https://www.powerstream.com/Wire_Size.htm",
+   "basis": "estimate"
+  },
+  {
+   "awg": 29,
+   "diameter_mm": 0.287,
+   "area_mm2": 0.0647,
+   "resistance_ohm_per_km": 268.402,
+   "max_current_chassis_a": 1.2,
+   "max_current_power_transmission_a": 0.182,
+   "source": "https://www.powerstream.com/Wire_Size.htm",
+   "basis": "estimate"
+  },
+  {
+   "awg": 30,
+   "diameter_mm": 0.254,
+   "area_mm2": 0.0507,
+   "resistance_ohm_per_km": 338.496,
+   "max_current_chassis_a": 0.86,
+   "max_current_power_transmission_a": 0.142,
+   "source": "https://www.powerstream.com/Wire_Size.htm",
+   "basis": "estimate"
+  },
+  {
+   "awg": 31,
+   "diameter_mm": 0.2261,
+   "area_mm2": 0.0401,
+   "resistance_ohm_per_km": 426.728,
+   "max_current_chassis_a": 0.7,
+   "max_current_power_transmission_a": 0.113,
+   "source": "https://www.powerstream.com/Wire_Size.htm",
+   "basis": "estimate"
+  },
+  {
+   "awg": 32,
+   "diameter_mm": 0.2032,
+   "area_mm2": 0.0324,
+   "resistance_ohm_per_km": 538.248,
+   "max_current_chassis_a": 0.53,
+   "max_current_power_transmission_a": 0.091,
+   "source": "https://www.powerstream.com/Wire_Size.htm",
+   "basis": "estimate"
+  }
+ ]
+}

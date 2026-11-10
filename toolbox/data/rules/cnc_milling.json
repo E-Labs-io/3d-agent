@@ -1,0 +1,217 @@
+{
+ "process": "cnc_milling",
+ "title": "3-axis CNC milling of metals and plastics",
+ "fetched": "2026-11-10",
+ "about": "Limits read from published design guides. Where guides disagree the limit carries 'range' and every source is listed with what it says.",
+ "rules": [
+  {
+   "id": "cnc_min_wall_metal",
+   "description": "Minimum wall thickness, metals",
+   "parameter": "min_wall_mm",
+   "limit": {
+    "min": 0.5,
+    "recommended": 0.8,
+    "unit": "mm"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-cnc-machining/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-cnc-machining/",
+     "says": "Recommended 0.8 mm, feasible 0.5 mm"
+    },
+    {
+     "source": "https://www.protolabs.com/services/cnc-machining/cnc-milling/design-guidelines/",
+     "says": "Features recommended thicker than 0.51 mm; nominal part thickness above 1.02 mm required"
+    }
+   ]
+  },
+  {
+   "id": "cnc_min_wall_plastic",
+   "description": "Minimum wall thickness, plastics",
+   "parameter": "min_wall_plastic_mm",
+   "limit": {
+    "min": 1.0,
+    "recommended": 1.5,
+    "unit": "mm"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-cnc-machining/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-cnc-machining/",
+     "says": "Recommended 1.5 mm, feasible 1.0 mm"
+    }
+   ]
+  },
+  {
+   "id": "cnc_corner_radius",
+   "description": "Internal vertical corner radius as a fraction of cavity depth",
+   "parameter": "min_internal_corner_radius_x_depth",
+   "limit": {
+    "recommended": 0.333,
+    "unit": "x cavity depth"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-cnc-machining/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-cnc-machining/",
+     "says": "Vertical corner radius: one third of cavity depth or larger; add about 1 mm above the tool radius for a better finish"
+    },
+    {
+     "source": "https://www.protolabs.com/services/cnc-machining/cnc-milling/design-guidelines/",
+     "says": "Sharp inside corners are radiused to the tool radius"
+    }
+   ]
+  },
+  {
+   "id": "cnc_floor_radius",
+   "description": "Floor (bottom edge) radius",
+   "parameter": "floor_radius_mm",
+   "limit": {
+    "recommended": 0.5,
+    "options": [
+     0,
+     0.5,
+     1.0
+    ],
+    "unit": "mm"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-cnc-machining/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-cnc-machining/",
+     "says": "Recommended 0.5 mm, 1 mm or no radius"
+    }
+   ]
+  },
+  {
+   "id": "cnc_cavity_depth",
+   "description": "Maximum cavity depth as a multiple of its width",
+   "parameter": "max_cavity_depth_x_width",
+   "limit": {
+    "recommended": 4,
+    "unit": "x cavity width"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-cnc-machining/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-cnc-machining/",
+     "says": "Limit cavity depth to four times its width; over six tool diameters is deep milling"
+    },
+    {
+     "source": "https://www.protolabs.com/services/cnc-machining/cnc-milling/design-guidelines/",
+     "says": "Maximum milled depth 50.8 mm from either side"
+    }
+   ]
+  },
+  {
+   "id": "cnc_min_hole",
+   "description": "Minimum hole or tool diameter",
+   "parameter": "min_hole_diameter_mm",
+   "limit": {
+    "min": 1.0,
+    "recommended": 2.5,
+    "unit": "mm"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-cnc-machining/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-cnc-machining/",
+     "says": "Any diameter over 1 mm is feasible; 2.5 mm is the recommended minimum tool, below that is micro-machining"
+    }
+   ]
+  },
+  {
+   "id": "cnc_hole_depth",
+   "description": "Maximum hole depth as a multiple of diameter",
+   "parameter": "max_hole_depth_x_diameter",
+   "limit": {
+    "recommended": 4,
+    "typical": 10,
+    "max": 40,
+    "unit": "x diameter"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-cnc-machining/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-cnc-machining/",
+     "says": "Recommended 4x, typical 10x, feasible 40x nominal diameter"
+    }
+   ]
+  },
+  {
+   "id": "cnc_thread_size",
+   "description": "Thread size",
+   "parameter": "min_thread_size_mm",
+   "limit": {
+    "min": 1,
+    "recommended": 6,
+    "unit": "mm nominal (M)"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-cnc-machining/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-cnc-machining/",
+     "says": "Minimum M1, recommended M6 or larger"
+    },
+    {
+     "source": "https://www.protolabs.com/services/cnc-machining/cnc-milling/design-guidelines/",
+     "says": "Automated factory supports M2 to M12 and #2 to 1/2 in UNC/UNF"
+    }
+   ]
+  },
+  {
+   "id": "cnc_thread_length",
+   "description": "Thread engagement length as a multiple of nominal diameter",
+   "parameter": "thread_length_x_diameter",
+   "limit": {
+    "min": 1.5,
+    "recommended": 3,
+    "unit": "x diameter"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-cnc-machining/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-cnc-machining/",
+     "says": "Minimum 1.5x, recommended 3x nominal diameter"
+    }
+   ]
+  },
+  {
+   "id": "cnc_tolerance",
+   "description": "Achievable dimensional tolerance",
+   "parameter": "tolerance_mm",
+   "limit": {
+    "typical": 0.1,
+    "min": 0.02,
+    "unit": "mm"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-cnc-machining/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-cnc-machining/",
+     "says": "Typical +/-0.1 mm, feasible +/-0.02 mm"
+    },
+    {
+     "source": "https://www.protolabs.com/services/cnc-machining/cnc-milling/design-guidelines/",
+     "says": "+/-0.13 mm at the automated facility"
+    }
+   ]
+  },
+  {
+   "id": "cnc_text",
+   "description": "Engraved text",
+   "parameter": "min_text_height_mm",
+   "limit": {
+    "recommended": 5,
+    "unit": "mm"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-cnc-machining/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-cnc-machining/",
+     "says": "Font size 20 or larger, 5 mm engraved"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,296 @@
+{
+ "process": "sla",
+ "title": "Stereolithography / masked SLA resin printing",
+ "fetched": "2026-11-10",
+ "about": "Limits read from published design guides. Where guides disagree the limit carries 'range' and every source is listed with what it says.",
+ "rules": [
+  {
+   "id": "sla_min_wall_supported",
+   "description": "Minimum wall connected on two or more sides",
+   "parameter": "min_wall_mm",
+   "limit": {
+    "min": 0.2,
+    "recommended": 0.4,
+    "range": [
+     0.2,
+     0.4
+    ],
+    "unit": "mm"
+   },
+   "source": "https://support.formlabs.com/s/article/Design-specifications-for-3D-models-form-3",
+   "sources": [
+    {
+     "source": "https://support.formlabs.com/s/article/Design-specifications-for-3D-models-form-3",
+     "says": "Supported wall: 0.2 mm (Form 3)"
+    },
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-sla-3d-printing/",
+     "says": "Supported walls at least 0.4 mm thick"
+    }
+   ],
+   "note": "Guides disagree; both recorded."
+  },
+  {
+   "id": "sla_min_wall_unsupported",
+   "description": "Minimum wall connected on fewer than two sides",
+   "parameter": "min_unsupported_wall_mm",
+   "limit": {
+    "min": 0.2,
+    "recommended": 0.6,
+    "range": [
+     0.2,
+     0.6
+    ],
+    "unit": "mm"
+   },
+   "source": "https://support.formlabs.com/s/article/Design-specifications-for-3D-models-form-3",
+   "sources": [
+    {
+     "source": "https://support.formlabs.com/s/article/Design-specifications-for-3D-models-form-3",
+     "says": "Unsupported wall: 0.2 mm (Form 3)"
+    },
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-sla-3d-printing/",
+     "says": "Unsupported walls at least 0.6 mm thick with filleted bases"
+    }
+   ],
+   "note": "Guides disagree; both recorded."
+  },
+  {
+   "id": "sla_overhang_length",
+   "description": "Maximum unsupported horizontal overhang length",
+   "parameter": "max_overhang_length_mm",
+   "limit": {
+    "max": 1.0,
+    "range": [
+     1.0,
+     5.0
+    ],
+    "unit": "mm"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-sla-3d-printing/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-sla-3d-printing/",
+     "says": "Unsupported overhangs less than 1.0 mm long"
+    },
+    {
+     "source": "https://support.formlabs.com/s/article/Design-specifications-for-3D-models-form-3",
+     "says": "Horizontal overhangs beyond 5 mm do not completely form"
+    }
+   ],
+   "note": "Guides disagree; both recorded."
+  },
+  {
+   "id": "sla_overhang_angle",
+   "description": "Minimum unsupported overhang angle, measured from level",
+   "parameter": "min_overhang_angle_from_level_deg",
+   "limit": {
+    "min": 19,
+    "range": [
+     10,
+     19
+    ],
+    "unit": "deg from horizontal"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-sla-3d-printing/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-sla-3d-printing/",
+     "says": "Unsupported overhangs at least 19 degrees from level"
+    },
+    {
+     "source": "https://support.formlabs.com/s/article/Design-specifications-for-3D-models-form-3",
+     "says": "10 degrees from level (35 mm long x 10 mm wide x 3 mm thick)"
+    }
+   ],
+   "note": "Guides disagree; both recorded."
+  },
+  {
+   "id": "sla_bridge",
+   "description": "Maximum horizontal span between supports",
+   "parameter": "max_bridge_length_mm",
+   "limit": {
+    "max": 21,
+    "range": [
+     21,
+     29
+    ],
+    "unit": "mm"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-sla-3d-printing/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-sla-3d-printing/",
+     "says": "Wide horizontal bridges shorter than 21 mm"
+    },
+    {
+     "source": "https://support.formlabs.com/s/article/Design-specifications-for-3D-models-form-3",
+     "says": "Span of 29 mm for a 5 mm wide x 3 mm thick beam; wider beams must be shorter"
+    }
+   ]
+  },
+  {
+   "id": "sla_min_hole",
+   "description": "Minimum hole diameter before holes close up",
+   "parameter": "min_hole_diameter_mm",
+   "limit": {
+    "min": 0.5,
+    "range": [
+     0.5,
+     0.8
+    ],
+    "unit": "mm"
+   },
+   "source": "https://support.formlabs.com/s/article/Design-specifications-for-3D-models-form-3",
+   "sources": [
+    {
+     "source": "https://support.formlabs.com/s/article/Design-specifications-for-3D-models-form-3",
+     "says": "Holes under 0.5 mm in X, Y and Z may close"
+    },
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-sla-3d-printing/",
+     "says": "Text says holes under 0.8 mm may close; its summary table says minimum 0.5 mm"
+    }
+   ]
+  },
+  {
+   "id": "sla_embossed",
+   "description": "Minimum embossed detail height",
+   "parameter": "min_embossed_detail_mm",
+   "limit": {
+    "min": 0.1,
+    "unit": "mm"
+   },
+   "source": "https://support.formlabs.com/s/article/Design-specifications-for-3D-models-form-3",
+   "sources": [
+    {
+     "source": "https://support.formlabs.com/s/article/Design-specifications-for-3D-models-form-3",
+     "says": "Embossed details under 0.1 mm may not be visible"
+    },
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-sla-3d-printing/",
+     "says": "At least 0.1 mm in height"
+    }
+   ]
+  },
+  {
+   "id": "sla_engraved",
+   "description": "Minimum engraved detail width and depth",
+   "parameter": "min_engraved_detail_mm",
+   "limit": {
+    "min": 0.15,
+    "recommended": 0.4,
+    "range": [
+     0.15,
+     0.4
+    ],
+    "unit": "mm"
+   },
+   "source": "https://support.formlabs.com/s/article/Design-specifications-for-3D-models-form-3",
+   "sources": [
+    {
+     "source": "https://support.formlabs.com/s/article/Design-specifications-for-3D-models-form-3",
+     "says": "Engraved details under 0.15 mm deep or wide may fuse"
+    },
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-sla-3d-printing/",
+     "says": "At least 0.4 mm wide and 0.4 mm thick"
+    }
+   ]
+  },
+  {
+   "id": "sla_clearance",
+   "description": "Clearance between moving parts",
+   "parameter": "clearance_fit_mm",
+   "limit": {
+    "min": 0.5,
+    "unit": "mm"
+   },
+   "source": "https://support.formlabs.com/s/article/Design-specifications-for-3D-models-form-3",
+   "sources": [
+    {
+     "source": "https://support.formlabs.com/s/article/Design-specifications-for-3D-models-form-3",
+     "says": "Parts may fuse if clearance is less than 0.5 mm"
+    },
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-sla-3d-printing/",
+     "says": "0.5 mm between moving parts, 0.2 mm for assembly connections, 0.1 mm for a push or snug fit"
+    }
+   ]
+  },
+  {
+   "id": "sla_clearance_assembly",
+   "description": "Clearance for assembly connections",
+   "parameter": "clearance_assembly_mm",
+   "limit": {
+    "recommended": 0.2,
+    "unit": "mm"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-sla-3d-printing/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-sla-3d-printing/",
+     "says": "Use 0.2 mm clearance for assembly connections"
+    }
+   ]
+  },
+  {
+   "id": "sla_clearance_snug",
+   "description": "Clearance for a push or snug fit",
+   "parameter": "clearance_snug_mm",
+   "limit": {
+    "recommended": 0.1,
+    "unit": "mm"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-sla-3d-printing/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-sla-3d-printing/",
+     "says": "Use 0.1 mm clearance for a push or snug fit"
+    }
+   ]
+  },
+  {
+   "id": "sla_drain_hole",
+   "description": "Minimum drain hole diameter for hollow parts",
+   "parameter": "min_drain_hole_diameter_mm",
+   "limit": {
+    "min": 2.5,
+    "recommended": 3.5,
+    "range": [
+     2.5,
+     3.5
+    ],
+    "unit": "mm"
+   },
+   "source": "https://support.formlabs.com/s/article/Design-specifications-for-3D-models-form-3",
+   "sources": [
+    {
+     "source": "https://support.formlabs.com/s/article/Design-specifications-for-3D-models-form-3",
+     "says": "Drain holes of at least 2.5 mm diameter"
+    },
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-sla-3d-printing/",
+     "says": "Drain holes at least 3.5 mm diameter, one per hollow section"
+    }
+   ]
+  },
+  {
+   "id": "sla_hollow_wall",
+   "description": "Minimum wall of a hollowed part",
+   "parameter": "min_hollow_wall_mm",
+   "limit": {
+    "min": 2.0,
+    "unit": "mm"
+   },
+   "source": "https://www.hubs.com/knowledge-base/how-design-parts-sla-3d-printing/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/knowledge-base/how-design-parts-sla-3d-printing/",
+     "says": "Keep the walls of a hollowed print at least 2 mm thick"
+    }
+   ]
+  }
+ ]
+}

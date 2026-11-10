@@ -1,0 +1,96 @@
+{
+  "about": "Design libraries that are NOT queried automatically. design_links only builds a search URL for a human to open. Terms pages returned HTTP 403 or empty to an automated fetch on 2026-11-10, so reuse terms are not confirmed here: read the licence on each model page. Search URL patterns are untested for the same reason (no automated requests were made to these sites).",
+  "sites": [
+    {
+      "id": "printables",
+      "name": "Printables",
+      "search_url": "https://www.printables.com/search/models?q={q}",
+      "hosts": [
+        "printables.com"
+      ],
+      "terms_url": "https://www.printables.com/terms-of-service",
+      "terms_confirmed": false,
+      "reuse_note": "Not confirmed (terms page refused automated fetch). Check the licence shown on the model page.",
+      "source": "https://www.printables.com/terms-of-service",
+      "search_url_verified": false
+    },
+    {
+      "id": "makerworld",
+      "name": "MakerWorld",
+      "search_url": "https://makerworld.com/en/search/models?keyword={q}",
+      "hosts": [
+        "makerworld.com"
+      ],
+      "terms_url": "https://makerworld.com/",
+      "terms_confirmed": false,
+      "reuse_note": "Not confirmed (terms page not located; see the site footer). Check the licence shown on the model page.",
+      "source": "https://makerworld.com/",
+      "search_url_verified": false
+    },
+    {
+      "id": "thingiverse",
+      "name": "Thingiverse",
+      "search_url": "https://www.thingiverse.com/search?q={q}&type=things",
+      "hosts": [
+        "thingiverse.com"
+      ],
+      "terms_url": "https://www.thingiverse.com/legal/terms",
+      "terms_confirmed": false,
+      "reuse_note": "Not confirmed (terms page refused automated fetch). Check the licence shown on the thing page.",
+      "source": "https://www.thingiverse.com/legal/terms",
+      "search_url_verified": false
+    },
+    {
+      "id": "grabcad",
+      "name": "GrabCAD Community Library",
+      "search_url": "https://grabcad.com/library?query={q}",
+      "hosts": [
+        "grabcad.com"
+      ],
+      "terms_url": "https://grabcad.com/terms",
+      "terms_confirmed": false,
+      "reuse_note": "Not confirmed (terms page refused automated fetch). Read the terms before any commercial reuse.",
+      "source": "https://grabcad.com/terms",
+      "search_url_verified": false
+    },
+    {
+      "id": "thangs",
+      "name": "Thangs",
+      "search_url": "https://thangs.com/search/{q}?scope=all",
+      "hosts": [
+        "thangs.com"
+      ],
+      "terms_url": "https://thangs.com/",
+      "terms_confirmed": false,
+      "reuse_note": "Not confirmed (terms page not located; see the site footer). Thangs indexes other sites; the licence is set where the model is hosted.",
+      "source": "https://thangs.com/",
+      "search_url_verified": false
+    },
+    {
+      "id": "traceparts",
+      "name": "TraceParts",
+      "search_url": "https://www.traceparts.com/en/search?Keywords={q}",
+      "hosts": [
+        "traceparts.com"
+      ],
+      "terms_url": "https://www.traceparts.com/",
+      "terms_confirmed": false,
+      "reuse_note": "Not confirmed (terms page not located; see the site footer). Supplier catalogue CAD; needs a free account to download.",
+      "source": "https://www.traceparts.com/",
+      "search_url_verified": false
+    },
+    {
+      "id": "mcmaster",
+      "name": "McMaster-Carr",
+      "search_url": "https://www.mcmaster.com/{q}",
+      "hosts": [
+        "mcmaster.com"
+      ],
+      "terms_url": "https://www.mcmaster.com/help/terms-and-conditions/",
+      "terms_confirmed": false,
+      "reuse_note": "Not confirmed (terms page returned no text to an automated fetch). Part CAD is downloaded by hand from the product page.",
+      "source": "https://www.mcmaster.com/help/terms-and-conditions/",
+      "search_url_verified": false
+    }
+  ]
+}

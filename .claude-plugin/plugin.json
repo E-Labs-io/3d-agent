@@ -1,7 +1,7 @@
 {
   "name": "3d-agent",
-  "version": "0.2.0",
-  "description": "Live AI-powered 3D design environment. Build, modify and export 3D objects via chat with realtime viewer at http://localhost:3030. Includes Engineer/Designer + 3D Specialist + Manager subagents for full product-design workflow.",
+  "version": "0.3.0",
+  "description": "Engineering design environment for Claude: parametric CAD on a real kernel, automated design checks, stress analysis, sourced materials and standards, projected drawings, BOM with supplier links, circuits and wiring, print estimates and printer links, with a live 3D viewer.",
   "author": {
     "name": "E-Labs",
     "url": "https://github.com/e-labs"
@@ -10,35 +10,34 @@
   "keywords": [
     "3d",
     "cad",
+    "step",
     "design",
     "3d-printing",
-    "manufacturing",
+    "fea",
     "engineering",
-    "viewer",
-    "three.js",
-    "drone",
-    "rocket",
-    "product-design"
+    "bom",
+    "electronics",
+    "viewer"
   ],
   "agents": [
-    "./agents/engineer-designer.md",
-    "./agents/3d-specialist.md",
-    "./agents/manager.md",
-    "./agents/3d-modeler.md",
-    "./agents/3d-printing.md",
-    "./agents/manufacturing.md",
-    "./agents/materials.md",
-    "./agents/cad-designer.md"
+    "./agents/engineer.md",
+    "./agents/cad-builder.md",
+    "./agents/analyst.md",
+    "./agents/electronics.md",
+    "./agents/manager.md"
   ],
   "commands": [
+    "./commands/3d-setup.md",
     "./commands/3d-start.md",
     "./commands/3d-stop.md",
+    "./commands/3d-status.md",
     "./commands/3d-new.md",
     "./commands/3d-design.md",
+    "./commands/3d-check.md",
     "./commands/3d-bom.md",
     "./commands/3d-plans.md",
-    "./commands/3d-bundle.md",
-    "./commands/3d-status.md"
+    "./commands/3d-bundle.md"
   ],
-  "skills": "./skills"
+  "skills": "./skills",
+  "mcpServers": "./.mcp.json"
 }

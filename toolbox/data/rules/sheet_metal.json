@@ -1,0 +1,249 @@
+{
+ "process": "sheet_metal",
+ "title": "Laser-cut and press-brake-bent sheet metal",
+ "fetched": "2026-11-10",
+ "about": "Limits read from published design guides. Where guides disagree the limit carries 'range' and every source is listed with what it says.",
+ "rules": [
+  {
+   "id": "sm_thickness",
+   "description": "Sheet thickness range",
+   "parameter": "sheet_thickness_mm",
+   "limit": {
+    "min": 0.5,
+    "max": 6.35,
+    "range": [
+     0.5,
+     10
+    ],
+    "unit": "mm"
+   },
+   "source": "https://www.protolabs.com/services/sheet-metal-fabrication/design-guidelines/",
+   "sources": [
+    {
+     "source": "https://www.protolabs.com/services/sheet-metal-fabrication/design-guidelines/",
+     "says": "Sheet thickness from 0.609 mm to 6.35 mm"
+    },
+    {
+     "source": "https://www.hubs.com/guides/sheet-metal-fabrication/",
+     "says": "0.5-10 mm for laser cutting, 0.5-6 mm for bending"
+    }
+   ]
+  },
+  {
+   "id": "sm_bend_radius",
+   "description": "Minimum inside bend radius as a multiple of thickness",
+   "parameter": "min_bend_radius_x_thickness",
+   "limit": {
+    "min": 1.0,
+    "unit": "x thickness"
+   },
+   "source": "https://www.hubs.com/guides/sheet-metal-fabrication/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/guides/sheet-metal-fabrication/",
+     "says": "Keep interior bend radii at least as large as the material thickness"
+    },
+    {
+     "source": "https://www.protolabs.com/services/sheet-metal-fabrication/design-guidelines/",
+     "says": "Standard tooling radii 0.762, 1.524, 2.286 and 3.048 mm; use the same radius on all bends"
+    }
+   ]
+  },
+  {
+   "id": "sm_flange_length",
+   "description": "Minimum flange length as a multiple of thickness",
+   "parameter": "min_flange_length_x_thickness",
+   "limit": {
+    "min": 4.0,
+    "unit": "x thickness"
+   },
+   "source": "https://www.protolabs.com/services/sheet-metal-fabrication/design-guidelines/",
+   "sources": [
+    {
+     "source": "https://www.protolabs.com/services/sheet-metal-fabrication/design-guidelines/",
+     "says": "Flange length must be at least 4 times the material thickness"
+    }
+   ]
+  },
+  {
+   "id": "sm_min_hole",
+   "description": "Minimum hole or slot diameter as a multiple of thickness",
+   "parameter": "min_hole_diameter_x_thickness",
+   "limit": {
+    "min": 1.0,
+    "unit": "x thickness"
+   },
+   "source": "https://www.protolabs.com/services/sheet-metal-fabrication/design-guidelines/",
+   "sources": [
+    {
+     "source": "https://www.protolabs.com/services/sheet-metal-fabrication/design-guidelines/",
+     "says": "Holes and slots a minimum of material thickness in diameter"
+    },
+    {
+     "source": "https://www.hubs.com/guides/sheet-metal-fabrication/",
+     "says": "Specify hole diameters larger than the sheet thickness"
+    }
+   ]
+  },
+  {
+   "id": "sm_hole_to_edge",
+   "description": "Minimum hole to edge distance",
+   "parameter": "min_hole_to_edge_x_thickness",
+   "limit": {
+    "min": 1.0,
+    "unit": "x thickness"
+   },
+   "source": "https://www.hubs.com/guides/sheet-metal-fabrication/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/guides/sheet-metal-fabrication/",
+     "says": "Holes at least the sheet thickness from the edge"
+    },
+    {
+     "source": "https://www.protolabs.com/services/sheet-metal-fabrication/design-guidelines/",
+     "says": "1.574 mm from the edge for sheet 0.914 mm or thinner; at least 3.175 mm for thicker sheet"
+    }
+   ]
+  },
+  {
+   "id": "sm_hole_spacing",
+   "description": "Minimum spacing between holes",
+   "parameter": "min_hole_spacing_x_thickness",
+   "limit": {
+    "min": 2.0,
+    "unit": "x thickness"
+   },
+   "source": "https://www.hubs.com/guides/sheet-metal-fabrication/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/guides/sheet-metal-fabrication/",
+     "says": "Space holes at least 2 times the sheet thickness apart"
+    }
+   ]
+  },
+  {
+   "id": "sm_hole_to_bend",
+   "description": "Minimum distance from a hole or feature to a bend",
+   "parameter": "min_hole_to_bend_x_thickness",
+   "limit": {
+    "min": 2.0,
+    "recommended": 4.0,
+    "range": [
+     2.0,
+     4.0
+    ],
+    "unit": "x thickness"
+   },
+   "source": "https://www.hubs.com/guides/sheet-metal-fabrication/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/guides/sheet-metal-fabrication/",
+     "says": "Holes at least 2 times the sheet thickness from the start of the bend radius"
+    },
+    {
+     "source": "https://www.protolabs.com/services/sheet-metal-fabrication/design-guidelines/",
+     "says": "Features within about 4x material thickness of a bend are at risk of deformation"
+    }
+   ]
+  },
+  {
+   "id": "sm_notch",
+   "description": "Minimum notch width",
+   "parameter": "min_notch_width_mm",
+   "limit": {
+    "min": 1.016,
+    "factor_x_thickness": 1.0,
+    "unit": "mm"
+   },
+   "source": "https://www.protolabs.com/services/sheet-metal-fabrication/design-guidelines/",
+   "sources": [
+    {
+     "source": "https://www.protolabs.com/services/sheet-metal-fabrication/design-guidelines/",
+     "says": "Notches at least the material thickness or 1.016 mm, whichever is greater, and no longer than 5 times their width"
+    }
+   ]
+  },
+  {
+   "id": "sm_tab",
+   "description": "Minimum tab width",
+   "parameter": "min_tab_width_mm",
+   "limit": {
+    "min": 3.2,
+    "factor_x_thickness": 2.0,
+    "unit": "mm"
+   },
+   "source": "https://www.protolabs.com/services/sheet-metal-fabrication/design-guidelines/",
+   "sources": [
+    {
+     "source": "https://www.protolabs.com/services/sheet-metal-fabrication/design-guidelines/",
+     "says": "Tabs at least 2 times the material thickness or 3.2 mm, whichever is greater, and no longer than 5 times their width"
+    }
+   ]
+  },
+  {
+   "id": "sm_hem",
+   "description": "Hem inside diameter and return length",
+   "parameter": "hem_return_x_thickness",
+   "limit": {
+    "recommended": 6.0,
+    "unit": "x thickness"
+   },
+   "source": "https://www.protolabs.com/services/sheet-metal-fabrication/design-guidelines/",
+   "sources": [
+    {
+     "source": "https://www.protolabs.com/services/sheet-metal-fabrication/design-guidelines/",
+     "says": "Minimum hem inside diameter equal to material thickness; return length 6x thickness"
+    }
+   ]
+  },
+  {
+   "id": "sm_bend_angle_tolerance",
+   "description": "Bend angle tolerance",
+   "parameter": "bend_angle_tolerance_deg",
+   "limit": {
+    "typical": 1.0,
+    "unit": "deg"
+   },
+   "source": "https://www.protolabs.com/services/sheet-metal-fabrication/design-guidelines/",
+   "sources": [
+    {
+     "source": "https://www.protolabs.com/services/sheet-metal-fabrication/design-guidelines/",
+     "says": "+/-1 degree on all bend angles"
+    }
+   ]
+  },
+  {
+   "id": "sm_kerf",
+   "description": "Laser cutting kerf",
+   "parameter": "laser_kerf_mm",
+   "limit": {
+    "typical": 0.3,
+    "unit": "mm"
+   },
+   "source": "https://www.hubs.com/guides/sheet-metal-fabrication/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/guides/sheet-metal-fabrication/",
+     "says": "Laser cutting kerf about 0.3 mm on average"
+    }
+   ]
+  },
+  {
+   "id": "sm_k_factor",
+   "description": "K-factor for flat patterns",
+   "parameter": "k_factor",
+   "limit": {
+    "min": 0.3,
+    "max": 0.5,
+    "unit": "ratio"
+   },
+   "source": "https://www.hubs.com/guides/sheet-metal-fabrication/",
+   "sources": [
+    {
+     "source": "https://www.hubs.com/guides/sheet-metal-fabrication/",
+     "says": "K-factor ranges 0.3-0.5 by material, bend radius and method (table in the guide)"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,31 @@
+[project]
+name = "threed-agent-toolbox"
+version = "0.3.0"
+description = "Engineering tools for the 3D Agent plugin, served over MCP"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "build123d==0.13.0",
+  "bd_warehouse==0.4.0",
+  "trimesh==5.2.0",
+  "manifold3d==3.5.4",
+  "gmsh==4.15.2",
+  "mcp>=1.2",
+  "numpy",
+  "scipy",
+  "httpx",
+  "pyyaml",
+  "scikit-fem>=12.0.2",
+  "meshio>=5.3.5",
+  "rtree>=1.4.1",
+]
+
+[project.optional-dependencies]
+extras = ["augura", "isofits", "dimstack", "PyNiteFEA", "skidl", "spicelib"]
+
+[tool.uv]
+package = false
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+]
