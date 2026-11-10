@@ -172,6 +172,7 @@
       <button class="view-btn" id="vbtn-side" title="Side view">S</button>
       <button class="view-btn" id="vbtn-fit" title="Fit all in view">⊡</button>
     </div>
+    <div id="nav-hint">✋ Pan mode — drag to move</div>
     <div id="toast-container"></div>
   </div>
 
@@ -399,9 +400,10 @@
 <!-- ── Export modal ──────────────────────────────────────────────── -->
 <div id="export-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:300; align-items:center; justify-content:center;">
   <div style="background:var(--panel); border:1px solid var(--border); border-radius:6px; padding:20px; width:320px;">
-    <h3 style="margin-bottom:16px; font-size:14px;">Export Scene</h3>
+    <h3 style="margin-bottom:12px; font-size:14px;">Export Scene</h3>
+    <div id="export-parts-summary" style="margin-bottom:14px; font-size:11px; color:var(--muted); line-height:1.5;"></div>
     <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:16px;">
-      <button class="btn" data-format="stl">STL — 3D Printing / CAD</button>
+      <button class="btn" data-format="stl">STL — one file per print part</button>
       <button class="btn" data-format="obj">OBJ — Universal 3D</button>
       <button class="btn" data-format="gltf">GLTF — Game / Web 3D</button>
       <button class="btn" data-format="glb">GLB — Game / Web 3D (binary)</button>

@@ -1,0 +1,6 @@
+node_modules/
+.DS_Store
+exports/
+uploads/
+dist/
+.claude/worktrees/

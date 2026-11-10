@@ -139,3 +139,19 @@ If the user asks for any of these, that's you:
 - "Status update for stakeholders"
 - "What's it going to cost?"
 - "Lead times?"
+
+---
+
+## MANDATORY: validate JSON after every write
+
+Scene JSON is parsed strictly. **JSON has no arithmetic** — `"position": [-171.65, 2.4 + 17.5, 63.4]` is invalid and kills the whole parse silently. Compute the value yourself and write the literal: `"position": [-171.65, 19.9, 63.4]`.
+
+After **every** write to `scene/current.json`, run this check before reporting done:
+
+```bash
+python3 -c "import json,sys; d=json.load(open('scene/current.json')); print(f'OK — {len(d.get(\"objects\",[]))} objects')"
+```
+
+If it errors, read the reported line, fix it, and re-run until it passes. Never report a scene as written until this check succeeds.
+
+Other things that break the parse: trailing commas, single quotes, unquoted keys, `NaN`/`Infinity`, comments, and unescaped newlines inside `geometry_code` strings.

@@ -1,0 +1,20 @@
+{
+  "name": "3d-agent",
+  "owner": {
+    "name": "E-Labs",
+    "email": "hello@e-labs.co.uk"
+  },
+  "metadata": {
+    "description": "Live AI-powered 3D design environment for Claude Code. Build, modify, and export 3D objects via chat with a real-time viewer at http://localhost:3030.",
+    "version": "0.2.0"
+  },
+  "plugins": [
+    {
+      "name": "3d-agent",
+      "source": "./",
+      "description": "Live 3D design environment. Eight subagents (Engineer/Designer, 3D Specialist, Manager, plus expertise in 3D printing, manufacturing, materials, CAD), eight slash commands, and a Three.js viewer with WebSocket live updates. Single-file .3dap project bundles for sharing.",
+      "category": "design",
+      "tags": ["3d", "cad", "design", "3d-printing", "manufacturing", "engineering", "viewer", "three.js", "drone", "rocket", "product-design"]
+    }
+  ]
+}

@@ -195,3 +195,51 @@ If the user says "group these properly" or "tidy up the scene panel" without spe
 - Single objects
 - Two or three objects that are conceptually one thing (just give them clear names)
 - Group headers themselves count as scene objects in the JSON list, so don't bloat with empty groups
+
+---
+
+## MANDATORY: validate JSON after every write
+
+Scene JSON is parsed strictly. **JSON has no arithmetic** — `"position": [-171.65, 2.4 + 17.5, 63.4]` is invalid and kills the whole parse silently. Compute the value yourself and write the literal: `"position": [-171.65, 19.9, 63.4]`.
+
+After **every** write to `scene/current.json`, run this check before reporting done:
+
+```bash
+python3 -c "import json,sys; d=json.load(open('scene/current.json')); print(f'OK — {len(d.get(\"objects\",[]))} objects')"
+```
+
+If it errors, read the reported line, fix it, and re-run until it passes. Never report a scene as written until this check succeeds.
+
+Other things that break the parse: trailing commas, single quotes, unquoted keys, `NaN`/`Infinity`, comments, and unescaped newlines inside `geometry_code` strings.
+
+---
+
+## Print parts — tag every object
+
+STL export splits the scene into **one file per print part**. Objects are grouped by a `_printPart` field, so tag every object as you build it:
+
+```json
+{ "id": "tray_floor",       "_printPart": "cradle-body" },
+{ "id": "top_plate",        "_printPart": "top-plate", "_printFlip": true },
+{ "id": "device_reference", "_reference": true }
+```
+
+| Field | Meaning |
+|-------|---------|
+| `_printPart` | Name of the physical part this object belongs to. Objects sharing a value merge into one STL. Becomes the filename. |
+| `_printFlip` | `true` rotates the part 180° about X on export. Use when pockets/recesses open downward — flipping puts them face-up so the slicer doesn't have to bridge them. |
+| `_reference` | `true` = fit ghosts, datum aids, the device being housed. **Never exported.** |
+
+**Anything untagged lands in `untagged.stl`** — that's the signal you forgot one, not a valid state.
+
+Give parts that are genuinely separate prints a contrasting material colour so the split is visible in the viewer. A user who sees one colour will reasonably assume one part.
+
+### Deciding the split
+
+One `_printPart` per physical piece that comes off the bed separately. Split when:
+- The assembly can't print in one piece without supports in a place that matters
+- A part needs a different orientation to print well (lids, plates, anything with downward pockets)
+- The user needs to open it for service
+- It exceeds the build volume
+
+Don't split just because objects are in different scene groups — groups are for panel organisation, `_printPart` is for manufacturing. They often differ.

@@ -1,0 +1,46 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "name": "30mm Test Cube",
+    "units": "mm"
+  },
+  "environment": {
+    "background": "#1a1f29",
+    "grid": true,
+    "axes": true,
+    "shadows": true,
+    "gridSize": 200,
+    "gridDivisions": 20
+  },
+  "camera": {
+    "position": [60, 60, 60],
+    "target": [0, 15, 0],
+    "fov": 45
+  },
+  "lights": [
+    { "id": "ambient", "type": "ambient", "color": "#ffffff", "intensity": 0.4 },
+    { "id": "key", "type": "directional", "color": "#ffffff", "intensity": 1.2, "position": [80, 120, 60], "castShadow": true }
+  ],
+  "objects": [
+    {
+      "id": "test_cube_30mm",
+      "name": "30mm Calibration Cube",
+      "type": "box",
+      "params": { "width": 30, "height": 30, "depth": 30 },
+      "material": {
+        "type": "standard",
+        "color": "#f0f0f0",
+        "metalness": 0.0,
+        "roughness": 0.7
+      },
+      "transform": {
+        "position": [0, 15, 0],
+        "rotation": [0, 0, 0],
+        "scale": [1, 1, 1]
+      },
+      "visible": true,
+      "castShadow": true,
+      "receiveShadow": true
+    }
+  ]
+}

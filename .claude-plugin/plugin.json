@@ -1,6 +1,6 @@
 {
   "name": "3d-agent",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Live AI-powered 3D design environment. Build, modify and export 3D objects via chat with realtime viewer at http://localhost:3030. Includes Engineer/Designer + 3D Specialist + Manager subagents for full product-design workflow.",
   "author": {
     "name": "E-Labs",
@@ -40,7 +40,5 @@
     "./commands/3d-bundle.md",
     "./commands/3d-status.md"
   ],
-  "skills": [
-    "./skills/3d-design"
-  ]
+  "skills": "./skills"
 }

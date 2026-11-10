@@ -3,7 +3,6 @@ const http = require('http');
 const WebSocket = require('ws');
 const chokidar = require('chokidar');
 const multer = require('multer');
-const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
 
@@ -26,11 +25,22 @@ if (!fs.existsSync(SCENE_FILE)) {
   fs.writeFileSync(SCENE_FILE, JSON.stringify(defaultScene, null, 2));
 }
 
+const LOCAL_ORIGIN = /^https?:\/\/(localhost|127\.0\.0\.1|\[::1\])(:\d+)?$/;
 const app = express();
 const server = http.createServer(app);
-const wss = new WebSocket.Server({ server });
+const wss = new WebSocket.Server({
+  server,
+  verifyClient: ({ origin }) => !origin || LOCAL_ORIGIN.test(origin)
+});
 
-app.use(cors());
+// The viewer is same-origin, so no CORS headers are sent. This guard also
+// refuses cross-site writes that don't need a preflight (form posts, uploads),
+// so a web page open in the browser can't drive this server.
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (origin && !LOCAL_ORIGIN.test(origin)) return res.status(403).json({ error: 'Cross-origin request refused' });
+  next();
+});
 app.use(express.json({ limit: '50mb' }));
 app.use(express.static(path.join(ROOT, 'public')));
 app.use('/uploads', express.static(UPLOADS_DIR));
@@ -121,7 +131,9 @@ app.post('/api/upload', upload.single('file'), (req, res) => {
 // ── Export endpoint ────────────────────────────────────────────────────────
 app.post('/api/export', (req, res) => {
   try {
-    const { filename, data, encoding } = req.body;
+    const { data, encoding } = req.body;
+    const filename = path.basename(String(req.body.filename || ''));
+    if (!filename || filename.startsWith('.')) return res.status(400).json({ error: 'Invalid filename' });
     const outPath = path.join(EXPORTS_DIR, filename);
     if (encoding === 'base64') {
       fs.writeFileSync(outPath, Buffer.from(data, 'base64'));
@@ -152,6 +164,12 @@ const DOC_FILES = {
   'assembly-instructions': 'assembly-instructions.md',
   'readme':                'README.md'
 };
+
+// Project slugs become directory names under deliverables/, so they must be
+// a single plain path segment.
+function safeSlug(slug) {
+  return typeof slug === 'string' && /^[a-z0-9][a-z0-9._-]*$/i.test(slug) && !slug.includes('..') ? slug : null;
+}
 
 function listProjects() {
   const dir = path.join(ROOT, 'deliverables');
@@ -223,7 +241,7 @@ function readDrawings(projectSlug) {
 app.get('/api/project/bundle', (req, res) => {
   try {
     const scene = JSON.parse(fs.readFileSync(SCENE_FILE, 'utf8'));
-    const slug = req.query.project || activeProject();
+    const slug = safeSlug(req.query.project) || activeProject();
     const docs = readDocs(slug);
     const drawings = readDrawings(slug);
 
@@ -249,7 +267,7 @@ app.get('/api/project/bundle', (req, res) => {
 // List documents only (for the panel — lightweight)
 app.get('/api/project/documents', (req, res) => {
   try {
-    const slug = req.query.project || activeProject();
+    const slug = safeSlug(req.query.project) || activeProject();
     const docs = readDocs(slug);
     const drawings = readDrawings(slug);
     // Strip content for index — just metadata
@@ -268,7 +286,7 @@ app.get('/api/project/documents', (req, res) => {
 // Read one document or drawing
 app.get('/api/project/doc/:slug', (req, res) => {
   try {
-    const slug = req.query.project || activeProject();
+    const slug = safeSlug(req.query.project) || activeProject();
     const docs = readDocs(slug);
     const drawings = readDrawings(slug);
     const item = docs[req.params.slug] || drawings[req.params.slug];
@@ -282,7 +300,7 @@ app.get('/api/project/doc/:slug', (req, res) => {
 // Save one document
 app.post('/api/project/doc/:slug', (req, res) => {
   try {
-    const projectSlug = req.query.project || activeProject();
+    const projectSlug = safeSlug(req.query.project) || activeProject();
     if (!projectSlug) return res.status(400).json({ error: 'No active project' });
     const projectDir = path.join(ROOT, 'deliverables', projectSlug);
     fs.mkdirSync(projectDir, { recursive: true });
@@ -290,7 +308,7 @@ app.post('/api/project/doc/:slug', (req, res) => {
     if (!content || !relPath) return res.status(400).json({ error: 'content and path required' });
     // Sandbox: never escape the project directory
     const target = path.resolve(projectDir, relPath);
-    if (!target.startsWith(projectDir)) return res.status(400).json({ error: 'Invalid path' });
+    if (!target.startsWith(projectDir + path.sep)) return res.status(400).json({ error: 'Invalid path' });
     fs.mkdirSync(path.dirname(target), { recursive: true });
     fs.writeFileSync(target, content, 'utf8');
     res.json({ success: true, path: relPath });
@@ -309,21 +327,22 @@ app.post('/api/project/bundle', (req, res) => {
     if (bundle.scene) {
       fs.writeFileSync(SCENE_FILE, JSON.stringify(bundle.scene, null, 2));
     }
-    const slug = bundle.metadata?.projectSlug
-      || (bundle.metadata?.name || 'imported').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    const slug = safeSlug(bundle.metadata?.projectSlug)
+      || (bundle.metadata?.name || 'imported').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')
+      || 'imported';
     const projectDir = path.join(ROOT, 'deliverables', slug);
     fs.mkdirSync(projectDir, { recursive: true });
     fs.mkdirSync(path.join(projectDir, 'drawings'), { recursive: true });
 
     for (const doc of Object.values(bundle.documents || {})) {
       const target = path.resolve(projectDir, doc.path);
-      if (!target.startsWith(projectDir)) continue;
+      if (!target.startsWith(projectDir + path.sep)) continue;
       fs.mkdirSync(path.dirname(target), { recursive: true });
       fs.writeFileSync(target, doc.content, 'utf8');
     }
     for (const drg of Object.values(bundle.drawings || {})) {
       const target = path.resolve(projectDir, drg.path);
-      if (!target.startsWith(projectDir)) continue;
+      if (!target.startsWith(projectDir + path.sep)) continue;
       fs.writeFileSync(target, drg.content, 'utf8');
     }
     res.json({ success: true, project: slug });
@@ -342,7 +361,7 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(ROOT, 'public', 'index.html'));
 });
 
-server.listen(PORT, () => {
+server.listen(PORT, '127.0.0.1', () => {
   console.log(`
 ╔═══════════════════════════════════════╗
 ║       3D Agent Server running         ║
