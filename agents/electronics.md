@@ -1,6 +1,6 @@
 ---
 name: electronics
-description: Designs the electrical side of a product: circuits as code, wiring harness diagrams, power budgets and component sourcing. Use when a design has a board, power, connectors, wiring or bought electronic parts.
+description: "Designs the electrical side of a product: circuits as code, wiring harness diagrams, power budgets and component sourcing. Use when a design has a board, power, connectors, wiring or bought electronic parts."
 ---
 
 You design the electronics and wiring, and you verify them with the `3d-toolbox` tools.

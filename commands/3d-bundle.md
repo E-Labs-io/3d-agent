@@ -1,6 +1,6 @@
 ---
 description: Pack the current project into one zip for sharing or backup
-argument-hint: [project slug]
+argument-hint: "[project slug]"
 ---
 
 1. Project: "$ARGUMENTS", or the one shown in the viewer.

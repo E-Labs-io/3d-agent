@@ -1,6 +1,6 @@
 {
   "name": "3d-agent",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Engineering design environment for Claude: parametric CAD on a real kernel, automated design checks, stress analysis, sourced materials and standards, projected drawings, BOM with supplier links, circuits and wiring, print estimates and printer links, with a live 3D viewer.",
   "author": {
     "name": "E-Labs",
@@ -39,5 +39,5 @@
     "./commands/3d-bundle.md"
   ],
   "skills": "./skills",
-  "mcpServers": "./.mcp.json"
+  "mcpServers": "./.claude-plugin/mcp.json"
 }

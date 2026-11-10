@@ -1,6 +1,6 @@
 ---
 name: 3D Design
-description: Use when the user wants to design, model, check, analyse, document or make a physical object: enclosures, brackets, mounts, mechanisms, printed or machined parts, assemblies, and their electronics and wiring. Also for stress checks, material choice, standard parts and fits, drawings, bills of materials, print estimates and printer jobs.
+description: "Use when the user wants to design, model, check, analyse, document or make a physical object: enclosures, brackets, mounts, mechanisms, printed or machined parts, assemblies, and their electronics and wiring. Also for stress checks, material choice, standard parts and fits, drawings, bills of materials, print estimates and printer jobs."
 ---
 
 # 3D Design with the 3D Agent toolbox
