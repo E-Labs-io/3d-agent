@@ -201,6 +201,10 @@ def parse_gcode_stats(text: str) -> dict:
         vals = [float(v) for v in re.findall(r"[-+]?\d*\.?\d+", m.group(1))]
         return sum(vals) if vals else None
 
+    def setting(key: str) -> str | None:
+        m = re.search(rf"^;[ \t]*{key}[ \t]*=[ \t]*(.*)$", text, re.M)
+        return m.group(1).strip() or None if m else None
+
     t = re.search(r"^;\s*estimated printing time \(normal mode\)\s*=\s*(.+)$", text, re.M | re.I) \
         or re.search(r"^;.*total estimated time:\s*(.+)$", text, re.M | re.I)
     return {
@@ -209,6 +213,11 @@ def parse_gcode_stats(text: str) -> dict:
         "filament_volume_cm3": nums(r"^;\s*(?:total )?filament used \[cm3\]\s*=\s*(.+)$"),
         "filament_g": nums(r"^;\s*total filament used \[g\]\s*=\s*(.+)$") or nums(r"^;\s*filament used \[g\]\s*=\s*(.+)$")
                       or nums(r"^;\s*total filament weight \[g\]\s*:\s*(.+)$"),
+        # What the slicer actually used, so a default-profile slice is not mistaken for the real printer's.
+        "settings": {"printer": setting("printer_settings_id") or setting("printer_model"),
+                     "filament_type": setting("filament_type"), "layer_height_mm": setting("layer_height"),
+                     "infill": setting("fill_density") or setting("sparse_infill_density"),
+                     "nozzle_mm": setting("nozzle_diameter")},
     }
 
 
@@ -331,7 +340,7 @@ def print_estimate(project: str, part: str = "", route: str = "auto", profile: d
             dens, src = _density(material or info.get("material", ""), density_g_cm3)
             v = r["filament_volume_cm3"] * 1000 if r["filament_volume_cm3"] else r["filament_length_mm"] * math.pi * (fil_d / 2) ** 2
             g = r["filament_g"] or (v / 1000 * dens if dens else None)
-            rows[name] = {**{k: r[k] for k in ("gcode", "print_time_s", "filament_length_mm")}, "filament_g": g, "qty": qty,
+            rows[name] = {**{k: r[k] for k in ("gcode", "print_time_s", "filament_length_mm", "settings")}, "filament_g": g, "qty": qty,
                           "mass_source": "slicer" if r["filament_g"] else src}
             vol, time_s, length = vol + v * qty, time_s + r["print_time_s"] * qty, length + r["filament_length_mm"] * qty
             grams = None if (g is None or grams is None) else grams + g * qty

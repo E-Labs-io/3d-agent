@@ -131,12 +131,14 @@ def test_slicer_routes_degrade_cleanly(cubes, monkeypatch):
 
 def test_parse_gcode_comments():
     p = make.parse_gcode_stats(GCODE_PRUSA)
-    assert p == {"print_time_s": 3723, "filament_length_mm": 4321.5, "filament_volume_cm3": 10.39, "filament_g": 13.2}
+    assert {k: p[k] for k in p if k != "settings"} == {"print_time_s": 3723, "filament_length_mm": 4321.5, "filament_volume_cm3": 10.39, "filament_g": 13.2}
     o = make.parse_gcode_stats(GCODE_ORCA)
     assert o["print_time_s"] == 653
     assert o["filament_length_mm"] == pytest.approx(1500.75)
     assert o["filament_g"] == pytest.approx(4.48)
     assert make.parse_gcode_stats("G28\n")["print_time_s"] is None
+    s = make.parse_gcode_stats("; filament_type = PETG\n; layer_height = 0.2\n; sparse_infill_density = 30%\n; printer_model = \n; printer_technology = FFF\n")
+    assert s["settings"] == {"printer": None, "filament_type": "PETG", "layer_height_mm": "0.2", "infill": "30%", "nozzle_mm": None}
 
 
 def test_prusaslicer_route_with_fake_binary(cubes, monkeypatch, tmp_path):

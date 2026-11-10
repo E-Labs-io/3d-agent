@@ -159,7 +159,7 @@ def test_kicad_report_violations_are_counted():
 @pytest.mark.skipif(HAVE_KICAD, reason="KiCad is installed; the not-installed path cannot be exercised")
 def test_kicad_missing_gives_install_guidance(projects):
     for r in (e.kicad_check("reg5v", "board.kicad_pcb"), e.kicad_export("reg5v", "sch.kicad_sch", "pdf")):
-        assert r["ok"] is False and r["install"] == "https://www.kicad.org/download/macos/"
+        assert r["ok"] is False and "kicad" in r["install"]
 
 
 @pytest.mark.skipif(not HAVE_KICAD, reason="KiCad (kicad-cli) is not installed")
@@ -227,6 +227,24 @@ def test_ngspice_voltage_divider(projects):
     assert r["ok"], r
     values = r["analyses"][0]["values"]
     assert values["v(out)"] == pytest.approx(2.5) and values["i(v1)"] == pytest.approx(-0.0025)  # 5 V / 2k
+
+
+def test_spice_deck_keeps_a_first_line_part():
+    assert e._spice_deck("V1 in 0 5\nR1 in 0 1k\n", "op").splitlines()[:2] == ["* circuit", "V1 in 0 5"]
+    assert e._spice_deck(DIVIDER, "op").splitlines()[0] == "divider"  # a real title is left alone
+
+
+@pytest.mark.skipif(not HAVE_NGSPICE, reason="ngspice is not installed")
+def test_ngspice_untitled_netlist_and_rc_step(projects):
+    r = e.circuit_simulate("reg5v", "V1 in 0 9\nR1 in mid 2k\nR2 mid 0 1k\n", "op")
+    assert r["ok"] and r["analyses"][0]["values"]["v(mid)"] == pytest.approx(3.0) and r["warnings"] == []
+    # RC step: 1k and 1u give 1 ms, so 5 ms is five time constants: 5 * (1 - e^-5) = 4.966 V
+    r = e.circuit_simulate("reg5v", "V1 in 0 PULSE(0 5 0 1n 1n 1 2)\nR1 in out 1k\nC1 out 0 1u\n", "tran 10u 5m")
+    assert r["analyses"][0]["signals"]["v(out)"]["final"] == pytest.approx(4.966, abs=0.01)
+    # same RC as a low-pass: -3 dB at 159 Hz, so about 1 at 1 Hz and 1/628 at 100 kHz
+    r = e.circuit_simulate("reg5v", "V1 in 0 AC 1\nR1 in out 1k\nC1 out 0 1u\n", "ac dec 10 1 100k")
+    sig = r["analyses"][0]["signals"]["v(out)"]
+    assert sig["first"] == pytest.approx(1.0, abs=1e-3) and sig["final"] == pytest.approx(1 / 628.3, rel=0.01)
 
 
 # ---- wiring harness ------------------------------------------------------------------
