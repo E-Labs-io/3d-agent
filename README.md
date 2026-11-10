@@ -42,7 +42,7 @@ Designs are kept in `~/Documents/3D-Agent` (set `THREED_AGENT_HOME` to move them
 
 ## Known untested
 
-These are written from published documentation but have not been run against the real thing: supplier APIs, the KiCad and ngspice routes, slicer command lines, and all three printer adapters. Expect a shake-down the first time each is used. See `docs/` for details.
+KiCad, ngspice, WireViz, PrusaSlicer and OrcaSlicer have been run for real (see `docs/known-untested.md`). Still written from published documentation only: supplier APIs, all three printer adapters, and the OSHWA and EPO searches. Expect a shake-down the first time each is used.
 
 ## Development
 

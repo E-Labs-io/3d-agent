@@ -22,9 +22,9 @@ from xml.sax.saxutils import escape
 
 from .common import DATA, TOOLBOX, inside, load_json, project_dir, save_json, which
 
-KICAD_INSTALL = "https://www.kicad.org/download/macos/"
+KICAD_INSTALL = "brew install --cask kicad  (asks for the Mac password; or https://www.kicad.org/download/macos/)"
 NGSPICE_INSTALL = "brew install ngspice"
-WIREVIZ_INSTALL = "brew install graphviz && pipx install wireviz  (WireViz is GPL-3: keep it outside the toolbox venv)"
+WIREVIZ_INSTALL = "brew install graphviz && uv tool install wireviz  (WireViz is GPL-3: keep it outside the toolbox venv)"
 
 CIRCUIT_TEMPLATE = '''"""{title} - circuit as code (SKiDL). Rebuild with the circuit_build tool after every edit.
 
@@ -346,15 +346,23 @@ def _kicad_run(project: str, file: str, action: str) -> dict:
     except (ValueError, FileNotFoundError) as e:
         return {"ok": False, "error": str(e)}
     (target if _KICAD_ACTIONS[action][3] else target.parent).mkdir(parents=True, exist_ok=True)
+    if target.is_file():
+        target.unlink()  # so a file left by an earlier run cannot pass for this one
     try:
         proc = subprocess.run(argv, capture_output=True, text=True, timeout=600)
     except subprocess.TimeoutExpired:
         return {"ok": False, "error": f"kicad-cli {action} did not finish within 600 s"}
     files = sorted(str(p) for p in target.glob("*")) if target.is_dir() else ([str(target)] if target.exists() else [])
-    if proc.returncode != 0 or not files:
+    if not files or (proc.returncode != 0 and target.is_dir()):
         return {"ok": False, "error": f"kicad-cli {action} failed (exit {proc.returncode})",
                 "stderr": (proc.stderr or proc.stdout)[-1500:], "command": argv}
-    return {"ok": True, "action": action, "files": files, "command": argv, "_target": target}
+    res = {"ok": True, "action": action, "files": files, "command": argv, "_target": target}
+    if proc.returncode != 0:
+        # kicad-cli writes the file and still exits non-zero when it had to skip something,
+        # e.g. a STEP export where a part has no 3D model.
+        lines = [ln for ln in (proc.stderr or proc.stdout).splitlines() if ln.strip() and "NSCocoaErrorDomain" not in ln]
+        res.update(exit_code=proc.returncode, warnings=sorted(set(lines))[:20])
+    return res
 
 
 def _violations(node) -> list[dict]:
@@ -416,6 +424,9 @@ def _spice_deck(netlist: str, analysis: str) -> str:
     """Add the analysis card to a netlist unless it already has one, and make sure it ends with .end."""
     lines = [ln.rstrip() for ln in netlist.strip().splitlines()]
     lines = [ln for ln in lines if ln.strip().lower() != ".end"]
+    # SPICE reads line one as the title, so a netlist that opens with a part would silently lose it.
+    if lines and re.match(r"(\.|\*|[a-z]+\d\S*\s+\S+\s+\S+)", lines[0].strip().lower()):
+        lines.insert(0, "* circuit")
     has = any(re.match(rf"\.({'|'.join(_ANALYSES)})\b", ln.strip().lower()) for ln in lines)
     if not has:
         card = analysis.strip()
@@ -526,7 +537,8 @@ def circuit_simulate(project: str, netlist: str, analysis: str = "op", route: st
     data_file = out / "result.json"
     save_json(data_file, [{**p, "values": {k: [[x.real, x.imag] if isinstance(x, complex) else x for x in v]
                                            for k, v in p["values"].items()}} for p in plots])
-    return {"ok": True, "route": "ngspice", "analyses": [_summarise_plot(p) for p in plots],
+    warnings = sorted({ln.strip() for ln in log_text.splitlines() if re.match(r"\s*(warning|error)\b", ln, re.I)})
+    return {"ok": True, "route": "ngspice", "analyses": [_summarise_plot(p) for p in plots], "warnings": warnings,
             "files": {"deck": str(deck), "raw": str(raw), "log": str(log), "data": str(data_file)}}
 
 
