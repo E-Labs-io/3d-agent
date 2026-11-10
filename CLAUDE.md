@@ -160,6 +160,18 @@ For modifications to an existing design: skip straight to the **3D Specialist** 
 
 The 3D Specialist always auto-groups assemblies — read `agents/3d-modeler.md` § "Auto-grouping" for the spec on how groups are encoded in the scene JSON.
 
+## Print parts and export
+
+STL export writes one file per print part to `exports/`, Z-up, centred, on the bed.
+
+```
+_printPart: "name"   objects sharing a value merge into one STL named after it
+_printFlip: true     rotate that part 180° on export (pockets face up)
+_reference: true     fit ghosts and datum aids, never exported
+```
+
+Untagged objects land in `untagged.stl`. Give separate parts contrasting colours.
+
 ## Critical rules
 
 1. **Always write scene/current.json** — never just describe the scene in text. Write it.

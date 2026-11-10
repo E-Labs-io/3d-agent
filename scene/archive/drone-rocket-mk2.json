@@ -1,0 +1,2498 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "name": "Drone Rocket Mk II — Contra-Rotating EDF",
+    "units": "mm",
+    "description": "1000mm drone rocket. 150mm OD body, 50mm avionics column, annular flow path. Two contra-rotating ducted fans, 4× steerable canards, 4× steerable tail fins, 2-axis gimballed vectoring nozzle. Top annular air intake. Five 200mm printable sections joined at interface rings."
+  },
+  "environment": {
+    "background": "#0a0d14",
+    "grid": true,
+    "axes": false,
+    "shadows": true,
+    "gridSize": 800,
+    "gridDivisions": 20
+  },
+  "camera": {
+    "position": [
+      380,
+      540,
+      1280
+    ],
+    "target": [
+      0,
+      500,
+      0
+    ],
+    "fov": 38
+  },
+  "lights": [
+    {
+      "id": "ambient",
+      "type": "ambient",
+      "color": "#c8d4ff",
+      "intensity": 0.32
+    },
+    {
+      "id": "key",
+      "type": "directional",
+      "color": "#ffffff",
+      "intensity": 1.45,
+      "position": [
+        400,
+        900,
+        500
+      ],
+      "castShadow": true
+    },
+    {
+      "id": "fill",
+      "type": "directional",
+      "color": "#5577ff",
+      "intensity": 0.45,
+      "position": [
+        -400,
+        400,
+        -400
+      ],
+      "castShadow": false
+    },
+    {
+      "id": "rim",
+      "type": "directional",
+      "color": "#ffffff",
+      "intensity": 0.5,
+      "position": [
+        0,
+        300,
+        -700
+      ],
+      "castShadow": false
+    },
+    {
+      "id": "engine_pt",
+      "type": "point",
+      "color": "#ff8800",
+      "intensity": 80,
+      "position": [
+        0,
+        10,
+        0
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "ground_plane",
+      "name": "Ground Plane",
+      "type": "plane",
+      "params": {
+        "width": 800,
+        "height": 800
+      },
+      "material": {
+        "type": "standard",
+        "color": "#0d1320",
+        "metalness": 0,
+        "roughness": 1,
+        "transparent": true,
+        "opacity": 0.55
+      },
+      "transform": {
+        "position": [
+          0,
+          -1,
+          0
+        ],
+        "rotation": [
+          -90,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": true
+    },
+    {
+      "id": "group_nose",
+      "name": "Nose & Intake",
+      "type": "group",
+      "_isGroup": true,
+      "_collapsed": false,
+      "visible": true
+    },
+    {
+      "id": "nose_cone",
+      "name": "Section 1 — Ogive Nose Cone",
+      "type": "lathe",
+      "params": {
+        "points": [
+          [
+            75,
+            880
+          ],
+          [
+            74.7,
+            895
+          ],
+          [
+            73.5,
+            910
+          ],
+          [
+            71.5,
+            925
+          ],
+          [
+            68.5,
+            940
+          ],
+          [
+            64.5,
+            955
+          ],
+          [
+            59,
+            970
+          ],
+          [
+            51.5,
+            982
+          ],
+          [
+            40.5,
+            992
+          ],
+          [
+            26,
+            998
+          ],
+          [
+            0,
+            1000
+          ]
+        ],
+        "segments": 80
+      },
+      "material": {
+        "type": "standard",
+        "color": "#eef0f4",
+        "metalness": 0.06,
+        "roughness": 0.28
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": true,
+      "receiveShadow": false,
+      "_groupId": "group_nose"
+    },
+    {
+      "id": "pitot_tube",
+      "name": "Pitot Tube (Airspeed)",
+      "type": "cylinder",
+      "params": {
+        "radiusTop": 1.6,
+        "radiusBottom": 1.6,
+        "height": 28,
+        "radialSegments": 16
+      },
+      "material": {
+        "type": "standard",
+        "color": "#8a8a90",
+        "metalness": 0.85,
+        "roughness": 0.18
+      },
+      "transform": {
+        "position": [
+          0,
+          1014,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_nose"
+    },
+    {
+      "id": "nose_collar",
+      "name": "Nose Base Collar",
+      "type": "lathe",
+      "params": {
+        "points": [
+          [
+            70.5,
+            860
+          ],
+          [
+            75.5,
+            860
+          ],
+          [
+            75.5,
+            880
+          ],
+          [
+            70.5,
+            880
+          ]
+        ],
+        "segments": 80
+      },
+      "material": {
+        "type": "standard",
+        "color": "#3a3a42",
+        "metalness": 0.55,
+        "roughness": 0.35
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": true,
+      "receiveShadow": false,
+      "_groupId": "group_nose"
+    },
+    {
+      "id": "intake_struts",
+      "name": "Annular Intake — 6 Struts",
+      "type": "custom_code",
+      "params": {
+        "geometry_code": "var positions=[];var indices=[];var vOff=0;for(var i=0;i<6;i++){var ang=i*Math.PI/3;var g=new THREE.BoxGeometry(8,38,8);g.translate(72,839,0);g.rotateY(ang);var p=g.getAttribute('position');var ix=g.index;for(var v=0;v<p.count;v++)positions.push(p.getX(v),p.getY(v),p.getZ(v));if(ix)for(var j=0;j<ix.count;j++)indices.push(ix.getX(j)+vOff);vOff+=p.count;}var m=new THREE.BufferGeometry();m.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));m.setIndex(indices);m.computeVertexNormals();return m;"
+      },
+      "material": {
+        "type": "standard",
+        "color": "#3a3a42",
+        "metalness": 0.55,
+        "roughness": 0.35
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_nose"
+    },
+    {
+      "id": "intake_inner_lip",
+      "name": "Intake Inner Lip (Diffuser)",
+      "type": "lathe",
+      "params": {
+        "points": [
+          [
+            62,
+            818
+          ],
+          [
+            60,
+            822
+          ],
+          [
+            58,
+            828
+          ],
+          [
+            57,
+            838
+          ],
+          [
+            57,
+            850
+          ],
+          [
+            58,
+            858
+          ],
+          [
+            60,
+            862
+          ]
+        ],
+        "segments": 64
+      },
+      "material": {
+        "type": "standard",
+        "color": "#1a1a20",
+        "metalness": 0.4,
+        "roughness": 0.5
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_nose"
+    },
+    {
+      "id": "intake_collar_lower",
+      "name": "Intake Lower Collar",
+      "type": "lathe",
+      "params": {
+        "points": [
+          [
+            70.5,
+            800
+          ],
+          [
+            75.5,
+            800
+          ],
+          [
+            75.5,
+            820
+          ],
+          [
+            70.5,
+            820
+          ]
+        ],
+        "segments": 80
+      },
+      "material": {
+        "type": "standard",
+        "color": "#3a3a42",
+        "metalness": 0.55,
+        "roughness": 0.35
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": true,
+      "receiveShadow": false,
+      "_groupId": "group_nose"
+    },
+    {
+      "id": "group_structure",
+      "name": "Structure & Body",
+      "type": "group",
+      "_isGroup": true,
+      "_collapsed": false,
+      "visible": true
+    },
+    {
+      "id": "section_ring_800",
+      "name": "Section Joint @ y=800",
+      "type": "lathe",
+      "params": {
+        "points": [
+          [
+            70.5,
+            798
+          ],
+          [
+            76,
+            798
+          ],
+          [
+            76,
+            802
+          ],
+          [
+            70.5,
+            802
+          ]
+        ],
+        "segments": 80
+      },
+      "material": {
+        "type": "standard",
+        "color": "#cc2200",
+        "metalness": 0.65,
+        "roughness": 0.18
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_structure"
+    },
+    {
+      "id": "body_section_2",
+      "name": "Section 2 — Avionics Shell (Cutaway)",
+      "type": "cylinder",
+      "params": {
+        "radiusTop": 75,
+        "radiusBottom": 75,
+        "height": 200,
+        "radialSegments": 80,
+        "openEnded": true
+      },
+      "material": {
+        "type": "standard",
+        "color": "#eef0f4",
+        "metalness": 0.1,
+        "roughness": 0.3,
+        "transparent": true,
+        "opacity": 0.18,
+        "doubleSide": true,
+        "depthWrite": false
+      },
+      "transform": {
+        "position": [
+          0,
+          700,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": true,
+      "receiveShadow": false,
+      "_groupId": "group_structure"
+    },
+    {
+      "id": "section_ring_600",
+      "name": "Section Joint @ y=600",
+      "type": "lathe",
+      "params": {
+        "points": [
+          [
+            70.5,
+            598
+          ],
+          [
+            76,
+            598
+          ],
+          [
+            76,
+            602
+          ],
+          [
+            70.5,
+            602
+          ]
+        ],
+        "segments": 80
+      },
+      "material": {
+        "type": "standard",
+        "color": "#cc2200",
+        "metalness": 0.65,
+        "roughness": 0.18
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_structure"
+    },
+    {
+      "id": "body_section_3",
+      "name": "Section 3 — Battery + Canard Shell (Cutaway)",
+      "type": "cylinder",
+      "params": {
+        "radiusTop": 75,
+        "radiusBottom": 75,
+        "height": 200,
+        "radialSegments": 80,
+        "openEnded": true
+      },
+      "material": {
+        "type": "standard",
+        "color": "#eef0f4",
+        "metalness": 0.1,
+        "roughness": 0.3,
+        "transparent": true,
+        "opacity": 0.18,
+        "doubleSide": true,
+        "depthWrite": false
+      },
+      "transform": {
+        "position": [
+          0,
+          500,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": true,
+      "receiveShadow": false,
+      "_groupId": "group_structure"
+    },
+    {
+      "id": "section_ring_400",
+      "name": "Section Joint @ y=400",
+      "type": "lathe",
+      "params": {
+        "points": [
+          [
+            70.5,
+            398
+          ],
+          [
+            76,
+            398
+          ],
+          [
+            76,
+            402
+          ],
+          [
+            70.5,
+            402
+          ]
+        ],
+        "segments": 80
+      },
+      "material": {
+        "type": "standard",
+        "color": "#cc2200",
+        "metalness": 0.65,
+        "roughness": 0.18
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_structure"
+    },
+    {
+      "id": "body_section_4",
+      "name": "Section 4 — EDF Duct Shell (Cutaway)",
+      "type": "cylinder",
+      "params": {
+        "radiusTop": 75,
+        "radiusBottom": 75,
+        "height": 200,
+        "radialSegments": 80,
+        "openEnded": true
+      },
+      "material": {
+        "type": "standard",
+        "color": "#eef0f4",
+        "metalness": 0.1,
+        "roughness": 0.3,
+        "transparent": true,
+        "opacity": 0.18,
+        "doubleSide": true,
+        "depthWrite": false
+      },
+      "transform": {
+        "position": [
+          0,
+          300,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": true,
+      "receiveShadow": false,
+      "_groupId": "group_structure"
+    },
+    {
+      "id": "edf_duct_inner",
+      "name": "EDF Duct Inner Liner",
+      "type": "cylinder",
+      "params": {
+        "radiusTop": 70,
+        "radiusBottom": 70,
+        "height": 200,
+        "radialSegments": 80,
+        "openEnded": true
+      },
+      "material": {
+        "type": "standard",
+        "color": "#1a1a20",
+        "metalness": 0.45,
+        "roughness": 0.5,
+        "transparent": true,
+        "opacity": 0.35,
+        "doubleSide": true,
+        "depthWrite": false
+      },
+      "transform": {
+        "position": [
+          0,
+          300,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_structure"
+    },
+    {
+      "id": "section_ring_200",
+      "name": "Section Joint @ y=200",
+      "type": "lathe",
+      "params": {
+        "points": [
+          [
+            70.5,
+            198
+          ],
+          [
+            76,
+            198
+          ],
+          [
+            76,
+            202
+          ],
+          [
+            70.5,
+            202
+          ]
+        ],
+        "segments": 80
+      },
+      "material": {
+        "type": "standard",
+        "color": "#cc2200",
+        "metalness": 0.65,
+        "roughness": 0.18
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_structure"
+    },
+    {
+      "id": "body_section_5",
+      "name": "Section 5 — Tail Shell (Cutaway)",
+      "type": "lathe",
+      "params": {
+        "points": [
+          [
+            75,
+            100
+          ],
+          [
+            75,
+            150
+          ],
+          [
+            73,
+            175
+          ],
+          [
+            70,
+            200
+          ]
+        ],
+        "segments": 80
+      },
+      "material": {
+        "type": "standard",
+        "color": "#eef0f4",
+        "metalness": 0.1,
+        "roughness": 0.3,
+        "transparent": true,
+        "opacity": 0.22,
+        "doubleSide": true,
+        "depthWrite": false
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": true,
+      "receiveShadow": false,
+      "_groupId": "group_structure"
+    },
+    {
+      "id": "tail_taper",
+      "name": "Tail Convergent Section",
+      "type": "lathe",
+      "params": {
+        "points": [
+          [
+            75,
+            100
+          ],
+          [
+            70,
+            90
+          ],
+          [
+            60,
+            78
+          ],
+          [
+            48,
+            64
+          ],
+          [
+            40,
+            50
+          ]
+        ],
+        "segments": 80
+      },
+      "material": {
+        "type": "standard",
+        "color": "#eef0f4",
+        "metalness": 0.1,
+        "roughness": 0.3
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": true,
+      "receiveShadow": false,
+      "_groupId": "group_structure"
+    },
+    {
+      "id": "group_avionics",
+      "name": "Avionics",
+      "type": "group",
+      "_isGroup": true,
+      "_collapsed": false,
+      "visible": true
+    },
+    {
+      "id": "avionics_window",
+      "name": "Avionics Inspection Window",
+      "type": "box",
+      "params": {
+        "width": 4,
+        "height": 50,
+        "depth": 28
+      },
+      "material": {
+        "type": "standard",
+        "color": "#1a3a4a",
+        "metalness": 0,
+        "roughness": 0.05,
+        "transparent": true,
+        "opacity": 0.55
+      },
+      "transform": {
+        "position": [
+          73.5,
+          720,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_avionics"
+    },
+    {
+      "id": "avionics_column",
+      "name": "Central Avionics Column",
+      "type": "cylinder",
+      "params": {
+        "radiusTop": 25,
+        "radiusBottom": 25,
+        "height": 200,
+        "radialSegments": 64,
+        "openEnded": true
+      },
+      "material": {
+        "type": "standard",
+        "color": "#2a2a32",
+        "metalness": 0.45,
+        "roughness": 0.4
+      },
+      "transform": {
+        "position": [
+          0,
+          700,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": true,
+      "receiveShadow": false,
+      "_groupId": "group_avionics"
+    },
+    {
+      "id": "flight_computer",
+      "name": "Flight Computer (FC + IMU)",
+      "type": "box",
+      "params": {
+        "width": 38,
+        "height": 8,
+        "depth": 38
+      },
+      "material": {
+        "type": "standard",
+        "color": "#0e3a1a",
+        "metalness": 0.1,
+        "roughness": 0.6
+      },
+      "transform": {
+        "position": [
+          0,
+          760,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_avionics"
+    },
+    {
+      "id": "flight_computer_chip",
+      "name": "FC Main Processor",
+      "type": "box",
+      "params": {
+        "width": 12,
+        "height": 3,
+        "depth": 12
+      },
+      "material": {
+        "type": "standard",
+        "color": "#1a1a22",
+        "metalness": 0.2,
+        "roughness": 0.5
+      },
+      "transform": {
+        "position": [
+          0,
+          765.5,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_avionics"
+    },
+    {
+      "id": "gps_module",
+      "name": "GPS / Compass Module",
+      "type": "box",
+      "params": {
+        "width": 32,
+        "height": 6,
+        "depth": 32
+      },
+      "material": {
+        "type": "standard",
+        "color": "#0e3a1a",
+        "metalness": 0.1,
+        "roughness": 0.6
+      },
+      "transform": {
+        "position": [
+          0,
+          740,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_avionics"
+    },
+    {
+      "id": "radio_module",
+      "name": "Telemetry Radio",
+      "type": "box",
+      "params": {
+        "width": 30,
+        "height": 8,
+        "depth": 22
+      },
+      "material": {
+        "type": "standard",
+        "color": "#0e3a1a",
+        "metalness": 0.1,
+        "roughness": 0.6
+      },
+      "transform": {
+        "position": [
+          0,
+          720,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_avionics"
+    },
+    {
+      "id": "radio_antenna",
+      "name": "Telemetry Antenna",
+      "type": "cylinder",
+      "params": {
+        "radiusTop": 1.4,
+        "radiusBottom": 1.4,
+        "height": 70,
+        "radialSegments": 12
+      },
+      "material": {
+        "type": "standard",
+        "color": "#101014",
+        "metalness": 0.2,
+        "roughness": 0.6
+      },
+      "transform": {
+        "position": [
+          73,
+          660,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_avionics"
+    },
+    {
+      "id": "group_power",
+      "name": "Power",
+      "type": "group",
+      "_isGroup": true,
+      "_collapsed": false,
+      "visible": true
+    },
+    {
+      "id": "battery_column",
+      "name": "Battery + Canard Inner Column",
+      "type": "cylinder",
+      "params": {
+        "radiusTop": 25,
+        "radiusBottom": 25,
+        "height": 200,
+        "radialSegments": 64,
+        "openEnded": true
+      },
+      "material": {
+        "type": "standard",
+        "color": "#2a2a32",
+        "metalness": 0.45,
+        "roughness": 0.4
+      },
+      "transform": {
+        "position": [
+          0,
+          500,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": true,
+      "receiveShadow": false,
+      "_groupId": "group_power"
+    },
+    {
+      "id": "battery_pack",
+      "name": "Li-ion Battery Pack (6S)",
+      "type": "box",
+      "params": {
+        "width": 38,
+        "height": 110,
+        "depth": 38
+      },
+      "material": {
+        "type": "standard",
+        "color": "#1a3a8a",
+        "metalness": 0.3,
+        "roughness": 0.4
+      },
+      "transform": {
+        "position": [
+          0,
+          470,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_power"
+    },
+    {
+      "id": "battery_label",
+      "name": "Battery Label",
+      "type": "box",
+      "params": {
+        "width": 1,
+        "height": 30,
+        "depth": 30
+      },
+      "material": {
+        "type": "standard",
+        "color": "#dddddd",
+        "metalness": 0,
+        "roughness": 0.7
+      },
+      "transform": {
+        "position": [
+          19.5,
+          470,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_power"
+    },
+    {
+      "id": "esc_pods",
+      "name": "ESC Power Modules ×2",
+      "type": "custom_code",
+      "params": {
+        "geometry_code": "var positions=[];var indices=[];var vOff=0;for(var i=0;i<2;i++){var ang=i*Math.PI;var g=new THREE.BoxGeometry(28,55,8);g.translate(60,310,0);g.rotateY(ang);var p=g.getAttribute('position');var ix=g.index;for(var v=0;v<p.count;v++)positions.push(p.getX(v),p.getY(v),p.getZ(v));if(ix)for(var j=0;j<ix.count;j++)indices.push(ix.getX(j)+vOff);vOff+=p.count;}var m=new THREE.BufferGeometry();m.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));m.setIndex(indices);m.computeVertexNormals();return m;"
+      },
+      "material": {
+        "type": "standard",
+        "color": "#1a1a1e",
+        "metalness": 0.3,
+        "roughness": 0.6
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_power"
+    },
+    {
+      "id": "esc_heatsinks",
+      "name": "ESC Heatsink Fins ×2",
+      "type": "custom_code",
+      "params": {
+        "geometry_code": "var positions=[];var indices=[];var vOff=0;for(var k=0;k<2;k++){var aBase=k*Math.PI;for(var i=0;i<6;i++){var g=new THREE.BoxGeometry(2,40,8);g.translate(66,310,-13.5+i*5.4);g.rotateY(aBase);var p=g.getAttribute('position');var ix=g.index;for(var v=0;v<p.count;v++)positions.push(p.getX(v),p.getY(v),p.getZ(v));if(ix)for(var j=0;j<ix.count;j++)indices.push(ix.getX(j)+vOff);vOff+=p.count;}}var m=new THREE.BufferGeometry();m.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));m.setIndex(indices);m.computeVertexNormals();return m;"
+      },
+      "material": {
+        "type": "standard",
+        "color": "#a8a8b0",
+        "metalness": 0.85,
+        "roughness": 0.18
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_power"
+    },
+    {
+      "id": "group_edf_upper",
+      "name": "Propulsion — Upper EDF (CW)",
+      "type": "group",
+      "_isGroup": true,
+      "_collapsed": false,
+      "visible": true
+    },
+    {
+      "id": "edf_motor_pod_upper",
+      "name": "Upper Motor Pod (CW)",
+      "type": "lathe",
+      "params": {
+        "points": [
+          [
+            0,
+            350
+          ],
+          [
+            12,
+            354
+          ],
+          [
+            22,
+            360
+          ],
+          [
+            27,
+            368
+          ],
+          [
+            27,
+            392
+          ],
+          [
+            22,
+            400
+          ],
+          [
+            12,
+            406
+          ],
+          [
+            0,
+            410
+          ]
+        ],
+        "segments": 48
+      },
+      "material": {
+        "type": "standard",
+        "color": "#3a3a44",
+        "metalness": 0.78,
+        "roughness": 0.22
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_edf_upper"
+    },
+    {
+      "id": "edf_motor_struts_upper",
+      "name": "Upper Motor Mount Struts ×4",
+      "type": "custom_code",
+      "params": {
+        "geometry_code": "var positions=[];var indices=[];var vOff=0;for(var i=0;i<4;i++){var ang=i*Math.PI/2+Math.PI/4;var g=new THREE.BoxGeometry(45,4,3);g.translate(48.5,407,0);g.rotateY(ang);var p=g.getAttribute('position');var ix=g.index;for(var v=0;v<p.count;v++)positions.push(p.getX(v),p.getY(v),p.getZ(v));if(ix)for(var j=0;j<ix.count;j++)indices.push(ix.getX(j)+vOff);vOff+=p.count;}var m=new THREE.BufferGeometry();m.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));m.setIndex(indices);m.computeVertexNormals();return m;"
+      },
+      "material": {
+        "type": "standard",
+        "color": "#b8b8c0",
+        "metalness": 0.85,
+        "roughness": 0.2
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_edf_upper"
+    },
+    {
+      "id": "edf_blades_upper",
+      "name": "Upper EDF Rotor Blades ×7 (CW)",
+      "type": "custom_code",
+      "params": {
+        "geometry_code": "var shape=new THREE.Shape();shape.moveTo(0,-1.6);shape.bezierCurveTo(8,-1.4,30,-0.6,42,2.4);shape.lineTo(42,5.4);shape.bezierCurveTo(30,3.4,8,2.0,0,1.6);shape.closePath();var ext={depth:18,bevelEnabled:false};var positions=[];var indices=[];var vOff=0;for(var i=0;i<7;i++){var ang=i*Math.PI*2/7;var g=new THREE.ExtrudeGeometry(shape,ext);g.translate(0,0,-9);g.rotateZ(0.32);g.translate(27,375,0);g.rotateY(ang);var p=g.getAttribute('position');var ix=g.index;for(var v=0;v<p.count;v++)positions.push(p.getX(v),p.getY(v),p.getZ(v));if(ix)for(var j=0;j<ix.count;j++)indices.push(ix.getX(j)+vOff);vOff+=p.count;}var m=new THREE.BufferGeometry();m.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));m.setIndex(indices);m.computeVertexNormals();return m;"
+      },
+      "material": {
+        "type": "standard",
+        "color": "#1a1a20",
+        "metalness": 0.65,
+        "roughness": 0.32
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_edf_upper"
+    },
+    {
+      "id": "edf_stators_upper",
+      "name": "Upper EDF Stator Vanes ×11",
+      "type": "custom_code",
+      "params": {
+        "geometry_code": "var shape=new THREE.Shape();shape.moveTo(0,0);shape.lineTo(0,4);shape.lineTo(43,4);shape.lineTo(43,0);shape.closePath();var ext={depth:1.2,bevelEnabled:false};var positions=[];var indices=[];var vOff=0;for(var i=0;i<11;i++){var ang=i*Math.PI*2/11;var g=new THREE.ExtrudeGeometry(shape,ext);g.translate(0,0,-0.6);g.translate(27,395,0);g.rotateY(ang);var p=g.getAttribute('position');var ix=g.index;for(var v=0;v<p.count;v++)positions.push(p.getX(v),p.getY(v),p.getZ(v));if(ix)for(var j=0;j<ix.count;j++)indices.push(ix.getX(j)+vOff);vOff+=p.count;}var m=new THREE.BufferGeometry();m.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));m.setIndex(indices);m.computeVertexNormals();return m;"
+      },
+      "material": {
+        "type": "standard",
+        "color": "#a0a0a8",
+        "metalness": 0.8,
+        "roughness": 0.25
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_edf_upper"
+    },
+    {
+      "id": "edf_spinner_upper",
+      "name": "Upper Rotor Hub Spinner",
+      "type": "sphere",
+      "params": {
+        "radius": 12,
+        "widthSegments": 32,
+        "heightSegments": 16,
+        "thetaStart": 0,
+        "thetaLength": 1.57
+      },
+      "material": {
+        "type": "standard",
+        "color": "#cc2200",
+        "metalness": 0.78,
+        "roughness": 0.22
+      },
+      "transform": {
+        "position": [
+          0,
+          369,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_edf_upper"
+    },
+    {
+      "id": "group_edf_lower",
+      "name": "Propulsion — Lower EDF (CCW)",
+      "type": "group",
+      "_isGroup": true,
+      "_collapsed": false,
+      "visible": true
+    },
+    {
+      "id": "edf_motor_pod_lower",
+      "name": "Lower Motor Pod (CCW)",
+      "type": "lathe",
+      "params": {
+        "points": [
+          [
+            0,
+            220
+          ],
+          [
+            12,
+            224
+          ],
+          [
+            22,
+            230
+          ],
+          [
+            27,
+            238
+          ],
+          [
+            27,
+            262
+          ],
+          [
+            22,
+            270
+          ],
+          [
+            12,
+            276
+          ],
+          [
+            0,
+            280
+          ]
+        ],
+        "segments": 48
+      },
+      "material": {
+        "type": "standard",
+        "color": "#3a3a44",
+        "metalness": 0.78,
+        "roughness": 0.22
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_edf_lower"
+    },
+    {
+      "id": "edf_motor_struts_lower",
+      "name": "Lower Motor Mount Struts ×4",
+      "type": "custom_code",
+      "params": {
+        "geometry_code": "var positions=[];var indices=[];var vOff=0;for(var i=0;i<4;i++){var ang=i*Math.PI/2+Math.PI/4;var g=new THREE.BoxGeometry(45,4,3);g.translate(48.5,223,0);g.rotateY(ang);var p=g.getAttribute('position');var ix=g.index;for(var v=0;v<p.count;v++)positions.push(p.getX(v),p.getY(v),p.getZ(v));if(ix)for(var j=0;j<ix.count;j++)indices.push(ix.getX(j)+vOff);vOff+=p.count;}var m=new THREE.BufferGeometry();m.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));m.setIndex(indices);m.computeVertexNormals();return m;"
+      },
+      "material": {
+        "type": "standard",
+        "color": "#b8b8c0",
+        "metalness": 0.85,
+        "roughness": 0.2
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_edf_lower"
+    },
+    {
+      "id": "edf_blades_lower",
+      "name": "Lower EDF Rotor Blades ×7 (CCW)",
+      "type": "custom_code",
+      "params": {
+        "geometry_code": "var shape=new THREE.Shape();shape.moveTo(0,-1.6);shape.bezierCurveTo(8,-1.4,30,-0.6,42,2.4);shape.lineTo(42,5.4);shape.bezierCurveTo(30,3.4,8,2.0,0,1.6);shape.closePath();var ext={depth:18,bevelEnabled:false};var positions=[];var indices=[];var vOff=0;for(var i=0;i<7;i++){var ang=i*Math.PI*2/7;var g=new THREE.ExtrudeGeometry(shape,ext);g.translate(0,0,-9);g.rotateZ(-0.32);g.translate(27,245,0);g.rotateY(ang);var p=g.getAttribute('position');var ix=g.index;for(var v=0;v<p.count;v++)positions.push(p.getX(v),p.getY(v),p.getZ(v));if(ix)for(var j=0;j<ix.count;j++)indices.push(ix.getX(j)+vOff);vOff+=p.count;}var m=new THREE.BufferGeometry();m.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));m.setIndex(indices);m.computeVertexNormals();return m;"
+      },
+      "material": {
+        "type": "standard",
+        "color": "#1a1a20",
+        "metalness": 0.65,
+        "roughness": 0.32
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_edf_lower"
+    },
+    {
+      "id": "edf_stators_lower",
+      "name": "Lower EDF Stator Vanes ×11",
+      "type": "custom_code",
+      "params": {
+        "geometry_code": "var shape=new THREE.Shape();shape.moveTo(0,0);shape.lineTo(0,4);shape.lineTo(43,4);shape.lineTo(43,0);shape.closePath();var ext={depth:1.2,bevelEnabled:false};var positions=[];var indices=[];var vOff=0;for(var i=0;i<11;i++){var ang=i*Math.PI*2/11;var g=new THREE.ExtrudeGeometry(shape,ext);g.translate(0,0,-0.6);g.translate(27,265,0);g.rotateY(ang);var p=g.getAttribute('position');var ix=g.index;for(var v=0;v<p.count;v++)positions.push(p.getX(v),p.getY(v),p.getZ(v));if(ix)for(var j=0;j<ix.count;j++)indices.push(ix.getX(j)+vOff);vOff+=p.count;}var m=new THREE.BufferGeometry();m.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));m.setIndex(indices);m.computeVertexNormals();return m;"
+      },
+      "material": {
+        "type": "standard",
+        "color": "#a0a0a8",
+        "metalness": 0.8,
+        "roughness": 0.25
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_edf_lower"
+    },
+    {
+      "id": "edf_spinner_lower",
+      "name": "Lower Rotor Hub Spinner",
+      "type": "sphere",
+      "params": {
+        "radius": 12,
+        "widthSegments": 32,
+        "heightSegments": 16,
+        "thetaStart": 0,
+        "thetaLength": 1.57
+      },
+      "material": {
+        "type": "standard",
+        "color": "#cc2200",
+        "metalness": 0.78,
+        "roughness": 0.22
+      },
+      "transform": {
+        "position": [
+          0,
+          251,
+          0
+        ],
+        "rotation": [
+          180,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_edf_lower"
+    },
+    {
+      "id": "group_canards",
+      "name": "Aero — Canards (×4)",
+      "type": "group",
+      "_isGroup": true,
+      "_collapsed": false,
+      "visible": true
+    },
+    {
+      "id": "canard_servo_ring",
+      "name": "Canard Servo Mount Ring",
+      "type": "lathe",
+      "params": {
+        "points": [
+          [
+            24,
+            545
+          ],
+          [
+            30,
+            545
+          ],
+          [
+            30,
+            565
+          ],
+          [
+            24,
+            565
+          ]
+        ],
+        "segments": 32
+      },
+      "material": {
+        "type": "standard",
+        "color": "#1a1a1e",
+        "metalness": 0.3,
+        "roughness": 0.7
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_canards"
+    },
+    {
+      "id": "canard_servos",
+      "name": "Canard Servos ×4",
+      "type": "custom_code",
+      "params": {
+        "geometry_code": "var positions=[];var indices=[];var vOff=0;for(var i=0;i<4;i++){var ang=i*Math.PI/2;var g=new THREE.BoxGeometry(20,12,18);g.translate(38,555,0);g.rotateY(ang);var p=g.getAttribute('position');var ix=g.index;for(var v=0;v<p.count;v++)positions.push(p.getX(v),p.getY(v),p.getZ(v));if(ix)for(var j=0;j<ix.count;j++)indices.push(ix.getX(j)+vOff);vOff+=p.count;}var m=new THREE.BufferGeometry();m.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));m.setIndex(indices);m.computeVertexNormals();return m;"
+      },
+      "material": {
+        "type": "standard",
+        "color": "#1a1a1e",
+        "metalness": 0.2,
+        "roughness": 0.7
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_canards"
+    },
+    {
+      "id": "canard_pivot_shafts",
+      "name": "Canard Pivot Shafts ×4",
+      "type": "custom_code",
+      "params": {
+        "geometry_code": "var positions=[];var indices=[];var vOff=0;for(var i=0;i<4;i++){var ang=i*Math.PI/2;var g=new THREE.CylinderGeometry(2,2,40,12);g.rotateZ(Math.PI/2);g.translate(70,555,0);g.rotateY(ang);var p=g.getAttribute('position');var ix=g.index;for(var v=0;v<p.count;v++)positions.push(p.getX(v),p.getY(v),p.getZ(v));if(ix)for(var j=0;j<ix.count;j++)indices.push(ix.getX(j)+vOff);vOff+=p.count;}var m=new THREE.BufferGeometry();m.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));m.setIndex(indices);m.computeVertexNormals();return m;"
+      },
+      "material": {
+        "type": "standard",
+        "color": "#a8a8b0",
+        "metalness": 0.85,
+        "roughness": 0.2
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_canards"
+    },
+    {
+      "id": "canards",
+      "name": "Steerable Canards ×4 (Mid-Body)",
+      "type": "custom_code",
+      "params": {
+        "geometry_code": "var shape=new THREE.Shape();shape.moveTo(0,-12);shape.lineTo(0,18);shape.lineTo(45,8);shape.lineTo(45,-2);shape.closePath();var ext={depth:3.5,bevelEnabled:false};var positions=[];var normals=[];var indices=[];var vOff=0;for(var i=0;i<4;i++){var ang=i*Math.PI/2+Math.PI/4;var g=new THREE.ExtrudeGeometry(shape,ext);g.translate(0,0,-1.75);g.translate(75,555,0);g.rotateY(ang);var p=g.getAttribute('position');var n=g.getAttribute('normal');var ix=g.index;for(var v=0;v<p.count;v++){positions.push(p.getX(v),p.getY(v),p.getZ(v));if(n)normals.push(n.getX(v),n.getY(v),n.getZ(v));}if(ix)for(var j=0;j<ix.count;j++)indices.push(ix.getX(j)+vOff);vOff+=p.count;}var m=new THREE.BufferGeometry();m.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));if(normals.length)m.setAttribute('normal',new THREE.Float32BufferAttribute(normals,3));m.setIndex(indices);m.computeVertexNormals();return m;"
+      },
+      "material": {
+        "type": "standard",
+        "color": "#c8c8d4",
+        "metalness": 0.72,
+        "roughness": 0.18
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_canards"
+    },
+    {
+      "id": "group_tail_fins",
+      "name": "Aero — Tail Fins (×4)",
+      "type": "group",
+      "_isGroup": true,
+      "_collapsed": false,
+      "visible": true
+    },
+    {
+      "id": "tail_fin_servo_ring",
+      "name": "Tail Fin Servo Mount Ring",
+      "type": "lathe",
+      "params": {
+        "points": [
+          [
+            65,
+            130
+          ],
+          [
+            73,
+            130
+          ],
+          [
+            73,
+            145
+          ],
+          [
+            65,
+            145
+          ]
+        ],
+        "segments": 64
+      },
+      "material": {
+        "type": "standard",
+        "color": "#1a1a1e",
+        "metalness": 0.25,
+        "roughness": 0.65
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_tail_fins"
+    },
+    {
+      "id": "tail_fin_servos",
+      "name": "Tail Fin Servos ×4",
+      "type": "custom_code",
+      "params": {
+        "geometry_code": "var positions=[];var indices=[];var vOff=0;for(var i=0;i<4;i++){var ang=i*Math.PI/2;var g=new THREE.BoxGeometry(22,14,20);g.translate(58,138,0);g.rotateY(ang);var p=g.getAttribute('position');var ix=g.index;for(var v=0;v<p.count;v++)positions.push(p.getX(v),p.getY(v),p.getZ(v));if(ix)for(var j=0;j<ix.count;j++)indices.push(ix.getX(j)+vOff);vOff+=p.count;}var m=new THREE.BufferGeometry();m.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));m.setIndex(indices);m.computeVertexNormals();return m;"
+      },
+      "material": {
+        "type": "standard",
+        "color": "#1a1a1e",
+        "metalness": 0.2,
+        "roughness": 0.7
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_tail_fins"
+    },
+    {
+      "id": "tail_fins",
+      "name": "Steerable Tail Fins ×4",
+      "type": "custom_code",
+      "params": {
+        "geometry_code": "var shape=new THREE.Shape();shape.moveTo(0,-30);shape.lineTo(0,80);shape.lineTo(60,40);shape.lineTo(60,-15);shape.closePath();var ext={depth:4,bevelEnabled:false};var positions=[];var indices=[];var vOff=0;for(var i=0;i<4;i++){var ang=i*Math.PI/2;var g=new THREE.ExtrudeGeometry(shape,ext);g.translate(0,0,-2);g.translate(72,138,0);g.rotateY(ang);var p=g.getAttribute('position');var ix=g.index;for(var v=0;v<p.count;v++)positions.push(p.getX(v),p.getY(v),p.getZ(v));if(ix)for(var j=0;j<ix.count;j++)indices.push(ix.getX(j)+vOff);vOff+=p.count;}var m=new THREE.BufferGeometry();m.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));m.setIndex(indices);m.computeVertexNormals();return m;"
+      },
+      "material": {
+        "type": "standard",
+        "color": "#c8c8d4",
+        "metalness": 0.72,
+        "roughness": 0.18
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_tail_fins"
+    },
+    {
+      "id": "tail_fin_pivots",
+      "name": "Tail Fin Pivot Shafts ×4",
+      "type": "custom_code",
+      "params": {
+        "geometry_code": "var positions=[];var indices=[];var vOff=0;for(var i=0;i<4;i++){var ang=i*Math.PI/2;var g=new THREE.CylinderGeometry(2.5,2.5,28,12);g.rotateZ(Math.PI/2);g.translate(67,138,0);g.rotateY(ang);var p=g.getAttribute('position');var ix=g.index;for(var v=0;v<p.count;v++)positions.push(p.getX(v),p.getY(v),p.getZ(v));if(ix)for(var j=0;j<ix.count;j++)indices.push(ix.getX(j)+vOff);vOff+=p.count;}var m=new THREE.BufferGeometry();m.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));m.setIndex(indices);m.computeVertexNormals();return m;"
+      },
+      "material": {
+        "type": "standard",
+        "color": "#a8a8b0",
+        "metalness": 0.85,
+        "roughness": 0.2
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_tail_fins"
+    },
+    {
+      "id": "group_vectoring",
+      "name": "Thrust Vectoring",
+      "type": "group",
+      "_isGroup": true,
+      "_collapsed": false,
+      "visible": true
+    },
+    {
+      "id": "gimbal_outer_ring",
+      "name": "Gimbal Outer Ring (Pitch)",
+      "type": "torus",
+      "params": {
+        "radius": 38,
+        "tube": 3,
+        "radialSegments": 16,
+        "tubularSegments": 64
+      },
+      "material": {
+        "type": "standard",
+        "color": "#a8a8b0",
+        "metalness": 0.88,
+        "roughness": 0.18
+      },
+      "transform": {
+        "position": [
+          0,
+          60,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_vectoring"
+    },
+    {
+      "id": "gimbal_inner_ring",
+      "name": "Gimbal Inner Ring (Yaw)",
+      "type": "torus",
+      "params": {
+        "radius": 32,
+        "tube": 2.5,
+        "radialSegments": 14,
+        "tubularSegments": 48
+      },
+      "material": {
+        "type": "standard",
+        "color": "#a8a8b0",
+        "metalness": 0.88,
+        "roughness": 0.18
+      },
+      "transform": {
+        "position": [
+          0,
+          60,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          90
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_vectoring"
+    },
+    {
+      "id": "gimbal_pivots",
+      "name": "Gimbal Pivot Bearings ×4",
+      "type": "custom_code",
+      "params": {
+        "geometry_code": "var positions=[];var indices=[];var vOff=0;for(var i=0;i<4;i++){var ang=i*Math.PI/2;var g=new THREE.CylinderGeometry(3.5,3.5,4,16);g.rotateZ(Math.PI/2);g.translate(38,60,0);g.rotateY(ang);var p=g.getAttribute('position');var ix=g.index;for(var v=0;v<p.count;v++)positions.push(p.getX(v),p.getY(v),p.getZ(v));if(ix)for(var j=0;j<ix.count;j++)indices.push(ix.getX(j)+vOff);vOff+=p.count;}var m=new THREE.BufferGeometry();m.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));m.setIndex(indices);m.computeVertexNormals();return m;"
+      },
+      "material": {
+        "type": "standard",
+        "color": "#3a3a44",
+        "metalness": 0.85,
+        "roughness": 0.25
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_vectoring"
+    },
+    {
+      "id": "gimbal_actuators",
+      "name": "Gimbal Linear Actuators ×2",
+      "type": "custom_code",
+      "params": {
+        "geometry_code": "var positions=[];var indices=[];var vOff=0;for(var i=0;i<2;i++){var ang=i*Math.PI/2;var g=new THREE.CylinderGeometry(3,3,42,12);g.translate(28,82,0);g.rotateY(ang);var p=g.getAttribute('position');var ix=g.index;for(var v=0;v<p.count;v++)positions.push(p.getX(v),p.getY(v),p.getZ(v));if(ix)for(var j=0;j<ix.count;j++)indices.push(ix.getX(j)+vOff);vOff+=p.count;}var m=new THREE.BufferGeometry();m.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));m.setIndex(indices);m.computeVertexNormals();return m;"
+      },
+      "material": {
+        "type": "standard",
+        "color": "#5a5a64",
+        "metalness": 0.82,
+        "roughness": 0.22
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_vectoring"
+    },
+    {
+      "id": "nozzle_bell",
+      "name": "Vectoring Nozzle Bell",
+      "type": "lathe",
+      "params": {
+        "points": [
+          [
+            40,
+            50
+          ],
+          [
+            38,
+            46
+          ],
+          [
+            32,
+            38
+          ],
+          [
+            25,
+            28
+          ],
+          [
+            22,
+            18
+          ],
+          [
+            24,
+            8
+          ],
+          [
+            30,
+            0
+          ]
+        ],
+        "segments": 64
+      },
+      "material": {
+        "type": "standard",
+        "color": "#38383e",
+        "metalness": 0.92,
+        "roughness": 0.12
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_vectoring"
+    },
+    {
+      "id": "nozzle_throat",
+      "name": "Nozzle Throat Interior",
+      "type": "cone",
+      "params": {
+        "radius": 18,
+        "height": 50,
+        "radialSegments": 48,
+        "openEnded": true
+      },
+      "material": {
+        "type": "standard",
+        "color": "#0a0a0e",
+        "metalness": 0.5,
+        "roughness": 0.85
+      },
+      "transform": {
+        "position": [
+          0,
+          25,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_vectoring"
+    },
+    {
+      "id": "exhaust_glow",
+      "name": "Exhaust Plume Glow",
+      "type": "circle",
+      "params": {
+        "radius": 26,
+        "segments": 48
+      },
+      "material": {
+        "type": "standard",
+        "color": "#ff6600",
+        "emissive": "#ffaa00",
+        "emissiveIntensity": 6,
+        "metalness": 0,
+        "roughness": 1,
+        "transparent": true,
+        "opacity": 0.92
+      },
+      "transform": {
+        "position": [
+          0,
+          2,
+          0
+        ],
+        "rotation": [
+          -90,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true,
+      "castShadow": false,
+      "receiveShadow": false,
+      "_groupId": "group_vectoring"
+    }
+  ],
+  "annotations": [],
+  "measurements": []
+}

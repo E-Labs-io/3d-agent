@@ -1164,17 +1164,148 @@ function runAnalysis() {
 
 // ── Export ────────────────────────────────────────────────────────────────
 
+// ── Print-part aware STL export ───────────────────────────────────────────
+// Objects are split into separate STL files by their `_printPart` field.
+// `_reference: true` objects (fit ghosts, datum aids) are never exported.
+// `_printFlip: true` rotates a part 180deg about X so downward-opening
+// pockets face up and don't need bridging.
+
+function printPartsIndex() {
+  const parts = new Map();      // partName -> [objDef]
+  const loose = [];             // printable but untagged
+  let refs = 0;
+  for (const o of (currentScene?.objects || [])) {
+    if (o._isGroup) continue;
+    if (o._reference) { refs++; continue; }
+    if (!sceneObjects.has(o.id)) continue;
+    if (o.visible === false) continue;
+    if (o._printPart) {
+      if (!parts.has(o._printPart)) parts.set(o._printPart, []);
+      parts.get(o._printPart).push(o);
+    } else loose.push(o);
+  }
+  return { parts, loose, refs };
+}
+
+// Bake one part into a slicer-ready geometry: world transforms applied,
+// Z-up, centred in XY, sitting on Z=0.
+function bakePartGeometry(defs, flip) {
+  const pos = [];
+  for (const def of defs) {
+    const src = sceneObjects.get(def.id);
+    if (!src) continue;
+    src.updateMatrixWorld(true);
+    src.traverse(c => {
+      if (!c.isMesh || c.material?.wireframe) return;
+      let g = c.geometry;
+      g = g.index ? g.toNonIndexed() : g.clone();
+      g.applyMatrix4(c.matrixWorld);
+      const a = g.getAttribute('position');
+      for (let i = 0; i < a.count; i++) pos.push(a.getX(i), a.getY(i), a.getZ(i));
+    });
+  }
+  if (!pos.length) return null;
+  const m = new THREE.BufferGeometry();
+  m.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+  if (flip) m.rotateX(Math.PI);     // pocket-side up
+  m.rotateX(Math.PI / 2);           // Y-up -> Z-up for slicers
+  m.computeBoundingBox();
+  m.translate(0, 0, -m.boundingBox.min.z);
+  m.computeBoundingBox();
+  const b = m.boundingBox;
+  m.translate(-(b.min.x + b.max.x) / 2, -(b.min.y + b.max.y) / 2, 0);
+  m.computeBoundingBox();
+  m.computeVertexNormals();
+  return m;
+}
+
+async function exportSTLParts() {
+  const { parts, loose, refs } = printPartsIndex();
+  if (loose.length) parts.set(parts.size ? 'untagged' : 'model', loose);
+  if (!parts.size) { toast('Nothing printable to export', 'error'); return; }
+
+  const exporter = new STLExporter();
+  const base = (currentScene?.metadata?.name || 'model')
+    .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+
+  const built = [];
+  for (const [name, defs] of parts) {
+    const flip = defs.some(d => d._printFlip);
+    const geo = bakePartGeometry(defs, flip);
+    if (!geo) continue;
+    const dv = exporter.parse(new THREE.Mesh(geo), { binary: true });
+    const bytes = new Uint8Array(dv.buffer !== undefined ? dv.buffer : dv);
+    const size = geo.boundingBox.getSize(new THREE.Vector3());
+    built.push({ file: `${base}-${name}.stl`, bytes, size, flip });
+  }
+
+  // 1) Write every part server-side. This is the reliable path — browsers
+  //    silently block rapid consecutive downloads, so we never depend on them.
+  const saved = [];
+  for (const b of built) {
+    let bin = ''; const CH = 8192;
+    for (let i = 0; i < b.bytes.length; i += CH) {
+      bin += String.fromCharCode.apply(null, b.bytes.subarray(i, i + CH));
+    }
+    try {
+      const r = await fetch('/api/export', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ filename: b.file, data: btoa(bin), encoding: 'base64' })
+      });
+      const res = await r.json();
+      if (res.success) saved.push({ ...b, url: res.url });
+    } catch (e) { /* fall through to download-only */ }
+  }
+
+  // 2) Also offer them as downloads, staggered so the browser doesn't drop them.
+  for (let i = 0; i < built.length; i++) {
+    setTimeout(() => saveBlob(new Blob([built[i].bytes], { type: 'model/stl' }), built[i].file), i * 700);
+  }
+
+  showExportResult(saved.length ? saved : built, refs);
+}
+
+// Persistent result panel — a toast disappears before you can click the links.
+function showExportResult(items, refs) {
+  document.getElementById('export-modal').style.display = 'none';
+  let el = document.getElementById('export-result');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'export-result';
+    document.body.appendChild(el);
+  }
+  const rows = items.map(it => {
+    const d = it.size;
+    const dims = `${d.x.toFixed(0)}\u00d7${d.y.toFixed(0)}\u00d7${d.z.toFixed(0)}mm`;
+    const kb = Math.round(it.bytes.length / 1024);
+    const link = it.url
+      ? `<a href="${it.url}" download style="color:var(--accent)">${it.file}</a>`
+      : `<span style="color:var(--text)">${it.file}</span>`;
+    const flip = it.flip ? ' <span style="color:var(--warn)">flipped</span>' : '';
+    return `<div style="padding:3px 0">${link} &mdash; <span style="color:var(--muted)">${dims}, ${kb} KB</span>${flip}</div>`;
+  }).join('');
+  el.innerHTML = `
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+      <b style="color:var(--accent2)">Exported ${items.length} part${items.length>1?'s':''}</b>
+      <button id="export-result-close" class="btn btn-icon" style="margin-left:auto">\u2715</button>
+    </div>
+    ${rows}
+    ${refs ? `<div style="color:var(--muted);margin-top:6px">${refs} reference object(s) excluded</div>` : ''}
+    <div style="color:var(--muted);margin-top:8px;font-size:10px">
+      Saved to <code>exports/</code>. Downloads may be blocked by the browser &mdash; click a filename above to fetch it.
+    </div>`;
+  el.style.display = 'block';
+  document.getElementById('export-result-close').onclick = () => { el.style.display = 'none'; };
+}
+
 function exportScene(format) {
+  if (format === 'stl') { exportSTLParts(); return; }
+
   const exportGroup = new THREE.Group();
-  sceneObjects.forEach(obj => exportGroup.add(obj.clone()));
+  const refIds = new Set((currentScene?.objects || []).filter(o => o._reference).map(o => o.id));
+  sceneObjects.forEach((obj, id) => { if (!refIds.has(id)) exportGroup.add(obj.clone()); });
 
   switch (format) {
-    case 'stl': {
-      const exporter = new STLExporter();
-      const data = exporter.parse(exportGroup, { binary: false });
-      saveFile('scene.stl', data);
-      break;
-    }
     case 'obj': {
       const exporter = new OBJExporter();
       const data = exporter.parse(exportGroup);
@@ -1818,6 +1949,21 @@ document.getElementById('file-input').addEventListener('change', (e) => {
 });
 
 document.getElementById('btn-export').addEventListener('click', () => {
+  // Show what will actually come out before the user commits
+  const el = document.getElementById('export-parts-summary');
+  if (el) {
+    const { parts, loose, refs } = printPartsIndex();
+    const rows = [];
+    for (const [name, defs] of parts) {
+      const flip = defs.some(d => d._printFlip) ? ' <span style="color:var(--warn)">(flipped for print)</span>' : '';
+      rows.push(`<div>&bull; <b style="color:var(--text)">${name}.stl</b> — ${defs.length} object${defs.length>1?'s':''}${flip}</div>`);
+    }
+    if (loose.length) rows.push(`<div>&bull; <b style="color:var(--text)">untagged.stl</b> — ${loose.length} object(s) with no <code>_printPart</code></div>`);
+    if (refs) rows.push(`<div style="color:var(--muted)">&bull; ${refs} reference object(s) excluded</div>`);
+    el.innerHTML = rows.length
+      ? `<div style="color:var(--muted);margin-bottom:5px;">STL exports as separate parts:</div>${rows.join('')}`
+      : '<span style="color:var(--warn)">Nothing printable in this scene.</span>';
+  }
   document.getElementById('export-modal').style.display = 'flex';
 });
 
@@ -2006,9 +2152,63 @@ vc.addEventListener('drop', e => {
   if (file) importFile(file);
 });
 
+
+// ── Spacebar navigation (hold Space + drag to pan, like Figma/Photoshop) ──
+let spacePanActive = false;
+let suppressNextClick = false;
+
+const ORBIT_BUTTONS = {
+  LEFT: THREE.MOUSE.ROTATE,
+  MIDDLE: THREE.MOUSE.DOLLY,
+  RIGHT: THREE.MOUSE.PAN
+};
+const PAN_BUTTONS = {
+  LEFT: THREE.MOUSE.PAN,
+  MIDDLE: THREE.MOUSE.DOLLY,
+  RIGHT: THREE.MOUSE.PAN
+};
+orbitControls.mouseButtons = ORBIT_BUTTONS;
+
+function isTypingTarget(t) {
+  if (!t) return false;
+  const tag = t.tagName;
+  return tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || t.isContentEditable;
+}
+
+function setSpacePan(on) {
+  if (spacePanActive === on) return;
+  spacePanActive = on;
+  orbitControls.mouseButtons = on ? PAN_BUTTONS : ORBIT_BUTTONS;
+  renderer.domElement.style.cursor = on ? 'grab' : '';
+  document.getElementById('nav-hint')?.classList.toggle('active', on);
+}
+
+window.addEventListener('keydown', (e) => {
+  if (e.code !== 'Space' || isTypingTarget(e.target)) return;
+  e.preventDefault();           // stop the page scrolling
+  setSpacePan(true);
+}, { capture: true });
+
+window.addEventListener('keyup', (e) => {
+  if (e.code !== 'Space') return;
+  setSpacePan(false);
+}, { capture: true });
+
+// Release pan if focus leaves the window mid-drag
+window.addEventListener('blur', () => setSpacePan(false));
+
+// Cursor feedback + swallow the click that ends a pan drag
+renderer.domElement.addEventListener('pointerdown', () => {
+  if (spacePanActive) { renderer.domElement.style.cursor = 'grabbing'; suppressNextClick = true; }
+});
+renderer.domElement.addEventListener('pointerup', () => {
+  if (spacePanActive) renderer.domElement.style.cursor = 'grab';
+});
+
 // Click to select in viewport
 renderer.domElement.addEventListener('click', (e) => {
   if (e.target !== renderer.domElement) return;
+  if (spacePanActive || suppressNextClick) { suppressNextClick = false; return; }
   const rect = renderer.domElement.getBoundingClientRect();
   mouse.set(
     ((e.clientX - rect.left) / rect.width) * 2 - 1,

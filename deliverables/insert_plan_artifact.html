@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>2U Rack Drawer Insert — Plan View</title>
+<style>
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: 24px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  background: #fafaf7;
+  color: #1c1c1a;
+  line-height: 1.5;
+  font-size: 14px;
+}
+.wrap { max-width: 980px; margin: 0 auto; }
+h1 { font-size: 20px; font-weight: 500; margin: 0 0 4px; }
+.subtitle { color: #5f5e5a; margin: 0 0 24px; font-size: 13px; }
+.section { margin-bottom: 32px; }
+.section-title { font-size: 15px; font-weight: 500; margin: 0 0 12px; padding-bottom: 6px; border-bottom: 0.5px solid rgba(0,0,0,0.12); }
+.svg-card { background: #fff; border: 0.5px solid rgba(0,0,0,0.15); border-radius: 12px; padding: 20px; }
+.legend { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 14px; font-size: 12px; color: #444; }
+.legend span.sw { display: inline-block; width: 14px; height: 14px; border-radius: 3px; vertical-align: -3px; margin-right: 6px; border: 0.5px solid rgba(0,0,0,0.25); }
+.specs { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 24px; }
+.spec { background: #fff; border: 0.5px solid rgba(0,0,0,0.12); border-radius: 8px; padding: 10px 12px; }
+.spec .l { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.04em; }
+.spec .v { font-size: 14px; font-weight: 500; margin-top: 2px; }
+table.cmp { width: 100%; border-collapse: collapse; font-size: 13px; }
+table.cmp th, table.cmp td { text-align: left; padding: 8px 10px; border-bottom: 0.5px solid rgba(0,0,0,0.1); }
+table.cmp th { font-weight: 500; color: #5f5e5a; font-size: 12px; }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 500; }
+.tag-lid { background: #fde7d2; color: #6b3f0b; }
+.tag-open { background: #e3eee0; color: #2d4a17; }
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>2U rack drawer insert — plan view</h1>
+  <p class="subtitle">Modular 2-tile design · drawer interior 400 × 205 × 63mm · 1.2/1.4mm nozzle · 300³ build volume · 0.5mm clearance · friction-fit lids</p>
+
+  <div class="specs">
+    <div class="spec"><div class="l">Drawer interior</div><div class="v">400 × 205 × 63mm</div></div>
+    <div class="spec"><div class="l">Insert footprint</div><div class="v">399 × 204 × 62mm</div></div>
+    <div class="spec"><div class="l">Tile split</div><div class="v">2 × 199mm wide</div></div>
+    <div class="spec"><div class="l">Outer walls</div><div class="v">3.6mm</div></div>
+    <div class="spec"><div class="l">Dividers</div><div class="v">2.4mm</div></div>
+    <div class="spec"><div class="l">Floor</div><div class="v">2.4mm</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Top view (looking down into the drawer)</div>
+    <div class="svg-card">
+      <svg viewBox="0 0 920 540" width="100%" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- scale: 2px per mm. Drawer = 800 × 410. Origin offset (60, 60). -->
+        <!-- Drawer outline -->
+        <rect x="60" y="60" width="800" height="410" fill="#f4f2eb" stroke="#1c1c1a" stroke-width="1.2"/>
+
+        <!-- Left tile body (X = 60..458 = 199mm wide) -->
+        <rect x="61" y="61" width="397" height="408" fill="#dad7cd" stroke="none"/>
+        <!-- Right tile body (X = 462..859) -->
+        <rect x="462" y="61" width="397" height="408" fill="#c8c4b8" stroke="none"/>
+        <!-- Seam line -->
+        <line x1="460" y1="58" x2="460" y2="472" stroke="#1c1c1a" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <text x="460" y="52" font-size="10" text-anchor="middle" fill="#444">tile seam (tongue + pocket)</text>
+
+        <!-- ===== LEFT TILE compartments ===== -->
+        <!-- Pen trough: full-width 388mm × 32mm. Top of drawer (Z = -98..-66). Y = 60..124 (32mm × 2px = 64) -->
+        <rect x="68" y="68" width="784" height="64" fill="#eae7dd" stroke="#1c1c1a" stroke-width="0.6"/>
+        <text x="260" y="105" font-size="13" font-weight="500" text-anchor="middle" fill="#1c1c1a">Pens / markers / antennas</text>
+        <text x="260" y="120" font-size="11" text-anchor="middle" fill="#5f5e5a">388 × 32mm · open</text>
+
+        <!-- Radio bay 6-cell grid -->
+        <!-- X: 68..454 (193mm). Z: 136..316 (90mm × 2 = 180). 3 columns × 2 rows -->
+        <g>
+          <rect x="68" y="136" width="386" height="180" fill="#e7d9c1" stroke="#1c1c1a" stroke-width="0.6"/>
+          <!-- divider lines -->
+          <line x1="195" y1="138" x2="195" y2="314" stroke="#1c1c1a" stroke-width="0.5"/>
+          <line x1="322" y1="138" x2="322" y2="314" stroke="#1c1c1a" stroke-width="0.5"/>
+          <line x1="70" y1="226" x2="452" y2="226" stroke="#1c1c1a" stroke-width="0.5"/>
+          <text x="131" y="180" font-size="11" text-anchor="middle">Radio 1</text>
+          <text x="258" y="180" font-size="11" text-anchor="middle">Radio 2</text>
+          <text x="385" y="180" font-size="11" text-anchor="middle">Radio 3</text>
+          <text x="131" y="270" font-size="11" text-anchor="middle">Radio 4</text>
+          <text x="258" y="270" font-size="11" text-anchor="middle">Radio 5</text>
+          <text x="385" y="270" font-size="11" text-anchor="middle">Radio 6</text>
+          <text x="261" y="304" font-size="11" font-weight="500" text-anchor="middle" fill="#5a3a0b">+ snap lid · 6 × 64 × 86mm cells</text>
+        </g>
+
+        <!-- Gaffer tape rack (4 cups with spindles) -->
+        <!-- X: 68..454. Z: 320..460 (70mm × 2 = 140) -->
+        <g>
+          <rect x="68" y="320" width="386" height="140" fill="#dfe7d4" stroke="#1c1c1a" stroke-width="0.6"/>
+          <!-- 4 spindles -->
+          <circle cx="116.5" cy="390" r="24" fill="#fff" stroke="#1c1c1a" stroke-width="0.5"/>
+          <circle cx="116.5" cy="390" r="12" fill="#a89887" stroke="#1c1c1a" stroke-width="0.5"/>
+          <circle cx="213" cy="390" r="24" fill="#fff" stroke="#1c1c1a" stroke-width="0.5"/>
+          <circle cx="213" cy="390" r="12" fill="#a89887" stroke="#1c1c1a" stroke-width="0.5"/>
+          <circle cx="309.5" cy="390" r="24" fill="#fff" stroke="#1c1c1a" stroke-width="0.5"/>
+          <circle cx="309.5" cy="390" r="12" fill="#a89887" stroke="#1c1c1a" stroke-width="0.5"/>
+          <circle cx="406" cy="390" r="24" fill="#fff" stroke="#1c1c1a" stroke-width="0.5"/>
+          <circle cx="406" cy="390" r="12" fill="#a89887" stroke="#1c1c1a" stroke-width="0.5"/>
+          <text x="116.5" y="343" font-size="10" text-anchor="middle" fill="#2d4a17">Green</text>
+          <text x="213" y="343" font-size="10" text-anchor="middle" fill="#2d4a17">Orange</text>
+          <text x="309.5" y="343" font-size="10" text-anchor="middle" fill="#2d4a17">Pink</text>
+          <text x="406" y="343" font-size="10" text-anchor="middle" fill="#2d4a17">Yellow</text>
+          <text x="261" y="450" font-size="11" font-weight="500" text-anchor="middle" fill="#2d4a17">Gaffer rolls (Ø50) · open · spindle Ø24</text>
+        </g>
+
+        <!-- ===== RIGHT TILE compartments ===== -->
+        <!-- Antenna slots: 4 channels. X: 466..852. Z: 136..262 (63mm × 2 = 126) -->
+        <g>
+          <rect x="466" y="136" width="386" height="126" fill="#e7d9c1" stroke="#1c1c1a" stroke-width="0.6"/>
+          <line x1="562" y1="138" x2="562" y2="260" stroke="#1c1c1a" stroke-width="0.5"/>
+          <line x1="659" y1="138" x2="659" y2="260" stroke="#1c1c1a" stroke-width="0.5"/>
+          <line x1="755" y1="138" x2="755" y2="260" stroke="#1c1c1a" stroke-width="0.5"/>
+          <text x="514" y="200" font-size="11" text-anchor="middle">Ant 1</text>
+          <text x="610" y="200" font-size="11" text-anchor="middle">Ant 2</text>
+          <text x="707" y="200" font-size="11" text-anchor="middle">Ant 3</text>
+          <text x="803" y="200" font-size="11" text-anchor="middle">Ant 4</text>
+          <text x="659" y="252" font-size="11" font-weight="500" text-anchor="middle" fill="#5a3a0b">+ snap lid · 4 × 48 × 63mm slots</text>
+        </g>
+
+        <!-- Lens cup Ø55 -->
+        <!-- center at X = 466 + 55 = 521 (27.5mm from edge), Z = 263 + 62 = 325 (31mm down) -->
+        <g>
+          <rect x="466" y="266" width="116" height="124" fill="#d4e8e8" stroke="#1c1c1a" stroke-width="0.6"/>
+          <circle cx="521" cy="328" r="55" fill="#fff" stroke="#1c1c1a" stroke-width="0.7"/>
+          <text x="521" y="332" font-size="11" text-anchor="middle">Lens Ø55</text>
+          <text x="521" y="380" font-size="10" text-anchor="middle" fill="#194040">open</text>
+        </g>
+
+        <!-- Misc tray -->
+        <!-- X: 586..852 (133mm). Z: 266..390 (62mm × 2 = 124) -->
+        <g>
+          <rect x="586" y="266" width="266" height="124" fill="#e7e1d3" stroke="#1c1c1a" stroke-width="0.6"/>
+          <!-- sub-dividers per item -->
+          <line x1="668" y1="268" x2="668" y2="388" stroke="#1c1c1a" stroke-width="0.4" stroke-dasharray="3 2"/>
+          <line x1="752" y1="268" x2="752" y2="388" stroke="#1c1c1a" stroke-width="0.4" stroke-dasharray="3 2"/>
+          <text x="627" y="320" font-size="10" text-anchor="middle">AppleTV</text>
+          <text x="627" y="334" font-size="10" text-anchor="middle">remote</text>
+          <text x="710" y="320" font-size="10" text-anchor="middle">Wifi AP</text>
+          <text x="802" y="320" font-size="10" text-anchor="middle">Sticky</text>
+          <text x="802" y="334" font-size="10" text-anchor="middle">labels</text>
+          <text x="719" y="382" font-size="11" font-weight="500" text-anchor="middle" fill="#5a3a0b">+ snap lid · sub-divided (dashed)</text>
+        </g>
+
+        <!-- Cable tie bin (across right tile width, bottom strip) -->
+        <!-- X: 466..852. Z: 392..460 (32mm × 2 = 64) -->
+        <g>
+          <rect x="466" y="394" width="386" height="66" fill="#e7d9c1" stroke="#1c1c1a" stroke-width="0.6"/>
+          <text x="659" y="428" font-size="13" font-weight="500" text-anchor="middle">Cable ties</text>
+          <text x="659" y="447" font-size="11" text-anchor="middle" fill="#5a3a0b">386 × 32mm · + snap lid</text>
+        </g>
+
+        <!-- ===== DIMENSIONS ===== -->
+        <!-- Width 400mm at top -->
+        <line x1="60" y1="40" x2="860" y2="40" stroke="#1c1c1a" stroke-width="0.5"/>
+        <line x1="60" y1="35" x2="60" y2="45" stroke="#1c1c1a" stroke-width="0.5"/>
+        <line x1="860" y1="35" x2="860" y2="45" stroke="#1c1c1a" stroke-width="0.5"/>
+        <text x="460" y="32" font-size="11" text-anchor="middle">400mm (drawer interior width)</text>
+
+        <!-- Depth 205mm on right -->
+        <line x1="880" y1="60" x2="880" y2="470" stroke="#1c1c1a" stroke-width="0.5"/>
+        <line x1="875" y1="60" x2="885" y2="60" stroke="#1c1c1a" stroke-width="0.5"/>
+        <line x1="875" y1="470" x2="885" y2="470" stroke="#1c1c1a" stroke-width="0.5"/>
+        <text x="900" y="268" font-size="11" text-anchor="middle" transform="rotate(90 900 268)">205mm (drawer interior depth)</text>
+
+        <!-- Tile A width -->
+        <line x1="60" y1="494" x2="460" y2="494" stroke="#1c1c1a" stroke-width="0.5"/>
+        <line x1="60" y1="489" x2="60" y2="499" stroke="#1c1c1a" stroke-width="0.5"/>
+        <line x1="460" y1="489" x2="460" y2="499" stroke="#1c1c1a" stroke-width="0.5"/>
+        <text x="260" y="510" font-size="11" text-anchor="middle">Tile A · 199mm</text>
+
+        <!-- Tile B width -->
+        <line x1="460" y1="494" x2="860" y2="494" stroke="#1c1c1a" stroke-width="0.5"/>
+        <line x1="460" y1="489" x2="460" y2="499" stroke="#1c1c1a" stroke-width="0.5"/>
+        <line x1="860" y1="489" x2="860" y2="499" stroke="#1c1c1a" stroke-width="0.5"/>
+        <text x="660" y="510" font-size="11" text-anchor="middle">Tile B · 199mm</text>
+
+        <!-- N indicator (drawer front = +Z, so the bottom edge represents the back wall) -->
+        <g transform="translate(820, 90)">
+          <circle r="14" fill="#fff" stroke="#1c1c1a" stroke-width="0.5"/>
+          <text x="0" y="-3" font-size="9" text-anchor="middle" fill="#888">FRONT</text>
+          <text x="0" y="9" font-size="11" font-weight="500" text-anchor="middle">↑</text>
+        </g>
+
+      </svg>
+
+      <div class="legend">
+        <div><span class="sw" style="background:#dad7cd"></span>Tile A body (left)</div>
+        <div><span class="sw" style="background:#c8c4b8"></span>Tile B body (right)</div>
+        <div><span class="sw" style="background:#e7d9c1"></span>Covered compartment (snap lid)</div>
+        <div><span class="sw" style="background:#dfe7d4"></span>Open compartment</div>
+        <div><span class="sw" style="background:#d4e8e8"></span>Lens cup (open)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Side section (looking at the seam from the front)</div>
+    <div class="svg-card">
+      <svg viewBox="0 0 920 220" width="100%" xmlns="http://www.w3.org/2000/svg">
+        <!-- 2px per mm. Drawer interior 400 × 63mm = 800 × 126 -->
+        <!-- Drawer cavity -->
+        <rect x="60" y="50" width="800" height="126" fill="#f4f2eb" stroke="#1c1c1a" stroke-width="1"/>
+        <!-- Tile A -->
+        <rect x="61" y="56" width="397" height="119" fill="#dad7cd"/>
+        <!-- Tile B -->
+        <rect x="462" y="56" width="397" height="119" fill="#c8c4b8"/>
+        <!-- Tongue from Tile A (1.8mm = 3.6px) -->
+        <rect x="455" y="62" width="6" height="107" fill="#1d2230" />
+        <!-- Tongue pocket gap (visualised) -->
+        <line x1="461" y1="56" x2="461" y2="175" stroke="#fff" stroke-width="1"/>
+        <!-- Floor strip (2.4mm = 4.8px) -->
+        <rect x="61" y="170" width="797" height="5" fill="#1c1c1a" opacity="0.18"/>
+        <!-- A lid hovering above radio bay -->
+        <rect x="80" y="30" width="350" height="6" fill="#6f7689" stroke="#1c1c1a" stroke-width="0.4"/>
+        <text x="255" y="22" font-size="10" text-anchor="middle" fill="#5f5e5a">snap lid (shown floated +12mm above compartment)</text>
+
+        <!-- Dimensions -->
+        <line x1="60" y1="195" x2="860" y2="195" stroke="#1c1c1a" stroke-width="0.5"/>
+        <line x1="60" y1="190" x2="60" y2="200" stroke="#1c1c1a" stroke-width="0.5"/>
+        <line x1="860" y1="190" x2="860" y2="200" stroke="#1c1c1a" stroke-width="0.5"/>
+        <text x="460" y="212" font-size="11" text-anchor="middle">400mm</text>
+        <line x1="880" y1="50" x2="880" y2="176" stroke="#1c1c1a" stroke-width="0.5"/>
+        <line x1="875" y1="50" x2="885" y2="50" stroke="#1c1c1a" stroke-width="0.5"/>
+        <line x1="875" y1="176" x2="885" y2="176" stroke="#1c1c1a" stroke-width="0.5"/>
+        <text x="900" y="116" font-size="11" text-anchor="middle" transform="rotate(90 900 116)">63mm</text>
+
+        <text x="460" y="100" font-size="11" font-weight="500" text-anchor="middle">Tongue + pocket lap seam · friction fit</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Compartment summary</div>
+    <table class="cmp">
+      <thead>
+        <tr><th>Tile</th><th>Compartment</th><th>Footprint (mm)</th><th>Capacity</th><th>Lid</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>A</td><td>Pen / marker trough (shared with B)</td><td>388 × 32 × 58</td><td>~12 pens / markers / antennas</td><td><span class="tag tag-open">open</span></td></tr>
+        <tr><td>A</td><td>Radio bay (6 cells, 3×2)</td><td>193 × 90 × 58 (cells ~64 × 42)</td><td>6 × PTTRN radios</td><td><span class="tag tag-lid">snap lid</span></td></tr>
+        <tr><td>A</td><td>Gaffer tape rack (4 cups + spindles)</td><td>193 × 70 × 58</td><td>4 × gaffer rolls Ø50</td><td><span class="tag tag-open">open</span></td></tr>
+        <tr><td>B</td><td>Antenna slots (×4)</td><td>193 × 63 × 58 (each ~48 × 63)</td><td>4 × whip antennas</td><td><span class="tag tag-lid">snap lid</span></td></tr>
+        <tr><td>B</td><td>Lens cup</td><td>Ø55 × 58</td><td>1 × lens / gel</td><td><span class="tag tag-open">open</span></td></tr>
+        <tr><td>B</td><td>Misc tray (sub-divided)</td><td>133 × 62 × 58</td><td>AppleTV remote · Wifi AP · sticky labels</td><td><span class="tag tag-lid">snap lid</span></td></tr>
+        <tr><td>B</td><td>Cable tie bin</td><td>193 × 32 × 58</td><td>zip-tie bundle</td><td><span class="tag tag-lid">snap lid</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Print notes</div>
+    <ul style="margin:0; padding-left:18px; color:#3a3a37;">
+      <li>Nozzle 1.2 / 1.4mm — outer walls 3.6mm (3 perimeters), dividers 2.4mm (2 perimeters), floor 2.4mm.</li>
+      <li>Build volume 300³ — each tile (199 × 204 × 62mm) fits with margin.</li>
+      <li>Clearance 0.5mm all-round to drawer wall · lid clearance 0.3mm.</li>
+      <li>Tile seam: 1.8mm tongue on Tile A + matching pocket on Tile B. No bolts unless you want them added.</li>
+      <li>Print orientation: floor-down. No supports needed if dividers stay vertical.</li>
+      <li>Material: PETG recommended for road-case transit (impact-tolerant) · PLA acceptable if storage stays cool.</li>
+    </ul>
+  </div>
+
+</div>
+</body>
+</html>
